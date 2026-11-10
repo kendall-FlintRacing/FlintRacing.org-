@@ -1396,7 +1396,9 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .gx-no{font:italic 800 .82rem/1 var(--body);letter-spacing:.14em;color:var(--n);text-shadow:0 0 10px var(--n)}
 .gx-name{font:italic 800 clamp(2rem,4.6vw,3.4rem)/.95 var(--body);text-transform:none;color:#fff;letter-spacing:-.01em;text-shadow:0 3px 0 rgba(0,0,0,.55),0 0 24px color-mix(in srgb,var(--n) 55%,transparent)}
 .gx-bars{width:100%;background:rgba(10,10,14,.72);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:10px 12px;display:grid;gap:7px;backdrop-filter:blur(4px)}
-.gx-bar{display:grid;grid-template-columns:1fr auto 42%;gap:8px;align-items:center;font:italic 700 .82rem/1 var(--body)}
+.gx-bar{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font:italic 700 .86rem/1.1 var(--body);padding-bottom:6px;border-bottom:2px solid color-mix(in srgb,var(--n) 55%,transparent)}
+.gx-bar:last-child{border-bottom:0;padding-bottom:0}
+.gx-bar b{font:italic 900 1.15rem/1 var(--body);color:var(--n);white-space:nowrap;text-shadow:0 0 12px color-mix(in srgb,var(--n) 45%,transparent)}
 .gx-bar span{text-align:left;color:#e3e5e9}
 .gx-bar em{font-style:normal;color:#9a9da3;font-weight:700;font-variant-numeric:tabular-nums}
 .gx-bar i{height:12px;border-radius:2px;background:linear-gradient(90deg,var(--n) calc(var(--v)*10%),rgba(255,255,255,.16) 0);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
@@ -2893,8 +2895,8 @@ body.rw-tv .rw-fol{display:none}
     <div class="wrap cs-wrap">
       <div class="gx">
         <div class="gx-top">
-          <h1 class="gx-title">Car Select</h1>
-          <div class="gx-player" aria-hidden="true"><span>Driver</span><b>Guest</b><span>Season</span><b>2027</b><span>Track</span><b>Cronin Derby Downs</b></div>
+          <h1 class="gx-title">Select Your Dashboard</h1>
+          <div class="gx-player" aria-hidden="true"><span>Driver</span><b>You!</b><span>Season</span><b>2027</b><span>Race day</span><b>Sat, June 5</b><span>Track</span><b>Cronin Derby Downs</b></div>
         </div>
         <div class="gx-main">
           <div class="gx-garage" aria-hidden="true"><i class="gx-lights"></i><i class="gx-flag"></i><i class="gx-door"></i></div>
@@ -2906,7 +2908,7 @@ body.rw-tv .rw-fol{display:none}
             <div class="gx-bars" id="gxBars"></div>
             <p class="gx-key" id="gxKey"></p>
           </div>
-          <p class="gx-drag" aria-hidden="true">Drag to spin</p>
+          <p class="gx-drag" aria-hidden="true">Drag to spin · Take a closer look</p>
         </div>
         <div class="gx-strip">
           <button class="gx-arrow cs-prev" type="button" aria-label="Previous ride"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5 8 12l8 7z"/></svg></button>
@@ -3581,10 +3583,25 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
-      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
-      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
-      {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
-      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",label:"Staff",neon:"#e21b2d",key:"Username or admin email",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
+      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Workshops on the calendar","workshops"],["Cars in the build","cars"]]},
+      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteer check-ins","volunteer_visits"],["Meals served","meals"],["Ways to help","helpways"]]},
+      {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
+      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",label:"Staff",neon:"#e21b2d",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
+    var LIVE={};
+    function impact(i){var el=document.querySelectorAll(".impact .stat strong")[i];return el?el.textContent.trim():""}
+    function gxStat(k){var t=new Date();t.setHours(0,0,0,0);var iso=t.toISOString().slice(0,10),up=EVENTS.filter(function(e){return (e.e||e.d)>=iso});
+      if(k==="kids")return LIVE.kids>0?LIVE.kids.toLocaleString():impact(0)||"120+";
+      if(k==="cars")return impact(1)||"24–30";
+      if(k==="paths")return impact(2)||"4";
+      if(k==="track")return impact(3)||"1";
+      if(k==="workshops"){var w=up.filter(function(e){return e.k==="workshop"}).length;return w?String(w):"Coming soon"}
+      if(k==="events")return String(up.length);
+      if(k==="speed")return "30+ mph";
+      if(k==="helpways")return "7";
+      if(k==="engines")return "0 (gravity!)";
+      if(k==="countdown"){var r=EVENTS.filter(function(e){return e.k==="racing"&&e.d>=iso})[0];if(!r)return "Soon";var d=Math.round((new Date(r.d+"T00:00:00")-t)/864e5);return d===0?"Today!":d+" days"}
+      if(LIVE[k]>0)return LIVE[k].toLocaleString();return "Tally starts soon"}
+    window.FR_gxLive=function(d){LIVE=d||{};show(cur,0)};
     var cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=cards.length,cur=0;
     var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var thumbs=root.querySelector(".gx-thumbs");
@@ -3740,8 +3757,8 @@ body.rw-tv .rw-fol{display:none}
       cards.forEach(function(x,k){x.hidden=k!==cur});thBtns.forEach(function(b,k){b.setAttribute("aria-pressed",String(k===cur))});
       root.style.setProperty("--n",c.neon);
       $("#gxNo").textContent=String(cur+1).padStart(2,"0")+" / "+String(n).padStart(2,"0");$("#gxName").textContent=cd.querySelector("h2").textContent;
-      $("#gxBars").innerHTML=c.stats.map(function(s){return '<div class="gx-bar"><span>'+esc(s[0])+'</span><em>'+s[1]+'/10</em><i style="--v:'+s[1]+'"></i></div>'}).join("");
-      $("#gxKey").innerHTML='<b>Key</b> '+esc(c.key);
+      $("#gxBars").innerHTML=c.stats.map(function(s){return '<div class="gx-bar"><span>'+esc(s[0])+'</span><b>'+esc(gxStat(s[1]))+'</b></div>'}).join("");
+      $("#gxKey").innerHTML='<b>Ignition key</b> '+esc(c.key);
       if(!ok){root.querySelector(".gx-fallback").innerHTML=flat(c,cur)}
       if(spin&&!still)cam.spin=spin*1.6;kick()}
     root.querySelector(".cs-prev").onclick=function(){show(cur-1,-1)};
@@ -3988,7 +4005,8 @@ window.FRB=(function(){
     if(r.error) throw r.error; CONTENT={}; r.data.forEach(function(c){CONTENT[c.key]=c}); applyContent(); applyDonate(); return r.data;})}
 
   var started=false;
-  function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();}
+  function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();
+    db.rpc("public_stats",{p_year:null}).then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
   Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
     FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true; startUp();
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
