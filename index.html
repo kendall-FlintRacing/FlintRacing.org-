@@ -3583,7 +3583,7 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
-      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Workshops on the calendar","workshops"],["Cars in the build","cars"]]},
+      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
       {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteer check-ins","volunteer_visits"],["Meals served","meals"],["Ways to help","helpways"]]},
       {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
       {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",label:"Staff",neon:"#e21b2d",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
@@ -3598,6 +3598,7 @@ body.rw-tv .rw-fol{display:none}
       if(k==="events")return String(up.length);
       if(k==="speed")return "30+ mph";
       if(k==="helpways")return "7";
+      if(k==="years")return String(new Date().getFullYear()-2019);
       if(k==="engines")return "0 (gravity!)";
       if(k==="countdown"){var r=EVENTS.filter(function(e){return e.k==="racing"&&e.d>=iso})[0];if(!r)return "Soon";var d=Math.round((new Date(r.d+"T00:00:00")-t)/864e5);return d===0?"Today!":d+" days"}
       if(LIVE[k]>0)return LIVE[k].toLocaleString();return "Tally starts soon"}
