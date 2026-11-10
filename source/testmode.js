@@ -106,7 +106,7 @@
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
       onAuthStateChange:function(cb){listeners.push(cb)},
       signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
-      signUp:function(c){return Promise.resolve({data:{user:{email:c.email,identities:[{}]},session:null},error:null})},
+      signUp:function(c){return Promise.resolve({data:null,error:{message:"PREVIEW: This is the Claude preview, so no real account was created. Create your real account on your website (the GitHub test address)."}})},
       resend:function(){return Promise.resolve({error:null})},
       updateUser:function(){return Promise.resolve({data:{},error:null})},
       resetPasswordForEmail:function(){return Promise.resolve({error:null})},

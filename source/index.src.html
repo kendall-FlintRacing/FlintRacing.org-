@@ -929,6 +929,13 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .acc-team{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);margin-top:clamp(1.6rem,3vw,2.4rem);scroll-margin-top:90px;align-items:start}
 @media (max-width:860px){.acc-team{grid-template-columns:1fr}}
 .acc-card{background:#fff;color:var(--ink);border-radius:8px;padding:clamp(18px,3vw,28px);border-top:5px solid var(--red-deep)}
+.gr-photo{margin:18px 0 0;position:relative;background:#fff;padding:12px 12px 16px;border-radius:6px;box-shadow:0 22px 50px rgba(0,0,0,.5);transform:rotate(1.2deg)}
+.gr-photo::before{content:"";position:absolute;top:-12px;left:50%;width:120px;height:26px;transform:translateX(-50%) rotate(-2deg);background:conic-gradient(rgba(17,17,19,.9) 25%,rgba(255,255,255,.9) 0 50%,rgba(17,17,19,.9) 0 75%,rgba(255,255,255,.9) 0) 0 0/13px 13px;opacity:.9;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.gr-photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;background:#d4d6da}
+.gr-photo figcaption{display:grid;gap:3px;padding:12px 4px 0;color:var(--ink)}
+.gr-photo figcaption b{font:800 1.15rem/1.2 var(--body)}
+.gr-photo figcaption span{color:#4a4d55;font-size:.92rem}
+@media (max-width:860px){.gr-photo{transform:none}}
 .acc-spaces h2{color:#fff;font-size:clamp(1.6rem,3vw,2.1rem)}
 .acc-spaces>p{color:#c9cbd0;margin-top:4px}
 .acc-spaces ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
@@ -2532,10 +2539,10 @@ body.rw-tv .rw-fol{display:none}
           <p class="cs-desc">Follow every heat live on race day: the starting lights, run times, brackets and winners. Send a shout-out from the stands.</p>
           <div class="cs-acts"><a class="cs-go" href="#race-watch">Watch race day live</a></div>
         </article>
-        <article class="cs-card" data-card="3" aria-label="Team Garage" hidden>
-          <h2>Team Garage</h2>
+        <article class="cs-card" data-card="3" aria-label="Staff Garage" hidden>
+          <h2>Staff Garage</h2>
           <p class="cs-desc">For admins, teachers, photographers, workshop staff and race-day crew. Sign in or create your team account.</p>
-          <div class="cs-acts"><a class="cs-go" href="#team">Enter the Garage</a></div>
+          <div class="cs-acts"><a class="cs-go" href="#team">Enter the Staff Garage</a></div>
         </article>
       </div>
     </div>
@@ -2544,12 +2551,12 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= THE GARAGE: TEAM SIGN IN ======================= -->
 <div class="page dark prog-page gr-page" data-page="team" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>The Garage</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Staff Garage</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="gr-head">
       <p class="eyebrow">Crew only past this point</p>
-      <h1>The Garage</h1>
-      <p>Team sign in for admins, teachers, photographers, workshop staff and race-day crew. Create your account once; an admin hands you the keys to your spaces.</p>
+      <h1>Staff Garage</h1>
+      <p>Staff sign in for admins, teachers, photographers, workshop staff and race-day crew. Create your account once; an admin hands you the keys to your spaces.</p>
     </section>
     <div class="gr-grid">
       <div class="badge">
@@ -2558,15 +2565,10 @@ body.rw-tv .rw-fol{display:none}
         <div class="badge-body" id="accAuth"><p>Loading…</p></div>
         <div class="badge-bar" aria-hidden="true"></div>
       </div>
-      <div class="acc-spaces"><h2>Garage bays</h2><p>Each bay opens once an admin turns it on for your account.</p><ul>
-        <li><a data-space="admin" href="#admin"><b>Admin</b><span>Every page and photo. Events, news, families, team and reviews.</span></a></li>
-        <li><a data-space="teacher" href="#teacher"><b>Teacher planning</b><span>Seasonal workshop plans, materials and meeting dates.</span></a></li>
-        <li><a data-space="photographer" href="#photographer"><b>Photographer</b><span>Event albums and uploads for review.</span></a></li>
-        <li><a data-space="workshop" href="#workshop-signin"><b>Workshop sign-in</b><span>Building Workshop attendance, teams, kids and meal counts.</span></a></li>
-        <li><a data-space="controller" href="#race-control"><b>Race control</b><span>Brackets, running order, starting lights, run times and results.</span></a></li>
-        <li><a data-space="track" href="#track-manager"><b>Track manager</b><span>Shout-outs, intermissions, sponsor ads and fun moments.</span></a></li>
-        <li><a data-space="volunteers" href="#volunteers"><b>Race-day volunteers</b><span>Event and track volunteer lists, check-in and crew links.</span></a></li>
-      </ul></div>
+      <figure class="gr-photo">
+        <img src="{{IMG:img/web/2026-racers-group.webp}}" alt="Flint Racing racers and crew together at the track" loading="lazy">
+        <figcaption><b>Every great race starts in the garage.</b><span>Thank you for building something bigger with us.</span></figcaption>
+      </figure>
     </div>
   </div></div>
 </div>
@@ -2790,7 +2792,7 @@ body.rw-tv .rw-fol{display:none}
       <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#programs">Programs</a></li><li><a href="#calendar">Calendar</a></li><li><a href="#resources">Resources</a></li></ul></div>
       <a class="f-logo" href="#home"><img src="{{LOGO_WHITE}}" alt="Flint Racing home"></a>
       <div><h4>Take part</h4><ul><li><a href="#participate">Get Involved</a></li><li><a href="#support">Support Flint Racing</a></li><li><a href="#serve">Volunteer</a></li><li><a href="#background-check">Background Check</a></li></ul></div>
-      <div><h4>Connect</h4><ul><li><a href="#news-page">News &amp; Stories</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#contact">Contact</a></li><li><a href="#access">Sign In</a></li><li><a href="#team">Team sign in</a></li><li><a href="mailto:info@flintracing.org">info@flintracing.org</a></li></ul></div>
+      <div><h4>Connect</h4><ul><li><a href="#news-page">News &amp; Stories</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#contact">Contact</a></li><li><a href="#access">Sign In</a></li><li><a href="#team">Staff sign in</a></li><li><a href="mailto:info@flintracing.org">info@flintracing.org</a></li></ul></div>
     </div>
     <div class="f-base"><span>© <span id="yr">2026</span> Flint Racing and STEM</span><span>Build Something Bigger.</span></div>
   </div>
@@ -2800,7 +2802,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"The Garage","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track manager","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track manager","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -3165,7 +3167,7 @@ body.rw-tv .rw-fol{display:none}
       {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",neon:"#ffffff",key:"Family code",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
       {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",neon:"#ffc233",key:"None. Just sign up",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
       {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
-      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",neon:"#e21b2d",key:"Team account",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
+      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",neon:"#e21b2d",key:"Staff account",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
     var cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=cards.length,cur=0;
     var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var thumbs=root.querySelector(".gx-thumbs");
@@ -3549,7 +3551,7 @@ window.FRB=(function(){
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
 
   function testChip(){var c=document.createElement("div");c.className="fr-test";c.setAttribute("role","note");
-    c.innerHTML='<b>Test mode</b><span>No login needed. Changes stay in this browser only.</span><a href="#admin">Admin</a><button type="button">Reset test data</button>';
+    c.innerHTML='<b>Preview copy</b><span>Practice only: nothing here reaches your real site. Create real accounts on your website.</span><a href="#admin">Admin</a><button type="button">Reset test data</button>';
     document.body.appendChild(c);var b=c.querySelector("button");b.onclick=function(){if(b.textContent!=="Confirm reset"){b.textContent="Confirm reset";return}window.FR_TEST_RESET()};}
   /* ---------- Toast ---------- */
   var tt; function toast(m){var t=$(".fr-toast");if(!t){t=document.createElement("div");t.className="fr-toast";t.setAttribute("role","status");document.body.appendChild(t)}
@@ -3692,6 +3694,7 @@ window.FRB=(function(){
       else db.auth.updateUser({password:pass}).then(function(r){busy(false);if(r.error){say(friendly(r.error));return}RECOVERY=false;AUTH_NOTE="";Object.keys(AUTHUI).forEach(function(k){AUTHUI[k].mode="in"});toast("Password saved. You’re signed in.");renderAccess()});};
   }
   function friendly(err){var t=(err&&err.message)||"";
+    if(/^PREVIEW: /.test(t)) return t.slice(9);
     if(/invalid login/i.test(t)) return "That email and password didn’t match. Check them, or reset your password.";
     if(/already registered|already exists/i.test(t)) return "There’s already an account with that email. Sign in instead, or reset your password.";
     if(/rate limit|too many/i.test(t)) return "Too many emails were sent in a short time. Wait a bit and try again, or ask an admin.";
@@ -3709,7 +3712,7 @@ window.FRB=(function(){
   function canSpace(k){if(IS_ADMIN)return true;if(k==="controller")return IS_CTRL;if(k==="track")return IS_TRACK;if(k==="volunteers")return IS_CTRL||IS_TRACK;return !!STAFF[k]}
   function renderAccess(){var box=$("#accAuth");if(!box||!window.FR_DB)return;
     if(!USER||RECOVERY){$$(".acc-spaces [data-space]").forEach(function(a){a.classList.remove("yours")});
-      if(!box.querySelector("#accAuthBody"))box.innerHTML=signInHTML("acc").replace("Admin sign in","Team sign in");bindSignIn("acc");return}
+      if(!box.querySelector("#accAuthBody"))box.innerHTML=signInHTML("acc").replace("Admin sign in","Staff sign in");bindSignIn("acc");return}
     var name=(USER.user_metadata&&USER.user_metadata.full_name)||"",mine=SPACES.filter(function(s){return canSpace(s[0])});
     box.innerHTML='<div class="auth"><p class="acc-k">Signed in</p><h2>'+esc(name||"Welcome back")+'</h2><p class="acc-email">'+esc(USER.email)+'</p>'+(AUTH_NOTE?'<p class="auth-note">'+esc(AUTH_NOTE)+'</p>':'')+
       (mine.length?'<p class="acc-sub">Your spaces</p><div class="acc-mine">'+mine.map(function(s){return '<a class="btn deep" href="'+s[1]+'">'+esc(s[2])+' →</a>'}).join("")+'</div>':
