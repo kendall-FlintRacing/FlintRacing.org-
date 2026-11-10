@@ -177,6 +177,7 @@
     storage:{from:function(){return{
       upload:function(path,file){return new Promise(function(res){
         /* shrink the photo so test data fits in browser storage */
+        if(!/^image\//.test(file.type||"")){var fr=new FileReader();fr.onload=function(){files[path]=fr.result;res({error:null})};fr.onerror=function(){res({error:{message:"Couldn’t read file"}})};fr.readAsDataURL(file);return}
         var url=URL.createObjectURL(file),img=new Image();
         img.onload=function(){var w=Math.min(1200,img.naturalWidth),h=Math.round(img.naturalHeight*w/img.naturalWidth),c=document.createElement("canvas");c.width=w;c.height=h;
           c.getContext("2d").drawImage(img,0,0,w,h);files[path]=c.toDataURL("image/jpeg",0.82);URL.revokeObjectURL(url);res({error:null})};
