@@ -3571,10 +3571,10 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
-      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",neon:"#ffffff",key:"Username + passcode",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
-      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",neon:"#ffc233",key:"Username + passcode",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
-      {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
-      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",neon:"#e21b2d",key:"Username or admin email",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
+      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
+      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
+      {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
+      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",label:"Staff",neon:"#e21b2d",key:"Username or admin email",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
     var cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=cards.length,cur=0;
     var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var thumbs=root.querySelector(".gx-thumbs");
@@ -3642,13 +3642,21 @@ body.rw-tv .rw-fol{display:none}
       return {cockpit:ell(-0.24,bt-0.025,0,0.66,0.04,0.25),rest:ell(-0.24,bt-0.05,0,0.55,0.02,0.18),torso:ell(-0.36,bt+0.0,0,0.23,0.13,0.24),helmet:ell(-0.24,bt+0.17,0,0.17,0.16,0.16),
         visor:ell(-0.12,bt+0.15,0,0.08,0.07,0.13),tires:merge(tires),hubs:merge(hubs),axles:merge(axles)}}
 
-    function decalCanvas(c){var cvx=document.createElement("canvas");cvx.width=1024;cvx.height=256;var g=cvx.getContext("2d");
-      var px=function(x){return (x-X0)/(X1-X0)*1024},py=function(y){return (1.3-y)/1.3*256};
-      g.fillStyle=c.trim;g.fillRect(0,0,8,8);
-      g.lineCap="round";g.strokeStyle=c.trim;g.lineWidth=10;g.beginPath();g.moveTo(px(-1.9),py(0.43));g.lineTo(px(1.9),py(0.43));g.stroke();
-      var nx=px(-1.36),ny=py(0.71),rr=36;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
-      g.fillStyle="#0b0b0e";g.font="900 "+(c.num.length>1?50:58)+"px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(c.num,nx,ny+3);
-      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.88;g.font="italic 900 64px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="center";g.fillText("FLINT RACING",px(0.4),py(0.76));
+    /* Side art. Top half of the texture is one side of the car, bottom half the other side,
+       with the lettering mirrored there so it reads correctly from both sides. */
+    function decalCanvas(c){var cvx=document.createElement("canvas");cvx.width=1024;cvx.height=512;var g=cvx.getContext("2d");
+      var px=function(x){return (x-X0)/(X1-X0)*1024},F="'Barlow Condensed','Arial Narrow',Arial,sans-serif";
+      g.fillStyle=c.trim;g.fillRect(0,0,8,4);
+      function txt(t,x,y,flip){g.save();g.translate(x,y);if(flip)g.scale(-1,1);g.fillText(t,0,0);g.restore()}
+      [0,1].forEach(function(side){var py=function(y){return side*256+(1.3-y)/1.3*256};
+        g.lineCap="round";g.strokeStyle=c.trim;g.lineWidth=10;g.beginPath();g.moveTo(px(-1.9),py(0.43));g.lineTo(px(1.9),py(0.43));g.stroke();
+        var nx=px(-1.36),ny=py(0.71),rr=36;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
+        g.fillStyle="#0b0b0e";g.font="900 "+(c.num.length>1?50:58)+"px "+F;g.textAlign="center";g.textBaseline="middle";txt(c.num,nx,ny+3,side===1);
+        var lx=px(0.4),ly=py(0.76),label=c.label.toUpperCase();g.font="italic 900 70px "+F;
+        if(c.paint==="checker"){var tw=g.measureText(label).width+44,th=74;g.fillStyle="#ffffff";g.strokeStyle="#0b0b0e";g.lineWidth=5;
+          g.beginPath();if(g.roundRect)g.roundRect(lx-tw/2,ly-th/2,tw,th,14);else g.rect(lx-tw/2,ly-th/2,tw,th);g.fill();g.stroke();g.fillStyle="#0b0b0e";g.globalAlpha=1}
+        else{g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.9}
+        txt(label,lx,ly+2,side===1);g.globalAlpha=1});
       return cvx}
 
     var VS="attribute vec3 aP;attribute vec3 aN;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec3 vO;varying vec3 vON;void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=mat3(uM)*aN;vO=aP;vON=aN;gl_Position=uVP*w;}";
@@ -3656,8 +3664,8 @@ body.rw-tv .rw-fol{display:none}
       "vec3 env(vec3 r){float h=r.y;vec3 c=mix(vec3(0.03,0.03,0.035),vec3(0.16,0.17,0.19),smoothstep(-0.3,0.7,h));c+=vec3(2.2)*smoothstep(0.45,0.75,h)*(1.0-smoothstep(0.06,0.13,abs(fract(r.x*1.4+0.25)-0.5)));c+=uNeon*0.45*exp(-pow((h+0.08)/0.12,2.0));return c;}"+
       "void main(){vec3 N=normalize(vN);vec3 V=normalize(uEye-vW);if(dot(N,V)<0.0)N=-N;vec3 base=uC;"+
       "if(uChk>0.5){float k=mod(floor(vO.x*4.0)+floor(vO.y*4.0)+floor(vO.z*4.0+100.0),2.0);base=mix(vec3(0.012),vec3(0.86),k);}"+
-      "if(uDec>0.5){vec4 d=texture2D(uT,vec2((vO.x+1.84)/3.68,(1.3-vO.y)/1.3));float side=smoothstep(0.2,0.55,abs(normalize(vON).z));base=mix(base,pow(d.rgb,vec3(2.2)),d.a*side);"+
-      "float az=abs(vO.z),top=smoothstep(0.3,0.6,normalize(vON).y);vec3 tr=pow(texture2D(uT,vec2(0.003,0.01)).rgb,vec3(2.2));"+
+      "if(uDec>0.5){vec4 d=texture2D(uT,vec2((vO.x+1.84)/3.68,(1.3-vO.y)/1.3*0.5+(vO.z<0.0?0.5:0.0)));float side=smoothstep(0.2,0.55,abs(normalize(vON).z));base=mix(base,pow(d.rgb,vec3(2.2)),d.a*side);"+
+      "float az=abs(vO.z),top=smoothstep(0.3,0.6,normalize(vON).y);vec3 tr=pow(texture2D(uT,vec2(0.003,0.004)).rgb,vec3(2.2));"+
       "base=mix(base,tr,top*(1.0-smoothstep(0.075,0.085,az)));base=mix(base,vec3(0.01),top*smoothstep(0.075,0.085,az)*(1.0-smoothstep(0.1,0.11,az)));base=mix(base,tr,top*smoothstep(0.1,0.11,az)*(1.0-smoothstep(0.125,0.135,az)));}"+
       "vec3 L1=normalize(vec3(0.35,1.0,0.55));vec3 L2=normalize(vec3(-0.7,0.35,-0.4));float d1=max(dot(N,L1),0.0),d2=max(dot(N,L2),0.0);"+
       "vec3 amb=mix(vec3(0.05,0.05,0.06),vec3(0.2,0.2,0.22),N.y*0.5+0.5);vec3 col=base*(amb+d1*vec3(0.95,0.92,0.88)+d2*0.22);"+
