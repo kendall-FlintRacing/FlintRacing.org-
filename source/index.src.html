@@ -3599,7 +3599,7 @@ body.rw-tv .rw-fol{display:none}
     /* ----- geometry (baked object space: x = nose forward, y = up, z = side) ----- */
     function cr(arr,t){var m=arr.length-1,f=Math.max(0,Math.min(1,t))*m,i=Math.min(m-1,Math.floor(f)),u=f-i,p0=arr[Math.max(0,i-1)],p1=arr[i],p2=arr[i+1],p3=arr[Math.min(m,i+2)];
       return 0.5*(2*p1+(-p0+p2)*u+(2*p0-5*p1+4*p2-p3)*u*u+(-p0+3*p1-3*p2+p3)*u*u*u)}
-    var W=[0.1,0.33,0.41,0.43,0.43,0.43,0.43,0.42,0.38,0.27,0.08],TOP=[0.7,0.92,0.99,1.01,1.01,1.0,0.98,0.95,0.9,0.82,0.7],BOT=[0.54,0.4,0.35,0.34,0.34,0.34,0.34,0.35,0.37,0.42,0.5],X0=-1.95,X1=1.95;
+    var W=[0.16,0.36,0.41,0.42,0.42,0.42,0.42,0.42,0.41,0.36,0.16],TOP=[0.76,0.93,0.98,0.99,0.99,0.99,0.99,0.99,0.98,0.93,0.76],BOT=[0.56,0.39,0.35,0.34,0.34,0.34,0.34,0.34,0.35,0.39,0.56],X0=-1.7,X1=1.7;
     function bodyAt(x){var t=(x-X0)/(X1-X0);return {w:cr(W,t),top:cr(TOP,t),bot:cr(BOT,t)}}
     function finish(P,I){var N=new Float32Array(P.length);for(var i=0;i<I.length;i+=3){var a=I[i]*3,b=I[i+1]*3,c=I[i+2]*3,
         u=[P[b]-P[a],P[b+1]-P[a+1],P[b+2]-P[a+2]],v=[P[c]-P[a],P[c+1]-P[a+1],P[c+2]-P[a+2]],f=crs(u,v);
@@ -3622,20 +3622,20 @@ body.rw-tv .rw-fol{display:none}
       for(i=0;i<prof.length-1;i++)for(j=0;j<S;j++){var a=i*(S+1)+j,b=a+S+1;I.push(a,a+1,b,a+1,b+1,b)}return finish(P,I)}
     function merge(list){var P=[],N=[],I=[];list.forEach(function(g){var o=P.length/3;Array.prototype.push.apply(P,g.p);Array.prototype.push.apply(N,g.n);for(var k=0;k<g.i.length;k++)I.push(g.i[k]+o)});return {p:new Float32Array(P),n:new Float32Array(N),i:new Uint16Array(I)}}
     function partsGeo(){var b=bodyAt(0.05),bt=b.top,wr=0.37,hw=0.055,tires=[],hubs=[],axles=[];
-      [[1.62,0],[-1.6,0]].forEach(function(w){var bw=0.43+0.11;[-1,1].forEach(function(sd){var z=sd*bw;
+      [[1.38,0],[-1.38,0]].forEach(function(w){var bw=0.42+0.11;[-1,1].forEach(function(sd){var z=sd*bw;
         tires.push(lathe(w[0],wr,z,[[wr*0.8,-hw],[wr*0.88,-hw],[wr*0.97,-hw*0.7],[wr,-hw*0.2],[wr,hw*0.2],[wr*0.97,hw*0.7],[wr*0.88,hw],[wr*0.8,hw]].map(function(p){return [p[0],p[1]*sd]}).reverse()));
         hubs.push(lathe(w[0],wr,z,[[0.001,hw*1.4*sd],[0.05,hw*1.4*sd],[0.07,hw*0.5*sd],[wr*0.81,hw*0.2*sd],[wr*0.81,-hw*0.5*sd]].reverse()))});
         axles.push(lathe(w[0],wr,0,[[0.025,bw],[0.025,-bw]]))});
-      return {cockpit:ell(0.0,bt-0.015,0,0.66,0.05,0.33),rest:ell(-0.62,bt-0.01,0,0.12,0.05,0.3),torso:ell(-0.02,bt+0.08,0,0.24,0.2,0.25),helmet:ell(0.16,bt+0.33,0,0.19,0.18,0.18),
-        visor:ell(0.29,bt+0.31,0,0.09,0.08,0.15),tires:merge(tires),hubs:merge(hubs),axles:merge(axles),nosebar:ell(1.25,bodyAt(1.25).top-0.005,0,0.55,0.025,0.06)}}
+      return {cockpit:ell(0.0,bt-0.015,0,0.66,0.05,0.33),rest:ell(-0.6,bt-0.01,0,0.1,0.04,0.28),torso:ell(-0.02,bt+0.08,0,0.24,0.2,0.25),helmet:ell(0.16,bt+0.33,0,0.19,0.18,0.18),
+        visor:ell(0.29,bt+0.31,0,0.09,0.08,0.15),tires:merge(tires),hubs:merge(hubs),axles:merge(axles)}}
 
     function decalCanvas(c){var cvx=document.createElement("canvas");cvx.width=1024;cvx.height=256;var g=cvx.getContext("2d");
       var px=function(x){return (x-X0)/(X1-X0)*1024},py=function(y){return (1-y)*256};
-      g.lineCap="round";g.strokeStyle=c.trim;g.lineWidth=18;g.beginPath();g.moveTo(px(-1.9),py(0.5));g.bezierCurveTo(px(-0.6),py(0.5),px(0.9),py(0.49),px(1.95),py(0.46));g.stroke();
-      g.lineWidth=7;g.beginPath();g.moveTo(px(-1.9),py(0.42));g.bezierCurveTo(px(-0.6),py(0.42),px(0.9),py(0.415),px(1.92),py(0.4));g.stroke();
-      var nx=px(-1.2),ny=py(0.66),rr=44;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
+      g.lineCap="round";g.strokeStyle=c.trim;g.lineWidth=18;g.beginPath();g.moveTo(px(-1.75),py(0.5));g.lineTo(px(1.75),py(0.5));g.stroke();
+      g.lineWidth=7;g.beginPath();g.moveTo(px(-1.75),py(0.42));g.lineTo(px(1.75),py(0.42));g.stroke();
+      var nx=px(-1.05),ny=py(0.67),rr=44;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
       g.fillStyle="#0b0b0e";g.font="900 "+(c.num.length>1?50:58)+"px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(c.num,nx,ny+3);
-      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.85;g.font="italic 900 46px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="left";g.fillText("FLINT RACING",px(-0.45),py(0.68));
+      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.85;g.font="italic 900 46px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="left";g.fillText("FLINT RACING",px(-0.5),py(0.69));
       return cvx}
 
     var VS="attribute vec3 aP;attribute vec3 aN;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec3 vO;varying vec3 vON;void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=mat3(uM)*aN;vO=aP;vON=aN;gl_Position=uVP*w;}";
@@ -3685,7 +3685,7 @@ body.rw-tv .rw-fol{display:none}
       gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex[k]);gl.uniform1i(P1.u.uT,0);
       var chk=c.paint==="checker",paint=chk?[0.5,0.5,0.5]:hex(c.paint),dark=[0.012,0.012,0.014];
       [["body",paint,1.0,90,1.0,chk?1:0,1],["rest",chk?[0.012,0.012,0.014]:paint,1.0,90,1.0,0,0],["cockpit",dark,0.6,50,0.5,0,0],["torso",[0.035,0.035,0.04],0.5,30,0.3,0,0],["helmet",hex(c.helmet),1.2,110,1.0,0,0],["visor",[0.02,0.02,0.03],1.4,140,1.3,0,0],
-       ["nosebar",hex(c.trim),0.8,80,0.8,0,0],["tires",[0.018,0.018,0.02],0.12,12,0.05,0,0],["hubs",[0.09,0.09,0.1],0.9,60,0.6,0,0],["axles",[0.08,0.08,0.09],0.5,40,0.3,0,0]].forEach(function(x){var m=meshes[x[0]];
+       ["tires",[0.018,0.018,0.02],0.12,12,0.05,0,0],["hubs",[0.09,0.09,0.1],0.9,60,0.6,0,0],["axles",[0.08,0.08,0.09],0.5,40,0.3,0,0]].forEach(function(x){var m=meshes[x[0]];
         gl.uniform3fv(P1.u.uC,x[1]);gl.uniform1f(P1.u.uSpec,x[2]);gl.uniform1f(P1.u.uGloss,x[3]);gl.uniform1f(P1.u.uCoat,x[4]);gl.uniform1f(P1.u.uChk,x[5]);gl.uniform1f(P1.u.uDec,x[6]);
         gl.bindBuffer(gl.ARRAY_BUFFER,m.pb);gl.enableVertexAttribArray(P1.a.aP);gl.vertexAttribPointer(P1.a.aP,3,gl.FLOAT,false,0,0);
         gl.bindBuffer(gl.ARRAY_BUFFER,m.nb);gl.enableVertexAttribArray(P1.a.aN);gl.vertexAttribPointer(P1.a.aN,3,gl.FLOAT,false,0,0);
@@ -3982,7 +3982,7 @@ window.FRB=(function(){
   function setUser(u){USER=u;
     if(!u){IS_ADMIN=false;IS_CTRL=false;IS_TRACK=false;IS_VOLS=false;CODE_ROLES={};STAFF={};ME=null;PD.data=null;setEditing(false);updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();renderMemCards();renderPortals();return Promise.resolve()}
     return Promise.all([db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle(),db.from("race_roles").select("role").eq("user_id",u.id),db.from("staff").select("role").eq("user_id",u.id),db.rpc("my_member")]).then(function(rr){
-      if(USER!==u)return;
+      if(!USER||USER.id!==u.id)return;
       var r=rr[0],ro=(rr[1].data||[]).map(function(x){return x.role}),was=ME&&ME.id;IS_ADMIN=!!(r.data);STAFF={};(rr[2].data||[]).forEach(function(x){STAFF[x.role]=1});
       ME=(rr[3]&&!rr[3].error&&rr[3].data)||null;if((ME&&ME.id)!==was)PD.data=null;var mr=ME?ME.roles||[]:[];
       ["workshop","teacher","photographer"].forEach(function(k){if(mr.indexOf(k)>=0)STAFF[k]=1});

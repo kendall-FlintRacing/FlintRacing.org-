@@ -166,7 +166,7 @@
         {user_id:"u-kevin@example.com",email:"kevin@example.com",full_name:"Kevin C.",created_at:new Date().toISOString(),last_sign_in_at:null,is_admin:(T.extra_admins||[]).indexOf("kevin@example.com")>=0,staff_roles:T.staff.filter(function(x){return x.email==="kevin@example.com"}).map(function(x){return x.role}),race_role:null}]);
       return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
-      onAuthStateChange:function(cb){listeners.push(cb)},
+      onAuthStateChange:function(cb){listeners.push(cb);setTimeout(function(){cb("INITIAL_SESSION",user?{user:JSON.parse(JSON.stringify(user))}:null)},0)},
       signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
       signUp:function(c){return Promise.resolve({data:null,error:{message:"PREVIEW: This is the Claude preview, so no real account was created. Create your real account on your website (the GitHub test address)."}})},
       resend:function(){return Promise.resolve({error:null})},
