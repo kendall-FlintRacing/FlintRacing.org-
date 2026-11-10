@@ -44,6 +44,9 @@
     T.staff=[{user_id:"test-admin",role:"workshop",email:"test-admin@flintracing.org"},{user_id:"test-admin",role:"photographer",email:"test-admin@flintracing.org"},{user_id:"test-admin",role:"teacher",email:"test-admin@flintracing.org"}];
     T.race_volunteers=[{id:"rv1",created_at:new Date().toISOString(),first_name:"Dana",last_name:"Brooks",email:"dana@example.com",phone:null,area:"track",shift:"All day",notes:"Ran the starting ramp last year",over18:true,status:"new"},
       {id:"rv2",created_at:new Date().toISOString(),first_name:"Marcus",last_name:"Lee",email:"marcus@example.com",phone:"810-555-0100",area:"event",shift:"Morning",notes:null,over18:true,status:"confirmed",assigned_area:"event",role:"Check-in table",assignment:"Welcome tent at 7:45 AM.",link_token:"demo0crew0link0marcus0000"}];
+    T.spirit_items=Array.prototype.slice.call(document.querySelectorAll("#spGrid .sp-item")).map(function(el,i){var art=el.querySelector(".sp-art"),sm=art.querySelector("small"),b=art.querySelector("b");
+      return {id:"sp"+i,name:el.querySelector("h3").textContent,category:el.getAttribute("data-cat"),description:(el.querySelector(".sp-body p")||{}).textContent||null,art_text:b?b.innerHTML.replace(/<br>/g,"\n"):null,badge:sm?sm.textContent:null,style:(art.className.match(/a[1-4]/)||["a1"])[0],image_url:null,sort_order:i,visible:true}});
+    T.code_sessions=[];T.crew_codes={};
     T.news_posts=[];T.resources=[];T.albums=[];T.album_photos=[];T.teacher_plans=[];T.workshop_signins=[];T.event_details=[];
     T.race_state=[{id:1,live:true,current_heat:cur?cur.id:null,banner:"DEMO RACE (test mode only). These names and times are made up.",updated_at:new Date().toISOString()}];
     var t=Date.now();
@@ -53,7 +56,7 @@
       {id:"so4",name:"Uncle Ray",message:"Waiting for review: you can approve me in Admin > Race day > Shout-outs.",status:"pending",created_at:new Date(t).toISOString()}];
   }
   load();
-  if(T&&(!T.race_show||!T.staff)){race();save();}
+  if(T&&(!T.race_show||!T.staff||!T.crew_codes)){race();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -102,12 +105,21 @@
       if(fn==="grant_admin"){T.extra_admins=(T.extra_admins||[]).filter(function(e){return e!==args.p_email}).concat([args.p_email]);save();return R(args.p_email)}
       if(fn==="revoke_admin"){T.extra_admins=(T.extra_admins||[]).filter(function(e){return "u-"+e!==args.p_user});save();return R(null)}
       if(fn==="set_staff"){T.staff=T.staff.filter(function(x){return !(x.email===args.p_email&&x.role===args.p_role)});if(args.p_on)T.staff.push({user_id:"u-"+args.p_email,role:args.p_role,email:args.p_email});save();return R(args.p_email)}
+      T.crew_codes=T.crew_codes||{};T.code_sessions=T.code_sessions||[];
+      if(fn==="set_crew_code"){if(!/^[0-9]{6,12}$/.test(args.p_code))return R(null,"Use 6 to 12 digits.");T.crew_codes[args.p_role]={code:args.p_code,at:new Date().toISOString()};T.code_sessions=T.code_sessions.filter(function(x){return x.role!==args.p_role});save();return R(null)}
+      if(fn==="clear_crew_code"){delete T.crew_codes[args.p_role];save();return R(null)}
+      if(fn==="crew_code_info"){var o={};Object.keys(T.crew_codes).forEach(function(k){o[k]={updated_at:T.crew_codes[k].at,active:T.code_sessions.filter(function(x){return x.role===k}).length}});return R(o)}
+      if(fn==="redeem_crew_code"){var role=Object.keys(T.crew_codes).filter(function(k){return T.crew_codes[k].code===args.p_code})[0];if(!role)return R(null);
+        T.code_sessions=T.code_sessions.filter(function(x){return !(x.user_id===user.id&&x.role===role)});T.code_sessions.push({user_id:user.id,role:role,expires_at:new Date(Date.now()+16*36e5).toISOString()});save();return R(role)}
+      if(fn==="list_accounts")return R([{user_id:"test-admin",email:"test-admin@flintracing.org",full_name:"Test Admin",created_at:new Date().toISOString(),last_sign_in_at:new Date().toISOString(),is_admin:true,staff_roles:T.staff.filter(function(x){return x.user_id==="test-admin"}).map(function(x){return x.role}),race_role:null},
+        {user_id:"u-kevin@example.com",email:"kevin@example.com",full_name:"Kevin C.",created_at:new Date().toISOString(),last_sign_in_at:null,is_admin:(T.extra_admins||[]).indexOf("kevin@example.com")>=0,staff_roles:T.staff.filter(function(x){return x.email==="kevin@example.com"}).map(function(x){return x.role}),race_role:null}]);
       return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
       onAuthStateChange:function(cb){listeners.push(cb)},
       signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
       signUp:function(c){return Promise.resolve({data:null,error:{message:"PREVIEW: This is the Claude preview, so no real account was created. Create your real account on your website (the GitHub test address)."}})},
       resend:function(){return Promise.resolve({error:null})},
+      signInAnonymously:function(){user={id:"anon-"+rid(),is_anonymous:true,user_metadata:{}};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({data:{user:user,session:{user:user}},error:null})},
       updateUser:function(){return Promise.resolve({data:{},error:null})},
       resetPasswordForEmail:function(){return Promise.resolve({error:null})},
       signOut:function(){user=null;listeners.forEach(function(cb){cb("SIGNED_OUT",null)});return Promise.resolve({})}},
