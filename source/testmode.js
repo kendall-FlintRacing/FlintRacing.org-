@@ -51,7 +51,7 @@
   load();
   if(T&&!T.race_show){race();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
-  var user={id:"test-admin",email:"test-admin@flintracing.org"}, listeners=[];
+  var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
   function Q(t){this.t=t;this.f=[];this.op="select";this.row=null;this.single=false;this.head=false;this.ord=null}
   Q.prototype.select=function(c,o){if(o&&o.head)this.head=true;return this};
@@ -85,8 +85,10 @@
       return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
       onAuthStateChange:function(cb){listeners.push(cb)},
-      signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org"};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
-      signUp:function(){return Promise.resolve({error:null})},
+      signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
+      signUp:function(c){return Promise.resolve({data:{user:{email:c.email,identities:[{}]},session:null},error:null})},
+      resend:function(){return Promise.resolve({error:null})},
+      updateUser:function(){return Promise.resolve({data:{},error:null})},
       resetPasswordForEmail:function(){return Promise.resolve({error:null})},
       signOut:function(){user=null;listeners.forEach(function(cb){cb("SIGNED_OUT",null)});return Promise.resolve({})}},
     storage:{from:function(){return{

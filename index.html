@@ -920,6 +920,57 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .stub-card h1{font-size:clamp(2.6rem,6vw,4rem)}
 .stub-card p{color:#4a4d55}
 .page[hidden]{display:none!important}
+/* ===== Sign in page + account widget ===== */
+.acc-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(16px,3vw,28px);align-items:stretch}
+@media (max-width:860px){.acc-hero{grid-template-columns:1fr}}
+.acc-intro{background:var(--red-deep);border-radius:6px;padding:clamp(1.6rem,4vw,2.6rem);color:#fff;display:grid;gap:14px;align-content:center}
+.acc-intro h1{color:#fff}
+.acc-intro p{color:#fde8ea;font-size:1.05rem;max-width:44ch}
+.acc-intro .btn{justify-self:start}
+.acc-picks{display:grid;gap:12px}
+.acc-picks a{display:grid;gap:6px;background:#fff;color:var(--ink);border-radius:6px;padding:18px 20px;text-decoration:none;border-left:6px solid var(--red);transition:transform .15s}
+.acc-picks a:hover{transform:translateX(3px)}
+.acc-picks b{font:800 1.5rem/1 var(--display);text-transform:uppercase}
+.acc-picks span{color:#4a4d55;font-size:.95rem}
+.acc-team{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,28px);margin-top:clamp(1.6rem,3vw,2.4rem);scroll-margin-top:90px;align-items:start}
+@media (max-width:860px){.acc-team{grid-template-columns:1fr}}
+.acc-card{background:#fff;color:var(--ink);border-radius:8px;padding:clamp(18px,3vw,28px);border-top:5px solid var(--red-deep)}
+.acc-spaces h2{color:#fff;font-size:clamp(1.6rem,3vw,2.1rem)}
+.acc-spaces>p{color:#c9cbd0;margin-top:4px}
+.acc-spaces ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.acc-spaces a{display:grid;gap:3px;padding:12px 14px;border:1px solid #34333a;border-radius:6px;color:#fff;text-decoration:none;background:rgba(255,255,255,.03)}
+.acc-spaces a b{font-weight:800}
+.acc-spaces a span{color:#a9abb1;font-size:.88rem}
+.acc-spaces a.yours{border-color:var(--pink);background:rgba(255,90,104,.1)}
+.acc-spaces a.yours b::after{content:" · yours";color:var(--pink);font-weight:700}
+.auth h2{font-size:clamp(1.6rem,3vw,2.1rem);color:var(--ink)}
+.auth .f{display:block;font:600 .92rem/1.3 var(--body);color:var(--ink);margin-top:12px}
+.auth .f small{font-weight:500;color:#5a5d64}
+.auth .f>input,.auth .pw input{display:block;width:100%;margin-top:6px;font:400 1rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:11px 12px;color:var(--ink);background:#fff;min-width:0}
+.auth .pw{position:relative;display:block}
+.auth .pw input{padding-right:70px}
+.pw-eye{position:absolute;right:6px;bottom:6px;border:0;background:#eceef1;border-radius:3px;font:700 .78rem/1 var(--body);padding:8px 9px;cursor:pointer;color:var(--ink)}
+.auth-tabs{display:flex;gap:4px;background:#eceef1;border-radius:8px;padding:4px;margin-top:14px}
+.auth-tabs button{flex:1;border:0;background:transparent;font:800 .95rem/1 var(--body);padding:12px 8px;border-radius:6px;cursor:pointer;color:#4a4d55}
+.auth-tabs button[aria-selected="true"]{background:#fff;color:var(--red-deep);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.auth-go{width:100%;margin-top:16px;justify-content:center;min-height:50px}
+.auth-go.busy{opacity:.6}
+.auth-link{display:inline-block;background:none;border:0;color:var(--red-deep);font:700 .92rem/1.2 var(--body);text-decoration:underline;cursor:pointer;padding:12px 0 0}
+.auth-fine{color:#5a5d64;font-size:.88rem;margin-top:10px}
+.auth-h{font:800 1.3rem/1.2 var(--body);text-transform:none;color:var(--ink);margin-top:12px}
+.auth-note{background:#fff4cc;color:#3d2e00;border-left:5px solid #f5b82e;border-radius:4px;padding:10px 12px;font-weight:600;margin-top:12px}
+.auth-sent p{margin-top:8px}
+.auth-steps{margin:10px 0 12px 18px;color:#4a4d55;font-size:.92rem;display:grid;gap:4px}
+.auth .msg{margin-top:10px;font-weight:600;min-height:1.2em}
+.auth .msg.err{color:#b3152d}.auth .msg.ok{color:#1d6b3a}
+.acc-k{font:800 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep)}
+.acc-email{color:#4a4d55;margin-top:4px}
+.acc-sub{font:800 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#5a5d64;margin-top:18px}
+.acc-mine{display:grid;gap:8px;margin-top:8px}
+.acc-mine .btn{justify-content:space-between}
+.acc-wait{background:#f3f4f6;border-radius:6px;padding:14px;margin-top:14px}
+.acc-wait p{color:#4a4d55;margin-top:4px}
+.acc-card .row{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
 /* ===== Race control console ===== */
 .rk-page{background:#e9ebee;min-height:80vh;padding:clamp(1rem,2.5vw,1.6rem) 0 3rem}
 .rk-wrap{max-width:1240px}
@@ -2157,20 +2208,29 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <!-- ======================= SIGN-IN HUB ======================= -->
-<div class="page dark prog-page" data-page="access" hidden>
+<div class="page dark prog-page access-page" data-page="access" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Sign in</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Team &amp; family access</p><h1>Sign in</h1><p>Choose your space. Families get workshop details by email; the Program Dashboard is an extra place to find them.</p></section>
-    <div class="hub">
-      <a href="#admin"><b>Admin</b><span>Edit every page, photo and card. Manage events, bulletin notes and inquiries.</span></a>
-      <div class="soon"><em>Coming soon</em><b>Program Dashboard</b><span>Families: where, when and what time workshops are held.</span></div>
-      <div class="soon"><em>Coming soon</em><b>Workshop sign-in</b><span>Building Workshop attendance, teams and meal counts.</span></div>
-      <a href="#race-control"><b>Race control</b><span>Race controller: brackets, running order, starting lights, run times and results.</span></a>
-      <a href="#track-manager"><b>Track manager</b><span>Shout-outs, intermissions, sponsor ads and fun moments on race day.</span></a>
-      <div class="soon"><em>Coming soon</em><b>Race Day</b><span>Volunteer lists, check-in and role links for officials.</span></div>
-      <div class="soon"><em>Coming soon</em><b>Photographer</b><span>Event albums and uploads.</span></div>
-      <div class="soon"><em>Coming soon</em><b>Teacher planning</b><span>Seasonal workshop ideas, materials and planning dates.</span></div>
-    </div>
+    <section class="acc-hero">
+      <div class="acc-intro"><p class="eyebrow">Families, fans &amp; team</p><h1>Sign in</h1><p>Families and race fans don’t need an account. Pick where you’re headed. Team members sign in below.</p><button class="btn white" type="button" onclick="document.getElementById('team-signin').scrollIntoView({behavior:'smooth'})">Team sign in ↓</button></div>
+      <div class="acc-picks">
+        <a href="#program-signin"><b>Program Dashboard</b><span>Families: workshop dates, times and places with this year’s family code.</span></a>
+        <a href="#race-watch"><b>View Live Race Day</b><span>Follow every heat, bracket and result as it happens.</span></a>
+        <a href="#race-volunteer"><b>Volunteer on race day</b><span>Sign up to help at the event or on the track.</span></a>
+      </div>
+    </section>
+    <section class="acc-team" id="team-signin" aria-label="Team sign in">
+      <div class="acc-card" id="accAuth"><p>Loading…</p></div>
+      <div class="acc-spaces"><h2>Team spaces</h2><p>Each space opens once an admin turns it on for your account.</p><ul>
+        <li><a data-space="admin" href="#admin"><b>Admin</b><span>Edit every page and photo. Events, news, families, team and reviews.</span></a></li>
+        <li><a data-space="controller" href="#race-control"><b>Race control</b><span>Brackets, running order, starting lights, run times and results.</span></a></li>
+        <li><a data-space="track" href="#track-manager"><b>Track manager</b><span>Shout-outs, intermissions, sponsor ads and fun moments.</span></a></li>
+        <li><a data-space="volunteers" href="#volunteers"><b>Race-day volunteers</b><span>Event and track volunteer lists, check-in and role links.</span></a></li>
+        <li><a data-space="workshop" href="#workshop-signin"><b>Workshop sign-in</b><span>Building Workshop attendance, teams, kids and meal counts.</span></a></li>
+        <li><a data-space="photographer" href="#photographer"><b>Photographer</b><span>Event albums and uploads for review.</span></a></li>
+        <li><a data-space="teacher" href="#teacher"><b>Teacher planning</b><span>Seasonal workshop plans, materials and meeting dates.</span></a></li>
+      </ul></div>
+    </section>
   </div></div>
 </div>
 
@@ -2299,7 +2359,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","track-manager":"Track manager","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","track-manager":"Track manager","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -2795,12 +2855,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#accAuth","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#accAuth","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
@@ -2860,6 +2920,7 @@ window.FRB=(function(){
       if(v&&v.kind==="image"&&(/^https:\/\//.test(v.value)||(window.FR_TEST&&/^data:image\//.test(v.value)))){img.src=v.value;img.removeAttribute("srcset")} else if(!v&&DEF[k]&&img.getAttribute("src")!==DEF[k]) img.setAttribute("src",DEF[k]);});
   }
 
+  var AUTH_HASH=location.hash, AUTH_Q=new URLSearchParams(location.search);
   tagAll(); FR.recaptureForm();
   if(!window.supabase||!window.supabase.createClient) return;
   var db; try{db=window.supabase.createClient(SB_URL,SB_KEY)}catch(e){return}
@@ -2891,14 +2952,15 @@ window.FRB=(function(){
   /* ---------- Auth + admin ---------- */
   var USER=null, IS_ADMIN=false, IS_CTRL=false, IS_TRACK=false;
   function initAuth(){
-    db.auth.getSession().then(function(r){setUser(r.data&&r.data.session?r.data.session.user:null)});
-    db.auth.onAuthStateChange(function(ev,session){setUser(session?session.user:null)});
-    window.addEventListener("hashchange",function(){if(location.hash==="#admin")renderAdmin();renderRK(true);renderTM(true)});
+    db.auth.getSession().then(function(r){handleAuthLink();setUser(r.data&&r.data.session?r.data.session.user:null)});
+    db.auth.onAuthStateChange(function(ev,session){if(ev==="PASSWORD_RECOVERY"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account.";if(location.hash!=="#access")location.hash="#access"}setUser(session?session.user:null)});
+    window.addEventListener("hashchange",function(){if(location.hash==="#admin")renderAdmin();if(location.hash==="#access")renderAccess();renderRK(true);renderTM(true)});
+    renderAccess();
     renderAdmin();
   }
   function setUser(u){USER=u;
-    if(!u){IS_ADMIN=false;IS_CTRL=false;IS_TRACK=false;setEditing(false);updatePill();renderAdmin();renderRK(true);renderTM(true);return}
-    Promise.all([db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle(),db.from("race_roles").select("role").eq("user_id",u.id)]).then(function(rr){var r=rr[0],ro=(rr[1].data||[]).map(function(x){return x.role});IS_ADMIN=!!(r.data);IS_CTRL=ro.indexOf("controller")>=0;IS_TRACK=ro.indexOf("track")>=0;updatePill();renderAdmin();renderRK(true);renderTM(true);
+    if(!u){IS_ADMIN=false;IS_CTRL=false;IS_TRACK=false;STAFF={};setEditing(false);updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();return}
+    Promise.all([db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle(),db.from("race_roles").select("role").eq("user_id",u.id),db.from("staff").select("role").eq("user_id",u.id)]).then(function(rr){var r=rr[0],ro=(rr[1].data||[]).map(function(x){return x.role});IS_ADMIN=!!(r.data);IS_CTRL=ro.indexOf("controller")>=0;IS_TRACK=ro.indexOf("track")>=0;STAFF={};(rr[2].data||[]).forEach(function(x){STAFF[x.role]=1});updatePill();renderAdmin();renderRK(true);renderTM(true);renderAccess();
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
   function updatePill(){var p=$(".fr-pill");
@@ -2969,19 +3031,101 @@ window.FRB=(function(){
     $$(".adm-tabs button",box).forEach(function(b){b.onclick=function(){TAB=b.getAttribute("data-tab");renderAdmin()}});
     ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,partners:tabPartners,edits:tabEdits,race:tabRace})[TAB]();
   }
-  function signInHTML(px){return ('<h2>Admin sign in</h2><form id="admForm" novalidate><label class="f" for="adm-email">Email<input type="email" id="adm-email" autocomplete="username" required></label><label class="f" for="adm-pass">Password<input type="password" id="adm-pass" autocomplete="current-password" required minlength="8"></label><div class="row"><button class="btn deep" type="submit" id="admSubmit">Sign in</button><button class="mini" type="button" id="admMode">Create an account</button><button class="mini" type="button" id="admForgot">Forgot password</button></div><p class="msg" id="admMsg" role="status"></p></form>').replace(/"adm/g,'"'+(px||"adm"))}
-  function bindSignIn(px){px=px||"adm";var q=function(id){return $("#"+id.replace(/^adm/,px))};var mode="in",msg=q("admMsg");
-    function m(t,ok){msg.textContent=t;msg.className="msg "+(ok?"ok":"err")}
-    q("admMode").onclick=function(){mode=mode==="in"?"up":"in";q("admSubmit").textContent=mode==="in"?"Sign in":"Create account";this.textContent=mode==="in"?"Create an account":"I already have an account";q("adm-pass").autocomplete=mode==="in"?"current-password":"new-password";m("")};
-    q("admForgot").onclick=function(){var em=q("adm-email").value.trim();if(!em){m("Enter your email first.");return}
-      db.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname+"#admin"}).then(function(r){m(r.error?"Couldn’t send the reset email. Check the address.":"Check your email for a reset link.",!r.error)})};
-    q("admForm").onsubmit=function(e){e.preventDefault();var em=q("adm-email").value.trim(),pw=q("adm-pass").value;
-      if(!/^\S+@\S+\.\S+$/.test(em)||pw.length<8){m("Enter your email and a password of at least 8 characters.");return}
-      if(mode==="in") db.auth.signInWithPassword({email:em,password:pw}).then(function(r){if(r.error)m("That email and password didn’t match.")});
-      else db.auth.signUp({email:em,password:pw,options:{emailRedirectTo:location.origin+location.pathname+"#admin"}}).then(function(r){
-        m(r.error?"Couldn’t create the account: "+r.error.message:"Account created. Check your email to confirm it, then ask the site owner to grant admin access.",!r.error)});};
+  /* ---------- Sign in, create account, forgot password, set a new password ----------
+     One widget used on the Sign in page, Admin and every team screen. */
+  var AUTHUI={}, RECOVERY=false, AUTH_NOTE="";
+  function base(){return location.origin+location.pathname}
+  function signInHTML(px){px=px||"adm";return '<div class="auth" id="'+px+'AuthW"><h2>Admin sign in</h2><div class="auth-body" id="'+px+'AuthBody"></div></div>'}
+  function bindSignIn(px){px=px||"adm";var st=AUTHUI[px]=AUTHUI[px]||{mode:"in",email:""};if(RECOVERY)st.mode="reset";authDraw(px)}
+  function authDraw(px){var st=AUTHUI[px],b=$("#"+px+"AuthBody");if(!b)return;var m=st.mode,h="";
+    var pw=function(id,label,ac){return '<label class="f" for="'+px+'-'+id+'">'+label+'<span class="pw"><input type="password" id="'+px+'-'+id+'" autocomplete="'+ac+'" minlength="8" required><button type="button" class="pw-eye" data-eye="'+px+'-'+id+'" aria-label="Show password">Show</button></span></label>'};
+    if(AUTH_NOTE&&px===authMainPx()) h+='<p class="auth-note">'+esc(AUTH_NOTE)+'</p>';
+    if(m==="in"||m==="up"){
+      h+='<div class="auth-tabs" role="tablist"><button type="button" role="tab" data-mode="in" aria-selected="'+(m==="in")+'">Sign in</button><button type="button" role="tab" data-mode="up" aria-selected="'+(m==="up")+'">Create an account</button></div>'+
+        '<form id="'+px+'Form" novalidate>'+
+        (m==="up"?'<label class="f" for="'+px+'-name">Your name<input type="text" id="'+px+'-name" autocomplete="name" maxlength="80" required placeholder="First and last name"></label>':'')+
+        '<label class="f" for="'+px+'-email">Email<input type="email" id="'+px+'-email" autocomplete="username" required value="'+esc(st.email||"")+'"></label>'+
+        pw("pass",m==="up"?"Choose a password <small>(8 or more characters)</small>":"Password",m==="up"?"new-password":"current-password")+
+        (m==="up"?pw("pass2","Type it again","new-password"):'')+
+        '<button class="btn deep auth-go" type="submit" id="'+px+'Submit">'+(m==="in"?"Sign in":"Create my account")+'</button>'+
+        (m==="in"?'<button class="auth-link" type="button" data-mode="forgot">Forgot your password?</button>':'<p class="auth-fine">An account doesn’t open anything by itself. After you sign up, an admin turns on the spaces you need (Admin, Race day, Workshops, Photographer or Teacher).</p>')+
+        '<p class="msg" id="'+px+'Msg" role="status"></p></form>';}
+    else if(m==="forgot"){
+      h+='<h3 class="auth-h">Reset your password</h3><p class="auth-fine">Enter the email you signed up with. We’ll send a link to choose a new password.</p><form id="'+px+'Form" novalidate>'+
+        '<label class="f" for="'+px+'-email">Email<input type="email" id="'+px+'-email" autocomplete="username" required value="'+esc(st.email||"")+'"></label>'+
+        '<button class="btn deep auth-go" type="submit" id="'+px+'Submit">Send reset link</button><button class="auth-link" type="button" data-mode="in">Back to sign in</button><p class="msg" id="'+px+'Msg" role="status"></p></form>';}
+    else if(m==="sent"||m==="resetsent"){
+      h+='<div class="auth-sent"><h3 class="auth-h">Check your email</h3><p>'+(m==="sent"?'We sent a confirmation link to':'If there’s an account for')+' <b>'+esc(st.email)+'</b>'+(m==="sent"?'. Open it to finish creating your account.':', a link to choose a new password is on its way.')+'</p>'+
+        '<ul class="auth-steps"><li>It comes from Supabase Auth on behalf of Flint Racing.</li><li>Not there in a few minutes? Check spam or promotions.</li><li>The link works once and expires after a while.</li></ul>'+
+        (m==="sent"?'<button class="mini" type="button" id="'+px+'Resend">Send it again</button> ':'')+'<button class="auth-link" type="button" data-mode="in">Back to sign in</button><p class="msg" id="'+px+'Msg" role="status"></p></div>';}
+    else if(m==="reset"){
+      h+='<h3 class="auth-h">Choose a new password</h3><form id="'+px+'Form" novalidate>'+pw("pass","New password <small>(8 or more characters)</small>","new-password")+pw("pass2","Type it again","new-password")+
+        '<button class="btn deep auth-go" type="submit" id="'+px+'Submit">Save new password</button><p class="msg" id="'+px+'Msg" role="status"></p></form>';}
+    b.innerHTML=h;
+    var q=function(id){return $("#"+px+id)},msg=q("Msg");
+    function say(t,ok){if(msg){msg.textContent=t;msg.className="msg "+(ok?"ok":"err")}}
+    $$("[data-mode]",b).forEach(function(x){x.onclick=function(){var e=q("-email");if(e)st.email=e.value.trim();st.mode=x.getAttribute("data-mode");AUTH_NOTE="";authDraw(px);var f=b.querySelector("input");if(f)f.focus()}});
+    $$("[data-eye]",b).forEach(function(x){x.onclick=function(){var i=$("#"+x.getAttribute("data-eye"));var show=i.type==="password";i.type=show?"text":"password";x.textContent=show?"Hide":"Show";x.setAttribute("aria-label",show?"Hide password":"Show password")}});
+    var rs=q("Resend"); if(rs) rs.onclick=function(){rs.disabled=true;
+      (db.auth.resend?db.auth.resend({type:"signup",email:st.email,options:{emailRedirectTo:base()+"?auth=confirmed"}}):Promise.resolve({})).then(function(r){rs.disabled=false;say(r&&r.error?friendly(r.error):"Sent again. Give it a few minutes.",!(r&&r.error))})};
+    var f=q("Form"); if(!f) return;
+    f.onsubmit=function(e){e.preventDefault();var btn=q("Submit"),em=q("-email"),p1=q("-pass"),p2=q("-pass2"),nm=q("-name");
+      var email=em?em.value.trim():"",pass=p1?p1.value:"";if(em)st.email=email;
+      function busy(on){btn.disabled=on;btn.classList.toggle("busy",on)}
+      if(m!=="reset"&&!/^\S+@\S+\.\S+$/.test(email)){say("Enter your email address.");em.focus();return}
+      if(m==="forgot"){busy(true);db.auth.resetPasswordForEmail(email,{redirectTo:base()+"?auth=reset"}).then(function(r){busy(false);if(r.error&&/rate/i.test(r.error.message||"")){say(friendly(r.error));return}st.mode="resetsent";authDraw(px)});return}
+      if(pass.length<8){say("Passwords need at least 8 characters.");p1.focus();return}
+      if((m==="up"||m==="reset")&&p2&&p2.value!==pass){say("The two passwords don’t match.");p2.focus();return}
+      if(m==="up"&&nm&&!nm.value.trim()){say("Add your name so admins know who you are.");nm.focus();return}
+      busy(true);
+      if(m==="in") db.auth.signInWithPassword({email:email,password:pass}).then(function(r){busy(false);if(r.error){if(/confirm/i.test(r.error.message||"")){st.mode="sent";authDraw(px);return}say(friendly(r.error))}});
+      else if(m==="up") db.auth.signUp({email:email,password:pass,options:{emailRedirectTo:base()+"?auth=confirmed",data:{full_name:nm.value.trim()}}}).then(function(r){busy(false);
+        if(r.error){say(friendly(r.error));return}
+        var d=r.data||{};if(d.user&&d.user.identities&&d.user.identities.length===0){say("There’s already an account with that email. Sign in instead, or reset your password.");return}
+        if(d.session){toast("Account created. You’re signed in.");return} st.mode="sent";authDraw(px)});
+      else db.auth.updateUser({password:pass}).then(function(r){busy(false);if(r.error){say(friendly(r.error));return}RECOVERY=false;AUTH_NOTE="";Object.keys(AUTHUI).forEach(function(k){AUTHUI[k].mode="in"});toast("Password saved. You’re signed in.");renderAccess()});};
   }
+  function friendly(err){var t=(err&&err.message)||"";
+    if(/invalid login/i.test(t)) return "That email and password didn’t match. Check them, or reset your password.";
+    if(/already registered|already exists/i.test(t)) return "There’s already an account with that email. Sign in instead, or reset your password.";
+    if(/rate limit|too many/i.test(t)) return "Too many emails were sent in a short time. Wait a bit and try again, or ask an admin.";
+    if(/weak|password should/i.test(t)) return "Choose a stronger password: at least 8 characters, not easy to guess.";
+    if(/network|fetch/i.test(t)) return "Couldn’t reach the server. Check your internet connection.";
+    if(/same password|different from the old/i.test(t)) return "Choose a password you haven’t used here before.";
+    return "Something went wrong: "+t}
+  function authMainPx(){return location.hash==="#admin"?"adm":location.hash==="#race-control"?"rks":location.hash==="#track-manager"?"tms":"acc"}
   function signOut(){setEditing(false);db.auth.signOut()}
+
+  /* ---------- Sign in page (#access): your account and your spaces ---------- */
+  var SPACES=[["admin","#admin","Admin","Edit every page and photo. Events, news, families, team and reviews."],
+    ["controller","#race-control","Race control","Brackets, running order, starting lights, run times and results."],
+    ["track","#track-manager","Track manager","Shout-outs, intermissions, sponsor ads and fun moments."],
+    ["volunteers","#volunteers","Race-day volunteers","Event and track volunteer lists, check-in and role links."],
+    ["workshop","#workshop-signin","Workshop sign-in","Building Workshop attendance, teams, kids and meal counts."],
+    ["photographer","#photographer","Photographer","Event albums and uploads for review."],
+    ["teacher","#teacher","Teacher planning","Seasonal workshop plans, materials and meeting dates."]];
+  var STAFF={};
+  function canSpace(k){if(IS_ADMIN)return true;if(k==="controller")return IS_CTRL;if(k==="track")return IS_TRACK;if(k==="volunteers")return IS_CTRL||IS_TRACK;return !!STAFF[k]}
+  function renderAccess(){var box=$("#accAuth");if(!box||!window.FR_DB)return;
+    if(!USER||RECOVERY){$$(".acc-spaces [data-space]").forEach(function(a){a.classList.remove("yours")});
+      if(!box.querySelector("#accAuthBody"))box.innerHTML=signInHTML("acc").replace("Admin sign in","Team sign in");bindSignIn("acc");return}
+    var name=(USER.user_metadata&&USER.user_metadata.full_name)||"",mine=SPACES.filter(function(s){return canSpace(s[0])});
+    box.innerHTML='<div class="auth"><p class="acc-k">Signed in</p><h2>'+esc(name||"Welcome back")+'</h2><p class="acc-email">'+esc(USER.email)+'</p>'+(AUTH_NOTE?'<p class="auth-note">'+esc(AUTH_NOTE)+'</p>':'')+
+      (mine.length?'<p class="acc-sub">Your spaces</p><div class="acc-mine">'+mine.map(function(s){return '<a class="btn deep" href="'+s[1]+'">'+esc(s[2])+' →</a>'}).join("")+'</div>':
+        '<div class="acc-wait"><b>Your account is ready.</b><p>An admin needs to turn on the spaces you’ll use. Send them the email above. Once they do, sign out and back in.</p></div>')+
+      '<div class="row"><button class="mini" type="button" id="accPw">Change password</button><button class="mini" type="button" id="accOut">Sign out</button></div></div>';
+    $("#accOut").onclick=signOut;
+    $("#accPw").onclick=function(){RECOVERY=true;AUTHUI.acc={mode:"reset",email:USER.email};box.innerHTML=signInHTML("acc").replace("Admin sign in","Change your password");bindSignIn("acc");
+      var c=document.createElement("button");c.type="button";c.className="auth-link";c.textContent="Cancel";c.onclick=function(){RECOVERY=false;renderAccess()};box.querySelector(".auth").appendChild(c)};
+    $$(".acc-spaces [data-space]").forEach(function(a){var ok=canSpace(a.getAttribute("data-space"));a.classList.toggle("yours",ok)});
+  }
+  /* Links from emails: confirmation, password reset or an expired link */
+  function handleAuthLink(){var flag=AUTH_Q.get("auth"),hp=new URLSearchParams(AUTH_HASH.replace(/^#/,"")),err=hp.get("error_description");
+    if(!flag&&!err&&!hp.get("access_token")) return;
+    if(err) AUTH_NOTE=/expired|invalid/i.test(err)?"That link has expired or was already used. Sign in, or ask for a new link below.":"That link didn’t work: "+err;
+    else if(flag==="confirmed") AUTH_NOTE="Your email is confirmed. Welcome to the Flint Racing team site.";
+    else if(flag==="reset"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account."}
+    try{history.replaceState(null,"",base()+"#access")}catch(e){location.hash="#access"} FR.route();}
 
   function tabOverview(){var P=$("#admPanel");
     Promise.all([db.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),db.from("site_content").select("key",{count:"exact",head:true})]).then(function(r){
