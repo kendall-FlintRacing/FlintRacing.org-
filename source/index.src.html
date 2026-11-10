@@ -1522,7 +1522,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .pd-tabs button{flex:1;border:0;background:transparent;font:800 .95rem/1 var(--body);padding:12px 8px;border-radius:6px;cursor:pointer;color:#4a4d55}
 .pd-tabs button[aria-selected="true"]{background:#fff;color:var(--red-deep);box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .pd-events{display:grid;gap:10px}
-.pd-ev{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:start;border:1px solid #e1e3e6;border-radius:8px;padding:12px}
+.pd-ev{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;border:1px solid #e1e3e6;border-radius:8px;padding:12px}
 .pd-ev.first{border-color:var(--red);background:#fdf0f1}
 .pd-ev h3{font:800 1.1rem/1.2 var(--body);text-transform:none;color:var(--ink)}
 .pd-ev p{color:#2a2d33;margin-top:3px}
@@ -4783,14 +4783,14 @@ window.FRB=(function(){
     var ev=PD.data.events||[],t=todayISO(),now=new Date(),mk=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0");
     var monthEv=ev.filter(function(e){return String(e.start_date).slice(0,7)===mk||(e.end_date&&String(e.end_date).slice(0,7)===mk)}),notes=(FR.NOTES[mk]||[]);
     var up=ev.filter(function(e){return (e.end_date||e.start_date)>=t}).slice(0,8);
-    function when(e){return [e.start_time?esc(e.start_time)+(e.end_time?"–"+esc(e.end_time):""):"",e.location?esc(e.location):""].filter(Boolean).join(" · ")||(e.tbc?"Details to be confirmed":"Time and place coming soon")}
+    function when(e){return [e.start_time?esc(e.start_time)+(e.end_time?"–"+esc(e.end_time):""):"",e.location?esc(e.location):""].filter(Boolean).join(" · ")}
     var bulletin='<aside class="pd-bul"><p class="pd-k">Monthly bulletin</p><h2>'+now.toLocaleDateString([],{month:"long",year:"numeric"})+'</h2>'+
       (notes.length?notes.map(function(n){return '<div class="pd-note">'+(n.text?'<p>'+esc(n.text)+'</p>':'')+(n.file?'<a class="pd-file" href="'+esc(n.file)+'" target="_blank" rel="noopener">📄 Download this month’s bulletin</a>':'')+'<small>'+esc(n.from||"Flint Racing")+'</small></div>'}).join(""):'<p class="pd-empty">No announcements yet this month.</p>')+
-      '<h3>This month</h3>'+(monthEv.length?'<ul class="pd-mlist">'+monthEv.map(function(e){return '<li><b>'+fmtDate(e.start_date)+'</b> '+esc(e.title)+'<small>'+when(e)+'</small></li>'}).join("")+'</ul>':'<p class="pd-empty">Nothing scheduled this month.</p>')+
+      '<h3>This month</h3>'+(monthEv.length?'<ul class="pd-mlist">'+monthEv.map(function(e){return '<li><b>'+fmtDate(e.start_date)+'</b> '+esc(e.title)+(when(e)?'<small>'+when(e)+'</small>':'')+'</li>'}).join("")+'</ul>':'<p class="pd-empty">Nothing scheduled this month.</p>')+
       '<div class="pd-contact"><b>Questions?</b> <a href="mailto:info@flintracing.org">info@flintracing.org</a></div></aside>';
     var tabs='<div class="pd-tabs" role="tablist">'+[["overview","Overview"],["programs","Programs & Resources"]].map(function(x){return '<button type="button" role="tab" data-pdt="'+x[0]+'" aria-selected="'+(PD.tab===x[0])+'">'+x[1]+'</button>'}).join("")+'</div>';
     var body=PD.tab==="programs"?'<div class="rlanes pd-lanes">'+lanesHTML()+'</div>':
-      '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3><p>'+when(e)+'</p>'+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div></article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
+      '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3>'+(when(e)?'<p>'+when(e)+'</p>':'')+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div></article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
       '<div class="pd-short"><a href="#programs"><b>Programs</b><span>Ways to build</span></a><a href="#race-watch"><b>Live Race</b><span>Race day feed</span></a><a href="#calendar"><b>Calendar</b><span>The whole year</span></a><a href="#printables"><b>Flyers &amp; Forms</b><span>Print and bring</span></a></div>'+
       '<div class="pd-new"><p class="pd-k">New this year</p><p>Summer fun runs at Cronin Derby Downs. Dates are posted on <a href="#fun-runs">Summer Fun Runs</a> once they’re set.</p></div>';
     box.innerHTML='<div class="pd-bar"><span>'+(ME?esc(ME.display_name)+' · @'+esc(ME.username):'Admin preview')+'</span><span class="row" style="margin:0">'+(ME?'<a class="mini" href="#my-dashboard">My dashboard</a>':'')+'<button class="mini" type="button" id="pdOut">Sign out</button></span></div><div class="pd-grid">'+bulletin+'<section class="pd-main">'+tabs+body+'</section></div>';
