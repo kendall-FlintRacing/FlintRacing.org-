@@ -943,7 +943,7 @@ a.ycell:hover{background:#fbe2e5}
 .pv-screen iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
 .pv-note{font-size:.88rem;color:#4a4d55}
 .adm.adm2{display:grid;grid-template-columns:268px minmax(0,1fr);padding:0;overflow:visible;border-radius:12px;background:linear-gradient(90deg,#111216 268px,#fff 268px);margin-top:4px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
-.adm-side{background:#111216;color:#e3e5e9;border-radius:12px 0 0 12px;padding:18px 14px;display:flex;flex-direction:column;gap:14px;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;scrollbar-width:thin}
+.adm-side{background:#111216;color:#e3e5e9;border-radius:12px 0 0 12px;padding:18px 14px;display:flex;flex-direction:column;gap:12px;align-self:stretch}
 .adm-me{display:flex;gap:10px;align-items:center;padding:4px 6px 12px;border-bottom:1px solid #26272e}
 .adm-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--red-deep);color:#fff;font:italic 900 1.2rem/1 var(--display);flex:none}
 .adm-me b{display:block;color:#fff;font-size:.95rem;line-height:1.2;overflow-wrap:anywhere}
@@ -965,9 +965,11 @@ a.ycell:hover{background:#fbe2e5}
 .adm-nores{padding:12px;color:#5a5d64;font-size:.92rem}
 .adm-menu{display:none}
 .adm-nav{display:grid;gap:2px}
+.linkbtn{border:0;background:none;padding:2px 0 0;color:var(--red-deep);font:700 .78rem/1.2 var(--body);text-decoration:underline;cursor:pointer}
+.rt-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}.rt-list li{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e3e5e9;border-radius:8px;padding:8px 10px}.rt-list small{color:#6d7077}
 .adm-g{font:800 .68rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#7c7e86;margin:12px 8px 6px}
 .adm-g:first-child{margin-top:0}
-.adm-nav button,.adm-nav a,.adm-foot button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#d6d8dc;font:600 .93rem/1.2 var(--body);text-align:left;padding:7px 10px;border-radius:8px;cursor:pointer;text-decoration:none;position:relative}
+.adm-nav button,.adm-nav a,.adm-foot button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#d6d8dc;font:600 .93rem/1.2 var(--body);text-align:left;padding:6px 10px;border-radius:8px;cursor:pointer;text-decoration:none;position:relative}
 .adm-nav svg,.adm-foot svg{width:18px;height:18px;flex:none;color:#9a9ca3}
 .adm-nav button:hover,.adm-nav a:hover,.adm-foot button:hover{background:#1e1f25;color:#fff}
 .adm-nav button[aria-current=page]{background:#fff;color:var(--ink)}
@@ -1672,7 +1674,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .rk-meter{flex:1;max-width:320px;height:10px;background:#d4d6da;border-radius:99px;overflow:hidden}
 .rk-meter i{display:block;height:100%;background:var(--red)}
 .rk-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
-@media (max-width:980px){.rk-grid{grid-template-columns:1fr}}
+@media (max-width:980px){.rk-grid,.tm-box .rk-grid{grid-template-columns:minmax(0,1fr)}}
 .rk-main{border-top:5px solid var(--red)}
 .rk-hh{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font:600 1.05rem/1.3 var(--body)}
 .rk-num{font:800 1.9rem/1 var(--display);color:var(--ink)}
@@ -1722,10 +1724,10 @@ body.rk-on .fr-pill{display:none!important}
 .rk-tabs button{border:0;background:transparent;font:800 1rem/1 var(--body);padding:12px 16px;border-radius:6px;cursor:pointer;color:#2a2d33}
 .rk-tabs button[aria-selected="true"]{background:#fff;color:var(--red-deep);box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .rk-tt h1{line-height:1}
-.rk-grid{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr)}
-.tm-box .rk-grid{grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr)}
+@media (min-width:981px){.rk-grid{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr)}
+.tm-box .rk-grid{grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr)}}
 .rk-side{position:sticky;top:12px}
-@media (max-width:980px){.rk-grid,.tm-box .rk-grid{grid-template-columns:1fr}.rk-side{position:static}}
+@media (max-width:980px){.rk-grid,.tm-box .rk-grid{grid-template-columns:minmax(0,1fr)}.rk-side{position:static}}
 .rk-pv{padding:12px}
 .pv-bar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
 .pv-bar b{display:block;font:800 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep)}
@@ -4400,8 +4402,8 @@ window.FRB=(function(){
 
   /* ---------- Admin → Race day: the team, racers and sponsors are set up before race day ---------- */
   function tabRace(){var P=$("#admPanel");
-    Promise.all([db.from("race_racers").select("*").order("display_name"),db.from("race_ads").select("*").order("sort_order"),db.from("race_roles").select("*")]).then(function(r){
-      if(r.some(function(x){return x.error})){P.textContent="Couldn’t load race day data.";return}
+    Promise.all([db.from("race_racers").select("*").order("display_name"),db.from("race_ads").select("*").order("sort_order"),db.from("race_roles").select("*"),db.from("members").select("*").order("display_name")]).then(function(r){
+      if(r.slice(0,3).some(function(x){return x.error})){P.textContent="Couldn’t load race day data.";return}
       var racers=r[0].data||[],ads=r[1].data||[],roles={};(r[2].data||[]).forEach(function(x){roles[x.role]=x});
       var head='<div class="row" style="margin-top:0">'+[["team","Race-day team"],["racers","Racers ("+racers.length+")"],["ads","Sponsors & ads ("+ads.length+")"]].map(function(t){return '<button class="mini'+(RSUB===t[0]?' solid':'')+'" type="button" data-sub="'+t[0]+'">'+t[1]+'</button>'}).join("")+
         '<a class="mini" href="#race-control">Open Race control</a><a class="mini" href="#track-manager">Open Track operations</a><a class="mini" href="#race-watch" target="_blank" rel="noopener">Spectator view</a></div>';
@@ -4409,11 +4411,16 @@ window.FRB=(function(){
       function done(x,msg){toast(x&&x.error?"Couldn’t save: "+x.error.message:msg||"Saved");if(!x||!x.error)again()}
       var body="";
       if(RSUB==="team"){
-        var card=function(role,title,does,cant){var c=roles[role];return '<div class="inq"><header><b>'+title+'</b><small>'+(c?esc(c.email):"Not assigned yet")+'</small></header><p style="max-width:72ch"><b>Can:</b> '+does+'</p><p style="max-width:72ch;color:#4a4d55"><b>Can’t:</b> '+cant+'</p>'+
-          '<form data-role="'+role+'" novalidate><label class="f" for="role-'+role+'">Email of their account<input type="email" id="role-'+role+'" autocomplete="off" placeholder="name@example.com"></label><div class="row"><button class="btn deep" type="submit">'+(c?"Replace":"Assign")+'</button>'+(c?'<button class="mini red" type="button" data-clear="'+role+'">Remove</button>':'')+'</div></form></div>'};
-        body='<p style="color:#4a4d55;max-width:72ch">Two people help run race day, each on their own screen. They first create an account on the sign-in page (Create an account) and confirm their email. Then you assign them here. Admins can always use both screens.</p>'+
+        var mem=(r[3]&&r[3].data)||[],crew=mem.filter(function(m){return m.status==="approved"});
+        var card=function(role,title,does,cant){var c=roles[role],have=crew.filter(function(m){return (m.roles||[]).indexOf(role)>=0}),rest=crew.filter(function(m){return (m.roles||[]).indexOf(role)<0});
+          return '<div class="inq"><header><b>'+title+'</b><small>'+(have.length||c?(have.length+(c?1:0))+' assigned':'Not assigned yet')+'</small></header><p style="max-width:72ch"><b>Can:</b> '+does+'</p><p style="max-width:72ch;color:#4a4d55"><b>Can’t:</b> '+cant+'</p>'+
+            (have.length?'<ul class="rt-list">'+have.map(function(m){return '<li><span><b>'+esc(m.display_name)+'</b> <small>@'+esc(m.username)+'</small></span><button class="mini red" type="button" data-rm="'+m.id+'" data-role="'+role+'">Remove</button></li>'}).join("")+'</ul>':'')+
+            (c?'<ul class="rt-list"><li><span><b>'+esc(c.email)+'</b> <small>older email assignment</small></span><button class="mini red" type="button" data-clear="'+role+'">Remove</button></li></ul>':'')+
+            (rest.length?'<div class="team-add"><label class="sr" for="rt-'+role+'">Give this role to</label><select id="rt-'+role+'"><option value="">Give this role to…</option>'+rest.map(function(m){return '<option value="'+m.id+'">'+esc(m.display_name)+' (@'+esc(m.username)+')</option>'}).join("")+'</select><button class="mini solid" type="button" data-add="'+role+'">Add</button></div>':'<p class="rk-fine">Everyone approved already has this role, or no one is approved yet.</p>')+'</div>'};
+        body='<p style="color:#4a4d55;max-width:72ch">Pick people from your approved members. They sign in on the Staff Garage card with their username and passcode and land on their screen. Admins can always use both screens. <button class="mini" type="button" id="rtMem">Open Members</button></p>'+
           card("controller","Race controller","build the brackets on race morning (bingo draw and byes), set the running order, go live, run the starting lights, enter run times, post and fix results, and post announcements.","edit racers, sponsors, ads or the website, or approve shout-outs.")+
-          card("track","Track operations","approve or hide shout-outs, spotlight one, run intermissions, feature sponsor ads, set “brought to you by” sponsors for heats, send hype moments and fun facts.","change brackets, heats, times or results, or edit the website.");
+          card("track","Track operations","approve or hide shout-outs, spotlight one, run intermissions, feature sponsor ads, set “brought to you by” sponsors for heats, send hype moments and fun facts.","change brackets, heats, times or results, or edit the website.")+
+          card("volunteers","Race-day volunteer lists","see and sort volunteer sign-ups, place people on the event or track list, make crew links and check people in.","run the race or edit the website.");
       } else if(RSUB==="racers"){
         var rrow=function(x){x=x||{};return '<tr data-id="'+(x.id||"")+'"><td style="width:96px">'+(x.logo_url?'<img src="'+esc(x.logo_url)+'" alt="" style="max-width:84px;max-height:40px;object-fit:contain">':'<small style="color:#6d7077">No logo</small>')+'</td>'+
           '<td><input type="text" maxlength="40" value="'+esc(x.display_name||"")+'" aria-label="Racer name" placeholder="Maya R."></td><td><input type="text" maxlength="60" value="'+esc(x.team||"")+'" aria-label="Team"></td><td style="width:84px"><input type="text" maxlength="6" value="'+esc(x.car_number||"")+'" aria-label="Car number"></td>'+
@@ -4433,8 +4440,12 @@ window.FRB=(function(){
       P.innerHTML=head+body;
       $$("button[data-sub]",P).forEach(function(b){b.onclick=function(){RSUB=b.getAttribute("data-sub");tabRace()}});
       if(RSUB==="team"){
-        $$("form[data-role]",P).forEach(function(f){f.onsubmit=function(e){e.preventDefault();var role=f.getAttribute("data-role"),em=$("input",f).value.trim();if(!/^\S+@\S+\.\S+$/.test(em)){toast("Enter their email address.");return}
-          db.rpc("set_race_role",{p_role:role,p_email:em}).then(function(x){if(x.error){toast(x.error.message);return}toast(role==="track"?"Track operations lead set":"Race controller set");again()})}});
+        var mem2=(r[3]&&r[3].data)||[];
+        $("#rtMem").onclick=function(){goTab("members")};
+        function setRole(id,role,on){var m=mem2.filter(function(x){return x.id===id})[0];if(!m)return;var rs=(m.roles||[]).filter(function(x){return x!==role});if(on)rs.push(role);
+          db.rpc("admin_member_update",{p_id:id,p_roles:rs,p_status:m.status,p_note:m.admin_note||null}).then(function(x){if(okToast(x,on?m.display_name+" added":m.display_name+" removed"))again()})}
+        $$("button[data-add]",P).forEach(function(b){b.onclick=function(){var role=b.getAttribute("data-add"),v=$("#rt-"+role).value;if(!v){toast("Pick a person first.");return}setRole(v,role,true)}});
+        $$("button[data-rm]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm remove"){b.textContent="Confirm remove";return}setRole(b.getAttribute("data-rm"),b.getAttribute("data-role"),false)}});
         $$("button[data-clear]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm remove"){b.textContent="Confirm remove";return}db.rpc("clear_race_role",{p_role:b.getAttribute("data-clear")}).then(function(x){toast(x.error?x.error.message:"Removed");again()})}});
       } else if(RSUB==="racers"){
         var adLogo=function(name){var a=ads.filter(function(x){return name&&x.name.toLowerCase()===name.toLowerCase()})[0];return a&&a.logo_url?a.logo_url:null};
@@ -5023,19 +5034,27 @@ window.FRB=(function(){
     renderWS();renderVol();renderPH();renderTE();}
   window.addEventListener("hashchange",renderPortals);
   /* ---------- Admin → Families: private times and places ---------- */
+  function famKind(e){return (e.kind||"")+"|"+String(e.title||"").split("·")[0].replace(/\s+/g," ").trim().toLowerCase()}
   function tabFamilies(){var P=$("#admPanel");
     Promise.all([Promise.resolve({}),db.from("events").select("*").order("start_date"),db.from("event_details").select("*")]).then(function(r){
       if(r[1].error){P.textContent="Couldn’t load events.";return}
       var t=todayISO(),ev=(r[1].data||[]).filter(function(e){return (e.end_date||e.start_date)>=t}),D={};(r[2].data||[]).forEach(function(x){D[x.event_id]=x});
       P.innerHTML='<p style="color:#4a4d55;max-width:78ch">Families and crew see these times and places on the Program Dashboard after they sign in with their username. Approve profiles in <button class="mini" type="button" id="toMem2">Members</button></p>'+
-        '<div class="inq"><header><b>Times and places for families</b><small>Only approved, signed-in families and crew see these. The public calendar stays dates-only.</small></header>'+
-        (ev.length?'<div class="adm-scroll"><table class="adm-table" style="min-width:820px"><thead><tr><th>Date</th><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Note for families</th><th></th></tr></thead><tbody>'+ev.map(function(e){var d=D[e.id]||{};
-          return '<tr data-id="'+e.id+'"><td style="white-space:nowrap">'+fmtDate(e.start_date)+'</td><td>'+esc(e.title)+'</td><td style="width:100px"><input type="text" maxlength="20" value="'+esc(d.start_time||"")+'" placeholder="10:00 AM" aria-label="Start time"></td><td style="width:100px"><input type="text" maxlength="20" value="'+esc(d.end_time||"")+'" placeholder="1:00 PM" aria-label="End time"></td>'+
-            '<td><input type="text" maxlength="160" value="'+esc(d.location||"")+'" placeholder="Flint Racer Space" aria-label="Location"></td><td><input type="text" maxlength="1000" value="'+esc(d.notes||"")+'" placeholder="Bring safety glasses" aria-label="Note"></td><td><button class="mini solid" type="button">Save</button></td></tr>'}).join("")+'</tbody></table></div>':'<p>No upcoming events. Add them in the Events tab.</p>')+'</div>';
+        '<div class="inq"><header><b>Times and places for families</b><small>Only approved, signed-in families and crew see these. The public calendar stays dates-only. Each box saves when you click away; “Copy to later” fills every later event of the same kind.</small></header>'+
+        (ev.length?'<div class="adm-scroll"><table class="adm-table" style="min-width:820px"><thead><tr><th>Date</th><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Note for families</th></tr></thead><tbody>'+ev.map(function(e){var d=D[e.id]||{};
+          return '<tr data-id="'+e.id+'" data-kind="'+esc(famKind(e))+'"><td style="white-space:nowrap">'+fmtDate(e.start_date)+'</td><td>'+esc(e.title)+'<br><button class="linkbtn" type="button" data-copy title="Copy this time, place and note to every later event of the same kind">Copy to later ↓</button></td><td style="width:100px"><input type="text" maxlength="20" value="'+esc(d.start_time||"")+'" placeholder="10:00 AM" aria-label="Start time"></td><td style="width:100px"><input type="text" maxlength="20" value="'+esc(d.end_time||"")+'" placeholder="1:00 PM" aria-label="End time"></td>'+
+            '<td><input type="text" maxlength="160" value="'+esc(d.location||"")+'" placeholder="Flint Racer Space" aria-label="Location"></td><td><input type="text" maxlength="1000" value="'+esc(d.notes||"")+'" placeholder="Bring safety glasses" aria-label="Note"></td></tr>'}).join("")+'</tbody></table></div>':'<p>No upcoming events. Add them in the Events tab.</p>')+'</div>';
       $("#toMem2").onclick=function(){goTab("members")};
-      $$("tbody tr[data-id]",P).forEach(function(tr){$("button",tr).onclick=function(){var id=tr.getAttribute("data-id"),f=$$("input",tr);
+      function saveRow(tr,quiet){var id=tr.getAttribute("data-id"),f=$$("input",tr);
         var rec={event_id:id,start_time:f[0].value.trim()||null,end_time:f[1].value.trim()||null,location:f[2].value.trim()||null,notes:f[3].value.trim()||null};
-        db.from("event_details").delete().eq("event_id",id).then(function(){return db.from("event_details").insert(rec)}).then(function(x){okToast(x,"Saved")})}});
+        return db.from("event_details").delete().eq("event_id",id).then(function(){return db.from("event_details").insert(rec)}).then(function(x){if(!quiet)okToast(x,"Saved");return x})}
+      $$("tbody tr[data-id]",P).forEach(function(tr){
+        $$("input",tr).forEach(function(i){i.__v=i.value;i.addEventListener("change",function(){if(i.value!==i.__v){i.__v=i.value;saveRow(tr)}})});
+        $("button[data-copy]",tr).onclick=function(){var k=tr.getAttribute("data-kind"),src=$$("input",tr).map(function(i){return i.value}),later=[],seen=false;
+          $$("tbody tr[data-id]",P).forEach(function(o){if(o===tr){seen=true;return}if(seen&&o.getAttribute("data-kind")===k)later.push(o)});
+          if(!later.length){toast("No later events of this kind.");return}
+          later.forEach(function(o){$$("input",o).forEach(function(i,n){i.value=src[n];i.__v=src[n]})});
+          Promise.all(later.map(function(o){return saveRow(o,true)})).then(function(x){var bad=x.filter(function(y){return y&&y.error})[0];toast(bad?"Couldn’t save: "+bad.error.message:"Copied to "+later.length+" later event"+(later.length>1?"s":""))})}});
     });
   }
   /* ---------- Admin → Reviews: photo albums + teacher plans ---------- */

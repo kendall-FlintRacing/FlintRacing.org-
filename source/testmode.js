@@ -47,13 +47,13 @@
     T.spirit_items=Array.prototype.slice.call(document.querySelectorAll("#spGrid .sp-item")).map(function(el,i){var art=el.querySelector(".sp-art"),sm=art.querySelector("small"),b=art.querySelector("b");
       return {id:"sp"+i,name:el.querySelector("h3").textContent,category:el.getAttribute("data-cat"),description:(el.querySelector(".sp-body p")||{}).textContent||null,art_text:b?b.innerHTML.replace(/<br>/g,"\n"):null,badge:sm?sm.textContent:null,style:(art.className.match(/a[1-4]/)||["a1"])[0],image_url:null,sort_order:i,visible:true}});
     T.code_sessions=[];T.crew_codes={};
-    T.news_posts=[];T.resources=[];T.albums=[];T.album_photos=[];T.teacher_plans=[];T.workshop_signins=[];T.event_details=[];
+    T.news_posts=[];T.resources=[];T.albums=[];T.album_photos=[];T.teacher_plans=[];T.workshop_signins=[];T.event_details=(T.events||[]).filter(function(e){return /STEAM|Building Workshop/.test(e.title)}).slice(0,3).map(function(e){var b=/Building/.test(e.title);return{event_id:e.id,start_time:b?"9:00 AM":"10:00 AM",end_time:b?"1:00 PM":"12:00 PM",location:"Demo location (test mode)",notes:b?"Wear closed-toe shoes.":"Lunch provided."}});
     T.race_state=[{id:1,live:true,current_heat:cur?cur.id:null,banner:"DEMO RACE (test mode only). These names and times are made up.",updated_at:new Date().toISOString()}];
     var t=Date.now();
     T.shoutouts=[{id:"so1",name:"Grandma Pat",message:"Go Maya! The whole family is cheering at the finish line!",status:"approved",created_at:new Date(t-3e5).toISOString()},
       {id:"so2",name:"Coach Dee",message:"So proud of every builder out there today. You earned this ride.",status:"approved",created_at:new Date(t-2e5).toISOString()},
       {id:"so3",name:"Northside families",message:"Thank you volunteers for keeping the track running!",status:"approved",created_at:new Date(t-1e5).toISOString()},
-      {id:"so4",name:"Uncle Ray",message:"Waiting for review: you can approve me in Admin > Race day > Shout-outs.",status:"pending",created_at:new Date(t).toISOString()}];
+      {id:"so4",name:"Uncle Ray",message:"Waiting for review: approve me in Track operations.",status:"pending",created_at:new Date(t).toISOString()}];
   }
   /* Demo member profiles (username + passcode). Passcode for every demo profile: racing26 */
   function members(){var now=Date.now(),d=function(days,h){return new Date(now-days*864e5+(h||0)*36e5).toISOString()};
