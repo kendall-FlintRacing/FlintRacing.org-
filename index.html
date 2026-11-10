@@ -4043,7 +4043,7 @@ window.FRB=(function(){
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
   function updatePill(){var p=$(".fr-pill");
-    if(false){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
+    if(IS_ADMIN&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
     else if(p) p.hidden=true;}
 
   /* ---------- Edit mode ---------- */
