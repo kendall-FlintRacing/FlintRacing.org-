@@ -967,7 +967,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .acc-card .row{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
 /* ===== Sign in: 3D car select ===== */
 .cs-page{background:#0c0c10;color:#fff;overflow-x:clip}
-.cs{--n:#ff3b5c;padding:clamp(1rem,2.5vw,1.6rem) 0 clamp(2.4rem,5vw,3.6rem)}
+.cs{--n:#ffffff;padding:clamp(1rem,2.5vw,1.6rem) 0 clamp(2.4rem,5vw,3.6rem)}
 .gx{position:relative;border-radius:14px;overflow:hidden;background:#141519;border:1px solid #2a2b31;box-shadow:0 24px 60px rgba(0,0,0,.55)}
 .gx-top{position:absolute;inset:0 0 auto 0;z-index:4;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:clamp(14px,2.4vw,24px) clamp(14px,2.6vw,28px);pointer-events:none}
 .gx-title{font:italic 800 clamp(1.9rem,4.4vw,3.2rem)/1 var(--body);letter-spacing:-.01em;text-transform:none;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.6),0 0 22px rgba(255,255,255,.25)}
@@ -999,7 +999,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .gx-bar{display:grid;grid-template-columns:1fr auto 42%;gap:8px;align-items:center;font:italic 700 .82rem/1 var(--body)}
 .gx-bar span{text-align:left;color:#e3e5e9}
 .gx-bar em{font-style:normal;color:#9a9da3;font-weight:700;font-variant-numeric:tabular-nums}
-.gx-bar i{height:12px;border-radius:2px;background:linear-gradient(90deg,var(--n) calc(var(--v)*10%),#f3f4f6 0);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.gx-bar i{height:12px;border-radius:2px;background:linear-gradient(90deg,var(--n) calc(var(--v)*10%),rgba(255,255,255,.16) 0);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
 .gx-key{font:italic 800 1rem/1 var(--body);letter-spacing:.06em;color:#fff;text-transform:uppercase}
 .gx-key b{color:var(--n);margin-right:6px}
 .gx-drag{position:absolute;left:clamp(14px,2.6vw,28px);bottom:12px;z-index:3;font:italic 600 .78rem/1 var(--body);color:rgba(255,255,255,.55);letter-spacing:.08em}
@@ -3162,10 +3162,10 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
-      {paint:"#d8152b",trim:"#ffffff",helmet:"#f5b82e",num:"1",neon:"#ff3b5c",key:"Family code",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
-      {paint:"#f2b01e",trim:"#111113",helmet:"#d8152b",num:"7",neon:"#ffc233",key:"None. Just sign up",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
-      {paint:"checker",trim:"#d8152b",helmet:"#f4f4f4",num:"27",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
-      {paint:"#16171c",trim:"#d8152b",helmet:"#d8152b",num:"00",neon:"#ff5a68",key:"Team account",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
+      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",neon:"#ffffff",key:"Family code",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
+      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",neon:"#ffc233",key:"None. Just sign up",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
+      {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
+      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",neon:"#e21b2d",key:"Team account",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
     var cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=cards.length,cur=0;
     var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var thumbs=root.querySelector(".gx-thumbs");
@@ -3231,15 +3231,15 @@ body.rw-tv .rw-fol{display:none}
 
     var VS="attribute vec3 aP;attribute vec3 aN;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec3 vO;varying vec3 vON;void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=mat3(uM)*aN;vO=aP;vON=aN;gl_Position=uVP*w;}";
     var FS="precision mediump float;varying vec3 vW;varying vec3 vN;varying vec3 vO;varying vec3 vON;uniform vec3 uC;uniform vec3 uEye;uniform vec3 uNeon;uniform float uSpec;uniform float uGloss;uniform float uCoat;uniform float uChk;uniform float uDec;uniform sampler2D uT;"+
-      "vec3 env(vec3 r){float h=r.y;vec3 c=mix(vec3(0.03,0.03,0.035),vec3(0.16,0.17,0.19),smoothstep(-0.3,0.7,h));c+=vec3(2.2)*smoothstep(0.45,0.75,h)*(1.0-smoothstep(0.06,0.13,abs(fract(r.x*1.4+0.25)-0.5)));c+=uNeon*0.9*exp(-pow((h+0.08)/0.12,2.0));return c;}"+
+      "vec3 env(vec3 r){float h=r.y;vec3 c=mix(vec3(0.03,0.03,0.035),vec3(0.16,0.17,0.19),smoothstep(-0.3,0.7,h));c+=vec3(2.2)*smoothstep(0.45,0.75,h)*(1.0-smoothstep(0.06,0.13,abs(fract(r.x*1.4+0.25)-0.5)));c+=uNeon*0.45*exp(-pow((h+0.08)/0.12,2.0));return c;}"+
       "void main(){vec3 N=normalize(vN);vec3 V=normalize(uEye-vW);if(dot(N,V)<0.0)N=-N;vec3 base=uC;"+
       "if(uChk>0.5){float k=mod(floor(vO.x*4.0)+floor(vO.y*4.0)+floor(vO.z*4.0+100.0),2.0);base=mix(vec3(0.012),vec3(0.86),k);}"+
       "if(uDec>0.5){vec4 d=texture2D(uT,vec2((vO.x+2.1)/4.2,1.0-vO.y));float side=smoothstep(0.2,0.55,abs(normalize(vON).z));base=mix(base,pow(d.rgb,vec3(2.2)),d.a*side);}"+
       "vec3 L1=normalize(vec3(0.35,1.0,0.55));vec3 L2=normalize(vec3(-0.7,0.35,-0.4));float d1=max(dot(N,L1),0.0),d2=max(dot(N,L2),0.0);"+
-      "vec3 amb=mix(vec3(0.05,0.05,0.06),vec3(0.22,0.23,0.26),N.y*0.5+0.5);vec3 col=base*(amb+d1*vec3(1.05,1.0,0.95)+d2*0.25);"+
+      "vec3 amb=mix(vec3(0.05,0.05,0.06),vec3(0.2,0.2,0.22),N.y*0.5+0.5);vec3 col=base*(amb+d1*vec3(0.95,0.92,0.88)+d2*0.22);"+
       "vec3 H=normalize(L1+V);col+=uSpec*pow(max(dot(N,H),0.0),uGloss)*vec3(1.0);"+
       "float fr=0.04+0.96*pow(1.0-max(dot(N,V),0.0),5.0);col+=uCoat*fr*env(reflect(-V,N))+uCoat*0.12*env(reflect(-V,N))*0.5;"+
-      "col+=uNeon*pow(1.0-max(dot(N,V),0.0),3.0)*0.35;col=col/(1.0+col);gl_FragColor=vec4(pow(col,vec3(1.0/2.2)),1.0);}";
+      "col+=uNeon*pow(1.0-max(dot(N,V),0.0),3.0)*0.12;col=col/(1.0+col);gl_FragColor=vec4(pow(col,vec3(1.0/2.2)),1.0);}";
     var VS2="attribute vec2 aQ;uniform mat4 uM;uniform mat4 uVP;uniform float uS;varying vec2 vQ;void main(){vQ=aQ*uS;gl_Position=uVP*uM*vec4(vQ.x,0.002,vQ.y,1.0);}";
     var FS2="precision mediump float;varying vec2 vQ;uniform vec3 uNeon;uniform float uMode;uniform float uLift;void main(){if(uMode<0.5){float d=pow(vQ.x/2.25,2.0)+pow(vQ.y/0.85,2.0);float a=0.82*exp(-d*2.6)*(1.0-uLift*2.5);gl_FragColor=vec4(0.0,0.0,0.0,a);}else{float r=length(vQ);float g=exp(-pow((r-2.3)/0.04,2.0))*1.1+0.4*exp(-pow((r-2.3)/0.26,2.0))+0.14*(1.0-smoothstep(0.0,2.3,r));g*=1.0-smoothstep(2.55,3.0,r);gl_FragColor=vec4(uNeon*g,g);}}";
 
