@@ -919,6 +919,70 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .stub-card h1{font-size:clamp(2.6rem,6vw,4rem)}
 .stub-card p{color:#4a4d55}
 .page[hidden]{display:none!important}
+/* ===== Race control console ===== */
+.rk-page{background:#e9ebee;min-height:80vh;padding:clamp(1rem,2.5vw,1.6rem) 0 3rem}
+.rk-wrap{max-width:1240px}
+.rk-card{background:#fff;color:var(--ink);border:1px solid #d4d6da;border-radius:8px;padding:clamp(14px,2.4vw,22px);margin-bottom:14px}
+.rk-card h2{font:700 clamp(1.6rem,3vw,2.2rem)/1.1 var(--body);text-transform:none;color:var(--ink)}
+.rk-card h3{font:800 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin-bottom:10px}
+.rk-sign{max-width:520px;margin:0 auto}
+.rk-k{font:800 .74rem/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep)}
+.rk-top{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.rk-top h1{font-size:clamp(2rem,4vw,2.8rem);color:var(--ink)}
+.rk-live{display:flex;align-items:center;gap:10px;border:2px solid #9a9da3;background:#fff;color:var(--ink);border-radius:999px;padding:12px 18px;font:600 1rem/1.2 var(--body);cursor:pointer;text-align:left;max-width:100%}
+.rk-live b{font-weight:900;letter-spacing:.08em}
+.rk-live i{width:14px;height:14px;border-radius:50%;background:#9a9da3;flex:none}
+.rk-live.on{background:var(--red);border-color:var(--red);color:#fff}
+.rk-live.on i{background:#fff;animation:pulse 1.6s infinite}
+.rk-who{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.88rem;color:#4a4d55}
+.rk-prog{display:flex;align-items:center;gap:12px;font-size:1rem;color:#2a2d33;margin-bottom:12px}
+.rk-meter{flex:1;max-width:320px;height:10px;background:#d4d6da;border-radius:99px;overflow:hidden}
+.rk-meter i{display:block;height:100%;background:var(--red)}
+.rk-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:980px){.rk-grid{grid-template-columns:1fr}}
+.rk-main{border-top:5px solid var(--red)}
+.rk-hh{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font:600 1.05rem/1.3 var(--body)}
+.rk-num{font:800 1.9rem/1 var(--display);color:var(--ink)}
+.rk-run{background:var(--ink);color:#fff;font:800 .82rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;border-radius:4px}
+.rk-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+@media (max-width:560px){.rk-steps{grid-template-columns:1fr 1fr}}
+.rk-steps button{min-height:56px;border:2px solid #c9ccd1;background:#fff;border-radius:6px;font:800 1rem/1.1 var(--body);cursor:pointer;color:var(--ink)}
+.rk-steps button[aria-pressed="true"].s-upcoming{background:#3a3d45;border-color:#3a3d45;color:#fff}
+.rk-steps button[aria-pressed="true"].s-staging{background:var(--red);border-color:var(--red);color:#fff}
+.rk-steps button[aria-pressed="true"].s-set{background:#f5b82e;border-color:#d99a00;color:#1a1300}
+.rk-steps button[aria-pressed="true"].s-racing{background:#2fc26b;border-color:#1d9a51;color:#06210f}
+.rk-lanes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.rk-lanes{grid-template-columns:1fr}}
+.rk-lane{display:grid;gap:4px;border:2px solid #d4d6da;border-top:6px solid #9a9da3;border-radius:6px;padding:14px;cursor:text}
+.rk-lane.l1{border-top-color:var(--red)}
+.rk-ln{font:800 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#4a4d55}
+.rk-lane b{font:800 clamp(1.5rem,3vw,2rem)/1.1 var(--body);overflow-wrap:anywhere}
+.rk-lane small{color:#4a4d55;font-size:.9rem}
+.rk-lane small b{font:800 1rem/1 var(--body);color:var(--ink)}
+.rk-card label.f{display:block;font:600 .92rem/1.3 var(--body);margin-top:4px}
+.rk-card label.f input{display:block;width:100%;margin-top:6px;font:400 1rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:10px 12px}
+body.rk-on .fr-pill{display:none!important}
+.rk-tl{font:700 .85rem/1 var(--body);margin-top:8px}
+.rk-lane input{font:800 2.2rem/1.1 var(--display);font-variant-numeric:tabular-nums;width:100%;border:2px solid #9a9da3;border-radius:6px;padding:10px 12px;letter-spacing:.02em}
+.rk-lane input:focus{outline:3px solid var(--red);outline-offset:1px;border-color:var(--red)}
+.rk-prev{min-height:1.4em;margin:12px 0 4px;font:700 1.05rem/1.4 var(--body);color:#1d4e33}
+.rk-ovr{margin:8px 0;border:1px dashed #c9ccd1;border-radius:6px;padding:8px 12px}
+.rk-ovr summary{font-weight:700;cursor:pointer}
+.rk-ovr p{color:#4a4d55;font-size:.9rem;margin-top:6px}
+.rk-radio{display:inline-flex;gap:6px;align-items:center;font-weight:600;padding:8px 10px;border:1px solid #d4d6da;border-radius:4px}
+.rk-go{display:block;width:100%;min-height:64px;margin-top:12px;border:0;border-radius:8px;background:var(--red-deep);color:#fff;font:800 1.2rem/1.2 var(--body);cursor:pointer;padding:12px 16px}
+.rk-go:hover{background:var(--red)}
+.rk-go.confirm{background:#111113;outline:4px solid #f5b82e}
+.rk-big{font-size:1.15rem;line-height:1.5;margin:10px 0;font-variant-numeric:tabular-nums}
+.rk-done{border-top-color:#111113}
+.rk-ph{color:#6d7077}
+.rk-list{list-style:none;margin:0;padding:0}
+.rk-list li{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #eef0f2;font-size:.95rem}
+.rk-list small{color:#5a5d64}
+.rk-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.rk-so{border-bottom:1px solid #eef0f2;padding:8px 0}
+.rk-so .row{margin-top:6px}
+.rk-fine{color:#5a5d64;font-size:.86rem;margin-top:8px}
 /* ===== Live race view (spectators) ===== */
 .race-page{background-color:#121216;background-image:radial-gradient(rgba(255,255,255,.06) .8px,transparent .8px);background-size:6px 6px;color:#fff;min-height:70vh;padding-bottom:120px}
 .rw-ticker{display:flex;align-items:stretch;background:#1b1b20;border-bottom:2px solid var(--red);overflow:hidden}
@@ -1992,6 +2056,7 @@ body.rw-tv .rw-fol{display:none}
       <a href="#admin"><b>Admin</b><span>Edit every page, photo and card. Manage events, bulletin notes and inquiries.</span></a>
       <div class="soon"><em>Coming soon</em><b>Program Dashboard</b><span>Families: where, when and what time workshops are held.</span></div>
       <div class="soon"><em>Coming soon</em><b>Workshop sign-in</b><span>Building Workshop attendance, teams and meal counts.</span></div>
+      <a href="#race-control"><b>Race control</b><span>For the race day controller: starting lights, run times, results and announcements.</span></a>
       <div class="soon"><em>Coming soon</em><b>Race Day</b><span>Volunteer lists, check-in and role links for officials.</span></div>
       <div class="soon"><em>Coming soon</em><b>Photographer</b><span>Event albums and uploads.</span></div>
       <div class="soon"><em>Coming soon</em><b>Teacher planning</b><span>Seasonal workshop ideas, materials and planning dates.</span></div>
@@ -2080,6 +2145,11 @@ body.rw-tv .rw-fol{display:none}
   </div>
 </div>
 
+<!-- ======================= RACE CONTROL (CONTROLLER) ======================= -->
+<div class="page rk-page" data-page="race-control" hidden>
+  <div class="wrap rk-wrap"><div id="rkBox" class="rk-box"><div class="rk-card"><p>Loading race control…</p></div></div></div>
+</div>
+
 <!-- ======================= NOT-YET-REBUILT PAGES ======================= -->
 <div class="page stub" data-page="stub" hidden>
   <div class="wrap">
@@ -2110,7 +2180,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -2606,12 +2676,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#rkBox","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#rkBox","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
@@ -2700,16 +2770,16 @@ window.FRB=(function(){
     t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},2400)}
 
   /* ---------- Auth + admin ---------- */
-  var USER=null, IS_ADMIN=false;
+  var USER=null, IS_ADMIN=false, IS_CTRL=false;
   function initAuth(){
     db.auth.getSession().then(function(r){setUser(r.data&&r.data.session?r.data.session.user:null)});
     db.auth.onAuthStateChange(function(ev,session){setUser(session?session.user:null)});
-    window.addEventListener("hashchange",function(){if(location.hash==="#admin")renderAdmin()});
+    window.addEventListener("hashchange",function(){if(location.hash==="#admin")renderAdmin();renderRK(true)});
     renderAdmin();
   }
   function setUser(u){USER=u;
-    if(!u){IS_ADMIN=false;setEditing(false);updatePill();renderAdmin();return}
-    db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle().then(function(r){IS_ADMIN=!!(r.data);updatePill();renderAdmin();
+    if(!u){IS_ADMIN=false;IS_CTRL=false;setEditing(false);updatePill();renderAdmin();renderRK(true);return}
+    Promise.all([db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle(),db.from("race_controllers").select("user_id").eq("user_id",u.id).maybeSingle()]).then(function(rr){var r=rr[0];IS_ADMIN=!!(r.data);IS_CTRL=!!(rr[1].data);updatePill();renderAdmin();renderRK(true);
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
   function updatePill(){var p=$(".fr-pill");
@@ -2780,13 +2850,13 @@ window.FRB=(function(){
     $$(".adm-tabs button",box).forEach(function(b){b.onclick=function(){TAB=b.getAttribute("data-tab");renderAdmin()}});
     ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,partners:tabPartners,edits:tabEdits,race:tabRace})[TAB]();
   }
-  function signInHTML(){return '<h2>Admin sign in</h2><form id="admForm" novalidate><label class="f" for="adm-email">Email<input type="email" id="adm-email" autocomplete="username" required></label><label class="f" for="adm-pass">Password<input type="password" id="adm-pass" autocomplete="current-password" required minlength="8"></label><div class="row"><button class="btn deep" type="submit" id="admSubmit">Sign in</button><button class="mini" type="button" id="admMode">Create an account</button><button class="mini" type="button" id="admForgot">Forgot password</button></div><p class="msg" id="admMsg" role="status"></p></form>'}
-  function bindSignIn(){var mode="in",msg=$("#admMsg");
+  function signInHTML(px){return ('<h2>Admin sign in</h2><form id="admForm" novalidate><label class="f" for="adm-email">Email<input type="email" id="adm-email" autocomplete="username" required></label><label class="f" for="adm-pass">Password<input type="password" id="adm-pass" autocomplete="current-password" required minlength="8"></label><div class="row"><button class="btn deep" type="submit" id="admSubmit">Sign in</button><button class="mini" type="button" id="admMode">Create an account</button><button class="mini" type="button" id="admForgot">Forgot password</button></div><p class="msg" id="admMsg" role="status"></p></form>').replace(/"adm/g,'"'+(px||"adm"))}
+  function bindSignIn(px){px=px||"adm";var q=function(id){return $("#"+id.replace(/^adm/,px))};var mode="in",msg=q("admMsg");
     function m(t,ok){msg.textContent=t;msg.className="msg "+(ok?"ok":"err")}
-    $("#admMode").onclick=function(){mode=mode==="in"?"up":"in";$("#admSubmit").textContent=mode==="in"?"Sign in":"Create account";this.textContent=mode==="in"?"Create an account":"I already have an account";$("#adm-pass").autocomplete=mode==="in"?"current-password":"new-password";m("")};
-    $("#admForgot").onclick=function(){var em=$("#adm-email").value.trim();if(!em){m("Enter your email first.");return}
+    q("admMode").onclick=function(){mode=mode==="in"?"up":"in";q("admSubmit").textContent=mode==="in"?"Sign in":"Create account";this.textContent=mode==="in"?"Create an account":"I already have an account";q("adm-pass").autocomplete=mode==="in"?"current-password":"new-password";m("")};
+    q("admForgot").onclick=function(){var em=q("adm-email").value.trim();if(!em){m("Enter your email first.");return}
       db.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname+"#admin"}).then(function(r){m(r.error?"Couldn’t send the reset email. Check the address.":"Check your email for a reset link.",!r.error)})};
-    $("#admForm").onsubmit=function(e){e.preventDefault();var em=$("#adm-email").value.trim(),pw=$("#adm-pass").value;
+    q("admForm").onsubmit=function(e){e.preventDefault();var em=q("adm-email").value.trim(),pw=q("adm-pass").value;
       if(!/^\S+@\S+\.\S+$/.test(em)||pw.length<8){m("Enter your email and a password of at least 8 characters.");return}
       if(mode==="in") db.auth.signInWithPassword({email:em,password:pw}).then(function(r){if(r.error)m("That email and password didn’t match.")});
       else db.auth.signUp({email:em,password:pw,options:{emailRedirectTo:location.origin+location.pathname+"#admin"}}).then(function(r){
@@ -2865,7 +2935,7 @@ window.FRB=(function(){
     draw();
   }
   /* ---------- Race day controls ---------- */
-  var RSUB="control", BDRAFT=null;
+  var RSUB="ctl", BDRAFT=null;
   function tabRace(){var P=$("#admPanel"), FRB=window.FRB;
     Promise.all([db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_heats").select("*").order("sort_order"),
       db.from("race_racers").select("*").order("display_name"),db.from("shoutouts").select("*").order("created_at",{ascending:false}).limit(200),
@@ -2876,7 +2946,7 @@ window.FRB=(function(){
       function rn(id){var x=R[id];return x?esc(x.display_name+(x.car_number?" (#"+x.car_number+")":"")):""}
       function who(h,s){var id=s==="a"?h.lane1:h.lane2;return id?rn(id):'<i style="color:#6d7077">'+esc(FRB.source(heats,h,s,N))+'</i>'}
       function hname(h){return (N[h.id]?"Heat "+N[h.id]+" · ":"")+esc((h.division||"")+" · "+(h.label||""))}
-      var head='<div class="row" style="margin-top:0">'+[["control","Run the race"],["brackets","Brackets"],["order","Running order"],["racers","Racers"],["shout","Shout-outs"+(pend?" ("+pend+" new)":"")]].map(function(t){return '<button class="mini'+(RSUB===t[0]?' solid':'')+'" type="button" data-sub="'+t[0]+'">'+t[1]+'</button>'}).join("")+'<a class="mini" href="#race-watch" target="_blank" rel="noopener">Open spectator view</a></div>';
+      var head='<div class="row" style="margin-top:0">'+[["ctl","Race control"],["brackets","Brackets"],["order","Running order"],["racers","Racers"],["shout","Shout-outs"+(pend?" ("+pend+" new)":"")]].map(function(t){return '<button class="mini'+(RSUB===t[0]?' solid':'')+'" type="button" data-sub="'+t[0]+'">'+t[1]+'</button>'}).join("")+'<a class="mini" href="#race-watch" target="_blank" rel="noopener">Open spectator view</a></div>';
       function again(){tabRace()}
       function done(x,msg){toast(x&&x.error?"Couldn’t save: "+x.error.message:msg||"Saved");if(!x||!x.error)again()}
       function setState(rec,msg){rec.updated_at=new Date().toISOString();return db.from("race_state").update(rec).eq("id",1).then(function(x){done(x,msg)})}
@@ -2885,29 +2955,12 @@ window.FRB=(function(){
       function nextHeat(cur){var ready=function(h){return !FRB.isBye(h)&&h.status!=="finished"&&h.lane1&&h.lane2&&h!==cur};
         var i=cur?heats.indexOf(cur):-1;return heats.slice(i+1).filter(ready)[0]||heats.filter(ready)[0]||null}
       var body="";
-      if(RSUB==="control"){
-        var cur=heats.filter(function(h){return h.id===st.current_heat})[0]||null, run=cur?(cur.run||1):1;
-        body='<div class="inq"><header><b>Live page is '+(st.live?'<span style="color:#c51831">ON</span>':'off')+'</b><button class="mini solid" type="button" id="rcLive">'+(st.live?"Turn live page off":"Go live")+'</button></header>'+
-          '<p>While off, spectators see the race day countdown. Turn it on when racing starts.</p>'+
-          '<label class="f" for="rc-banner">Announcement banner (optional)<input type="text" id="rc-banner" maxlength="160" value="'+esc(st.banner||"")+'" placeholder="Lunch break until 12:30 · Awards at the finish line"></label><div class="row"><button class="mini" type="button" id="rcBanner">Save banner</button></div></div>'+
-          '<div class="inq"><header><b>Heat on the track</b></header><label class="f" for="rc-heat">Current heat<select id="rc-heat"><option value="">None yet</option>'+heats.filter(function(h){return !FRB.isBye(h)}).map(function(h){return '<option value="'+h.id+'"'+(cur&&cur.id===h.id?' selected':'')+'>'+hname(h)+(h.status==="finished"?" (final)":"")+'</option>'}).join("")+'</select></label>';
-        if(!cur) body+='<p>Pick a heat, or build a bracket in the Brackets tab.</p>';
-        else if(!cur.lane1||!cur.lane2) body+='<p>This heat is waiting on: '+who(cur,"a")+' vs '+who(cur,"b")+'.</p>';
-        else if(cur.status==="finished") body+='<p><b>Final:</b> '+rn(cur.winner)+' wins'+(cur.lane1_time!=null&&cur.lane2_time!=null?' · totals '+rn(cur.lane1)+' '+cur.lane1_time+'s, '+rn(cur.lane2)+' '+cur.lane2_time+'s':' (no times)')+'.</p>';
-        else {var l1=run===1?cur.lane1:cur.lane2, l2=run===1?cur.lane2:cur.lane1;
-          body+='<p style="font-size:1.05rem"><b>Run '+run+' of 2</b>'+(run===2?' · lanes swapped':'')+'<br>Lane 1: <b>'+rn(l1)+'</b> · Lane 2: <b>'+rn(l2)+'</b></p>'+
-            (run===2?'<p>Run 1: '+rn(cur.lane1)+' '+(cur.a_time1!=null?cur.a_time1+"s":"no time")+' (Lane 1) · '+rn(cur.lane2)+' '+(cur.b_time1!=null?cur.b_time1+"s":"no time")+' (Lane 2)</p>':'')+
-            '<p style="margin-top:10px">Status: tap each step as it happens</p><div class="row" style="margin-top:6px">'+
-            [["upcoming","Up next"],["staging","On the ramp"],["set","Ready, set"],["racing","They’re off"]].map(function(s){return '<button class="mini'+(cur.status===s[0]?' solid':'')+'" type="button" data-st="'+s[0]+'">'+s[1]+'</button>'}).join("")+'</div>'+
-            '<div class="adm-scroll"><table class="adm-table" style="min-width:560px;margin-top:12px"><thead><tr><th>Lane 1 time (s) · '+rn(l1)+'</th><th>Lane 2 time (s) · '+rn(l2)+'</th>'+(run===2?'<th>Winner</th>':'')+'<th></th></tr></thead><tbody><tr>'+
-            '<td><input type="number" step="0.001" min="0" id="rc-l1" value="'+(run===1?(cur.a_time1==null?"":cur.a_time1):(cur.b_time2==null?"":cur.b_time2))+'" aria-label="Lane 1 time"></td>'+
-            '<td><input type="number" step="0.001" min="0" id="rc-l2" value="'+(run===1?(cur.b_time1==null?"":cur.b_time1):(cur.a_time2==null?"":cur.a_time2))+'" aria-label="Lane 2 time"></td>'+
-            (run===2?'<td><select id="rc-win" aria-label="Winner"><option value="">Lowest total time</option><option value="a">'+rn(cur.lane1)+'</option><option value="b">'+rn(cur.lane2)+'</option></select></td>':'')+
-            '<td><button class="mini solid" type="button" id="rcPost">'+(run===1?"Post run 1 and swap lanes":"Post final result")+'</button></td></tr></tbody></table></div>'+
-            '<p id="rcPrev" style="color:#4a4d55"></p>'+(run===2?'<div class="row"><button class="mini" type="button" id="rcBack">Back to run 1</button></div>':'')+
-            '<p style="color:#4a4d55;font-size:.88rem">Pick a winner only for a tie, a forfeit or a disqualification.</p>';}
-        if(cur) body+='<div class="row"><button class="btn deep" type="button" id="rcNext">Move to the next heat</button></div>';
-        body+='</div>';
+      if(RSUB==="ctl"){
+        body='<div class="inq"><header><b>Race controller</b></header><p style="max-width:72ch">One person runs race day from the <b>Race control</b> screen: going live, the starting lights, run times, results, the next heat, announcements and shout-out approvals. The controller can’t change racers, brackets, the running order or the website. Admins can always use Race control too.</p>'+
+          '<p style="margin-top:10px;font-size:1.05rem">Current controller: <b id="ctlNow">checking…</b></p>'+
+          '<form id="ctlForm" novalidate><label class="f" for="ctl-email">Controller’s email<input type="email" id="ctl-email" autocomplete="off" placeholder="name@example.com"></label><div class="row"><button class="btn deep" type="submit">Make them the race controller</button><button class="mini red" type="button" id="ctlX" hidden>Remove controller</button></div></form>'+
+          '<p style="color:#4a4d55;font-size:.9rem;margin-top:8px">First they create an account on the sign-in page (Create an account) and confirm their email. Then enter that email here. Assigning someone new replaces the current controller.</p></div>'+
+          '<div class="inq"><header><b>Race control screen</b></header><p>Open it on the laptop or tablet at the timing table. It works best in landscape.</p><div class="row"><a class="btn deep" href="#race-control">Open Race control</a></div></div>';
       } else if(RSUB==="brackets"){
         body='<p style="color:#4a4d55;max-width:72ch">Each bracket is single or double elimination. Every heat is two runs with a lane swap, and the lowest total time wins. After you build a bracket, set the running order to alternate it with other brackets.</p>'+
           (brackets.length?brackets.map(function(b){var hs=heats.filter(function(h){return h.bracket_id===b.id}),real=hs.filter(function(h){return !FRB.isBye(h)}),fin=real.filter(function(h){return h.status==="finished"}).length;
@@ -2948,29 +3001,11 @@ window.FRB=(function(){
       }
       P.innerHTML=head+body;
       $$("button[data-sub]",P).forEach(function(b){b.onclick=function(){RSUB=b.getAttribute("data-sub");tabRace()}});
-      if(RSUB==="control"){
-        $("#rcLive").onclick=function(){setState({live:!st.live},st.live?"Live page is off":"You’re live")};
-        $("#rcBanner").onclick=function(){setState({banner:$("#rc-banner").value.trim()||null},"Banner saved")};
-        $("#rc-heat").onchange=function(){setState({current_heat:this.value||null},"Current heat set")};
-        var c2=heats.filter(function(h){return h.id===st.current_heat})[0];
-        if(c2){
-          $$("button[data-st]",P).forEach(function(b){b.onclick=function(){db.from("race_heats").update({status:b.getAttribute("data-st"),updated_at:new Date().toISOString()}).eq("id",c2.id).then(function(x){done(x,"Updated")})}});
-          var pb=$("#rcPost");
-          if(pb){var r2=(c2.run||1)===2, prev=function(){var a=$("#rc-l1").value,b=$("#rc-l2").value,p=$("#rcPrev");
-              if(!r2||a===""||b===""||c2.a_time1==null||c2.b_time1==null){p.textContent="";return}
-              var A=Math.round((+c2.a_time1+(+b))*1000)/1000,B=Math.round((+c2.b_time1+(+a))*1000)/1000;
-              p.textContent="Totals: "+(R[c2.lane1]||{}).display_name+" "+A.toFixed(3)+"s · "+(R[c2.lane2]||{}).display_name+" "+B.toFixed(3)+"s"+(A===B?" · tie, pick a winner":"");};
-            $("#rc-l1").oninput=prev;$("#rc-l2").oninput=prev;prev();
-            pb.onclick=function(){var a=$("#rc-l1").value,b=$("#rc-l2").value;
-              if(!r2){ if(a===""||b===""){toast("Enter both run 1 times.");return}
-                db.from("race_heats").update({a_time1:+a,b_time1:+b,run:2,status:"staging",updated_at:new Date().toISOString()}).eq("id",c2.id).then(function(x){done(x,"Run 1 posted. Lanes swap for run 2.")});return}
-              var res=FRB.post(heats,c2.id,{a1:c2.a_time1,b1:c2.b_time1,a2:b,b2:a,winner:$("#rc-win").value});
-              if(res.error){toast(res.error);return} saveHeats(res.changed,"Result posted. Winner moves on.");};
-            var bk=$("#rcBack"); if(bk) bk.onclick=function(){db.from("race_heats").update({run:1,status:"staging"}).eq("id",c2.id).then(function(x){done(x,"Back to run 1")})};}
-        }
-        var nb=$("#rcNext"); if(nb) nb.onclick=function(){var nx=nextHeat(c2);
-          if(!nx){toast(heats.some(function(h){return !FRB.isBye(h)&&h.status!=="finished"})?"The next heats are waiting on results.":"No heats left to run.");return}
-          db.from("race_heats").update({status:"staging",run:1,updated_at:new Date().toISOString()}).eq("id",nx.id).then(function(){setState({current_heat:nx.id},"Heat "+(N[nx.id]||"")+" is on the ramp")})};
+      if(RSUB==="ctl"){
+        db.from("race_controllers").select("email").maybeSingle().then(function(x){var c=x.data;$("#ctlNow").textContent=c?c.email:"None yet (only admins can run the race)";$("#ctlX").hidden=!c});
+        $("#ctlForm").onsubmit=function(e){e.preventDefault();var em=$("#ctl-email").value.trim();if(!/^\S+@\S+\.\S+$/.test(em)){toast("Enter their email address.");return}
+          db.rpc("set_race_controller",{p_email:em}).then(function(x){if(x.error){toast(x.error.message);return}toast("Race controller set");tabRace()})};
+        $("#ctlX").onclick=function(){var b=this;if(b.textContent!=="Confirm remove"){b.textContent="Confirm remove";return}db.rpc("clear_race_controller").then(function(x){toast(x.error?x.error.message:"Controller removed");tabRace()})};
       } else if(RSUB==="brackets"){
         $$("button[data-delb]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
           var id=b.getAttribute("data-delb"),inB=heats.some(function(h){return h.bracket_id===id&&h.id===st.current_heat});
@@ -3027,6 +3062,108 @@ window.FRB=(function(){
         $$("button[data-so]",P).forEach(function(b){b.onclick=function(){db.from("shoutouts").update({status:b.getAttribute("data-so")}).eq("id",b.getAttribute("data-id")).then(function(x){done(x,b.getAttribute("data-so")==="approved"?"Approved":"Hidden")})}});
       }
     });
+  }
+  /* ---------- Race control console (#race-control): one controller runs race day ---------- */
+  var RK={draft:{},confirm:"",sig:"",timer:null,ovr:{}};
+  function renderRK(force){var box=$("#rkBox"); if(!box||!window.FR_DB) return;
+    document.body.classList.toggle("rk-on",location.hash==="#race-control");
+    if(location.hash!=="#race-control"){clearInterval(RK.timer);RK.timer=null;return}
+    if(!USER){box.innerHTML='<div class="rk-card rk-sign">'+signInHTML("rks").replace("Admin sign in","Race control sign in")+'<p class="rk-fine">Only the race controller and admins can open this screen.</p></div>';bindSignIn("rks");RK.sig="";return}
+    if(!IS_ADMIN&&!IS_CTRL){box.innerHTML='<div class="rk-card"><h2>Not the race controller</h2><p>You’re signed in as <b>'+esc(USER.email)+'</b>, but this account isn’t the race controller. Ask an admin to assign you in Admin → Race day → Race control.</p><div class="row"><button class="mini" type="button" id="rkOut">Sign out</button></div></div>';$("#rkOut").onclick=signOut;RK.sig="";return}
+    if(!RK.timer) RK.timer=setInterval(function(){renderRK()},window.FR_TEST?2500:5000);
+    var act=document.activeElement; if(!force&&act&&box.contains(act)&&/INPUT|TEXTAREA|SELECT/.test(act.tagName)) return;
+    Promise.all([db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_heats").select("*").order("sort_order"),
+      db.from("race_racers").select("*"),db.from("shoutouts").select("*").eq("status","pending").order("created_at").limit(30)]).then(function(r){
+      if(r.some(function(x){return x.error})){box.innerHTML='<div class="rk-card"><p>Couldn’t reach the race data. Check the internet connection. This screen keeps trying.</p></div>';RK.sig="";return}
+      var sig=JSON.stringify([r[0].data,r[1].data,r[3].data.map(function(s){return s.id}),r[2].data.length]);
+      if(!force&&sig===RK.sig) return; RK.sig=sig; drawRK(box,r[0].data||{id:1,live:false},r[1].data||[],r[2].data||[],r[3].data||[]);});
+  }
+  function drawRK(box,st,heats,racers,pend){var FRB=window.FRB,R={};racers.forEach(function(x){R[x.id]=x});
+    var N=FRB.numbers(heats),cur=heats.filter(function(h){return h.id===st.current_heat})[0]||null;
+    function rn(id){var x=R[id];return x?esc(x.display_name):"TBD"}
+    function meta(id){var x=R[id];return x?[x.car_number?"Car #"+esc(x.car_number):"",x.team?esc(x.team):""].filter(Boolean).join(" · "):""}
+    function who(h,s){var id=s==="a"?h.lane1:h.lane2;return id?rn(id):'<i class="rk-ph">'+esc(FRB.source(heats,h,s,N))+'</i>'}
+    function title(h){return esc((h.division||"")+" · "+(h.label||""))}
+    var ready=function(h){return !FRB.isBye(h)&&h.status!=="finished"&&h.lane1&&h.lane2};
+    function nextOf(c){var i=c?heats.indexOf(c):-1;return heats.slice(i+1).filter(function(h){return ready(h)&&h!==c})[0]||heats.filter(function(h){return ready(h)&&h!==c})[0]||null}
+    var nx=nextOf(cur), real=heats.filter(function(h){return !FRB.isBye(h)}), fin=real.filter(function(h){return h.status==="finished"}).length;
+    var main="";
+    if(!cur){main='<section class="rk-card rk-main"><p class="rk-k">No heat on the track</p><h2>'+(nx?'Ready to start':'No heats ready')+'</h2>'+
+        (nx?'<p class="rk-big">Heat '+N[nx.id]+' · '+title(nx)+'<br><b>'+rn(nx.lane1)+'</b> vs <b>'+rn(nx.lane2)+'</b></p><button class="rk-go" type="button" data-next="'+nx.id+'">Put Heat '+N[nx.id]+' on the ramp</button>':'<p>Ask an admin to build the brackets and set the running order.</p>')+'</section>';}
+    else if(!cur.lane1||!cur.lane2){main='<section class="rk-card rk-main"><p class="rk-k">Heat '+(N[cur.id]||"")+' · '+title(cur)+'</p><h2>Waiting on results</h2><p class="rk-big">'+who(cur,"a")+' vs '+who(cur,"b")+'</p>'+(nx?'<button class="rk-go" type="button" data-next="'+nx.id+'">Skip ahead to Heat '+N[nx.id]+'</button>':'')+'</section>';}
+    else if(cur.status==="finished"){var A=cur.lane1_time,B=cur.lane2_time,lo=cur.winner===cur.lane1?cur.lane2:cur.lane1;
+      main='<section class="rk-card rk-main rk-done"><p class="rk-k">Heat '+N[cur.id]+' · '+title(cur)+' · Final</p><h2>'+rn(cur.winner)+' wins</h2>'+
+        (A!=null&&B!=null?'<p class="rk-big">'+rn(cur.lane1)+' '+(+cur.a_time1).toFixed(3)+' + '+(+cur.a_time2).toFixed(3)+' = <b>'+(+A).toFixed(3)+'</b><br>'+rn(cur.lane2)+' '+(+cur.b_time1).toFixed(3)+' + '+(+cur.b_time2).toFixed(3)+' = <b>'+(+B).toFixed(3)+'</b><br>Margin '+Math.abs(A-B).toFixed(3)+'s</p>':'<p class="rk-big">Decided without times (tie, forfeit or DQ). '+rn(lo)+' takes the loss.</p>')+
+        (nx?'<button class="rk-go" type="button" data-next="'+nx.id+'">Next: Heat '+N[nx.id]+' · '+rn(nx.lane1)+' vs '+rn(nx.lane2)+' →</button>':'<p class="rk-big">'+(real.some(function(h){return h.status!=="finished"})?'The next heats are waiting on results.':'That was the last heat. Great racing!')+'</p>')+
+        '<div class="row"><button class="mini" type="button" data-clr="'+cur.id+'">Undo this result</button></div></section>';}
+    else {var run=cur.run||1,l1=run===1?cur.lane1:cur.lane2,l2=run===1?cur.lane2:cur.lane1,key=cur.id+":"+run,d=RK.draft[key]||{};
+      var prev1=function(id){var t=id===cur.lane1?cur.a_time1:cur.b_time1;return run===2&&t!=null?' · run 1 <b>'+(+t).toFixed(3)+'</b>':''};
+      main='<section class="rk-card rk-main"><div class="rk-hh"><span class="rk-num">Heat '+N[cur.id]+'</span><span>'+title(cur)+'</span><span class="rk-run">Run '+run+' of 2'+(run===2?' · lanes swapped':'')+'</span></div>'+
+        '<div class="rk-steps" role="group" aria-label="Starting status">'+[["upcoming","Up next"],["staging","On the ramp"],["set","Ready, set"],["racing","They’re off"]].map(function(s){return '<button type="button" class="s-'+s[0]+'" data-st="'+s[0]+'" aria-pressed="'+(cur.status===s[0])+'">'+s[1]+'</button>'}).join("")+'</div>'+
+        '<div class="rk-lanes">'+[[1,l1],[2,l2]].map(function(p){return '<label class="rk-lane'+(p[0]===1?' l1':'')+'" for="rk-t'+p[0]+'"><span class="rk-ln">Lane '+p[0]+'</span><b>'+rn(p[1])+'</b><small>'+meta(p[1])+prev1(p[1])+'</small>'+
+          '<span class="rk-tl">Run '+run+' time (seconds)</span><input id="rk-t'+p[0]+'" type="text" inputmode="decimal" autocomplete="off" placeholder="00.000" value="'+esc(d["t"+p[0]]||"")+'"></label>'}).join("")+'</div>'+
+        '<p class="rk-prev" id="rkPrev" role="status"></p>'+
+        (run===2?'<details class="rk-ovr"'+(RK.ovr[cur.id]?' open':'')+'><summary>Tie, forfeit or disqualification?</summary><p>Pick the winner yourself. Times are optional.</p><div class="row">'+[["","Use the times"],["a",rn(cur.lane1)+" wins"],["b",rn(cur.lane2)+" wins"]].map(function(o){return '<label class="rk-radio"><input type="radio" name="rkw" value="'+o[0]+'"'+((RK.ovr[cur.id]||"")===o[0]?' checked':'')+'> '+o[1]+'</label>'}).join("")+'</div></details>':'')+
+        '<button class="rk-go" type="button" id="rkPost">'+(run===1?'Post run 1 and swap lanes':'Post final result')+'</button>'+
+        (run===2?'<div class="row"><button class="mini" type="button" id="rkBack">Back to run 1</button></div>':'')+'</section>';}
+    var up=heats.filter(function(h){return !FRB.isBye(h)&&h.status!=="finished"&&h!==cur}),i0=cur?heats.indexOf(cur):-1;
+    up=up.filter(function(h){return heats.indexOf(h)>i0}).concat(up.filter(function(h){return heats.indexOf(h)<i0})).slice(0,6);
+    var done=real.filter(function(h){return h.status==="finished"}).sort(function(a,b){return (b.updated_at||"")>(a.updated_at||"")?1:-1}).slice(0,5);
+    box.innerHTML='<div class="rk-top"><div><p class="rk-k">Flint Soap Box Derby</p><h1>Race control</h1></div>'+
+      '<button class="rk-live'+(st.live?' on':'')+'" type="button" id="rkLive" aria-pressed="'+!!st.live+'"><i aria-hidden="true"></i>'+(st.live?'<b>LIVE</b> Spectators see the race · tap to turn off':'<b>OFF</b> Spectators see the countdown · tap to go live')+'</button>'+
+      '<div class="rk-who"><span>'+esc(USER.email)+' · '+(IS_ADMIN?"Admin":"Race controller")+'</span><a class="mini" href="#race-watch" target="_blank" rel="noopener">Spectator view</a><button class="mini" type="button" id="rkOut">Sign out</button></div></div>'+
+      '<p class="rk-prog"><b>'+fin+' of '+real.length+'</b> heats raced'+(real.length?'<span class="rk-meter"><i style="width:'+Math.round(fin/real.length*100)+'%"></i></span>':'')+'</p>'+
+      '<div class="rk-grid">'+main+'<aside class="rk-side">'+
+        '<section class="rk-card"><h3>Coming up</h3>'+(up.length?'<ol class="rk-list">'+up.map(function(h){return '<li><div><b>Heat '+N[h.id]+'</b> <small>'+title(h)+'</small><br>'+who(h,"a")+' vs '+who(h,"b")+'</div>'+(ready(h)?'<button class="mini" type="button" data-pick="'+h.id+'">Make current</button>':'')+'</li>'}).join("")+'</ol>':'<p class="rk-fine">Nothing left in the running order.</p>')+'</section>'+
+        '<section class="rk-card"><h3>Announcement</h3><label class="f" for="rk-ban">Shows in a banner on the live page<input type="text" id="rk-ban" maxlength="160" value="'+esc(st.banner||"")+'"></label>'+
+          '<div class="rk-chips">'+["Short break. Racing resumes soon.","Lunch break. Racing resumes at 12:30.","Track check in progress.","Awards at the finish line after the last heat."].map(function(t){return '<button class="mini" type="button" data-ban="'+esc(t)+'">'+esc(t.split(".")[0])+'</button>'}).join("")+'</div>'+
+          '<div class="row"><button class="mini solid" type="button" id="rkBan">Post banner</button><button class="mini" type="button" id="rkBanX">Clear banner</button></div></section>'+
+        '<section class="rk-card"><h3>Shout-outs waiting'+(pend.length?' ('+pend.length+')':'')+'</h3>'+(pend.length?pend.slice(0,8).map(function(s){return '<div class="rk-so"><p><b>'+esc(s.name)+':</b> '+esc(s.message)+'</p><div class="row"><button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button><button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Hide</button></div></div>'}).join(""):'<p class="rk-fine">None waiting.</p>')+'</section>'+
+        '<section class="rk-card"><h3>Fix a result</h3>'+(done.length?'<ul class="rk-list">'+done.map(function(h){return '<li><div><b>Heat '+N[h.id]+'</b> '+rn(h.winner)+' won<br><small>'+title(h)+'</small></div><button class="mini" type="button" data-clr="'+h.id+'">Undo</button></li>'}).join("")+'</ul><p class="rk-fine">Undo is blocked once a later heat has used the result.</p>':'<p class="rk-fine">No results yet.</p>')+'</section>'+
+      '</aside></div>';
+    bindRK(st,heats,cur,R,N,nx);
+  }
+  function bindRK(st,heats,cur,R,N,nx){var FRB=window.FRB,box=$("#rkBox");
+    function ok(x,msg){if(x&&x.error){toast("Couldn’t save: "+x.error.message);return false}if(msg)toast(msg);RK.confirm="";renderRK(true);return true}
+    function setState(rec,msg){rec.updated_at=new Date().toISOString();return db.from("race_state").update(rec).eq("id",1).then(function(x){ok(x,msg)})}
+    function saveHeats(list,msg){var now=new Date().toISOString();return Promise.all(list.map(function(h){var row=FRB.row(h);row.updated_at=now;return db.from("race_heats").update(row).eq("id",h.id)})).then(function(rs){ok(rs.filter(function(x){return x.error})[0]||{},msg)})}
+    function putOn(id){db.from("race_heats").update({status:"staging",run:1,updated_at:new Date().toISOString()}).eq("id",id).then(function(x){if(x.error){ok(x);return}setState({current_heat:id},"Heat "+(N[id]||"")+" is on the ramp")})}
+    $("#rkOut").onclick=signOut;
+    $("#rkLive").onclick=function(){var b=this;if(st.live&&b.getAttribute("data-c")!=="1"){b.setAttribute("data-c","1");b.innerHTML="<i></i><b>Turn off?</b> Tap again to switch the live page off";return}setState({live:!st.live},st.live?"Live page is off":"You’re live")};
+    $$("[data-next]",box).forEach(function(b){b.onclick=function(){putOn(b.getAttribute("data-next"))}});
+    $$("[data-pick]",box).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm"){b.textContent="Confirm";return}putOn(b.getAttribute("data-pick"))}});
+    $$("[data-ban]",box).forEach(function(b){b.onclick=function(){$("#rk-ban").value=b.getAttribute("data-ban");$("#rk-ban").focus()}});
+    $("#rkBan").onclick=function(){setState({banner:$("#rk-ban").value.trim()||null},"Banner posted")};
+    $("#rkBanX").onclick=function(){setState({banner:null},"Banner cleared")};
+    $$("[data-so]",box).forEach(function(b){b.onclick=function(){db.from("shoutouts").update({status:b.getAttribute("data-so")}).eq("id",b.getAttribute("data-id")).then(function(x){ok(x,b.getAttribute("data-so")==="approved"?"Approved":"Hidden")})}});
+    $$("[data-clr]",box).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm undo"){b.textContent="Confirm undo";return}var res=FRB.clear(heats,b.getAttribute("data-clr"));if(res.error){toast(res.error);b.textContent="Undo";return}saveHeats(res.changed,"Result undone")}});
+    if(!cur||cur.status==="finished"||!cur.lane1||!cur.lane2) return;
+    var run=cur.run||1,key=cur.id+":"+run,t1=$("#rk-t1"),t2=$("#rk-t2"),post=$("#rkPost"),prev=$("#rkPrev");
+    $$("[data-st]",box).forEach(function(b){b.onclick=function(){db.from("race_heats").update({status:b.getAttribute("data-st"),updated_at:new Date().toISOString()}).eq("id",cur.id).then(function(x){ok(x)})}});
+    function val(inp){var v=(inp.value||"").trim().replace(",",".");if(v==="")return null;var n=+v;return isFinite(n)&&n>0&&n<1000?Math.round(n*1000)/1000:NaN}
+    function winPick(){var r=box.querySelector('input[name="rkw"]:checked');return r?r.value:""}
+    function update(){RK.draft[key]={t1:t1.value,t2:t2.value};RK.confirm="";post.textContent=run===1?"Post run 1 and swap lanes":"Post final result";post.classList.remove("confirm");
+      var a=val(t1),b=val(t2),msg=[],odd=[a,b].some(function(x){return x!=null&&!isNaN(x)&&(x<15||x>90)});
+      if(isNaN(a)||isNaN(b)) msg.push("Times are numbers like 28.412.");
+      else if(run===2&&a!=null&&b!=null&&cur.a_time1!=null&&cur.b_time1!=null){var A=Math.round((+cur.a_time1+b)*1000)/1000,B=Math.round((+cur.b_time1+a)*1000)/1000;
+        msg.push("Totals: "+R[cur.lane1].display_name+" "+A.toFixed(3)+" · "+R[cur.lane2].display_name+" "+B.toFixed(3)+(A===B?" · it’s a tie, pick the winner below":" · "+(A<B?R[cur.lane1]:R[cur.lane2]).display_name+" wins by "+Math.abs(A-B).toFixed(3)+"s"));}
+      if(odd) msg.push("Double-check: that time looks unusual.");
+      prev.textContent=msg.join(" ");}
+    t1.oninput=update;t2.oninput=update;update();
+    t1.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();t2.focus()}};
+    t2.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();post.click()}};
+    var det=box.querySelector(".rk-ovr"); if(det){det.ontoggle=function(){if(!det.open)RK.ovr[cur.id]=""};$$('input[name="rkw"]',det).forEach(function(r){r.onchange=function(){RK.ovr[cur.id]=r.value;update()}})}
+    var bk=$("#rkBack"); if(bk) bk.onclick=function(){db.from("race_heats").update({run:1,status:"staging"}).eq("id",cur.id).then(function(x){ok(x,"Back to run 1")})};
+    post.onclick=function(){var a=val(t1),b=val(t2),w=run===2?winPick():"";
+      if(isNaN(a)||isNaN(b)){toast("Times are numbers like 28.412.");return}
+      if(run===1){if(a==null||b==null){toast("Enter both run 1 times.");return}
+        if(RK.confirm!==key){RK.confirm=key;post.classList.add("confirm");post.textContent="Confirm run 1: Lane 1 "+a.toFixed(3)+" · Lane 2 "+b.toFixed(3);return}
+        db.from("race_heats").update({a_time1:a,b_time1:b,run:2,status:"staging",updated_at:new Date().toISOString()}).eq("id",cur.id).then(function(x){if(ok(x,"Run 1 posted. Swap lanes for run 2."))delete RK.draft[key]});return}
+      var trial=JSON.parse(JSON.stringify(heats)),res=FRB.post(trial,cur.id,{a1:cur.a_time1,b1:cur.b_time1,a2:b,b2:a,winner:w});
+      if(res.error){toast(res.error);return}
+      if(RK.confirm!==key){var h2=trial.filter(function(h){return h.id===cur.id})[0];RK.confirm=key;post.classList.add("confirm");
+        post.textContent="Confirm: "+R[h2.winner].display_name+" wins"+(h2.lane1_time!=null&&h2.lane2_time!=null?" by "+Math.abs(h2.lane1_time-h2.lane2_time).toFixed(3)+"s":"");return}
+      saveHeats(res.changed,"Result posted. Winner moves on.");delete RK.draft[key];RK.ovr[cur.id]="";};
   }
   function tabEdits(){var P=$("#admPanel"),keys=Object.keys(CONTENT).sort();
     P.innerHTML=keys.length?'<p style="color:#4a4d55">Every change made with Edit the site. Restore puts the original back.</p>'+keys.map(function(k){var c=CONTENT[k],pg=k.split("|")[0];

@@ -73,6 +73,8 @@
   var files={};
   window.supabase={createClient:function(){return{
     from:function(t){return new Q(t)},
+    rpc:function(fn,args){if(!T)seed();if(fn==="set_race_controller"){T.race_controllers=[{user_id:"ctl-"+args.p_email,email:args.p_email}];save();return Promise.resolve({data:args.p_email,error:null})}
+      if(fn==="clear_race_controller"){T.race_controllers=[];save();return Promise.resolve({data:null,error:null})}return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
       onAuthStateChange:function(cb){listeners.push(cb)},
       signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org"};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
