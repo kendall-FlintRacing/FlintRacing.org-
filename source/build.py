@@ -74,6 +74,9 @@ def build(embed):
     return src
 
 
+# Until launch day: keep the test address out of Google and other search engines
+NOINDEX = True
+
 CDN_TAG = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>'
 
 
@@ -88,5 +91,6 @@ if __name__ == "__main__":
     open(os.path.join(HERE, "index.html"), "w").write(
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+        + ('<meta name="robots" content="noindex, nofollow">\n' if NOINDEX else '')
         + page[:i] + "\n</head>\n<body>\n" + page[i:] + "\n</body>\n</html>\n")
     print("artifact bytes:", len(art))
