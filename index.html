@@ -919,6 +919,108 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .stub-card h1{font-size:clamp(2.6rem,6vw,4rem)}
 .stub-card p{color:#4a4d55}
 .page[hidden]{display:none!important}
+/* ===== Live race view (spectators) ===== */
+.race-page{background-color:#121216;background-image:radial-gradient(rgba(255,255,255,.06) .8px,transparent .8px);background-size:6px 6px;color:#fff;min-height:70vh;padding-bottom:110px}
+.rw-ticker{display:flex;align-items:stretch;background:#1b1b20;border-bottom:2px solid var(--red);border-top:1px solid #2a2a30;overflow:hidden}
+.rw-tag{flex:none;background:var(--red-deep);color:#fff;font:800 .82rem/1.05 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;display:grid;place-items:center;max-width:150px}
+.rw-track{flex:1;overflow:hidden;position:relative;display:flex;align-items:center;min-width:0}
+.rw-run{display:inline-flex;gap:64px;white-space:nowrap;padding-left:100%;font:700 1.2rem/1 var(--body);animation:rwscroll 40s linear infinite}
+@keyframes rwscroll{to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.rw-run{animation:none;padding-left:16px;white-space:normal;flex-wrap:wrap;gap:8px 24px;font-size:1rem}}
+.rw-wrap{padding-top:clamp(1rem,3vw,1.6rem)}
+.rw-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.rw-top .eyebrow{color:var(--pink);margin-right:auto}
+.rw-live{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font:800 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:3px}
+.rw-live i{width:9px;height:9px;border-radius:50%;background:#fff;animation:pulse 1.6s infinite}
+.rw-btn{border:1.5px solid rgba(255,255,255,.55);background:transparent;color:#fff;font:700 .85rem/1 var(--body);padding:10px 12px;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.rw-btn:hover{background:#fff;color:var(--ink)}
+.rw-btn.red{background:var(--red-deep);border-color:var(--red-deep)}
+.rw-btn.red:hover{background:var(--red);color:#fff}
+.rw-stage{position:relative;overflow:hidden;background:linear-gradient(180deg,#1d1b22,#141317);border:1px solid #2c2b32;border-top:3px solid var(--red);border-radius:6px;padding:clamp(1.4rem,4vw,2.6rem) clamp(1rem,3vw,2rem);text-align:center}
+.rw-stage::after{content:"";position:absolute;right:-30px;bottom:-30px;width:220px;height:170px;background:conic-gradient(rgba(255,255,255,.06) 25%,transparent 0 50%,rgba(255,255,255,.06) 0 75%,transparent 0) 0 0/26px 26px;transform:rotate(-12deg);pointer-events:none}
+.rw-kicker{font:700 .8rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+.rw-head{font:600 clamp(2.2rem,5vw,3.6rem)/1.05 var(--body);letter-spacing:-.01em;margin:12px 0 22px;color:#fff;text-transform:none}
+.rw-match{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(10px,2.5vw,26px);align-items:center;max-width:960px;margin:0 auto;position:relative;z-index:1}
+.rw-lane{background:rgba(255,255,255,.04);border:1px solid #3a3940;border-top:3px solid #9a9da3;border-radius:6px;padding:clamp(14px,3vw,22px);display:grid;gap:6px;justify-items:center;min-width:0;transition:transform .3s,border-color .3s,background .3s}
+.rw-lane.l1{border-top-color:var(--red)}
+.rw-lane.win{border-color:var(--red);background:rgba(226,27,45,.14);transform:scale(1.03)}
+.rw-lane.lose{opacity:.55}
+.rw-av{width:clamp(56px,8vw,72px);height:clamp(56px,8vw,72px);border-radius:8px;background:#fff;color:var(--red-deep);display:grid;place-items:center;font:800 clamp(1.5rem,3vw,2rem)/1 var(--body);letter-spacing:-.02em;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.rw-ln{font:700 .68rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a9abb1;margin-top:6px}
+.rw-team{font:600 clamp(1.15rem,2.6vw,1.75rem)/1.15 var(--body);color:#fff;overflow-wrap:anywhere}
+.rw-name{font:700 1rem/1.2 var(--body);color:#e3e5e9}
+.rw-meta{font-size:.8rem;color:#a9abb1}
+.rw-time{font:800 clamp(1.6rem,3.5vw,2.4rem)/1 var(--display);color:#fff;font-variant-numeric:tabular-nums;margin-top:6px}
+.rw-badge{display:inline-block;background:var(--red);color:#fff;font:800 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:6px 8px;border-radius:3px;margin-top:4px}
+.rw-vs{width:clamp(52px,7vw,64px);height:clamp(52px,7vw,64px);display:grid;place-items:center;background:var(--red);color:#fff;font:900 1.5rem/1 var(--body);border-radius:6px;transform:rotate(-8deg);box-shadow:0 8px 18px rgba(0,0,0,.4);border:2px solid #fff}
+.rw-lights{display:inline-flex;gap:10px;background:#0b0b0d;border:1px solid #333;border-radius:999px;padding:9px 12px;margin-top:22px}
+.rw-lights i{width:24px;height:24px;border-radius:50%;background:#2a2a2f;border:1px solid #3c3c42;transition:background .2s,box-shadow .2s}
+.rw-lights i.on.r{background:#ff3346;box-shadow:0 0 14px #ff3346}
+.rw-lights i.on.y{background:#f5b82e;box-shadow:0 0 14px #f5b82e}
+.rw-lights i.on.g{background:#2fc26b;box-shadow:0 0 14px #2fc26b}
+.rw-status{font:800 .9rem/1.3 var(--body);letter-spacing:.1em;text-transform:uppercase;margin-top:14px}
+.rw-sub{color:#c9cbd0;margin-top:6px}
+.rw-next{margin-top:18px;font-size:.88rem;color:#a9abb1}
+.rw-banner{background:#fff7e0;color:#5b4500;border-radius:4px;padding:10px 12px;font-weight:600;margin:0 auto 16px;max-width:760px}
+@media (max-width:620px){.rw-match{grid-template-columns:1fr;gap:10px}.rw-vs{justify-self:center;margin:-4px 0}}
+.rw-idle .rw-head{margin-bottom:10px}
+.rw-count{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0 8px}
+.rw-count div{background:#0b0b0d;border:1px solid #333;border-radius:6px;min-width:84px;padding:12px 10px;display:grid;gap:6px}
+.rw-count b{font:800 2.4rem/1 var(--display);font-variant-numeric:tabular-nums}
+.rw-count span{font:700 .66rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a9abb1}
+.rw-idle .row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:18px}
+/* Brackets & scores */
+.rw-board{margin-top:26px}
+.rw-board-head{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;justify-content:space-between;margin-bottom:12px}
+.rw-board-head h2{font-size:clamp(1.8rem,3.5vw,2.4rem);color:#fff}
+.rw-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.rw-tabs button{border:1px solid #444;background:#1b1b20;color:#fff;font:700 .85rem/1 var(--body);padding:10px 14px;border-radius:4px;cursor:pointer}
+.rw-tabs button[aria-pressed="true"]{background:var(--red-deep);border-color:var(--red-deep)}
+.rw-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;background:#f3f4f6;color:var(--ink);border-radius:6px;padding:16px}
+@media (max-width:860px){.rw-cols{grid-template-columns:1fr}}
+.rw-col h3{font:700 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin-bottom:10px}
+.rw-card{background:#fff;border:1px solid #e1e3e6;border-radius:4px;overflow:hidden;margin-bottom:10px}
+.rw-card header{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;background:#eceef1;font:700 .82rem/1.2 var(--body)}
+.rw-card.now header{background:var(--red-deep);color:#fff}
+.rw-card .rr{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:8px 10px;border-top:1px solid #eef0f2;font-size:.9rem}
+.rw-card .rr b{font-weight:700}
+.rw-card .rr .car{font:700 .72rem/1 var(--body);background:#eceef1;padding:4px 6px;border-radius:3px;font-variant-numeric:tabular-nums}
+.rw-card .rr.w{background:#fdf0f1}
+.rw-card .rr .t{font-variant-numeric:tabular-nums;font-weight:700}
+.rw-empty{color:#6d7077;font-size:.88rem}
+.rw-sched{margin-top:16px;background:#fff;color:var(--ink);border-radius:6px;overflow-x:auto}
+.rw-sched table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+.rw-sched th{text-align:left;font:700 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#5a5d64;padding:10px;border-bottom:2px solid #d4d6da}
+.rw-sched td{padding:9px 10px;border-bottom:1px solid #eef0f2}
+.rw-sched tr.cur td{background:#fdf0f1;font-weight:700}
+.rw-pill{display:inline-block;font:700 .62rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:4px 6px;border-radius:3px;background:#eceef1;color:#4a4d55}
+.rw-pill.live{background:var(--red);color:#fff}.rw-pill.done{background:#111113;color:#fff}
+/* Action bar + shout-out form */
+.rw-actions{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:rgba(18,18,22,.96);border-top:2px solid var(--red);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.rw-actions .grp{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:560px){.rw-actions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;padding-left:10px;padding-right:10px}.rw-actions .grp{display:contents}.rw-actions .rw-btn{justify-content:center;text-align:center;padding:10px 6px;font-size:.78rem}}
+.rw-so{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px}
+.rw-so form{background:#fff;color:var(--ink);border-radius:8px;width:min(520px,100%);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.rw-so .top{background:linear-gradient(135deg,var(--red-deep),#3a0b14);color:#fff;padding:18px 20px}
+.rw-so .top h2{font-size:1.9rem;color:#fff}
+.rw-so .top p{color:#fde8ea;font-size:.92rem;margin-top:6px}
+.rw-so .body{padding:18px 20px;display:grid;gap:12px}
+.rw-so label{display:block;font:600 .9rem/1.3 var(--body)}
+.rw-so input,.rw-so textarea{display:block;width:100%;margin-top:6px;font:400 1rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:10px 12px}
+.rw-so textarea{min-height:96px;resize:vertical}
+.rw-so .fine{font-size:.8rem;color:#6d7077}
+.rw-so .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.rw-so .msg{font-weight:600;font-size:.9rem}
+body.rw-bar .fr-pill,body.rw-bar .fr-test{bottom:calc(var(--rwbar,70px) + 10px)}
+/* Track screen mode */
+body.rw-tv header.site-nav,body.rw-tv footer.site-foot,body.rw-tv .crumbs,body.rw-tv .fr-test,body.rw-tv .fr-pill{display:none!important}
+body.rw-tv .race-page{min-height:100vh}
+body.rw-tv .rw-wrap{max-width:none}
+body.rw-tv .rw-head{font-size:clamp(3rem,6vw,5.4rem)}
+body.rw-tv .rw-team{font-size:clamp(1.6rem,3vw,2.6rem)}
+body.rw-tv .rw-av{width:96px;height:96px;font-size:2.6rem}
+body.rw-tv .rw-run{font-size:1.6rem}
+
 </style>
 </head>
 <body>
@@ -1789,6 +1891,50 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   </div></div>
 </div>
 
+<!-- ======================= LIVE RACE (SPECTATORS) ======================= -->
+<div class="page race-page" data-page="race-watch" hidden>
+  <div class="rw-ticker" id="rwTicker" hidden><span class="rw-tag">Trackside updates</span><div class="rw-track"><div class="rw-run" id="rwRun"></div></div></div>
+  <div class="wrap rw-wrap">
+    <div class="rw-top">
+      <p class="eyebrow">Flint Soap Box Derby · Cronin Derby Downs</p>
+      <span class="rw-live" id="rwLive" hidden><i aria-hidden="true"></i>Live</span>
+      <button class="rw-btn" type="button" id="rwTv">Track screen</button>
+    </div>
+    <section class="rw-stage" id="rwStage" aria-live="polite">
+      <div class="rw-idle" id="rwIdle">
+        <p class="rw-kicker">Race day is coming</p>
+        <h1 class="rw-head">Follow every heat live, right here.</h1>
+        <p class="rw-sub rw-when" id="rwWhen">Race day: Saturday, June 5, 2027</p>
+        <div class="rw-count" id="rwCount" aria-label="Countdown to race day"></div>
+        <p class="rw-sub">On race day this page shows who’s on the ramp, the starting lights, every winner and the brackets as they happen.</p>
+        <div class="row"><a class="rw-btn red" href="#calendar">See the calendar</a><a class="rw-btn" href="#racing">About racing</a></div>
+      </div>
+      <div id="rwOn" hidden></div>
+    </section>
+    <section class="rw-board" id="rwBoard" hidden aria-labelledby="rwBoardTitle">
+      <div class="rw-board-head"><h2 id="rwBoardTitle">Brackets &amp; scores</h2><div class="rw-tabs" id="rwTabs" role="group" aria-label="Division"></div></div>
+      <div class="rw-cols" id="rwCols"></div>
+      <div class="rw-sched" id="rwSched"></div>
+    </section>
+  </div>
+  <div class="rw-actions" id="rwActions" hidden>
+    <div class="grp"><button class="rw-btn red" type="button" id="rwSoOpen">Send a shout-out</button></div>
+    <div class="grp"><button class="rw-btn" type="button" id="rwToLive">Live screen</button><button class="rw-btn" type="button" id="rwToBoard">Brackets &amp; scores</button></div>
+  </div>
+  <div class="rw-so" id="rwSo" hidden>
+    <form id="rwSoForm" novalidate>
+      <div class="top"><h2>Give someone a little extra horsepower.</h2><p>Cheer on a racer, celebrate your family or thank someone who makes this day possible.</p></div>
+      <div class="body">
+        <label for="so-name">Your name<input type="text" id="so-name" maxlength="60" placeholder="First name or team name" required></label>
+        <label for="so-msg">Shout-out<textarea id="so-msg" maxlength="280" placeholder="Go Northside! Your whole family is cheering for you!" required></textarea></label>
+        <p class="fine">Up to 280 characters. Our team reviews every shout-out before it appears on the screen.</p>
+        <p class="msg" id="soMsg" role="status"></p>
+        <div class="row"><button class="btn deep" type="submit" id="soSend">Send for review</button><button class="btn outline-red" type="button" id="soClose">Close</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- ======================= NOT-YET-REBUILT PAGES ======================= -->
 <div class="page stub" data-page="stub" hidden>
   <div class="wrap">
@@ -1819,7 +1965,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"View Race","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -2205,12 +2351,12 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#rwOn","#rwCount","#rwWhen","#rwRun","#rwTabs","#rwCols","#rwSched","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#rwOn","#rwCount","#rwWhen","#rwRun","#rwTabs","#rwCols","#rwSched","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
@@ -2374,10 +2520,10 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     if(!USER){box.innerHTML=signInHTML();bindSignIn();return}
     if(!IS_ADMIN){box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b></span><button class="mini" type="button" id="admOut">Sign out</button></div><h2 style="margin-top:14px">Waiting for admin access</h2><p style="margin-top:8px;color:#4a4d55">This account doesn’t have admin access yet. Once the site owner grants it, sign out and back in.</p>';$("#admOut").onclick=signOut;return}
     box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b> · Admin</span><span class="row" style="margin:0"><button class="mini solid" type="button" id="admEdit">Edit the site</button><button class="mini" type="button" id="admOut">Sign out</button></span></div>'+
-      '<div class="adm-tabs" role="tablist">'+[["overview","Overview"],["events","Events"],["notes","Bulletin notes"],["inq","Inquiries"],["partners","Partners"],["edits","Site edits"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>'}).join("")+'</div><div class="adm-panel" id="admPanel">Loading…</div>';
+      '<div class="adm-tabs" role="tablist">'+[["overview","Overview"],["events","Events"],["notes","Bulletin notes"],["inq","Inquiries"],["race","Race day"],["partners","Partners"],["edits","Site edits"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>'}).join("")+'</div><div class="adm-panel" id="admPanel">Loading…</div>';
     $("#admOut").onclick=signOut; $("#admEdit").onclick=function(){location.hash="#home";setTimeout(function(){setEditing(true)},50)};
     $$(".adm-tabs button",box).forEach(function(b){b.onclick=function(){TAB=b.getAttribute("data-tab");renderAdmin()}});
-    ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,partners:tabPartners,edits:tabEdits})[TAB]();
+    ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,partners:tabPartners,edits:tabEdits,race:tabRace})[TAB]();
   }
   function signInHTML(){return '<h2>Admin sign in</h2><form id="admForm" novalidate><label class="f" for="adm-email">Email<input type="email" id="adm-email" autocomplete="username" required></label><label class="f" for="adm-pass">Password<input type="password" id="adm-pass" autocomplete="current-password" required minlength="8"></label><div class="row"><button class="btn deep" type="submit" id="admSubmit">Sign in</button><button class="mini" type="button" id="admMode">Create an account</button><button class="mini" type="button" id="admForgot">Forgot password</button></div><p class="msg" id="admMsg" role="status"></p></form>'}
   function bindSignIn(){var mode="in",msg=$("#admMsg");
@@ -2463,6 +2609,84 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     function pick(cb){var f=document.createElement("input");f.type="file";f.accept="image/jpeg,image/png,image/webp,image/gif";f.onchange=function(){if(f.files[0])cb(f.files[0])};f.click()}
     draw();
   }
+  /* ---------- Race day controls ---------- */
+  var RSUB="control";
+  function tabRace(){var P=$("#admPanel");
+    Promise.all([db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_heats").select("*").order("sort_order"),
+      db.from("race_racers").select("*").order("display_name"),db.from("shoutouts").select("*").order("created_at",{ascending:false}).limit(200)]).then(function(r){
+      if(r.some(function(x){return x.error})){P.textContent="Couldn’t load race day data.";return}
+      var st=r[0].data||{id:1,live:false}, heats=r[1].data||[], racers=r[2].data||[], sh=r[3].data||[], R={};racers.forEach(function(x){R[x.id]=x});
+      var pend=sh.filter(function(s){return s.status==="pending"}).length;
+      function rn(id){var x=R[id];return x?esc(x.display_name+(x.car_number?" (#"+x.car_number+")":"")):"TBD"}
+      function opts(sel,blank){return '<option value="">'+(blank||"Choose")+'</option>'+racers.map(function(x){return '<option value="'+x.id+'"'+(x.id===sel?' selected':'')+'>'+rn(x.id)+' · '+esc(x.division||"")+'</option>'}).join("")}
+      var head='<div class="row" style="margin-top:0">'+[["control","Run the race"],["heats","Heats"],["racers","Racers"],["shout","Shout-outs"+(pend?" ("+pend+" new)":"")]].map(function(t){return '<button class="mini'+(RSUB===t[0]?' solid':'')+'" type="button" data-sub="'+t[0]+'">'+t[1]+'</button>'}).join("")+'<a class="mini" href="#race-watch" target="_blank" rel="noopener">Open spectator view</a></div>';
+      function again(){tabRace()}
+      function done(x,msg){toast(x.error?"Couldn’t save: "+x.error.message:msg||"Saved");if(!x.error)again()}
+      function setState(rec,msg){rec.updated_at=new Date().toISOString();db.from("race_state").update(rec).eq("id",1).then(function(x){done(x,msg)})}
+      var body="";
+      if(RSUB==="control"){
+        var cur=heats.filter(function(h){return h.id===st.current_heat})[0]||null;
+        body='<div class="inq"><header><b>Live page is '+(st.live?'<span style="color:#c51831">ON</span>':'off')+'</b><button class="mini solid" type="button" id="rcLive">'+(st.live?"Turn live page off":"Go live")+'</button></header>'+
+          '<p>While off, spectators see the race day countdown. Turn it on when racing starts.</p>'+
+          '<label class="f" for="rc-banner">Announcement banner (optional)<input type="text" id="rc-banner" maxlength="160" value="'+esc(st.banner||"")+'" placeholder="Lunch break until 12:30 · Awards at the finish line"></label><div class="row"><button class="mini" type="button" id="rcBanner">Save banner</button></div></div>'+
+          '<div class="inq"><header><b>Heat on the track</b></header><label class="f" for="rc-heat">Current heat<select id="rc-heat"><option value="">None yet</option>'+heats.map(function(h){return '<option value="'+h.id+'"'+(cur&&cur.id===h.id?' selected':'')+'>'+esc(h.division+" · "+h.label)+(h.status==="finished"?" (final)":"")+'</option>'}).join("")+'</select></label>'+
+          (cur?'<p><b>'+rn(cur.lane1)+'</b> (Lane 1) vs <b>'+rn(cur.lane2)+'</b> (Lane 2)</p><p style="margin-top:10px">Status: tap each step as it happens</p><div class="row" style="margin-top:6px">'+
+            [["upcoming","Up next"],["staging","On the ramp"],["set","Ready, set"],["racing","They’re off"]].map(function(s){return '<button class="mini'+(cur.status===s[0]?' solid':'')+'" type="button" data-st="'+s[0]+'">'+s[1]+'</button>'}).join("")+'</div>'+
+            '<div class="adm-scroll"><table class="adm-table" style="min-width:520px;margin-top:12px"><thead><tr><th>Winner</th><th>Lane 1 time (s)</th><th>Lane 2 time (s)</th><th></th></tr></thead><tbody><tr>'+
+            '<td><select id="rc-win" aria-label="Winner"><option value="">Choose</option><option value="'+(cur.lane1||"")+'"'+(cur.winner&&cur.winner===cur.lane1?' selected':'')+'>Lane 1 · '+rn(cur.lane1)+'</option><option value="'+(cur.lane2||"")+'"'+(cur.winner&&cur.winner===cur.lane2?' selected':'')+'>Lane 2 · '+rn(cur.lane2)+'</option></select></td>'+
+            '<td><input type="number" step="0.001" min="0" id="rc-t1" value="'+(cur.lane1_time==null?"":cur.lane1_time)+'" aria-label="Lane 1 time"></td><td><input type="number" step="0.001" min="0" id="rc-t2" value="'+(cur.lane2_time==null?"":cur.lane2_time)+'" aria-label="Lane 2 time"></td>'+
+            '<td><button class="mini solid" type="button" id="rcFinish">Post result</button></td></tr></tbody></table></div><div class="row"><button class="btn deep" type="button" id="rcNext">Move to the next heat</button></div>':'<p>Pick a heat, or add heats in the Heats tab.</p>')+'</div>';
+      } else if(RSUB==="heats"){
+        var divs=[];racers.forEach(function(x){if(divs.indexOf(x.division)<0)divs.push(x.division)});heats.forEach(function(h){if(divs.indexOf(h.division)<0)divs.push(h.division)});if(!divs.length)divs=["Stock","Super Stock","Masters"];
+        function hrow(h){h=h||{division:divs[0],label:"Heat "+(heats.length+1),sort_order:(heats.length?heats[heats.length-1].sort_order+1:1)};
+          return '<tr data-id="'+(h.id||"")+'"><td style="width:70px"><input type="number" value="'+(h.sort_order||0)+'" aria-label="Order"></td><td><input type="text" list="rcDivs" value="'+esc(h.division||"")+'" aria-label="Division"></td><td><input type="text" value="'+esc(h.label||"")+'" aria-label="Heat name"></td><td><select aria-label="Lane 1">'+opts(h.lane1,"Lane 1")+'</select></td><td><select aria-label="Lane 2">'+opts(h.lane2,"Lane 2")+'</select></td><td><small>'+esc(h.status||"new")+'</small></td><td><button class="mini solid" type="button" data-act="save">'+(h.id?"Save":"Add")+'</button> '+(h.id?'<button class="mini" type="button" data-act="reset">Clear result</button> <button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
+        body='<p style="color:#4a4d55">Heats run in order. Add racers first, then pair them up here.</p><datalist id="rcDivs">'+divs.map(function(d){return '<option value="'+esc(d)+'">'}).join("")+'</datalist><div class="adm-scroll"><table class="adm-table" style="min-width:820px"><thead><tr><th>Order</th><th>Division</th><th>Heat</th><th>Lane 1</th><th>Lane 2</th><th>Status</th><th></th></tr></thead><tbody>'+hrow(null)+heats.map(hrow).join("")+'</tbody></table></div>';
+      } else if(RSUB==="racers"){
+        function rrow(x){x=x||{division:"Stock"};return '<tr data-id="'+(x.id||"")+'"><td><input type="text" maxlength="40" value="'+esc(x.display_name||"")+'" aria-label="Racer name" placeholder="Maya R."></td><td><input type="text" maxlength="60" value="'+esc(x.team||"")+'" aria-label="Team" placeholder="Northside Rockets"></td><td style="width:90px"><input type="text" maxlength="6" value="'+esc(x.car_number||"")+'" aria-label="Car number"></td><td><input type="text" maxlength="60" value="'+esc(x.sponsor||"")+'" aria-label="Sponsor"></td><td><input type="text" list="rcDivs2" value="'+esc(x.division||"")+'" aria-label="Division"></td><td><button class="mini solid" type="button" data-act="save">'+(x.id?"Save":"Add")+'</button> '+(x.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
+        body='<p style="color:#4a4d55">For kids’ privacy, use a first name and last initial (Maya R.). These names show publicly on race day.</p><datalist id="rcDivs2"><option value="Stock"><option value="Super Stock"><option value="Masters"></datalist><div class="adm-scroll"><table class="adm-table" style="min-width:760px"><thead><tr><th>Racer</th><th>Team</th><th>Car #</th><th>Sponsor</th><th>Division</th><th></th></tr></thead><tbody>'+rrow(null)+racers.map(rrow).join("")+'</tbody></table></div>';
+      } else {
+        body='<p style="color:#4a4d55">Shout-outs from spectators wait here until you approve them. Only approved ones scroll on the live page.</p>'+
+          (sh.length?sh.map(function(s){var d=new Date(s.created_at);return '<div class="inq'+(s.status==="hidden"?' done':'')+'"><header><b>'+esc(s.name)+'</b><small>'+d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+' · '+esc(s.status)+'</small><span>'+(s.status!=="approved"?'<button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button> ':'')+(s.status!=="hidden"?'<button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Hide</button>':'')+'</span></header><p>'+esc(s.message)+'</p></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No shout-outs yet.</p>');
+      }
+      P.innerHTML=head+body;
+      $$("button[data-sub]",P).forEach(function(b){b.onclick=function(){RSUB=b.getAttribute("data-sub");tabRace()}});
+      if(RSUB==="control"){
+        $("#rcLive").onclick=function(){setState({live:!st.live},st.live?"Live page is off":"You’re live")};
+        $("#rcBanner").onclick=function(){setState({banner:$("#rc-banner").value.trim()||null},"Banner saved")};
+        $("#rc-heat").onchange=function(){setState({current_heat:this.value||null},"Current heat set")};
+        var cur2=heats.filter(function(h){return h.id===st.current_heat})[0];
+        if(cur2){
+          $$("button[data-st]",P).forEach(function(b){b.onclick=function(){db.from("race_heats").update({status:b.getAttribute("data-st"),updated_at:new Date().toISOString()}).eq("id",cur2.id).then(function(x){done(x,"Updated")})}});
+          $("#rcFinish").onclick=function(){var w=$("#rc-win").value,t1=$("#rc-t1").value,t2=$("#rc-t2").value;
+            if(!w&&t1&&t2) w=(+t1<=+t2)?cur2.lane1:cur2.lane2;
+            if(!w){toast("Pick the winner or enter both times.");return}
+            db.from("race_heats").update({status:"finished",winner:w,lane1_time:t1===""?null:+t1,lane2_time:t2===""?null:+t2,updated_at:new Date().toISOString()}).eq("id",cur2.id).then(function(x){done(x,"Result posted")})};
+          $("#rcNext").onclick=function(){var i=heats.indexOf(cur2),nx=heats.slice(i+1).filter(function(h){return h.status!=="finished"})[0]||heats.filter(function(h){return h!==cur2&&h.status!=="finished"})[0];
+            if(!nx){toast("No heats left to run.");return}
+            db.from("race_heats").update({status:"staging",updated_at:new Date().toISOString()}).eq("id",nx.id).then(function(){setState({current_heat:nx.id},"Next heat is on the ramp")})};
+        }
+      } else if(RSUB==="heats"){
+        $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input,select",tr),a=b.getAttribute("data-act");
+          if(a==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+            var go=function(){db.from("race_heats").delete().eq("id",id).then(function(x){done(x,"Deleted")})};
+            if(st.current_heat===id) db.from("race_state").update({current_heat:null}).eq("id",1).then(go); else go(); return}
+          if(a==="reset"){db.from("race_heats").update({status:"upcoming",winner:null,lane1_time:null,lane2_time:null}).eq("id",id).then(function(x){done(x,"Result cleared")});return}
+          var rec={sort_order:parseInt(f[0].value,10)||0,division:f[1].value.trim()||"Stock",label:f[2].value.trim(),lane1:f[3].value||null,lane2:f[4].value||null};
+          if(!rec.label){toast("Name the heat.");return}
+          (id?db.from("race_heats").update(rec).eq("id",id):db.from("race_heats").insert(Object.assign({status:"upcoming"},rec))).then(function(x){done(x,id?"Saved":"Heat added")})}});
+      } else if(RSUB==="racers"){
+        $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input",tr);
+          if(b.getAttribute("data-act")==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+            if(heats.some(function(h){return h.lane1===id||h.lane2===id})){toast("This racer is in a heat. Change the heat first.");b.textContent="Delete";return}
+            db.from("race_racers").delete().eq("id",id).then(function(x){done(x,"Deleted")});return}
+          var rec={display_name:f[0].value.trim(),team:f[1].value.trim()||null,car_number:f[2].value.trim()||null,sponsor:f[3].value.trim()||null,division:f[4].value.trim()||"Stock"};
+          if(!rec.display_name){toast("Add the racer’s name.");return}
+          (id?db.from("race_racers").update(rec).eq("id",id):db.from("race_racers").insert(rec)).then(function(x){done(x,id?"Saved":"Racer added")})}});
+      } else {
+        $$("button[data-so]",P).forEach(function(b){b.onclick=function(){db.from("shoutouts").update({status:b.getAttribute("data-so")}).eq("id",b.getAttribute("data-id")).then(function(x){done(x,b.getAttribute("data-so")==="approved"?"Approved":"Hidden")})}});
+      }
+    });
+  }
   function tabEdits(){var P=$("#admPanel"),keys=Object.keys(CONTENT).sort();
     P.innerHTML=keys.length?'<p style="color:#4a4d55">Every change made with Edit the site. Restore puts the original back.</p>'+keys.map(function(k){var c=CONTENT[k],pg=k.split("|")[0];
       if(k==="data|partners") return '<div class="inq"><header><b>Partners list</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header><p>Partner logos were changed in the Partners tab.</p></div>';
@@ -2471,6 +2695,132 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   }
 })();
 </script>
+<script>
+/* ===== Live race view for spectators =====
+   Reads race_state, race_heats, race_racers and approved shoutouts. Updates instantly through
+   Supabase realtime when available, and also checks every few seconds as a backup. */
+(function(){
+  var FR=window.FR; if(!FR) return;
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var esc=FR.esc, page=$('[data-page="race-watch"]'); if(!page) return;
+  var S={state:null,heats:[],racers:{},shout:[]}, DIV=null, timer=null, cdTimer=null, chan=null, busy=false;
+  var HEAD={upcoming:"Coming up next",staging:"On the ramp",set:"Ready. Set…",racing:"And they’re off!",finished:"Winner!"};
+  var LINE={upcoming:"Racers are getting ready",staging:"Cars are rolling onto the ramp",set:"Hands up, eyes forward",racing:"Gravity takes it from here",finished:"Heat complete"};
+  function visible(){return !page.hidden}
+  function db(){return window.FR_DB}
+
+  /* ---------- Countdown (works even before the database loads) ---------- */
+  var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"],DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  function raceDay(){var t=new Date().toISOString().slice(0,10),r=FR.EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t});
+    var main=r.filter(function(e){return /race day|derby/i.test(e.t)})[0]||r[0]; return main||null}
+  function countdown(){var ev=raceDay(),box=$("#rwCount"),w=$("#rwWhen"); if(!box) return;
+    if(!ev){w.textContent="Next race day: date coming soon";box.innerHTML="";return}
+    var p=ev.d.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);
+    w.textContent=(ev.t||"Race day")+": "+DAYS[d.getDay()]+", "+MONTHS[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear()+(ev.tbc?" (to be confirmed)":"");
+    var ms=d-new Date(); if(ms<=0){box.innerHTML='<div><b>Today</b><span>Race day</span></div>';return}
+    var dd=Math.floor(ms/864e5),hh=Math.floor(ms/36e5)%24,mm=Math.floor(ms/6e4)%60;
+    box.innerHTML=[[dd,"Days"],[hh,"Hours"],[mm,"Minutes"]].map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join("");}
+
+  /* ---------- Load ---------- */
+  function load(){var d=db(); if(!d||busy) return; busy=true;
+    Promise.all([d.from("race_state").select("*").eq("id",1).maybeSingle(),d.from("race_heats").select("*").order("sort_order"),
+      d.from("race_racers").select("*").order("display_name"),d.from("shoutouts").select("id,name,message,created_at").eq("status","approved").order("created_at",{ascending:false}).limit(25)])
+    .then(function(r){busy=false; if(r.some(function(x){return x.error})) return;
+      S.state=r[0].data; S.heats=r[1].data||[]; S.racers={}; (r[2].data||[]).forEach(function(x){S.racers[x.id]=x}); S.shout=r[3].data||[]; draw();})
+    .catch(function(){busy=false});}
+
+  /* ---------- Helpers ---------- */
+  function racer(id){return S.racers[id]||null}
+  function initials(r){if(!r) return "?";var s=(r.display_name||r.team||"?").replace(/[^A-Za-z0-9 ]/g," ").trim().split(/\s+/);return ((s[0]||"?")[0]+(s[1]?s[1][0]:"")).toUpperCase()}
+  function secs(t){return t==null||t===""?"":Number(t).toFixed(3)+"s"}
+  function current(){var st=S.state||{},h=S.heats.filter(function(x){return x.id===st.current_heat})[0];
+    return h||S.heats.filter(function(x){return x.status!=="finished"})[0]||null}
+  function nextAfter(h){if(!h) return null;var i=S.heats.indexOf(h);
+    return S.heats.slice(i+1).filter(function(x){return x.status!=="finished"})[0]||S.heats.filter(function(x){return x!==h&&x.status!=="finished"})[0]||null}
+  function nm(r){return r?esc(r.display_name||r.team||"Racer"):"TBD"}
+  function heatTitle(h){return esc((h.division||"")+(h.division&&h.label?" · ":"")+(h.label||""))}
+
+  /* ---------- Draw ---------- */
+  function lane(h,n){var id=h["lane"+n],r=racer(id),t=h["lane"+n+"_time"],fin=h.status==="finished"&&h.winner,cls="rw-lane"+(n===1?" l1":"")+(fin?(h.winner===id?" win":" lose"):"");
+    return '<div class="'+cls+'"><div class="rw-av" aria-hidden="true">'+esc(initials(r))+'</div><p class="rw-ln">Lane '+n+'</p>'+
+      (r&&r.team?'<p class="rw-team">'+esc(r.team)+'</p>':'')+'<p class="rw-name">'+nm(r)+'</p>'+
+      (r?'<p class="rw-meta">'+[r.car_number?"Car #"+esc(r.car_number):"",r.sponsor?esc(r.sponsor):""].filter(Boolean).join(" · ")+'</p>':'')+
+      (h.status==="finished"&&t!=null?'<p class="rw-time">'+secs(t)+'</p>':'')+(fin&&h.winner===id?'<span class="rw-badge">Winner</span>':'')+'</div>'}
+  function draw(){
+    var st=S.state||{}, live=!!st.live;
+    $("#rwLive").hidden=!live; $("#rwIdle").hidden=live; $("#rwOn").hidden=!live; $("#rwBoard").hidden=!live||!S.heats.length; $("#rwActions").hidden=!live;
+    page.style.paddingBottom=live?"":"40px";
+    document.body.classList.toggle("rw-bar",live&&visible()); if(live){var ab=$("#rwActions");document.body.style.setProperty("--rwbar",ab.offsetHeight+"px")}
+    /* ticker */
+    var tk=$("#rwTicker"); tk.hidden=!S.shout.length;
+    if(S.shout.length){var items=S.shout.map(function(s){return '<span><b>'+esc(s.name)+':</b> '+esc(s.message)+'</span>'}).join("");
+      var run=$("#rwRun"); if(run.getAttribute("data-v")!==items){run.innerHTML=items;run.setAttribute("data-v",items);run.style.animationDuration=Math.max(25,S.shout.length*9)+"s"}}
+    if(!live) return;
+    var h=current(), on=$("#rwOn"), nx=nextAfter(h);
+    if(!h){on.innerHTML=(st.banner?'<p class="rw-banner">'+esc(st.banner)+'</p>':'')+'<p class="rw-kicker">We’re live</p><h1 class="rw-head">The first heat is lining up.</h1><p class="rw-sub">Stay on this page. It updates on its own.</p>';}
+    else{var s=h.status||"upcoming",L={staging:"r",set:"ry",racing:"g"}[s]||"";
+      on.innerHTML=(st.banner?'<p class="rw-banner">'+esc(st.banner)+'</p>':'')+'<p class="rw-kicker">'+heatTitle(h)+'</p><h2 class="rw-head">'+HEAD[s]+'</h2>'+
+        '<div class="rw-match">'+lane(h,1)+'<div class="rw-vs" aria-hidden="true">VS</div>'+lane(h,2)+'</div>'+
+        '<div class="rw-lights" role="img" aria-label="Starting lights: '+(L?({r:"red",ry:"red and amber",g:"green"})[L]:"off")+'"><i class="r'+(L.indexOf("r")>=0?" on":"")+'"></i><i class="y'+(L.indexOf("y")>=0?" on":"")+'"></i><i class="g'+(L==="g"?" on":"")+'"></i></div>'+
+        '<p class="rw-status">'+(s==="finished"&&h.winner?nm(racer(h.winner))+" takes the heat":LINE[s])+'</p>'+
+        (nx?'<p class="rw-next"><b>Coming up next:</b> '+heatTitle(nx)+' · '+nm(racer(nx.lane1))+' vs '+nm(racer(nx.lane2))+'</p>':'');}
+    board(h);
+    if(document.body.classList.contains("rw-tv")) document.title="LIVE | Flint Soap Box Derby";
+  }
+  function board(cur){
+    var divs=[];S.heats.forEach(function(x){var d=x.division||"Race";if(divs.indexOf(d)<0)divs.push(d)});
+    if(!divs.length) return; if(divs.indexOf(DIV)<0) DIV=(cur&&cur.division)||divs[0];
+    var tabs=$("#rwTabs"),th=divs.map(function(d){return '<button type="button" data-d="'+esc(d)+'" aria-pressed="'+(d===DIV)+'">'+esc(d)+'</button>'}).join("");
+    if(tabs.innerHTML!==th){tabs.innerHTML=th;Array.prototype.forEach.call(tabs.children,function(b){b.onclick=function(){DIV=b.getAttribute("data-d");draw()}})}
+    var hs=S.heats.filter(function(x){return (x.division||"Race")===DIV});
+    function card(h,cls){var r=function(n){var id=h["lane"+n],x=racer(id);return '<div class="rr'+(h.winner&&h.winner===id?' w':'')+'"><span class="car">'+(x&&x.car_number?"#"+esc(x.car_number):"L"+n)+'</span><b>'+nm(x)+'</b><span class="t">'+(h.status==="finished"?secs(h["lane"+n+"_time"])+(h.winner===id?" ✓":""):"")+'</span></div>'};
+      return '<div class="rw-card'+(cls||"")+'"><header><span>'+esc(h.label||"Heat")+'</span><span>'+esc(h.status==="finished"?"Final":h.status==="upcoming"?"Up next":"On track")+'</span></header>'+r(1)+r(2)+'</div>'}
+    var now=hs.filter(function(x){return cur&&x.id===cur.id&&x.status!=="finished"}),
+        nextUp=hs.filter(function(x){return x.status!=="finished"&&!(cur&&x.id===cur.id)}).slice(0,3),
+        done=hs.filter(function(x){return x.status==="finished"}).slice(-5).reverse();
+    var none='<p class="rw-empty">Nothing here yet.</p>';
+    $("#rwCols").innerHTML='<div class="rw-col"><h3>On track now</h3>'+(now.length?card(now[0]," now"):none)+'</div><div class="rw-col"><h3>Next up</h3>'+(nextUp.length?nextUp.map(function(x){return card(x)}).join(""):none)+'</div><div class="rw-col"><h3>Recent results</h3>'+(done.length?done.map(function(x){return card(x)}).join(""):none)+'</div>';
+    $("#rwSched").innerHTML='<table><thead><tr><th>Heat</th><th>Lane 1</th><th>Lane 2</th><th>Status</th><th>Winner</th></tr></thead><tbody>'+hs.map(function(x){
+      var st=x.status==="finished"?'<span class="rw-pill done">Final</span>':(cur&&x.id===cur.id)?'<span class="rw-pill live">On track</span>':'<span class="rw-pill">Upcoming</span>';
+      return '<tr'+(cur&&x.id===cur.id?' class="cur"':'')+'><td>'+esc(x.label||"")+'</td><td>'+nm(racer(x.lane1))+'</td><td>'+nm(racer(x.lane2))+'</td><td>'+st+'</td><td>'+(x.winner?nm(racer(x.winner))+(x.status==="finished"?" · "+secs(x.winner===x.lane1?x.lane1_time:x.lane2_time):""):"")+'</td></tr>'}).join("")+'</tbody></table>';
+  }
+
+  /* ---------- Start / stop with the page ---------- */
+  function start(){countdown(); clearInterval(cdTimer); cdTimer=setInterval(countdown,30000);
+    if(!db()){setTimeout(function(){if(visible())start()},600);return}
+    load(); clearInterval(timer); timer=setInterval(function(){if(visible())load()},window.FR_TEST?3000:15000);
+    var d=db(); if(!chan&&d.channel){try{chan=d.channel("race-live");["race_state","race_heats","race_racers","shoutouts"].forEach(function(t){chan.on("postgres_changes",{event:"*",schema:"public",table:t},function(){load()})});chan.subscribe()}catch(e){chan=null}}}
+  function stop(){document.body.classList.remove("rw-bar");clearInterval(timer);clearInterval(cdTimer);timer=cdTimer=null;tv(false);
+    if(chan&&db()&&db().removeChannel){try{db().removeChannel(chan)}catch(e){}} chan=null;}
+  function onRoute(){if(location.hash==="#race-watch") start(); else if(timer||cdTimer) stop()}
+  addEventListener("hashchange",onRoute); onRoute();
+
+  /* ---------- Track screen ---------- */
+  function tv(on){document.body.classList.toggle("rw-tv",on);$("#rwTv").textContent=on?"Exit track screen":"Track screen";
+    try{if(on&&document.documentElement.requestFullscreen&&!document.fullscreenElement)document.documentElement.requestFullscreen().catch(function(){});
+      if(!on&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){})}catch(e){}}
+  $("#rwTv").addEventListener("click",function(){tv(!document.body.classList.contains("rw-tv"))});
+  document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&document.body.classList.contains("rw-tv"))tv(false)});
+  $("#rwToLive").addEventListener("click",function(){$("#rwStage").scrollIntoView({behavior:"smooth",block:"start"})});
+  $("#rwToBoard").addEventListener("click",function(){$("#rwBoard").scrollIntoView({behavior:"smooth",block:"start"})});
+
+  /* ---------- Shout-outs ---------- */
+  var so=$("#rwSo"),last=null;
+  function soOpen(o){so.hidden=!o; if(o){last=document.activeElement;$("#soMsg").textContent="";$("#so-name").focus()} else if(last) last.focus()}
+  $("#rwSoOpen").addEventListener("click",function(){soOpen(true)});
+  $("#soClose").addEventListener("click",function(){soOpen(false)});
+  so.addEventListener("click",function(e){if(e.target===so)soOpen(false)});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!so.hidden)soOpen(false)});
+  $("#rwSoForm").addEventListener("submit",function(e){e.preventDefault();var n=$("#so-name").value.trim(),m=$("#so-msg").value.trim(),out=$("#soMsg");
+    if(!n||!m){out.textContent="Add your name and a message.";return}
+    if(!db()){out.textContent="Shout-outs open on race day. Try again in a moment.";return}
+    $("#soSend").disabled=true;
+    db().from("shoutouts").insert({name:n.slice(0,60),message:m.slice(0,280),status:"pending"}).then(function(r){$("#soSend").disabled=false;
+      if(r.error){out.textContent="That didn’t send. Please try again.";return}
+      $("#so-msg").value="";out.textContent="Thanks! It will appear after our team reviews it.";});});
+})();
+</script>
+
 
 
 </body>
