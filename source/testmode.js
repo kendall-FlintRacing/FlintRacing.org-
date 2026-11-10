@@ -15,18 +15,27 @@
          phone:null,contact_by:"Email",best_time:"Evening",email_updates:true,status:"new"}]};
     race(); save();
   }
-  /* Demo race day so the live race page and its controls can be tried */
+  /* Demo race day so the live race page and its controls can be tried.
+     Two brackets alternate: Super Stock (double elimination, 6 cars + 2 byes) and Masters (single elimination, 5 cars + 3 byes). */
   function race(){
-    var R=[["Maya R.","Northside Rockets","12","Goyette Mechanical","Stock"],["Jalen T.","Eastside Thunder","7","Ideal Group","Stock"],
-      ["Ava M.","Calvin's Crew","21","United Way","Stock"],["Noah P.","Gravity Gang","3","Motor City Signs","Stock"],
+    var F=window.FRB; if(!F){T.race_racers=[];T.race_heats=[];T.race_brackets=[];T.race_state=[{id:1,live:false}];T.shoutouts=[];return}
+    var R=[["Maya R.","Northside Rockets","12","Goyette Mechanical","Super Stock"],["Jalen T.","Eastside Thunder","7","Ideal Group","Super Stock"],
+      ["Ava M.","Calvin's Crew","21","United Way","Super Stock"],["Noah P.","Gravity Gang","3","Motor City Signs","Super Stock"],
       ["Zoe K.","Flint Flyers","44","Graphics Galore","Super Stock"],["Eli W.","Red Line Racing","18","Behind Your Design","Super Stock"],
-      ["Mia S.","Brick Street Builders","9","Moonwalk Man","Super Stock"],["Leo D.","Vehicle City Velocity","30","Flint Community Schools","Super Stock"]];
+      ["Mia S.","Brick Street Builders","9","Moonwalk Man","Masters"],["Leo D.","Vehicle City Velocity","30","Flint Community Schools","Masters"],
+      ["Aria J.","Hilltop Hustle","15","Goyette Mechanical","Masters"],["Caleb B.","Southside Speed","27","Ideal Group","Masters"],["Nora F.","Checkered Dreams","5","United Way","Masters"]];
     T.race_racers=R.map(function(x,i){return{id:"rr"+i,display_name:x[0],team:x[1],car_number:x[2],sponsor:x[3],division:x[4]}});
-    var H=[["Stock","Heat 1","rr0","rr1","finished","rr0",28.412,28.977],["Stock","Heat 2","rr2","rr3","finished","rr3",28.851,28.603],
-      ["Super Stock","Heat 1","rr4","rr5","finished","rr5",27.904,27.881],["Stock","Heat 3","rr0","rr3","staging",null,null,null],
-      ["Super Stock","Heat 2","rr6","rr7","upcoming",null,null,null],["Stock","Heat 4","rr1","rr2","upcoming",null,null,null],["Super Stock","Heat 3","rr5","rr6","upcoming",null,null,null]];
-    T.race_heats=H.map(function(x,i){return{id:"rh"+i,division:x[0],label:x[1],sort_order:i+1,lane1:x[2],lane2:x[3],status:x[4],winner:x[5],lane1_time:x[6],lane2_time:x[7],updated_at:new Date(Date.now()-(9-i)*6e4).toISOString()}});
-    T.race_state=[{id:1,live:true,current_heat:"rh3",banner:"DEMO RACE (test mode only). These names and times are made up.",updated_at:new Date().toISOString()}];
+    var a=F.build({name:"Super Stock",kind:"double",cars:6,byes:2,pairs:[["rr0","rr1"],["rr2","rr3"],["rr4",null],["rr5",null]]}),
+        b=F.build({name:"Masters",kind:"single",cars:5,byes:3,pairs:[["rr6","rr7"],["rr8",null],["rr9",null],["rr10",null]]});
+    a.bracket.sort_order=1;b.bracket.sort_order=2;
+    var H=a.heats.concat(b.heats); F.order(H,[a.bracket,b.bracket],"alt"); H.sort(function(x,y){return x.sort_order-y.sort_order});
+    /* race the first three heats, then put the fourth on the ramp for run 2 */
+    var times=[[28.412,28.977,28.501,28.870],[28.851,28.603,28.790,28.655],[29.104,29.380,29.012,29.250]],n=0,cur=null;
+    H.forEach(function(h){if(F.isBye(h)||cur)return;if(!h.lane1||!h.lane2)return;
+      if(n<3){var t=times[n++];F.post(H,h.id,{a1:t[0],b1:t[1],a2:t[2],b2:t[3]})} else {cur=h;h.run=2;h.status="staging";h.a_time1=28.66;h.b_time1=28.94}});
+    var now=Date.now();H.forEach(function(h,i){h.updated_at=new Date(now-(60-i)*6e4).toISOString()});
+    T.race_brackets=[a.bracket,b.bracket]; T.race_heats=H;
+    T.race_state=[{id:1,live:true,current_heat:cur?cur.id:null,banner:"DEMO RACE (test mode only). These names and times are made up.",updated_at:new Date().toISOString()}];
     var t=Date.now();
     T.shoutouts=[{id:"so1",name:"Grandma Pat",message:"Go Maya! The whole family is cheering at the finish line!",status:"approved",created_at:new Date(t-3e5).toISOString()},
       {id:"so2",name:"Coach Dee",message:"So proud of every builder out there today. You earned this ride.",status:"approved",created_at:new Date(t-2e5).toISOString()},
@@ -34,7 +43,7 @@
       {id:"so4",name:"Uncle Ray",message:"Waiting for review: you can approve me in Admin > Race day > Shout-outs.",status:"pending",created_at:new Date(t).toISOString()}];
   }
   load();
-  if(T&&!T.race_state){race();save();}
+  if(T&&!T.race_brackets){race();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org"}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -54,7 +63,7 @@
     if(s.op==="select"){var d=rows.filter(m).slice();
       if(s.ord){var c=s.ord[0],asc=s.ord[1];d.sort(function(a,b){return (a[c]>b[c]?1:a[c]<b[c]?-1:0)*(asc?1:-1)})}
       res=s.head?{data:null,count:d.length,error:null}:{data:s.single?(d[0]||null):JSON.parse(JSON.stringify(d)),error:null}}
-    else if(s.op==="insert"){rows.push(Object.assign({id:rid(),created_at:new Date().toISOString()},s.t==="inquiries"?{status:"new"}:s.t==="shoutouts"?{status:"pending"}:{},s.row));res={data:null,error:null}}
+    else if(s.op==="insert"){(Array.isArray(s.row)?s.row:[s.row]).forEach(function(row){rows.push(Object.assign({id:rid(),created_at:new Date().toISOString()},s.t==="inquiries"?{status:"new"}:s.t==="shoutouts"?{status:"pending"}:{},JSON.parse(JSON.stringify(row))))});res={data:null,error:null}}
     else if(s.op==="upsert"){var i=rows.findIndex(function(r){return r.key===s.row.key});if(i>=0)rows[i]=s.row;else rows.push(s.row);res={data:null,error:null}}
     else if(s.op==="update"){rows.filter(m).forEach(function(r){Object.assign(r,s.row)});res={data:null,error:null}}
     else {T[s.t]=rows.filter(function(r){return !m(r)});res={data:null,error:null}}

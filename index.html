@@ -1080,6 +1080,34 @@ tr:first-child .rw-rk{background:var(--red);color:#fff}
 .rw-cheer li{background:#f3f4f6;border-radius:6px;padding:12px 14px;font-size:1.02rem}
 .rw-cheer b{display:block;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red-deep);margin-bottom:3px}
 .rw-empty{color:#5a5d64;padding:14px 4px}
+.ph{color:#8d9097;font-style:italic;font-weight:500}
+.rw-upc .ph{color:#a9abb1}
+.rw-runpill{font:800 .85rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;border-radius:4px;border:1.5px solid #fff;color:#fff}
+.rw-lead{display:block;margin-top:6px;color:#f5b82e;font-size:1rem}
+.rw-runs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:.86rem;color:#c9cbd0;font-variant-numeric:tabular-nums}
+.rw-runs b{color:#fff}
+.rw-time small{display:block;font:700 .62rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#a9abb1;margin-top:4px}
+.rw-tagx{display:inline-block;font:800 .6rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border-radius:3px;background:#eceef1;color:#4a4d55;vertical-align:2px;margin-left:4px}
+.rw-tagx.t-champion{background:var(--red);color:#fff}.rw-tagx.t-runner-up{background:#111113;color:#fff}.rw-tagx.t-out{background:#fff;border:1px solid #c9ccd1;color:#8d9097}.rw-tagx.t-winners{background:#e5f6ec;color:#1d6b3a}.rw-tagx.t-consolation{background:#fff4cc;color:#6b4f00}
+.rw-stand h3 small,.bk h3 small{font:600 .82rem/1 var(--body);color:#5a5d64}
+.bk h3{font:700 1.25rem/1.2 var(--body);text-transform:none;margin:14px 0 4px;color:var(--ink)}
+.bk-side{font:800 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin:16px 0 8px}
+.bk-scroll{overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.bk-scroll:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.bk-cols{display:flex;gap:14px;min-width:min-content}
+.bk-col{display:flex;flex-direction:column;width:200px;flex:none}
+.bk-rt{font:700 .78rem/1.2 var(--body);color:#5a5d64;margin-bottom:8px;min-height:1.2em}
+.bk-stack{display:flex;flex-direction:column;justify-content:space-around;gap:10px;flex:1}
+.bk-c{background:#fff;border:1px solid #d4d6da;border-radius:5px;overflow:hidden}
+.bk-c.on{border-color:var(--red);box-shadow:0 0 0 2px rgba(226,27,45,.25)}
+.bk-c.bye{border-style:dashed;opacity:.7}
+.bk-h{font:700 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#5a5d64;background:#f3f4f6;padding:6px 8px}
+.bk-c.on .bk-h{background:var(--red-deep);color:#fff}
+.bk-r{display:flex;justify-content:space-between;gap:8px;padding:7px 8px;border-top:1px solid #eef0f2;font-size:.9rem}
+.bk-r span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bk-r b{font-variant-numeric:tabular-nums;flex:none}
+.bk-r.w{background:#fdf0f1;font-weight:800}
+.bk-r.dead{color:#8d9097;font-style:italic}
 /* How it works */
 .rw-how{margin-top:22px;background:#1f1e24;border:1px solid #34333a;border-radius:8px}
 .rw-how summary{padding:15px 16px;font:700 1.08rem/1.2 var(--body);cursor:pointer;color:#fff}
@@ -2014,6 +2042,7 @@ body.rw-tv .rw-fol{display:none}
       <div class="rw-board-head"><h2 id="rwBoardTitle">Race center</h2><p>Every heat, result and racer. Updates on its own.</p></div>
       <div class="rw-tabs" role="tablist" aria-label="Race center">
         <button type="button" role="tab" data-view="sched" aria-selected="true">Schedule</button>
+        <button type="button" role="tab" data-view="bracket" aria-selected="false">Bracket</button>
         <button type="button" role="tab" data-view="results" aria-selected="false">Results</button>
         <button type="button" role="tab" data-view="stand" aria-selected="false">Standings</button>
         <button type="button" role="tab" data-view="racers" aria-selected="false">Find a racer</button>
@@ -2026,10 +2055,10 @@ body.rw-tv .rw-fol{display:none}
       <summary>New to derby racing? How to follow along</summary>
       <ol>
         <li>Soap box cars have no engine. Racers roll down the hill on gravity alone.</li>
-        <li>Two cars race side by side, one in Lane 1 and one in Lane 2.</li>
+        <li>Two cars race side by side, one in Lane 1 and one in Lane 2. Each heat is two runs: the racers swap lanes for run 2, and the lowest total time wins.</li>
         <li>The lights go red when cars are on the ramp, amber when they’re set, and green when they’re off.</li>
-        <li>First across the finish line wins the heat. Times are shown to the thousandth of a second.</li>
-        <li>Racers compete within divisions, so they race others in similar cars.</li>
+        <li>Times are shown to the thousandth of a second. A bye means a racer moves on to the next round without racing.</li>
+        <li>Racers compete in brackets by division. In double elimination a racer is out after two losses and keeps racing on the consolation side after the first.</li>
       </ol>
     </details>
   </div>
@@ -2448,6 +2477,116 @@ body.rw-tv .rw-fol{display:none}
   route();
 })();
 </script>
+<script>
+/* ===== Bracket engine (shared by the live race page, Admin and test mode) =====
+   Every heat is two runs with a lane swap: racer A starts in Lane 1, racer B in Lane 2, then they swap.
+   Lowest total time wins. Brackets can be single or double elimination, with byes placed by hand. */
+window.FRB=(function(){
+  function uid(){try{if(crypto.randomUUID)return crypto.randomUUID()}catch(e){}
+    var b=crypto.getRandomValues(new Uint8Array(16));b[6]=b[6]&15|64;b[8]=b[8]&63|128;
+    var h=Array.prototype.map.call(b,function(x){return (x+256).toString(16).slice(1)}).join("");
+    return h.slice(0,8)+"-"+h.slice(8,12)+"-"+h.slice(12,16)+"-"+h.slice(16,20)+"-"+h.slice(20)}
+  function pow2(n){return n>=2&&(n&(n-1))===0}
+  function autoByes(cars){var p=2;while(p<cars)p*=2;return p-cars}
+  function check(cars,byes){cars=+cars;byes=+byes;
+    if(!(cars>=2))return "Enter at least 2 cars.";
+    if(!(byes>=0))return "Byes can’t be negative.";
+    var p=cars+byes; if(!pow2(p)||p>64) return "Cars + byes must add up to 4, 8, 16, 32 or 64 (you have "+p+"). Try "+autoByes(cars)+" byes.";
+    if(byes>p/2) return "Too many byes: each bye needs a car on the other side.";
+    return ""}
+  var FIELDS=["lane1","lane2","winner","status","run","a_time1","b_time1","a_time2","b_time2","lane1_time","lane2_time","a_bye","b_bye","updated_at"];
+  function blank(){return{status:"upcoming",run:1,lane1:null,lane2:null,winner:null,lane1_time:null,lane2_time:null,a_time1:null,b_time1:null,a_time2:null,b_time2:null,
+    win_to:null,win_slot:null,lose_to:null,lose_slot:null,a_bye:false,b_bye:false}}
+  /* o = {name, kind:'single'|'double', cars, byes, pairs:[[racerA, racerB or null for a bye], …]} */
+  function build(o){
+    var P=+o.cars+(+o.byes),k=Math.round(Math.log2(P)),bid=o.bracketId||uid(),H=[],W=[],L=[],F=null,dbl=o.kind!=="single"&&P>=4;
+    function mk(side,round,slot,label){var h=Object.assign(blank(),{id:uid(),bracket_id:bid,division:o.name,label:label,side:side,round:round,slot:slot,sort_order:0});H.push(h);return h}
+    function race(n,i){return n>1?" · Race "+(i+1):""}
+    for(var r=1;r<=k;r++){W[r]=[];var n=P/Math.pow(2,r);
+      for(var i=0;i<n;i++){var nm=dbl?(r===k?"Winners final":"Winners R"+r):(r===k?"Final":r===k-1?"Semifinal":"Round "+r);W[r].push(mk("W",r,i,nm+race(n,i)))}}
+    function link(from,to,slot,lose){if(lose){from.lose_to=to.id;from.lose_slot=slot}else{from.win_to=to.id;from.win_slot=slot}}
+    for(r=1;r<k;r++) W[r].forEach(function(h,i){link(h,W[r+1][Math.floor(i/2)],i%2?"b":"a")});
+    if(dbl){var LR=2*(k-1);
+      for(var m=1;m<=LR;m++){L[m]=[];var cnt=m===1?P/4:(m%2===0?P/Math.pow(2,m/2+1):P/Math.pow(2,(m+1)/2+1));
+        for(i=0;i<cnt;i++) L[m].push(mk("L",m,i,(m===LR?"Consolation final":"Consolation R"+m)+race(cnt,i)))}
+      W[1].forEach(function(h,i){link(h,L[1][Math.floor(i/2)],i%2?"b":"a",true)});
+      for(m=1;m<=LR;m++){
+        if(m%2===1){ /* odd round winners meet the next batch of winners-side losers */
+          L[m].forEach(function(h,i){link(h,L[m+1][i],"a")});
+          var wr=(m+1)/2+1, nn=W[wr].length; W[wr].forEach(function(h,i){link(h,L[m+1][nn-1-i],"b",true)});
+        } else if(m<LR){ L[m].forEach(function(h,i){link(h,L[m+1][Math.floor(i/2)],i%2?"b":"a")}) }
+      }
+      F=mk("F",1,0,"Championship"); link(W[k][0],F,"a"); link(L[LR][0],F,"b");
+    }
+    /* first-round cars and byes */
+    (o.pairs||[]).forEach(function(p,i){var h=W[1][i];if(!h)return;h.lane1=p[0]||null;h.lane2=p[1]||null;if(!p[0])h.a_bye=true;if(!p[1])h.b_bye=true});
+    /* natural running order: stages that respect who-feeds-whom */
+    var st=[W[1]]; if(dbl){st.push(L[1]);for(var j=2;j<=k;j++){st.push(W[j]);st.push(L[2*j-2]);if(2*j-1<=2*k-2)st.push(L[2*j-1])}st.push([F])} else for(j=2;j<=k;j++)st.push(W[j]);
+    var ord=0; st.forEach(function(s){s.forEach(function(h){h.sort_order=++ord})});
+    resolve(H);
+    return {bracket:{id:bid,name:o.name,kind:dbl?"double":"single",car_count:+o.cars,bye_count:+o.byes},heats:H};
+  }
+  function stage(h,kind,maxRound){ /* position of a heat's round in the natural order */
+    if(h.side==="F") return 9999; var r=h.round||1;
+    if(kind==="single"||h.side==="W"&&kind!=="double") return r-1;
+    if(h.side==="W") return r===1?0:2+3*(r-2);
+    if(r===1) return 1; return r%2===0?3+3*((r+2)/2-2):4+3*((r+1)/2-2);}
+  function byId(H){var m={};H.forEach(function(h){m[h.id]=h});return m}
+  function send(M,to,slot,racer,ch){var t=M[to];if(!t)return;if(racer){if(slot==="a")t.lane1=racer;else t.lane2=racer}else{if(slot==="a")t.a_bye=true;else t.b_bye=true}ch[t.id]=t}
+  /* push byes forward until nothing changes; returns the heats that changed */
+  function resolve(H,ch){ch=ch||{};var M=byId(H),moved=true;
+    while(moved){moved=false;H.forEach(function(h){if(h.status==="finished"||h.status==="bye")return;
+      var a=h.lane1||h.a_bye,b=h.lane2||h.b_bye; if(!(h.a_bye||h.b_bye)||!a||!b) return;
+      h.status="bye"; h.winner=h.a_bye&&h.b_bye?null:(h.lane1||h.lane2); ch[h.id]=h; moved=true;
+      if(h.win_to) send(M,h.win_to,h.win_slot,h.winner,ch); if(h.lose_to) send(M,h.lose_to,h.lose_slot,null,ch);});}
+    return Object.keys(ch).map(function(k){return ch[k]});}
+  function n3(x){return x==null||x===""||isNaN(+x)?null:Math.round(+x*1000)/1000}
+  /* post a finished heat: t={a1,b1,a2,b2,winner:'a'|'b'|''} */
+  function post(H,id,t){var M=byId(H),h=M[id],ch={};if(!h) return {error:"Heat not found."};
+    if(!h.lane1||!h.lane2) return {error:"Both racers have to be set first."};
+    h.a_time1=n3(t.a1);h.b_time1=n3(t.b1);h.a_time2=n3(t.a2);h.b_time2=n3(t.b2);
+    var A=h.a_time1!=null&&h.a_time2!=null?n3(h.a_time1+h.a_time2):null,B=h.b_time1!=null&&h.b_time2!=null?n3(h.b_time1+h.b_time2):null;
+    h.lane1_time=A;h.lane2_time=B;
+    var w=t.winner==="a"?h.lane1:t.winner==="b"?h.lane2:(A!=null&&B!=null&&A!==B?(A<B?h.lane1:h.lane2):null);
+    if(!w) return {error:A!=null&&A===B?"It’s a tie. Pick the winner.":"Enter all four run times, or pick the winner."};
+    h.winner=w;h.status="finished";h.run=2;h.updated_at=new Date().toISOString();ch[h.id]=h;
+    var lo=w===h.lane1?h.lane2:h.lane1;
+    if(h.win_to) send(M,h.win_to,h.win_slot,w,ch); if(h.lose_to) send(M,h.lose_to,h.lose_slot,lo,ch);
+    return {changed:resolve(H,ch)};}
+  /* undo a result (only if nothing it fed into has been raced) */
+  function clear(H,id){var M=byId(H),h=M[id],ch={};if(!h||h.status!=="finished") return {error:"Nothing to clear."};
+    function ok(to){var t=M[to];if(!t)return true;if(t.status==="bye")return (!t.win_to||ok(t.win_to))&&(!t.lose_to||ok(t.lose_to));return t.status==="upcoming"&&t.run===1}
+    if(!(!h.win_to||ok(h.win_to))||!(!h.lose_to||ok(h.lose_to))) return {error:"A later heat already used this result. Clear that one first."};
+    function pull(to,slot,racer,byeFlag){var t=M[to];if(!t)return;
+      if(byeFlag){if(slot==="a")t.a_bye=false;else t.b_bye=false}else{if(slot==="a"&&t.lane1===racer)t.lane1=null;if(slot==="b"&&t.lane2===racer)t.lane2=null}
+      ch[t.id]=t; if(t.status==="bye"){var w=t.winner;t.status="upcoming";t.winner=null;
+        if(t.win_to)pull(t.win_to,t.win_slot,w,!w); if(t.lose_to)pull(t.lose_to,t.lose_slot,null,true);}}
+    var w=h.winner,lo=w===h.lane1?h.lane2:h.lane1;
+    if(h.win_to)pull(h.win_to,h.win_slot,w,false); if(h.lose_to)pull(h.lose_to,h.lose_slot,lo,false);
+    Object.assign(h,{status:"upcoming",run:1,winner:null,a_time1:null,b_time1:null,a_time2:null,b_time2:null,lane1_time:null,lane2_time:null,updated_at:new Date().toISOString()});ch[h.id]=h;
+    return {changed:resolve(H,ch)};}
+  /* running order: alternate brackets round by round, or one bracket after another */
+  function order(H,brackets,mode){var B=brackets.slice().sort(function(a,b){return (a.sort_order||0)-(b.sort_order||0)}),out=[];
+    var groups=B.map(function(b){var hs=H.filter(function(h){return h.bracket_id===b.id}),st={};
+      hs.forEach(function(h){var s=stage(h,b.kind);(st[s]=st[s]||[]).push(h)});
+      return Object.keys(st).map(Number).sort(function(a,b){return a-b}).map(function(s){return st[s].sort(function(a,b){return (a.slot||0)-(b.slot||0)})})});
+    if(mode==="sequential") groups.forEach(function(g){g.forEach(function(s){out=out.concat(s)})});
+    else {var max=Math.max.apply(null,groups.map(function(g){return g.length}).concat([0]));
+      for(var i=0;i<max;i++) groups.forEach(function(g){if(g[i])out=out.concat(g[i])});}
+    var loose=H.filter(function(h){return !h.bracket_id}).sort(function(a,b){return a.sort_order-b.sort_order});
+    out=out.concat(loose); out.forEach(function(h,i){h.sort_order=i+1}); return out;}
+  function isBye(h){return h.status==="bye"||!!h.a_bye||!!h.b_bye}
+  function numbers(H){var n={},c=0;H.slice().sort(function(a,b){return a.sort_order-b.sort_order}).forEach(function(h){if(!isBye(h))n[h.id]=++c});return n}
+  /* text for an empty slot: "Winner of Heat 5", "Bye" … */
+  function source(H,h,slot,N){if(slot==="a"?h.a_bye:h.b_bye) return "Bye";
+    for(var i=0;i<H.length;i++){var s=H[i];
+      if(s.win_to===h.id&&s.win_slot===slot){if(isBye(s)){if(s.a_bye&&s.b_bye)return "Bye";return source(H,s,s.a_bye?"b":"a",N)}return "Winner of Heat "+(N[s.id]||"?")}
+      if(s.lose_to===h.id&&s.lose_slot===slot) return "Loser of Heat "+(N[s.id]||"?");}
+    return "TBD";}
+  function row(h){var o={};FIELDS.forEach(function(f){if(f in h)o[f]=h[f]});return o}
+  return {uid:uid,check:check,autoByes:autoByes,build:build,post:post,clear:clear,resolve:resolve,order:order,isBye:isBye,numbers:numbers,source:source,row:row,stage:stage};
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* ===== Supabase layer: live content, events, notes, inquiries, and the Admin portal =====
@@ -2726,40 +2865,83 @@ body.rw-tv .rw-fol{display:none}
     draw();
   }
   /* ---------- Race day controls ---------- */
-  var RSUB="control";
-  function tabRace(){var P=$("#admPanel");
+  var RSUB="control", BDRAFT=null;
+  function tabRace(){var P=$("#admPanel"), FRB=window.FRB;
     Promise.all([db.from("race_state").select("*").eq("id",1).maybeSingle(),db.from("race_heats").select("*").order("sort_order"),
-      db.from("race_racers").select("*").order("display_name"),db.from("shoutouts").select("*").order("created_at",{ascending:false}).limit(200)]).then(function(r){
+      db.from("race_racers").select("*").order("display_name"),db.from("shoutouts").select("*").order("created_at",{ascending:false}).limit(200),
+      db.from("race_brackets").select("*").order("sort_order")]).then(function(r){
       if(r.some(function(x){return x.error})){P.textContent="Couldn’t load race day data.";return}
-      var st=r[0].data||{id:1,live:false}, heats=r[1].data||[], racers=r[2].data||[], sh=r[3].data||[], R={};racers.forEach(function(x){R[x.id]=x});
-      var pend=sh.filter(function(s){return s.status==="pending"}).length;
-      function rn(id){var x=R[id];return x?esc(x.display_name+(x.car_number?" (#"+x.car_number+")":"")):"TBD"}
-      function opts(sel,blank){return '<option value="">'+(blank||"Choose")+'</option>'+racers.map(function(x){return '<option value="'+x.id+'"'+(x.id===sel?' selected':'')+'>'+rn(x.id)+' · '+esc(x.division||"")+'</option>'}).join("")}
-      var head='<div class="row" style="margin-top:0">'+[["control","Run the race"],["heats","Heats"],["racers","Racers"],["shout","Shout-outs"+(pend?" ("+pend+" new)":"")]].map(function(t){return '<button class="mini'+(RSUB===t[0]?' solid':'')+'" type="button" data-sub="'+t[0]+'">'+t[1]+'</button>'}).join("")+'<a class="mini" href="#race-watch" target="_blank" rel="noopener">Open spectator view</a></div>';
+      var st=r[0].data||{id:1,live:false}, heats=r[1].data||[], racers=r[2].data||[], sh=r[3].data||[], brackets=r[4].data||[], R={};racers.forEach(function(x){R[x.id]=x});
+      var N=FRB.numbers(heats), pend=sh.filter(function(s){return s.status==="pending"}).length;
+      function rn(id){var x=R[id];return x?esc(x.display_name+(x.car_number?" (#"+x.car_number+")":"")):""}
+      function who(h,s){var id=s==="a"?h.lane1:h.lane2;return id?rn(id):'<i style="color:#6d7077">'+esc(FRB.source(heats,h,s,N))+'</i>'}
+      function hname(h){return (N[h.id]?"Heat "+N[h.id]+" · ":"")+esc((h.division||"")+" · "+(h.label||""))}
+      var head='<div class="row" style="margin-top:0">'+[["control","Run the race"],["brackets","Brackets"],["order","Running order"],["racers","Racers"],["shout","Shout-outs"+(pend?" ("+pend+" new)":"")]].map(function(t){return '<button class="mini'+(RSUB===t[0]?' solid':'')+'" type="button" data-sub="'+t[0]+'">'+t[1]+'</button>'}).join("")+'<a class="mini" href="#race-watch" target="_blank" rel="noopener">Open spectator view</a></div>';
       function again(){tabRace()}
-      function done(x,msg){toast(x.error?"Couldn’t save: "+x.error.message:msg||"Saved");if(!x.error)again()}
-      function setState(rec,msg){rec.updated_at=new Date().toISOString();db.from("race_state").update(rec).eq("id",1).then(function(x){done(x,msg)})}
+      function done(x,msg){toast(x&&x.error?"Couldn’t save: "+x.error.message:msg||"Saved");if(!x||!x.error)again()}
+      function setState(rec,msg){rec.updated_at=new Date().toISOString();return db.from("race_state").update(rec).eq("id",1).then(function(x){done(x,msg)})}
+      function saveHeats(list,msg){var now=new Date().toISOString();
+        return Promise.all(list.map(function(h){var row=FRB.row(h);row.updated_at=now;return db.from("race_heats").update(row).eq("id",h.id)})).then(function(rs){var e=rs.filter(function(x){return x.error})[0];done(e||{},msg)})}
+      function nextHeat(cur){var ready=function(h){return !FRB.isBye(h)&&h.status!=="finished"&&h.lane1&&h.lane2&&h!==cur};
+        var i=cur?heats.indexOf(cur):-1;return heats.slice(i+1).filter(ready)[0]||heats.filter(ready)[0]||null}
       var body="";
       if(RSUB==="control"){
-        var cur=heats.filter(function(h){return h.id===st.current_heat})[0]||null;
+        var cur=heats.filter(function(h){return h.id===st.current_heat})[0]||null, run=cur?(cur.run||1):1;
         body='<div class="inq"><header><b>Live page is '+(st.live?'<span style="color:#c51831">ON</span>':'off')+'</b><button class="mini solid" type="button" id="rcLive">'+(st.live?"Turn live page off":"Go live")+'</button></header>'+
           '<p>While off, spectators see the race day countdown. Turn it on when racing starts.</p>'+
           '<label class="f" for="rc-banner">Announcement banner (optional)<input type="text" id="rc-banner" maxlength="160" value="'+esc(st.banner||"")+'" placeholder="Lunch break until 12:30 · Awards at the finish line"></label><div class="row"><button class="mini" type="button" id="rcBanner">Save banner</button></div></div>'+
-          '<div class="inq"><header><b>Heat on the track</b></header><label class="f" for="rc-heat">Current heat<select id="rc-heat"><option value="">None yet</option>'+heats.map(function(h){return '<option value="'+h.id+'"'+(cur&&cur.id===h.id?' selected':'')+'>'+esc(h.division+" · "+h.label)+(h.status==="finished"?" (final)":"")+'</option>'}).join("")+'</select></label>'+
-          (cur?'<p><b>'+rn(cur.lane1)+'</b> (Lane 1) vs <b>'+rn(cur.lane2)+'</b> (Lane 2)</p><p style="margin-top:10px">Status: tap each step as it happens</p><div class="row" style="margin-top:6px">'+
+          '<div class="inq"><header><b>Heat on the track</b></header><label class="f" for="rc-heat">Current heat<select id="rc-heat"><option value="">None yet</option>'+heats.filter(function(h){return !FRB.isBye(h)}).map(function(h){return '<option value="'+h.id+'"'+(cur&&cur.id===h.id?' selected':'')+'>'+hname(h)+(h.status==="finished"?" (final)":"")+'</option>'}).join("")+'</select></label>';
+        if(!cur) body+='<p>Pick a heat, or build a bracket in the Brackets tab.</p>';
+        else if(!cur.lane1||!cur.lane2) body+='<p>This heat is waiting on: '+who(cur,"a")+' vs '+who(cur,"b")+'.</p>';
+        else if(cur.status==="finished") body+='<p><b>Final:</b> '+rn(cur.winner)+' wins'+(cur.lane1_time!=null&&cur.lane2_time!=null?' · totals '+rn(cur.lane1)+' '+cur.lane1_time+'s, '+rn(cur.lane2)+' '+cur.lane2_time+'s':' (no times)')+'.</p>';
+        else {var l1=run===1?cur.lane1:cur.lane2, l2=run===1?cur.lane2:cur.lane1;
+          body+='<p style="font-size:1.05rem"><b>Run '+run+' of 2</b>'+(run===2?' · lanes swapped':'')+'<br>Lane 1: <b>'+rn(l1)+'</b> · Lane 2: <b>'+rn(l2)+'</b></p>'+
+            (run===2?'<p>Run 1: '+rn(cur.lane1)+' '+(cur.a_time1!=null?cur.a_time1+"s":"no time")+' (Lane 1) · '+rn(cur.lane2)+' '+(cur.b_time1!=null?cur.b_time1+"s":"no time")+' (Lane 2)</p>':'')+
+            '<p style="margin-top:10px">Status: tap each step as it happens</p><div class="row" style="margin-top:6px">'+
             [["upcoming","Up next"],["staging","On the ramp"],["set","Ready, set"],["racing","They’re off"]].map(function(s){return '<button class="mini'+(cur.status===s[0]?' solid':'')+'" type="button" data-st="'+s[0]+'">'+s[1]+'</button>'}).join("")+'</div>'+
-            '<div class="adm-scroll"><table class="adm-table" style="min-width:520px;margin-top:12px"><thead><tr><th>Winner</th><th>Lane 1 time (s)</th><th>Lane 2 time (s)</th><th></th></tr></thead><tbody><tr>'+
-            '<td><select id="rc-win" aria-label="Winner"><option value="">Choose</option><option value="'+(cur.lane1||"")+'"'+(cur.winner&&cur.winner===cur.lane1?' selected':'')+'>Lane 1 · '+rn(cur.lane1)+'</option><option value="'+(cur.lane2||"")+'"'+(cur.winner&&cur.winner===cur.lane2?' selected':'')+'>Lane 2 · '+rn(cur.lane2)+'</option></select></td>'+
-            '<td><input type="number" step="0.001" min="0" id="rc-t1" value="'+(cur.lane1_time==null?"":cur.lane1_time)+'" aria-label="Lane 1 time"></td><td><input type="number" step="0.001" min="0" id="rc-t2" value="'+(cur.lane2_time==null?"":cur.lane2_time)+'" aria-label="Lane 2 time"></td>'+
-            '<td><button class="mini solid" type="button" id="rcFinish">Post result</button></td></tr></tbody></table></div><div class="row"><button class="btn deep" type="button" id="rcNext">Move to the next heat</button></div>':'<p>Pick a heat, or add heats in the Heats tab.</p>')+'</div>';
-      } else if(RSUB==="heats"){
-        var divs=[];racers.forEach(function(x){if(divs.indexOf(x.division)<0)divs.push(x.division)});heats.forEach(function(h){if(divs.indexOf(h.division)<0)divs.push(h.division)});if(!divs.length)divs=["Stock","Super Stock","Masters"];
-        function hrow(h){h=h||{division:divs[0],label:"Heat "+(heats.length+1),sort_order:(heats.length?heats[heats.length-1].sort_order+1:1)};
-          return '<tr data-id="'+(h.id||"")+'"><td style="width:70px"><input type="number" value="'+(h.sort_order||0)+'" aria-label="Order"></td><td><input type="text" list="rcDivs" value="'+esc(h.division||"")+'" aria-label="Division"></td><td><input type="text" value="'+esc(h.label||"")+'" aria-label="Heat name"></td><td><select aria-label="Lane 1">'+opts(h.lane1,"Lane 1")+'</select></td><td><select aria-label="Lane 2">'+opts(h.lane2,"Lane 2")+'</select></td><td><small>'+esc(h.status||"new")+'</small></td><td><button class="mini solid" type="button" data-act="save">'+(h.id?"Save":"Add")+'</button> '+(h.id?'<button class="mini" type="button" data-act="reset">Clear result</button> <button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
-        body='<p style="color:#4a4d55">Heats run in order. Add racers first, then pair them up here.</p><datalist id="rcDivs">'+divs.map(function(d){return '<option value="'+esc(d)+'">'}).join("")+'</datalist><div class="adm-scroll"><table class="adm-table" style="min-width:820px"><thead><tr><th>Order</th><th>Division</th><th>Heat</th><th>Lane 1</th><th>Lane 2</th><th>Status</th><th></th></tr></thead><tbody>'+hrow(null)+heats.map(hrow).join("")+'</tbody></table></div>';
+            '<div class="adm-scroll"><table class="adm-table" style="min-width:560px;margin-top:12px"><thead><tr><th>Lane 1 time (s) · '+rn(l1)+'</th><th>Lane 2 time (s) · '+rn(l2)+'</th>'+(run===2?'<th>Winner</th>':'')+'<th></th></tr></thead><tbody><tr>'+
+            '<td><input type="number" step="0.001" min="0" id="rc-l1" value="'+(run===1?(cur.a_time1==null?"":cur.a_time1):(cur.b_time2==null?"":cur.b_time2))+'" aria-label="Lane 1 time"></td>'+
+            '<td><input type="number" step="0.001" min="0" id="rc-l2" value="'+(run===1?(cur.b_time1==null?"":cur.b_time1):(cur.a_time2==null?"":cur.a_time2))+'" aria-label="Lane 2 time"></td>'+
+            (run===2?'<td><select id="rc-win" aria-label="Winner"><option value="">Lowest total time</option><option value="a">'+rn(cur.lane1)+'</option><option value="b">'+rn(cur.lane2)+'</option></select></td>':'')+
+            '<td><button class="mini solid" type="button" id="rcPost">'+(run===1?"Post run 1 and swap lanes":"Post final result")+'</button></td></tr></tbody></table></div>'+
+            '<p id="rcPrev" style="color:#4a4d55"></p>'+(run===2?'<div class="row"><button class="mini" type="button" id="rcBack">Back to run 1</button></div>':'')+
+            '<p style="color:#4a4d55;font-size:.88rem">Pick a winner only for a tie, a forfeit or a disqualification.</p>';}
+        if(cur) body+='<div class="row"><button class="btn deep" type="button" id="rcNext">Move to the next heat</button></div>';
+        body+='</div>';
+      } else if(RSUB==="brackets"){
+        body='<p style="color:#4a4d55;max-width:72ch">Each bracket is single or double elimination. Every heat is two runs with a lane swap, and the lowest total time wins. After you build a bracket, set the running order to alternate it with other brackets.</p>'+
+          (brackets.length?brackets.map(function(b){var hs=heats.filter(function(h){return h.bracket_id===b.id}),real=hs.filter(function(h){return !FRB.isBye(h)}),fin=real.filter(function(h){return h.status==="finished"}).length;
+            return '<div class="inq"><header><b>'+esc(b.name)+'</b><small>'+(b.kind==="double"?"Double":"Single")+' elimination · '+b.car_count+' cars · '+b.bye_count+' byes · '+fin+' of '+real.length+' heats raced</small><button class="mini red" type="button" data-delb="'+b.id+'">Delete bracket</button></header></div>'}).join(""):'<p style="margin-top:12px">No brackets yet.</p>');
+        if(!BDRAFT) body+='<div class="inq"><header><b>New bracket</b></header>'+
+          '<label class="f" for="bk-name">Bracket name<input type="text" id="bk-name" maxlength="40" list="bkNames" placeholder="Super Stock"></label><datalist id="bkNames"><option value="Stock"><option value="Super Stock"><option value="Masters"></datalist>'+
+          '<label class="f" for="bk-kind">Type<select id="bk-kind"><option value="double">Double elimination (out after 2 losses)</option><option value="single">Single elimination (out after 1 loss)</option></select></label>'+
+          '<div class="row" style="align-items:flex-end"><label class="f" for="bk-cars" style="flex:1;min-width:140px">Number of cars<input type="number" id="bk-cars" min="2" max="64" value="8"></label><label class="f" for="bk-byes" style="flex:1;min-width:140px">Number of byes<input type="number" id="bk-byes" min="0" max="32" value="0"></label></div>'+
+          '<p id="bkCheck" style="font-weight:600"></p><div class="row"><button class="btn deep" type="button" id="bkNext">Next: place the cars and byes</button></div></div>';
+        else {var D=BDRAFT, half=(D.cars+D.byes)/2, inDiv=racers.filter(function(x){return (x.division||"")===D.name}), others=racers.filter(function(x){return (x.division||"")!==D.name}),
+          sel=function(v,i,s){var used={};D.pairs.forEach(function(p,j){[0,1].forEach(function(k){if(p[k]&&!(j===i&&k===s))used[p[k]]=1})});
+            var o=function(x){return '<option value="'+x.id+'"'+(v===x.id?' selected':'')+(used[x.id]&&v!==x.id?' disabled':'')+'>'+rn(x.id)+'</option>'};
+            return '<option value="">Choose a car</option>'+(s===1?'<option value="BYE"'+(v==="BYE"?' selected':'')+'>BYE</option>':'')+(inDiv.length?'<optgroup label="'+esc(D.name)+'">'+inDiv.map(o).join("")+'</optgroup>':'')+(others.length?'<optgroup label="Other racers">'+others.map(o).join("")+'</optgroup>':'')};
+          var nb=D.pairs.filter(function(p){return p[1]==="BYE"}).length, nc=0; D.pairs.forEach(function(p){if(p[0])nc++;if(p[1]&&p[1]!=="BYE")nc++});
+          body+='<div class="inq"><header><b>Place cars: '+esc(D.name)+'</b><small>'+(D.kind==="double"?"Double":"Single")+' elimination · '+D.cars+' cars · '+D.byes+' byes</small></header>'+
+            '<p>First-round races. The first car starts in Lane 1 and swaps to Lane 2 for run 2. Choose <b>BYE</b> for the second car to give the first car a bye.</p>'+
+            '<p style="font-weight:700;margin-top:6px">Cars placed: '+nc+' of '+D.cars+' · Byes placed: '+nb+' of '+D.byes+'</p>'+
+            '<div class="row"><button class="mini" type="button" id="bkFill">Fill from racer list ('+esc(D.name)+' first)</button><button class="mini" type="button" id="bkEmpty">Clear all</button></div>'+
+            '<div class="adm-scroll"><table class="adm-table" style="min-width:520px"><thead><tr><th>Race</th><th>Starts in Lane 1</th><th>Starts in Lane 2</th></tr></thead><tbody>'+
+            D.pairs.map(function(p,i){return '<tr><td>'+(i+1)+'</td><td><select data-pi="'+i+'" data-ps="0" aria-label="Race '+(i+1)+' first car">'+sel(p[0],i,0)+'</select></td><td><select data-pi="'+i+'" data-ps="1" aria-label="Race '+(i+1)+' second car">'+sel(p[1],i,1)+'</select></td></tr>'}).join("")+
+            '</tbody></table></div><div class="row"><button class="btn deep" type="button" id="bkBuild">Build bracket</button><button class="mini" type="button" id="bkCancel">Back</button></div></div>';}
+      } else if(RSUB==="order"){
+        body='<p style="color:#4a4d55;max-width:72ch">This is the order heats run on race day. Alternate brackets to mix them round by round (Masters, then Super Stock, then Masters …), or run one bracket after another. Byes don’t get a heat number because they aren’t raced.</p>'+
+          (brackets.length>1?'<div class="row"><button class="mini solid" type="button" data-ord="alt">Alternate brackets</button><button class="mini" type="button" data-ord="sequential">One bracket at a time</button></div>':'')+
+          '<div class="adm-scroll"><table class="adm-table" style="min-width:720px"><thead><tr><th>#</th><th>Heat</th><th>Racers</th><th>Status</th><th></th></tr></thead><tbody>'+
+          heats.map(function(h,i){var bye=FRB.isBye(h);return '<tr data-id="'+h.id+'"'+(bye?' style="opacity:.6"':'')+(st.current_heat===h.id?' style="background:#fdf0f1"':'')+'><td>'+(N[h.id]||"Bye")+'</td><td>'+esc((h.division||"")+" · "+(h.label||""))+'</td><td>'+who(h,"a")+' vs '+who(h,"b")+(h.winner&&h.status==="finished"?'<br><small>Winner: '+rn(h.winner)+'</small>':'')+'</td><td><small>'+esc(h.status)+(h.status!=="finished"&&!bye&&h.run===2?" · run 2":"")+'</small></td><td style="white-space:nowrap"><button class="mini" type="button" data-mv="-1" aria-label="Move up"'+(i===0?' disabled':'')+'>↑</button> <button class="mini" type="button" data-mv="1" aria-label="Move down"'+(i===heats.length-1?' disabled':'')+'>↓</button>'+
+            (!bye&&h.lane1&&h.lane2&&h.status!=="finished"?' <button class="mini" type="button" data-cur="1">Make current</button>':'')+(h.status==="finished"?' <button class="mini" type="button" data-clr="1">Clear result</button>':'')+(!h.bracket_id?' <button class="mini red" type="button" data-del="1">Delete</button>':'')+'</td></tr>'}).join("")+'</tbody></table></div>'+
+          '<div class="inq"><header><b>Add a single heat</b><small>For an exhibition or a race outside the brackets</small></header><div class="row" style="align-items:flex-end">'+
+          '<label class="f" for="sh-div" style="flex:1;min-width:140px">Group<input type="text" id="sh-div" maxlength="40" value="Exhibition"></label><label class="f" for="sh-lab" style="flex:1;min-width:140px">Heat name<input type="text" id="sh-lab" maxlength="40" value="Special race"></label>'+
+          '<label class="f" for="sh-a" style="flex:1;min-width:160px">Starts in Lane 1<select id="sh-a"><option value="">Choose</option>'+racers.map(function(x){return '<option value="'+x.id+'">'+rn(x.id)+'</option>'}).join("")+'</select></label>'+
+          '<label class="f" for="sh-b" style="flex:1;min-width:160px">Starts in Lane 2<select id="sh-b"><option value="">Choose</option>'+racers.map(function(x){return '<option value="'+x.id+'">'+rn(x.id)+'</option>'}).join("")+'</select></label></div><div class="row"><button class="mini solid" type="button" id="shAdd">Add heat</button></div></div>';
       } else if(RSUB==="racers"){
-        function rrow(x){x=x||{division:"Stock"};return '<tr data-id="'+(x.id||"")+'"><td><input type="text" maxlength="40" value="'+esc(x.display_name||"")+'" aria-label="Racer name" placeholder="Maya R."></td><td><input type="text" maxlength="60" value="'+esc(x.team||"")+'" aria-label="Team" placeholder="Northside Rockets"></td><td style="width:90px"><input type="text" maxlength="6" value="'+esc(x.car_number||"")+'" aria-label="Car number"></td><td><input type="text" maxlength="60" value="'+esc(x.sponsor||"")+'" aria-label="Sponsor"></td><td><input type="text" list="rcDivs2" value="'+esc(x.division||"")+'" aria-label="Division"></td><td><button class="mini solid" type="button" data-act="save">'+(x.id?"Save":"Add")+'</button> '+(x.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
-        body='<p style="color:#4a4d55">For kids’ privacy, use a first name and last initial (Maya R.). These names show publicly on race day.</p><datalist id="rcDivs2"><option value="Stock"><option value="Super Stock"><option value="Masters"></datalist><div class="adm-scroll"><table class="adm-table" style="min-width:760px"><thead><tr><th>Racer</th><th>Team</th><th>Car #</th><th>Sponsor</th><th>Division</th><th></th></tr></thead><tbody>'+rrow(null)+racers.map(rrow).join("")+'</tbody></table></div>';
+        function rrow(x){x=x||{division:""};return '<tr data-id="'+(x.id||"")+'"><td><input type="text" maxlength="40" value="'+esc(x.display_name||"")+'" aria-label="Racer name" placeholder="Maya R."></td><td><input type="text" maxlength="60" value="'+esc(x.team||"")+'" aria-label="Team" placeholder="Northside Rockets"></td><td style="width:90px"><input type="text" maxlength="6" value="'+esc(x.car_number||"")+'" aria-label="Car number"></td><td><input type="text" maxlength="60" value="'+esc(x.sponsor||"")+'" aria-label="Sponsor"></td><td><input type="text" list="rcDivs2" value="'+esc(x.division||"")+'" aria-label="Division" placeholder="Super Stock"></td><td><button class="mini solid" type="button" data-act="save">'+(x.id?"Save":"Add")+'</button> '+(x.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
+        body='<p style="color:#4a4d55">For kids’ privacy, use a first name and last initial (Maya R.). These names show publicly on race day. Use the bracket name as the division so they’re listed first when placing cars.</p><datalist id="rcDivs2"><option value="Stock"><option value="Super Stock"><option value="Masters">'+brackets.map(function(b){return '<option value="'+esc(b.name)+'">'}).join("")+'</datalist><div class="adm-scroll"><table class="adm-table" style="min-width:760px"><thead><tr><th>Racer</th><th>Team</th><th>Car #</th><th>Sponsor</th><th>Division</th><th></th></tr></thead><tbody>'+rrow(null)+racers.map(rrow).join("")+'</tbody></table></div>';
       } else {
         body='<p style="color:#4a4d55">Shout-outs from spectators wait here until you approve them. Only approved ones scroll on the live page.</p>'+
           (sh.length?sh.map(function(s){var d=new Date(s.created_at);return '<div class="inq'+(s.status==="hidden"?' done':'')+'"><header><b>'+esc(s.name)+'</b><small>'+d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})+' · '+esc(s.status)+'</small><span>'+(s.status!=="approved"?'<button class="mini solid" type="button" data-so="approved" data-id="'+s.id+'">Approve</button> ':'')+(s.status!=="hidden"?'<button class="mini red" type="button" data-so="hidden" data-id="'+s.id+'">Hide</button>':'')+'</span></header><p>'+esc(s.message)+'</p></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No shout-outs yet.</p>');
@@ -2770,26 +2952,69 @@ body.rw-tv .rw-fol{display:none}
         $("#rcLive").onclick=function(){setState({live:!st.live},st.live?"Live page is off":"You’re live")};
         $("#rcBanner").onclick=function(){setState({banner:$("#rc-banner").value.trim()||null},"Banner saved")};
         $("#rc-heat").onchange=function(){setState({current_heat:this.value||null},"Current heat set")};
-        var cur2=heats.filter(function(h){return h.id===st.current_heat})[0];
-        if(cur2){
-          $$("button[data-st]",P).forEach(function(b){b.onclick=function(){db.from("race_heats").update({status:b.getAttribute("data-st"),updated_at:new Date().toISOString()}).eq("id",cur2.id).then(function(x){done(x,"Updated")})}});
-          $("#rcFinish").onclick=function(){var w=$("#rc-win").value,t1=$("#rc-t1").value,t2=$("#rc-t2").value;
-            if(!w&&t1&&t2) w=(+t1<=+t2)?cur2.lane1:cur2.lane2;
-            if(!w){toast("Pick the winner or enter both times.");return}
-            db.from("race_heats").update({status:"finished",winner:w,lane1_time:t1===""?null:+t1,lane2_time:t2===""?null:+t2,updated_at:new Date().toISOString()}).eq("id",cur2.id).then(function(x){done(x,"Result posted")})};
-          $("#rcNext").onclick=function(){var i=heats.indexOf(cur2),nx=heats.slice(i+1).filter(function(h){return h.status!=="finished"})[0]||heats.filter(function(h){return h!==cur2&&h.status!=="finished"})[0];
-            if(!nx){toast("No heats left to run.");return}
-            db.from("race_heats").update({status:"staging",updated_at:new Date().toISOString()}).eq("id",nx.id).then(function(){setState({current_heat:nx.id},"Next heat is on the ramp")})};
+        var c2=heats.filter(function(h){return h.id===st.current_heat})[0];
+        if(c2){
+          $$("button[data-st]",P).forEach(function(b){b.onclick=function(){db.from("race_heats").update({status:b.getAttribute("data-st"),updated_at:new Date().toISOString()}).eq("id",c2.id).then(function(x){done(x,"Updated")})}});
+          var pb=$("#rcPost");
+          if(pb){var r2=(c2.run||1)===2, prev=function(){var a=$("#rc-l1").value,b=$("#rc-l2").value,p=$("#rcPrev");
+              if(!r2||a===""||b===""||c2.a_time1==null||c2.b_time1==null){p.textContent="";return}
+              var A=Math.round((+c2.a_time1+(+b))*1000)/1000,B=Math.round((+c2.b_time1+(+a))*1000)/1000;
+              p.textContent="Totals: "+(R[c2.lane1]||{}).display_name+" "+A.toFixed(3)+"s · "+(R[c2.lane2]||{}).display_name+" "+B.toFixed(3)+"s"+(A===B?" · tie, pick a winner":"");};
+            $("#rc-l1").oninput=prev;$("#rc-l2").oninput=prev;prev();
+            pb.onclick=function(){var a=$("#rc-l1").value,b=$("#rc-l2").value;
+              if(!r2){ if(a===""||b===""){toast("Enter both run 1 times.");return}
+                db.from("race_heats").update({a_time1:+a,b_time1:+b,run:2,status:"staging",updated_at:new Date().toISOString()}).eq("id",c2.id).then(function(x){done(x,"Run 1 posted. Lanes swap for run 2.")});return}
+              var res=FRB.post(heats,c2.id,{a1:c2.a_time1,b1:c2.b_time1,a2:b,b2:a,winner:$("#rc-win").value});
+              if(res.error){toast(res.error);return} saveHeats(res.changed,"Result posted. Winner moves on.");};
+            var bk=$("#rcBack"); if(bk) bk.onclick=function(){db.from("race_heats").update({run:1,status:"staging"}).eq("id",c2.id).then(function(x){done(x,"Back to run 1")})};}
         }
-      } else if(RSUB==="heats"){
-        $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input,select",tr),a=b.getAttribute("data-act");
-          if(a==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
-            var go=function(){db.from("race_heats").delete().eq("id",id).then(function(x){done(x,"Deleted")})};
-            if(st.current_heat===id) db.from("race_state").update({current_heat:null}).eq("id",1).then(go); else go(); return}
-          if(a==="reset"){db.from("race_heats").update({status:"upcoming",winner:null,lane1_time:null,lane2_time:null}).eq("id",id).then(function(x){done(x,"Result cleared")});return}
-          var rec={sort_order:parseInt(f[0].value,10)||0,division:f[1].value.trim()||"Stock",label:f[2].value.trim(),lane1:f[3].value||null,lane2:f[4].value||null};
-          if(!rec.label){toast("Name the heat.");return}
-          (id?db.from("race_heats").update(rec).eq("id",id):db.from("race_heats").insert(Object.assign({status:"upcoming"},rec))).then(function(x){done(x,id?"Saved":"Heat added")})}});
+        var nb=$("#rcNext"); if(nb) nb.onclick=function(){var nx=nextHeat(c2);
+          if(!nx){toast(heats.some(function(h){return !FRB.isBye(h)&&h.status!=="finished"})?"The next heats are waiting on results.":"No heats left to run.");return}
+          db.from("race_heats").update({status:"staging",run:1,updated_at:new Date().toISOString()}).eq("id",nx.id).then(function(){setState({current_heat:nx.id},"Heat "+(N[nx.id]||"")+" is on the ramp")})};
+      } else if(RSUB==="brackets"){
+        $$("button[data-delb]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+          var id=b.getAttribute("data-delb"),inB=heats.some(function(h){return h.bracket_id===id&&h.id===st.current_heat});
+          (inB?db.from("race_state").update({current_heat:null}).eq("id",1):Promise.resolve()).then(function(){
+            return db.from("race_heats").delete().eq("bracket_id",id)}).then(function(){return db.from("race_brackets").delete().eq("id",id)}).then(function(x){done(x,"Bracket deleted")})}});
+        if(!BDRAFT){var cars=$("#bk-cars"),byes=$("#bk-byes"),chk=function(){var m=FRB.check(cars.value,byes.value);$("#bkCheck").textContent=m||("Bracket of "+((+cars.value)+(+byes.value))+": "+cars.value+" cars + "+byes.value+" byes. "+(+cars.value+(+byes.value))/2+" first-round races.");$("#bkCheck").style.color=m?"#b3152d":"#1d6b3a"};
+          cars.oninput=function(){byes.value=FRB.autoByes(+cars.value||2);chk()}; byes.oninput=chk; byes.value=FRB.autoByes(8); chk();
+          $("#bkNext").onclick=function(){var nm=$("#bk-name").value.trim(),m=FRB.check(cars.value,byes.value);if(!nm){toast("Name the bracket.");return}if(m){toast(m);return}
+            if(brackets.some(function(b){return b.name.toLowerCase()===nm.toLowerCase()})){toast("There’s already a bracket with that name.");return}
+            var c=+cars.value,y=+byes.value,half=(c+y)/2;BDRAFT={name:nm,kind:$("#bk-kind").value,cars:c,byes:y,pairs:[]};
+            for(var i=0;i<half;i++)BDRAFT.pairs.push(["",i>=half-y?"BYE":""]);tabRace()};}
+        else {
+          $$("select[data-pi]",P).forEach(function(s){s.onchange=function(){BDRAFT.pairs[+s.getAttribute("data-pi")][+s.getAttribute("data-ps")]=s.value;tabRace()}});
+          $("#bkCancel").onclick=function(){BDRAFT=null;tabRace()};
+          $("#bkEmpty").onclick=function(){BDRAFT.pairs.forEach(function(p){p[0]="";if(p[1]!=="BYE")p[1]=""});tabRace()};
+          $("#bkFill").onclick=function(){var D=BDRAFT,pool=racers.filter(function(x){return (x.division||"")===D.name}).concat(racers.filter(function(x){return (x.division||"")!==D.name})).map(function(x){return x.id}),k=0;
+            D.pairs.forEach(function(p){p[0]="";if(p[1]!=="BYE")p[1]=""});
+            D.pairs.forEach(function(p){p[0]=pool[k++]||""});D.pairs.forEach(function(p){if(p[1]!=="BYE")p[1]=pool[k++]||""});tabRace()};
+          $("#bkBuild").onclick=function(){var D=BDRAFT,ids=[],err="",nb=0;
+            D.pairs.forEach(function(p,i){if(!p[0])err=err||"Race "+(i+1)+" needs a first car.";else ids.push(p[0]);if(p[1]==="BYE")nb++;else if(!p[1])err=err||"Race "+(i+1)+" needs a second car or BYE.";else ids.push(p[1])});
+            if(!err&&nb!==D.byes) err="Place exactly "+D.byes+" byes (you have "+nb+").";
+            if(!err&&ids.length!==D.cars) err="Place exactly "+D.cars+" cars (you have "+ids.length+").";
+            if(!err&&ids.some(function(x,i){return ids.indexOf(x)!==i})) err="A car is listed twice.";
+            if(err){toast(err);return}
+            var out=FRB.build({name:D.name,kind:D.kind,cars:D.cars,byes:D.byes,pairs:D.pairs.map(function(p){return [p[0],p[1]==="BYE"?null:p[1]]})}),base=heats.length?Math.max.apply(null,heats.map(function(h){return h.sort_order||0})):0;
+            out.heats.forEach(function(h){h.sort_order+=base});
+            var b=out.bracket;b.sort_order=brackets.length+1;
+            db.from("race_brackets").insert(b).then(function(x){if(x.error)throw x.error;return db.from("race_heats").insert(out.heats)}).then(function(x){if(x.error)throw x.error;BDRAFT=null;RSUB="order";toast("Bracket built: "+out.heats.filter(function(h){return !FRB.isBye(h)}).length+" heats to race.");tabRace()})
+              .catch(function(e){toast("Couldn’t build the bracket: "+(e.message||e))})};}
+      } else if(RSUB==="order"){
+        $$("button[data-ord]",P).forEach(function(b){b.onclick=function(){if(b.textContent.indexOf("Confirm")<0){b.textContent="Confirm: "+b.textContent;return}
+          FRB.order(heats,brackets,b.getAttribute("data-ord"));
+          Promise.all(heats.map(function(h){return db.from("race_heats").update({sort_order:h.sort_order}).eq("id",h.id)})).then(function(rs){var e=rs.filter(function(x){return x.error})[0];done(e||{},"Running order updated")})}});
+        $$("tbody tr[data-id]",P).forEach(function(tr){var id=tr.getAttribute("data-id"),i=heats.findIndex(function(h){return h.id===id}),h=heats[i];
+          $$("button",tr).forEach(function(b){b.onclick=function(){
+            if(b.hasAttribute("data-mv")){var j=i+(+b.getAttribute("data-mv")),o=heats[j];if(!o)return;
+              Promise.all([db.from("race_heats").update({sort_order:o.sort_order}).eq("id",h.id),db.from("race_heats").update({sort_order:h.sort_order===o.sort_order?h.sort_order+(j>i?1:-1):h.sort_order}).eq("id",o.id)]).then(function(){again()});return}
+            if(b.hasAttribute("data-cur")){db.from("race_heats").update({status:"staging"}).eq("id",id).then(function(){setState({current_heat:id},"Current heat set")});return}
+            if(b.hasAttribute("data-clr")){if(b.textContent!=="Confirm clear"){b.textContent="Confirm clear";return}var res=FRB.clear(heats,id);if(res.error){toast(res.error);return}saveHeats(res.changed,"Result cleared");return}
+            if(b.hasAttribute("data-del")){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+              (st.current_heat===id?db.from("race_state").update({current_heat:null}).eq("id",1):Promise.resolve()).then(function(){return db.from("race_heats").delete().eq("id",id)}).then(function(x){done(x,"Deleted")})}}})});
+        $("#shAdd").onclick=function(){var a=$("#sh-a").value,b=$("#sh-b").value;if(!a||!b||a===b){toast("Pick two different racers.");return}
+          var base=heats.length?Math.max.apply(null,heats.map(function(h){return h.sort_order||0})):0;
+          db.from("race_heats").insert({id:FRB.uid(),division:$("#sh-div").value.trim()||"Exhibition",label:$("#sh-lab").value.trim()||"Special race",lane1:a,lane2:b,status:"upcoming",run:1,sort_order:base+1}).then(function(x){done(x,"Heat added")})};
       } else if(RSUB==="racers"){
         $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input",tr);
           if(b.getAttribute("data-act")==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
@@ -2813,19 +3038,20 @@ body.rw-tv .rw-fol{display:none}
 </script>
 <script>
 /* ===== Live race view for spectators =====
-   Reads race_state, race_heats, race_racers and approved shoutouts. Updates instantly through
+   Reads race_state, race_heats, race_brackets, race_racers and approved shoutouts. Updates instantly through
    Supabase realtime when available, and also checks every few seconds as a backup.
-   "Follow" choices stay in the viewer's own browser only. */
+   Each heat is two runs with a lane swap; lowest total time wins. "Follow" choices stay in the viewer's browser. */
 (function(){
-  var FR=window.FR; if(!FR) return;
+  var FR=window.FR, FRB=window.FRB; if(!FR||!FRB) return;
   var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var esc=FR.esc, page=$('[data-page="race-watch"]'); if(!page) return;
-  var S={state:null,heats:[],racers:{},list:[],shout:[]}, VIEW="sched", DIV="", Q="", timer=null, cdTimer=null, chan=null, busy=false, prevKey=null, loaded=false;
+  var S={state:null,heats:[],racers:{},list:[],shout:[],brackets:[],N:{}}, VIEW="sched", DIV="", Q="", timer=null, cdTimer=null, chan=null, busy=false, prevKey=null, loaded=false;
   var FOLLOW=[]; try{FOLLOW=JSON.parse(localStorage.getItem("fr-follow")||"[]")||[]}catch(e){FOLLOW=[]}
   function saveF(){try{localStorage.setItem("fr-follow",JSON.stringify(FOLLOW))}catch(e){}}
   function isF(id){return !!id&&FOLLOW.indexOf(id)>=0}
   function setH(el,h){if(!el||el.__h===h) return false; el.innerHTML=h; el.__h=h; return true}
-  var ST={upcoming:["Up next","Coming up next","Racers are getting ready"],staging:["On the ramp","On the ramp","Cars are rolling onto the starting ramp"],
+  var ST={upcoming:["Up next","Coming up next","Two runs with a lane swap. Lowest total time wins."],staging:["On the ramp","On the ramp","Cars are rolling onto the starting ramp"],
     set:["Ready","Ready. Set…","Hands up, eyes forward"],racing:["Racing","And they’re off!","Gravity takes it from here"],finished:["Final","Heat complete",""]};
   function visible(){return !page.hidden}
   function db(){return window.FR_DB}
@@ -2845,9 +3071,11 @@ body.rw-tv .rw-fol{display:none}
   /* ---------- Load ---------- */
   function load(){var d=db(); if(!d||busy) return; busy=true;
     Promise.all([d.from("race_state").select("*").eq("id",1).maybeSingle(),d.from("race_heats").select("*").order("sort_order"),
-      d.from("race_racers").select("*").order("display_name"),d.from("shoutouts").select("id,name,message,created_at").eq("status","approved").order("created_at",{ascending:false}).limit(25)])
-    .then(function(r){busy=false; if(r.some(function(x){return x.error})) return;
-      S.state=r[0].data; S.heats=r[1].data||[]; S.list=r[2].data||[]; S.racers={}; S.list.forEach(function(x){S.racers[x.id]=x}); S.shout=r[3].data||[]; draw(); loaded=true;})
+      d.from("race_racers").select("*").order("display_name"),d.from("shoutouts").select("id,name,message,created_at").eq("status","approved").order("created_at",{ascending:false}).limit(25),
+      d.from("race_brackets").select("*").order("sort_order")])
+    .then(function(r){busy=false; if(r.slice(0,4).some(function(x){return x.error})) return;
+      S.state=r[0].data; S.heats=r[1].data||[]; S.list=r[2].data||[]; S.racers={}; S.list.forEach(function(x){S.racers[x.id]=x}); S.shout=r[3].data||[];
+      S.brackets=r[4].error?[]:(r[4].data||[]); S.N=FRB.numbers(S.heats); draw(); loaded=true;})
     .catch(function(){busy=false});}
 
   /* ---------- Helpers ---------- */
@@ -2856,67 +3084,98 @@ body.rw-tv .rw-fol{display:none}
   function secs(t){return t==null||t===""?"":Number(t).toFixed(3)+"s"}
   function nm(id){var r=racer(id);return r?esc(r.display_name||r.team||"Racer"):"TBD"}
   function nmF(id,win){return '<span class="'+[isF(id)?"me":"",win?"w":""].join(" ").trim()+'">'+nm(id)+'</span>'}
+  /* a racer slot, or what fills it later ("Winner of Heat 5") */
+  function slot(h,s,win){var id=s==="a"?h.lane1:h.lane2;return id?nmF(id,win):'<span class="ph">'+esc(FRB.source(S.heats,h,s,S.N))+'</span>'}
+  function num(h){return S.N[h.id]?"Heat "+S.N[h.id]:""}
   function heatTitle(h){return esc((h.division||"")+(h.division&&h.label?" · ":"")+(h.label||""))}
+  function bye(h){return FRB.isBye(h)}
   function margin(h){return (h.lane1_time!=null&&h.lane2_time!=null)?Math.abs(h.lane1_time-h.lane2_time).toFixed(3):""}
   function loser(h){return h.winner===h.lane1?h.lane2:h.lane1}
-  function current(){var st=S.state||{},h=S.heats.filter(function(x){return x.id===st.current_heat})[0];
-    return h||S.heats.filter(function(x){return x.status!=="finished"})[0]||null}
-  function upcoming(cur){var rest=S.heats.filter(function(x){return x.status!=="finished"&&x!==cur});if(!cur) return rest;
+  function real(){return S.heats.filter(function(x){return !bye(x)})}
+  function current(){var st=S.state||{},h=S.heats.filter(function(x){return x.id===st.current_heat&&!bye(x)})[0];
+    return h||real().filter(function(x){return x.status!=="finished"})[0]||null}
+  function upcoming(cur){var rest=real().filter(function(x){return x.status!=="finished"&&x!==cur});if(!cur) return rest;
     var i=S.heats.indexOf(cur);return rest.filter(function(x){return S.heats.indexOf(x)>i}).concat(rest.filter(function(x){return S.heats.indexOf(x)<i}))}
+  function bracketOf(h){return S.brackets.filter(function(b){return b.id===h.bracket_id})[0]||null}
+  function runTimes(h,id){return id===h.lane1?[h.a_time1,h.a_time2]:[h.b_time1,h.b_time2]}
   function record(id){var w=0,l=0,best=null;S.heats.forEach(function(h){if(h.status!=="finished"||!h.winner||(h.lane1!==id&&h.lane2!==id))return;
-      if(h.winner===id)w++;else l++;var t=h.lane1===id?h.lane1_time:h.lane2_time;if(t!=null&&(best==null||+t<best))best=+t});return{w:w,l:l,best:best}}
-  function divisions(){var d=[];S.heats.forEach(function(x){var v=x.division||"Race";if(d.indexOf(v)<0)d.push(v)});S.list.forEach(function(x){if(x.division&&d.indexOf(x.division)<0)d.push(x.division)});return d}
-  function where(id,cur,up){if(cur&&cur.status!=="finished"&&(cur.lane1===id||cur.lane2===id)) return ["hot",cur.status==="upcoming"?"Up next":"On the track now"];
-    for(var i=0;i<up.length;i++){if(up[i].lane1===id||up[i].lane2===id) return [i<2?"soon":"",i===0?"Next heat":"In "+(i+1)+" heats"]}
-    var r=record(id);return ["",(r.w+r.l)?"Done for now · "+r.w+" W, "+r.l+" L":"No heats scheduled yet"]}
+      if(h.winner===id)w++;else l++;runTimes(h,id).forEach(function(t){if(t!=null&&(best==null||+t<best))best=+t})});return{w:w,l:l,best:best}}
+  /* where a racer stands in their bracket */
+  function standing(id,b){if(!b) return "";var hs=S.heats.filter(function(h){return h.bracket_id===b.id}),fin=hs.filter(function(h){return h.side==="F"})[0]||hs.filter(function(h){return h.side==="W"&&!h.win_to})[0];
+    if(fin&&fin.status==="finished"){if(fin.winner===id)return "Champion";if(fin.lane1===id||fin.lane2===id)return "Runner-up"}
+    var l=0;hs.forEach(function(h){if(h.status==="finished"&&h.winner&&h.winner!==id&&(h.lane1===id||h.lane2===id))l++});
+    if(l>=(b.kind==="double"?2:1)) return "Out";
+    return b.kind==="double"?(l?"Consolation side":"Winners side"):"Still racing"}
+  function racerBracket(id){var h=S.heats.filter(function(x){return x.bracket_id&&(x.lane1===id||x.lane2===id)})[0];return h?bracketOf(h):S.brackets.filter(function(b){return racer(id)&&b.name===racer(id).division})[0]||null}
+  function divisions(){var d=[];S.brackets.forEach(function(b){if(d.indexOf(b.name)<0)d.push(b.name)});S.heats.forEach(function(x){var v=x.division||"Race";if(d.indexOf(v)<0)d.push(v)});return d}
+  function where(id,cur,up){if(cur&&cur.status!=="finished"&&(cur.lane1===id||cur.lane2===id)) return ["hot",cur.status==="upcoming"?"Up next":"On the track now · run "+(cur.run||1)+" of 2"];
+    for(var i=0;i<up.length;i++){if(up[i].lane1===id||up[i].lane2===id) return [i<2?"soon":"",i===0?"Next heat":"In "+(i+1)+" heats"+(S.N[up[i].id]?" (Heat "+S.N[up[i].id]+")":"")]}
+    var r=record(id),s=standing(id,racerBracket(id));
+    if(s==="Champion") return ["soon","Champion! · "+r.w+" W, "+r.l+" L"];
+    if(s==="Out"||s==="Runner-up") return ["",s+" · "+r.w+" W, "+r.l+" L"];
+    return ["",(r.w+r.l)?(s?s+" · ":"")+r.w+" W, "+r.l+" L · next heat depends on results":(s?s+" · waiting on results":"No heats scheduled yet")]}
 
   /* ---------- Draw ---------- */
-  function lane(h,n){var id=h["lane"+n],r=racer(id),t=h["lane"+n+"_time"],fin=h.status==="finished"&&h.winner;
+  function lane(h,n){var run=h.run||1,id=run===2?(n===1?h.lane2:h.lane1):(n===1?h.lane1:h.lane2);
+    var r=racer(id),tt=runTimes(h,id),fin=h.status==="finished"&&h.winner,tot=id===h.lane1?h.lane1_time:h.lane2_time;
     var cls="rw-lane"+(n===1?" l1":"")+(fin?(h.winner===id?" win":" lose"):"")+(isF(id)?" mine":"");
+    var times=[tt[0]!=null?'<span>Run 1 <b>'+secs(tt[0])+'</b></span>':'',tt[1]!=null?'<span>Run 2 <b>'+secs(tt[1])+'</b></span>':''].join("");
     return '<div class="'+cls+'"><div class="rw-av" aria-hidden="true">'+esc(initials(r))+'</div><span class="rw-lp">Lane '+n+'</span>'+
       '<p class="rw-name">'+nm(id)+'</p>'+(r&&r.team?'<p class="rw-team">'+esc(r.team)+'</p>':'')+
       (r&&(r.car_number||r.sponsor)?'<p class="rw-meta">'+[r.car_number?"Car #"+esc(r.car_number):"",r.sponsor?esc(r.sponsor):""].filter(Boolean).join(" · ")+'</p>':'')+
-      (h.status==="finished"&&t!=null?'<p class="rw-time">'+secs(t)+'</p>':'')+(fin&&h.winner===id?'<span class="rw-badge">Winner</span>':'')+
+      (times?'<p class="rw-runs">'+times+'</p>':'')+(fin&&tot!=null?'<p class="rw-time">'+secs(tot)+'<small>total</small></p>':'')+(fin&&h.winner===id?'<span class="rw-badge">Winner</span>':'')+
       (r?'<button class="rw-fol" type="button" data-follow="'+esc(id)+'" aria-pressed="'+isF(id)+'">'+(isF(id)?"★ Following":"☆ Follow")+'</button>':'')+'</div>'}
   function draw(){
-    var st=S.state||{}, live=!!st.live, cur=current(), up=upcoming(cur);
+    var st=S.state||{}, live=!!st.live, cur=current(), up=upcoming(cur), R=real();
     $("#rwLive").hidden=!live; $("#rwIdle").hidden=live; $("#rwOn").hidden=!live; $("#rwBoard").hidden=!live||!S.heats.length;
-    $("#rwActions").hidden=!live; $("#rwUp").hidden=!live||!up.length; $("#rwMine").hidden=!live||!S.list.length; $("#rwProg").hidden=!live||!S.heats.length;
+    $("#rwActions").hidden=!live; $("#rwUp").hidden=!live||!up.length; $("#rwMine").hidden=!live||!S.list.length; $("#rwProg").hidden=!live||!R.length;
     page.style.paddingBottom=live?"":"40px";
     document.body.classList.toggle("rw-bar",live&&visible()); if(live) document.body.style.setProperty("--rwbar",$("#rwActions").offsetHeight+"px");
-    /* cheers ticker */
     $("#rwTicker").hidden=!S.shout.length;
     if(S.shout.length){var run=$("#rwRun");if(setH(run,S.shout.map(function(s){return '<span><b>'+esc(s.name)+':</b> '+esc(s.message)+'</span>'}).join("")))run.style.animationDuration=Math.max(25,S.shout.length*9)+"s"}
     var bn=$("#rwBanner"); bn.hidden=!(live&&st.banner); if(live&&st.banner){bn.className="rw-banner";setH(bn,'<b>Announcement</b><span>'+esc(st.banner)+'</span>')}
     if(!live) return;
-    /* progress */
-    var done=S.heats.filter(function(x){return x.status==="finished"}).length,tot=S.heats.length,pos=cur?S.heats.indexOf(cur)+1:tot;
-    setH($("#rwProg"),'<span>'+(cur?'Heat '+pos+' of '+tot:'All '+tot+' heats done')+'</span><span class="rw-meter" role="img" aria-label="'+done+' of '+tot+' heats complete"><i style="width:'+(tot?Math.round(done/tot*100):0)+'%"></i></span>');
-    /* your racers */
+    var done=R.filter(function(x){return x.status==="finished"}).length,tot=R.length;
+    setH($("#rwProg"),'<span>'+(cur?esc(num(cur))+' of '+tot:'All '+tot+' heats done')+'</span><span class="rw-meter" role="img" aria-label="'+done+' of '+tot+' heats complete"><i style="width:'+(tot?Math.round(done/tot*100):0)+'%"></i></span>');
     if(FOLLOW.length){var items=FOLLOW.filter(function(id){return racer(id)}).map(function(id){var w=where(id,cur,up);return '<div class="rw-mi '+w[0]+'"><b>'+nm(id)+'</b><span>'+w[1]+'</span></div>'}).join("");
       setH($("#rwMine"),'<div class="rw-mine-in"><p class="rw-mt">Your racers</p>'+(items||'<p>Your racers aren’t on today’s list.</p>')+'<button class="rw-link" type="button" data-go="racers">Change</button></div>')}
     else setH($("#rwMine"),'<div class="rw-mine-in"><p><b>Here for someone special?</b> Follow a racer to keep their next heat and results right here.</p><button class="rw-btn red" type="button" data-go="racers">Find a racer</button></div>');
-    /* stage */
     var on=$("#rwOn");
-    if(!cur){setH(on,'<div class="rw-st-top"><span class="rw-state s-finished">Final</span></div><h2 class="rw-head">That’s a wrap on racing!</h2><p class="rw-status">Thanks for cheering. Check Results and Standings below.</p>');}
-    else{var s=cur.status||"upcoming",L={staging:"r",set:"ry",racing:"g"}[s]||"",m=margin(cur),fin=s==="finished"&&cur.winner;
+    if(!cur){setH(on,'<div class="rw-st-top"><span class="rw-state s-finished">Final</span></div><h2 class="rw-head">That’s a wrap on racing!</h2><p class="rw-status">Thanks for cheering. Check the Bracket, Results and Standings below.</p>');}
+    else if(!cur.lane1||!cur.lane2){setH(on,'<div class="rw-st-top"><span class="rw-state">Up next</span><span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div><h2 class="rw-head">Waiting on results</h2><p class="rw-status">'+slot(cur,"a")+' vs '+slot(cur,"b")+'</p>');}
+    else{var s=cur.status||"upcoming",L={staging:"r",set:"ry",racing:"g"}[s]||"",m=margin(cur),fin=s==="finished"&&cur.winner,run=cur.run||1;
       var light=function(c,lbl,onn){return '<span class="rw-lt"><i class="'+c+(onn?" on":"")+'"></i><small>'+lbl+'</small></span>'};
-      setH(on,'<div class="rw-st-top"><span class="rw-state s-'+s+'">'+ST[s][0]+'</span><span class="rw-heat">'+heatTitle(cur)+'</span></div>'+
+      var line=fin?(m?'Won by '+m+' seconds over '+nm(loser(cur))+' (total of both runs)':'Heat complete'):(run===2&&s!=="racing"?'Lanes swapped for run 2.':ST[s][2]);
+      if(!fin&&run===2&&cur.a_time1!=null&&cur.b_time1!=null&&+cur.a_time1!==+cur.b_time1){var ld=+cur.a_time1<+cur.b_time1?cur.lane1:cur.lane2;line+=' <span class="rw-lead">After run 1: '+nm(ld)+' leads by '+Math.abs(cur.a_time1-cur.b_time1).toFixed(3)+'s</span>'}
+      setH(on,'<div class="rw-st-top"><span class="rw-state s-'+s+'">'+ST[s][0]+'</span>'+(fin?'':'<span class="rw-runpill">Run '+run+' of 2</span>')+'<span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div>'+
         '<h2 class="rw-head">'+(fin?nm(cur.winner)+' wins!':ST[s][1])+'</h2>'+
         '<div class="rw-match">'+lane(cur,1)+'<div class="rw-vs" aria-hidden="true">VS</div>'+lane(cur,2)+'</div>'+
         '<div class="rw-lights" role="img" aria-label="Starting lights: '+(L?({r:"red",ry:"red and amber",g:"green"})[L]:"off")+'">'+light("r","Ramp",L.indexOf("r")>=0)+light("y","Set",L.indexOf("y")>=0)+light("g","Go",L==="g")+'</div>'+
-        '<p class="rw-status">'+(fin?(m?'Won by '+m+' seconds over '+nm(loser(cur)):'Heat complete'):ST[s][2])+'</p>');
+        '<p class="rw-status">'+line+'</p>');
       var key=cur.id+":"+s; if(loaded&&prevKey&&prevKey!==key&&fin){var stg=$("#rwStage");stg.classList.remove("rw-cele");void stg.offsetWidth;stg.classList.add("rw-cele");setTimeout(function(){stg.classList.remove("rw-cele")},3000)} prevKey=key;}
-    /* coming up */
     setH($("#rwUp"),'<h2>Coming up</h2><div class="rw-up">'+up.slice(0,3).map(function(x,i){var mine=isF(x.lane1)||isF(x.lane2);
-      return '<div class="rw-upc'+(i===0?' first':'')+(mine?' mine':'')+'"><p class="rw-in">'+(i===0?'Next heat':'In '+(i+1)+' heats')+'</p><p class="rw-uph">'+heatTitle(x)+'</p><p class="rw-vsl">'+nmF(x.lane1)+'<span class="vs">vs</span>'+nmF(x.lane2)+'</p></div>'}).join("")+'</div>');
+      return '<div class="rw-upc'+(i===0?' first':'')+(mine?' mine':'')+'"><p class="rw-in">'+(i===0?'Next heat':'In '+(i+1)+' heats')+' · '+esc(num(x))+'</p><p class="rw-uph">'+heatTitle(x)+'</p><p class="rw-vsl">'+slot(x,"a")+'<span class="vs">vs</span>'+slot(x,"b")+'</p></div>'}).join("")+'</div>');
     view(cur,up);
   }
+  function card(h){var fin=h.status==="finished",isB=bye(h),cur=current(),on=cur&&cur.id===h.id&&!fin;
+    if(isB&&h.a_bye&&h.b_bye) return '';
+    var row=function(s){var id=s==="a"?h.lane1:h.lane2,isW=fin&&h.winner&&h.winner===id,dead=s==="a"?h.a_bye:h.b_bye,t=fin?(s==="a"?h.lane1_time:h.lane2_time):null;
+      return '<div class="bk-r'+(isW?' w':'')+(dead?' dead':'')+'"><span>'+(dead?'Bye':slot(h,s,isW))+'</span><b>'+(t!=null?Number(t).toFixed(3):isW?'✓':'')+'</b></div>'};
+    return '<div class="bk-c'+(on?' on':'')+(isB?' bye':'')+'"><p class="bk-h">'+(isB?'Bye':esc(num(h)))+(on?' · On track':fin?' · Final':'')+'</p>'+row("a")+row("b")+'</div>'}
+  function bracketHTML(b){var hs=S.heats.filter(function(h){return h.bracket_id===b.id}),sides=b.kind==="double"?[["W","Winners side"],["L","Consolation side"],["F","Championship"]]:[["W","Bracket"]];
+    return '<div class="bk"><h3>'+esc(b.name)+' <small>'+(b.kind==="double"?"Double":"Single")+' elimination · '+b.car_count+' cars</small></h3>'+sides.map(function(sd){
+      var inSide=hs.filter(function(h){return h.side===sd[0]}),rounds=[];inSide.forEach(function(h){if(rounds.indexOf(h.round)<0)rounds.push(h.round)});rounds.sort(function(a,b){return a-b});
+      if(!inSide.length) return '';
+      return '<p class="bk-side">'+sd[1]+'</p><div class="bk-scroll" tabindex="0" role="region" aria-label="'+esc(b.name)+' '+sd[1]+'"><div class="bk-cols">'+rounds.map(function(r){var col=inSide.filter(function(h){return h.round===r}).sort(function(a,b){return a.slot-b.slot}),
+        lab=sd[0]==="F"?"Final":(col[0].label||"").split(" · ")[0];
+        return '<div class="bk-col"><p class="bk-rt">'+esc(lab)+'</p><div class="bk-stack">'+col.map(card).join("")+'</div></div>'}).join("")+'</div></div>'}).join("")+'</div>'}
   function view(cur,up){
     $$('.rw-tabs button',page).forEach(function(b){b.setAttribute("aria-selected",String(b.getAttribute("data-view")===VIEW))});
-    var divs=divisions(), dv=$("#rwDivs"), useDiv=VIEW==="sched"||VIEW==="results"||VIEW==="stand"; if(DIV&&divs.indexOf(DIV)<0) DIV="";
+    var bt=$('.rw-tabs [data-view="bracket"]',page); if(bt) bt.hidden=!S.brackets.length; if(VIEW==="bracket"&&!S.brackets.length) VIEW="sched";
+    var divs=divisions(), dv=$("#rwDivs"), useDiv=VIEW==="sched"||VIEW==="results"||VIEW==="stand"||VIEW==="bracket"; if(DIV&&divs.indexOf(DIV)<0) DIV="";
+    if(VIEW==="bracket"&&!DIV) DIV=(cur&&cur.bracket_id&&cur.division)||(S.brackets[0]&&S.brackets[0].name)||"";
     dv.hidden=!useDiv||divs.length<2;
-    setH(dv,['<button type="button" data-div="" aria-pressed="'+(!DIV)+'">All divisions</button>'].concat(divs.map(function(d){return '<button type="button" data-div="'+esc(d)+'" aria-pressed="'+(DIV===d)+'">'+esc(d)+'</button>'})).join(""));
+    setH(dv,(VIEW==="bracket"?[]:['<button type="button" data-div="" aria-pressed="'+(!DIV)+'">All</button>']).concat((VIEW==="bracket"?S.brackets.map(function(b){return b.name}):divs).map(function(d){return '<button type="button" data-div="'+esc(d)+'" aria-pressed="'+(DIV===d)+'">'+esc(d)+'</button>'})).join(""));
     var box=$("#rwView"), inDiv=function(x){return !DIV||(x.division||"Race")===DIV}, none='<p class="rw-empty">Nothing here yet.</p>';
     if(VIEW==="racers"){
       if(box.__mode!=="racers"){box.__mode="racers";box.__h=null;box.innerHTML='<label class="rw-search" for="rwQ">Find a racer<input type="search" id="rwQ" placeholder="Name, team or car number" autocomplete="off"></label><p class="rw-fine">Tap Follow and their next heat stays at the top of this page. Saved on this device only.</p><ul class="rw-rl" id="rwRL"></ul>';
@@ -2926,39 +3185,44 @@ body.rw-tv .rw-fol{display:none}
       return;
     }
     box.__mode=VIEW; var html="";
-    if(VIEW==="sched"){var hs=S.heats.filter(inDiv);
-      html=hs.length?'<ol class="rw-list">'+hs.map(function(x){var i=S.heats.indexOf(x)+1,isCur=cur&&x.id===cur.id&&x.status!=="finished",fin=x.status==="finished";
-        var pill=fin?'<span class="rw-pill done">Final</span>':isCur?'<span class="rw-pill live">'+(x.status==="upcoming"?"Up next":"On track")+'</span>':'<span class="rw-pill">Upcoming</span>';
-        return '<li class="rw-row'+(isCur?' cur':'')+(fin?' done':'')+'"><span class="rw-n">'+i+'</span><div><p class="rw-rt">'+heatTitle(x)+'</p><p class="rw-rv">'+nmF(x.lane1,fin&&x.winner===x.lane1)+'<span class="vs">vs</span>'+nmF(x.lane2,fin&&x.winner===x.lane2)+'</p></div><div class="rw-rs">'+pill+(fin&&x.winner?'<small>'+nm(x.winner)+' · '+secs(x.winner===x.lane1?x.lane1_time:x.lane2_time)+'</small>':'')+'</div></li>'}).join("")+'</ol>':none;}
-    else if(VIEW==="results"){var rs=S.heats.filter(function(x){return x.status==="finished"&&x.winner&&inDiv(x)}).sort(function(a,b){return (b.updated_at||"")>(a.updated_at||"")?1:-1});
-      html=rs.length?'<ul class="rw-list">'+rs.map(function(x){var m=margin(x);return '<li class="rw-res"><p class="rw-rt">'+heatTitle(x)+'</p><p class="big">'+nmF(x.winner,true)+' beat '+nmF(loser(x))+(m?' by '+m+'s':'')+'</p>'+(x.lane1_time!=null||x.lane2_time!=null?'<p class="tm">Lane 1 '+nm(x.lane1)+' '+(secs(x.lane1_time)||"no time")+' · Lane 2 '+nm(x.lane2)+' '+(secs(x.lane2_time)||"no time")+'</p>':'')+'</li>'}).join("")+'</ul>':'<p class="rw-empty">Results show up here as soon as each heat finishes.</p>';}
-    else if(VIEW==="stand"){html='<div class="rw-stand">'+(DIV?[DIV]:divisions()).map(function(d){
-        var ids=[];S.list.forEach(function(r){if((r.division||"Race")===d)ids.push(r.id)});S.heats.forEach(function(h){if((h.division||"Race")===d)[h.lane1,h.lane2].forEach(function(id){if(id&&ids.indexOf(id)<0)ids.push(id)})});
-        var rows=ids.map(function(id){var r=record(id);r.id=id;return r}).sort(function(a,b){return b.w-a.w||a.l-b.l||((a.best==null?1e9:a.best)-(b.best==null?1e9:b.best))});
-        return '<h3>'+esc(d)+'</h3>'+(rows.length?'<table><thead><tr><th>#</th><th>Racer</th><th class="c">W</th><th class="c">L</th><th class="bt">Best</th></tr></thead><tbody>'+rows.map(function(r,i){var x=racer(r.id);
-          return '<tr><td><span class="rw-rk">'+(i+1)+'</span></td><td>'+nmF(r.id)+(x&&x.team?'<small>'+esc(x.team)+'</small>':'')+'</td><td class="c">'+r.w+'</td><td class="c">'+r.l+'</td><td class="bt">'+(r.best!=null?r.best.toFixed(3)+"s":"–")+'</td></tr>'}).join("")+'</tbody></table>':none)}).join("")+
-        '<p class="rw-fine">Ranked by wins, then best time. Official placings are announced at the track.</p></div>';}
+    if(VIEW==="sched"){var hs=real().filter(inDiv),ups=S.heats.filter(function(x){return bye(x)&&!(x.a_bye&&x.b_bye)&&x.winner&&x.bracket_id&&inDiv(x)&&x.round===1&&x.side==="W"});
+      html=(hs.length?'<ol class="rw-list">'+hs.map(function(x){var isCur=cur&&x.id===cur.id&&x.status!=="finished",fin=x.status==="finished";
+        var pill=fin?'<span class="rw-pill done">Final</span>':isCur?'<span class="rw-pill live">'+(x.status==="upcoming"?"Up next":"On track · run "+(x.run||1))+'</span>':'<span class="rw-pill">Upcoming</span>';
+        return '<li class="rw-row'+(isCur?' cur':'')+(fin?' done':'')+'"><span class="rw-n">'+(S.N[x.id]||"")+'</span><div><p class="rw-rt">'+heatTitle(x)+'</p><p class="rw-rv">'+slot(x,"a",fin&&x.winner===x.lane1)+'<span class="vs">vs</span>'+slot(x,"b",fin&&x.winner===x.lane2)+'</p></div><div class="rw-rs">'+pill+(fin&&x.winner?'<small>'+nm(x.winner)+(x.lane1_time!=null?' · '+secs(x.winner===x.lane1?x.lane1_time:x.lane2_time)+' total':'')+'</small>':'')+'</div></li>'}).join("")+'</ol>':none)+
+        (ups.length?'<p class="rw-fine">First-round byes: '+ups.map(function(x){return nm(x.winner)+' ('+esc(x.division)+')'}).join(", ")+' move straight to the next round.</p>':'');}
+    else if(VIEW==="results"){var rs=real().filter(function(x){return x.status==="finished"&&x.winner&&inDiv(x)}).sort(function(a,b){return (b.updated_at||"")>(a.updated_at||"")?1:-1});
+      html=rs.length?'<ul class="rw-list">'+rs.map(function(x){var m=margin(x),lo=loser(x),tw=runTimes(x,x.winner),tl=runTimes(x,lo);
+        var line=function(id,t,tot){return t[0]!=null&&t[1]!=null?nm(id)+' '+Number(t[0]).toFixed(3)+' + '+Number(t[1]).toFixed(3)+' = <b>'+Number(tot).toFixed(3)+'s</b>':''};
+        return '<li class="rw-res"><p class="rw-rt">'+esc(num(x))+' · '+heatTitle(x)+'</p><p class="big">'+nmF(x.winner,true)+' beat '+nmF(lo)+(m?' by '+m+'s':'')+'</p>'+
+          (x.lane1_time!=null?'<p class="tm">'+line(x.winner,tw,x.winner===x.lane1?x.lane1_time:x.lane2_time)+'<br>'+line(lo,tl,lo===x.lane1?x.lane1_time:x.lane2_time)+'</p>':'<p class="tm">Decided without times</p>')+'</li>'}).join("")+'</ul>':'<p class="rw-empty">Results show up here as soon as each heat finishes.</p>';}
+    else if(VIEW==="stand"){html='<div class="rw-stand">'+(DIV?[DIV]:divisions()).map(function(d){var b=S.brackets.filter(function(x){return x.name===d})[0];
+        var ids=[];S.heats.forEach(function(h){if((h.division||"Race")===d)[h.lane1,h.lane2].forEach(function(id){if(id&&ids.indexOf(id)<0)ids.push(id)})});S.list.forEach(function(r){if((r.division||"")===d&&ids.indexOf(r.id)<0&&!b)ids.push(r.id)});
+        var rank={"Champion":0,"Runner-up":1,"Winners side":2,"Still racing":2,"Consolation side":3,"Out":4,"":2};
+        var rows=ids.map(function(id){var r=record(id);r.id=id;r.s=standing(id,b);return r}).sort(function(a,c){return rank[a.s]-rank[c.s]||c.w-a.w||a.l-c.l||((a.best==null?1e9:a.best)-(c.best==null?1e9:c.best))});
+        return '<h3>'+esc(d)+(b?' <small>'+(b.kind==="double"?"Double":"Single")+' elimination</small>':'')+'</h3>'+(rows.length?'<table><thead><tr><th>Racer</th><th class="c">W</th><th class="c">L</th><th class="bt">Best run</th></tr></thead><tbody>'+rows.map(function(r){var x=racer(r.id);
+          return '<tr><td>'+nmF(r.id)+(r.s?' <span class="rw-tagx t-'+r.s.split(" ")[0].toLowerCase()+'">'+esc(r.s)+'</span>':'')+(x&&x.team?'<small>'+esc(x.team)+'</small>':'')+'</td><td class="c">'+r.w+'</td><td class="c">'+r.l+'</td><td class="bt">'+(r.best!=null?r.best.toFixed(3)+"s":"–")+'</td></tr>'}).join("")+'</tbody></table>':none)}).join("")+
+        '<p class="rw-fine">Racers still in the bracket are listed first. Official placings are announced at the track.</p></div>';}
+    else if(VIEW==="bracket"){var bb=S.brackets.filter(function(b){return b.name===DIV})[0]||S.brackets[0];html=bb?bracketHTML(bb)+'<p class="rw-fine">Each heat is two runs with a lane swap. Totals shown in seconds.</p>':none;}
     else {html=(S.shout.length?'<ul class="rw-cheer">'+S.shout.map(function(s){return '<li><b>'+esc(s.name)+'</b>'+esc(s.message)+'</li>'}).join("")+'</ul>':'<p class="rw-empty">No cheers yet. Be the first!</p>')+'<p style="margin-top:12px"><button class="btn deep" type="button" data-so="1">Send a shout-out</button></p>';}
     setH(box,html);
   }
-  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 
   /* ---------- Taps anywhere on the page ---------- */
   page.addEventListener("click",function(e){var t=e.target.closest("[data-follow],[data-div],[data-view],[data-go],[data-so]");if(!t||document.body.classList.contains("fr-editing")) return;
     if(t.hasAttribute("data-follow")){var id=t.getAttribute("data-follow"),i=FOLLOW.indexOf(id);if(i>=0)FOLLOW.splice(i,1);else FOLLOW.push(id);saveF();draw();return}
     if(t.hasAttribute("data-div")){DIV=t.getAttribute("data-div");draw();return}
-    if(t.hasAttribute("data-view")){VIEW=t.getAttribute("data-view");draw();return}
+    if(t.hasAttribute("data-view")){var was=VIEW;VIEW=t.getAttribute("data-view");if(VIEW==="bracket"||was==="bracket")DIV="";draw();return}
     if(t.hasAttribute("data-so")){soOpen(true);return}
     VIEW=t.getAttribute("data-go");draw();$("#rwBoard").scrollIntoView({behavior:"smooth",block:"start"});
     if(VIEW==="racers") setTimeout(function(){var q=$("#rwQ");if(q)q.focus({preventScroll:true})},400);});
-  $(".rw-tabs",page).addEventListener("keydown",function(e){if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;var b=$$(".rw-tabs button",page),i=b.indexOf(document.activeElement);if(i<0)return;
+  $(".rw-tabs",page).addEventListener("keydown",function(e){if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;var b=$$(".rw-tabs button",page).filter(function(x){return !x.hidden}),i=b.indexOf(document.activeElement);if(i<0)return;
     var n=b[(i+(e.key==="ArrowRight"?1:b.length-1))%b.length];n.focus();n.click();});
 
   /* ---------- Start / stop with the page ---------- */
   function start(){countdown(); clearInterval(cdTimer); cdTimer=setInterval(countdown,30000);
     if(!db()){setTimeout(function(){if(visible())start()},600);return}
     load(); clearInterval(timer); timer=setInterval(function(){if(visible())load()},window.FR_TEST?3000:15000);
-    var d=db(); if(!chan&&d.channel){try{chan=d.channel("race-live");["race_state","race_heats","race_racers","shoutouts"].forEach(function(t){chan.on("postgres_changes",{event:"*",schema:"public",table:t},function(){load()})});chan.subscribe()}catch(e){chan=null}}}
+    var d=db(); if(!chan&&d.channel){try{chan=d.channel("race-live");["race_state","race_heats","race_racers","race_brackets","shoutouts"].forEach(function(t){chan.on("postgres_changes",{event:"*",schema:"public",table:t},function(){load()})});chan.subscribe()}catch(e){chan=null}}}
   function stop(){document.body.classList.remove("rw-bar");clearInterval(timer);clearInterval(cdTimer);timer=cdTimer=null;tv(false);
     if(chan&&db()&&db().removeChannel){try{db().removeChannel(chan)}catch(e){}} chan=null;}
   function onRoute(){if(location.hash==="#race-watch") start(); else if(timer||cdTimer) stop()}
