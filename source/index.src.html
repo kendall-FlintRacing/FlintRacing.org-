@@ -8,7 +8,7 @@
 <style>
 /* Layout: rebuild of the live Flint Racing homepage. Full-width bands on a 1040px column; dark dotted sections, red racing bands, mist-gray light sections. Fixed light appearance. */
 :root{
-  --red:#e21b2d; --red2:#ff3346; --red-deep:#b3152d; --red-final:#c51831; --pink:#ff5a68;
+  --red:#d2141c; --red2:#e0242b; --red-deep:#b01218; --red-final:#c0141b; --pink:#e5363c;
   --ink:#111113; --char:#19191c; --night:#17191f; --black:#0b0b0b; --card-dark:#22242b;
   --steel:#6d7077; --text:#191c22; --mist:#f3f4f6; --mist2:#f5f6f7; --line:#d9dbde; --paper:#ffffff;
   --amber:#f5b82e; --green:#2fc26b;
@@ -130,7 +130,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,51,70,0)}100%{box-shadow:0 0 0 0 rgba(255,51,70,0)}}
 .hero .eyebrow{color:var(--pink);font-size:.8rem;letter-spacing:.18em}
 .hero h1{font-size:clamp(3.6rem,11vw,8.8rem);font-weight:800;line-height:.96;letter-spacing:-.03em;color:#fff;text-align:center;justify-self:stretch;margin-inline:auto;
-  text-shadow:0 0 2px rgba(255,255,255,.9),0 0 10px rgba(255,90,104,.55),0 0 26px rgba(226,27,45,.55),0 0 54px rgba(226,27,45,.35);animation:neon-on 2.4s ease-out 1 both}
+  text-shadow:0 2px 0 rgba(0,0,0,.35),0 0 18px rgba(210,20,28,.75),0 0 40px rgba(210,20,28,.55),0 0 80px rgba(210,20,28,.35);-webkit-text-stroke:0;animation:neon-on 2.4s ease-out 1 both}
 .hero h1 span{display:block;padding-left:.03em}
 @keyframes neon-on{0%,8%{opacity:.25;text-shadow:none}10%{opacity:1}12%{opacity:.35;text-shadow:none}16%,100%{opacity:1}}
 @media (max-width:420px){.hero h1{font-size:clamp(3rem,15vw,3.6rem)}}
@@ -189,7 +189,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:700px){.lane{grid-template-columns:52px minmax(0,1fr) 28px;padding:18px 18px}.lane p{grid-column:2;grid-row:2}.lane .arr{grid-row:1/3;grid-column:3}.lane .num{font-size:2.2rem;grid-row:1/3}}
 
 /* Spirit shop */
-.spirit{background:#d81b2f;color:#fff;position:relative;overflow:hidden;border-top:3px solid var(--ink);border-bottom:3px solid #ff5a68}
+.spirit{background:#d81b2f;color:#fff;position:relative;overflow:hidden;border-top:3px solid var(--ink);border-bottom:3px solid #e5363c}
 .spirit .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:center;min-height:580px;padding-block:64px}
 .spirit-tag{display:inline-block;background:#fff;color:var(--ink);font:700 .72rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:7px 9px}
 .spirit h2{font-size:clamp(3rem,6vw,4.4rem);color:#fff;margin:14px 0 22px}
@@ -289,7 +289,7 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 
 /* Final CTA */
 .final{background:var(--red-final);color:#fff;text-align:center;padding-block:clamp(4rem,7vw,5.5rem);background-image:radial-gradient(rgba(255,255,255,.06) .8px,transparent .8px);background-size:6px 6px}
-.final h2{font-size:clamp(3rem,6.5vw,4.8rem);color:#fff;max-width:14ch;margin:0 auto 28px}
+.final h2{font-size:clamp(2.6rem,6vw,4.8rem);color:#fff;max-width:none;margin:0 auto 28px;text-align:center;text-wrap:balance}
 
 /* Program entry */
 .program-entry{background:var(--mist);padding-block:clamp(1.5rem,3vw,2rem) 22px}
@@ -520,7 +520,7 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .q-card .opt{font-weight:400;color:#6d7077}
 .q-card input[type=text],.q-card input[type=email],.q-card input[type=tel],.q-card input[type=number],.q-card select,.q-card textarea{width:100%;min-width:0;font:400 1rem/1.4 var(--body);color:var(--ink);background:#fff;border:1.5px solid #c9ccd1;border-radius:4px;padding:11px 12px}
 .q-card textarea{min-height:110px;resize:vertical}
-.q-card input:focus,.q-card select:focus,.q-card textarea:focus{border-color:var(--red-deep);outline:2px solid rgba(179,21,45,.2);outline-offset:0}
+.q-card input:focus,.q-card select:focus,.q-card textarea:focus{border-color:var(--red-deep);outline:2px solid rgba(176,18,24,.2);outline-offset:0}
 .q-help{font-size:.84rem;color:#6d7077;margin-top:-6px}
 .picks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width:600px){.picks{grid-template-columns:1fr}}
@@ -873,7 +873,7 @@ a.ycell:hover{background:#fbe2e5}
 .prt-acts .btn{padding:10px 16px;min-height:0}
 .prt-link{font-weight:700;color:var(--red-deep)}
 .prt-ico{display:grid;place-items:center;width:48px;height:58px;border-radius:6px;font:900 .78rem/1 var(--body);letter-spacing:.04em;color:#fff;background:#4a4d55;clip-path:polygon(0 0,72% 0,100% 22%,100% 100%,0 100%)}
-.prt-ico.k-pdf{background:#c51831}.prt-ico.k-doc{background:#1d5fb4}.prt-ico.k-xls{background:#17803d}.prt-ico.k-img{background:#7a4fc0}
+.prt-ico.k-pdf{background:#c0141b}.prt-ico.k-doc{background:#1d5fb4}.prt-ico.k-xls{background:#17803d}.prt-ico.k-img{background:#7a4fc0}
 .prt-empty{background:#fff;color:var(--ink);border-radius:10px;padding:24px;max-width:620px}
 .prt-empty h2{color:var(--ink);margin-bottom:8px}
 .prt-drop{display:grid;gap:6px;justify-items:center;text-align:center;border:2px dashed #c3c6cc;border-radius:12px;padding:22px;margin:14px 0;cursor:pointer;background:#fafafb;transition:border-color .15s,background .15s}
@@ -1078,9 +1078,9 @@ a.ycell:hover{background:#fbe2e5}
 .fr-bar .mini.solid{background:var(--red);border-color:#fff;color:#fff}
 .fr-pill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:55;background:var(--ink);color:#fff;border:2px solid var(--red);border-radius:999px;padding:10px 16px;font:700 .85rem/1 var(--body);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3)}
 body.fr-editing{padding-bottom:70px}
-body.fr-editing [data-ck]{outline:1.5px dashed rgba(226,27,45,.55);outline-offset:2px;cursor:text}
+body.fr-editing [data-ck]{outline:1.5px dashed rgba(210,20,28,.55);outline-offset:2px;cursor:text}
 body.fr-editing a[data-ck]{cursor:pointer}
-body.fr-editing [data-ck]:hover{outline-color:var(--red);background:rgba(226,27,45,.06)}
+body.fr-editing [data-ck]:hover{outline-color:var(--red);background:rgba(210,20,28,.06)}
 body.fr-editing [data-ck][contenteditable="true"]:focus{outline:2px solid var(--red);background:rgba(255,255,255,.9);color:var(--ink)}
 .fr-imgbtn{position:absolute;z-index:58;background:var(--red);color:#fff;border:2px solid #fff;border-radius:4px;font:700 .82rem/1 var(--body);padding:9px 12px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .fr-test{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:56;max-width:min(360px,calc(100vw - 28px));background:#fff7e0;color:#5b4500;border:2px solid #d9a400;border-radius:6px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.82rem;box-shadow:0 8px 20px rgba(0,0,0,.2)}
@@ -1125,7 +1125,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .acc-spaces a{display:grid;gap:3px;padding:12px 14px;border:1px solid #34333a;border-radius:6px;color:#fff;text-decoration:none;background:rgba(255,255,255,.03)}
 .acc-spaces a b{font-weight:800}
 .acc-spaces a span{color:#a9abb1;font-size:.88rem}
-.acc-spaces a.yours{border-color:var(--pink);background:rgba(255,90,104,.1)}
+.acc-spaces a.yours{border-color:var(--pink);background:rgba(210,20,28,.1)}
 .acc-spaces a.yours b::after{content:" · yours";color:var(--pink);font-weight:700}
 .auth h2{font-size:clamp(1.6rem,3vw,2.1rem);color:var(--ink)}
 .auth .f{display:block;font:600 .92rem/1.3 var(--body);color:var(--ink);margin-top:12px}
@@ -1146,7 +1146,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .auth-sent p{margin-top:8px}
 .auth-steps{margin:10px 0 12px 18px;color:#4a4d55;font-size:.92rem;display:grid;gap:4px}
 .auth .msg{margin-top:10px;font-weight:600;min-height:1.2em}
-.auth .msg.err{color:#b3152d}.auth .msg.ok{color:#1d6b3a}
+.auth .msg.err{color:#b01218}.auth .msg.ok{color:#1d6b3a}
 .acc-k{font:800 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep)}
 .acc-email{color:#4a4d55;margin-top:4px}
 .acc-sub{font:800 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#5a5d64;margin-top:18px}
@@ -1162,7 +1162,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .mem-k{font:800 .74rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--red-deep)}
 .mem-f{display:grid;gap:6px;font:700 .84rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:#3b3e45}
 .mem-f input{width:100%;font:700 1.15rem/1.2 var(--body);letter-spacing:.02em;text-transform:none;border:2px solid #c3c6cc;border-radius:8px;padding:12px 14px;background:#fff;color:var(--ink)}
-.mem-f input:focus{outline:none;border-color:var(--red-deep);box-shadow:0 0 0 3px rgba(179,21,45,.18)}
+.mem-f input:focus{outline:none;border-color:var(--red-deep);box-shadow:0 0 0 3px rgba(176,18,24,.18)}
 .mem-pw{position:relative;display:block}
 .mem-pw input{padding-right:76px}
 .mem-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--red-deep);font:800 .78rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:10px;cursor:pointer}
@@ -1218,7 +1218,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .reg-card .f small{font-weight:500;color:#5a5d64}
 .reg-card input[type=text],.reg-card input[type=email],.reg-card input[type=tel],.reg-card input[type=password],.reg-card textarea,.reg-card select{width:100%;font:500 1rem/1.3 var(--body);border:2px solid #c3c6cc;border-radius:8px;padding:11px 12px;background:#fff;color:var(--ink)}
 .reg-card textarea{min-height:90px}
-.reg-card input:focus,.reg-card textarea:focus,.reg-card select:focus{outline:none;border-color:var(--red-deep);box-shadow:0 0 0 3px rgba(179,21,45,.15)}
+.reg-card input:focus,.reg-card textarea:focus,.reg-card select:focus{outline:none;border-color:var(--red-deep);box-shadow:0 0 0 3px rgba(176,18,24,.15)}
 .reg-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:560px){.reg-2{grid-template-columns:1fr}}
 .reg-hint{color:#5a5d64;font-size:.92rem}
@@ -1340,7 +1340,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .code-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:10px 0;border-bottom:1px solid #eef0f2}
 .code-row>div{display:grid;gap:2px;max-width:46ch}
 .code-row small{color:#5a5d64}
-.code-row .code-on{color:#1d6b3a;font-weight:700}.code-row .code-off{color:#b3152d;font-weight:700}
+.code-row .code-on{color:#1d6b3a;font-weight:700}.code-row .code-off{color:#b01218;font-weight:700}
 .code-row form{display:flex;gap:6px;flex-wrap:wrap}
 .code-row input{width:150px;font:800 1rem/1 var(--body);letter-spacing:.2em;border:1.5px solid #c9ccd1;border-radius:4px;padding:9px 10px}
 .tgl{position:relative;display:inline-block;width:44px;height:24px;cursor:pointer}
@@ -1461,7 +1461,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .t-form input:focus{outline:3px solid var(--red);border-style:solid}
 .t-main .btn{justify-self:start}
 .t-or{background:#fff8e1;border-radius:6px;padding:12px 14px;color:#3d2e00;font-size:.95rem;margin-top:4px}
-.t-msg{font-weight:700;color:#b3152d;min-height:1.2em}
+.t-msg{font-weight:700;color:#b01218;min-height:1.2em}
 .t-fine{font-size:.85rem;color:#5a5d64}
 .t-fine a{color:var(--red-deep)}
 .t-stub{border-left:3px dashed rgba(255,255,255,.55);display:grid;place-items:center;align-content:center;gap:8px;color:#fff;padding:14px 6px}
@@ -1538,9 +1538,9 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .pd-new{background:#f3f4f6;border-radius:6px;padding:12px 14px}
 .pd-new a{color:var(--red-deep)}
 /* ===== Programs & resources lanes ===== */
-.lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(1.2rem,3vw,1.8rem)}
-@media (max-width:1000px){.lanes{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.lanes{grid-template-columns:1fr}}
+.rlanes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(1.2rem,3vw,1.8rem)}
+@media (max-width:1000px){.rlanes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.rlanes{grid-template-columns:1fr}}
 .pd-lanes{margin-top:0;grid-template-columns:repeat(2,1fr)}
 @media (max-width:560px){.pd-lanes{grid-template-columns:1fr}}
 .lane-col{display:grid;gap:8px;align-content:start}
@@ -1627,7 +1627,7 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .ph-ph figcaption{font-size:.85rem;padding:0 8px}
 .ph-ph .mini{margin:0 8px;justify-self:start}
 .ph-consent{margin:10px 0;line-height:1.4}
-.st-draft{color:#5a5d64}.st-submitted{color:#8a6400;font-weight:700}.st-approved{color:#1d6b3a;font-weight:700}.st-returned{color:#b3152d;font-weight:700}
+.st-draft{color:#5a5d64}.st-submitted{color:#8a6400;font-weight:700}.st-approved{color:#1d6b3a;font-weight:700}.st-returned{color:#b01218;font-weight:700}
 .te-steps{margin:8px 0 0 20px;display:grid;gap:8px;color:#2a2d33}
 .te-ed textarea{min-height:90px}
 .team-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #eef0f2}
@@ -1732,7 +1732,7 @@ body.rk-on .fr-pill{display:none!important}
 .rk-link{background:none;border:0;color:var(--red-deep);font:700 .9rem/1 var(--body);text-decoration:underline;cursor:pointer;padding:10px 0 0}
 .rk-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;align-items:end}
 .rk-form select{display:block;width:100%;margin-top:6px;font:400 1rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:10px 12px;background:#fff}
-.rk-check{font-weight:700;margin:12px 0 0}.rk-check.good{color:#1d6b3a}.rk-check.bad{color:#b3152d}
+.rk-check{font-weight:700;margin:12px 0 0}.rk-check.good{color:#1d6b3a}.rk-check.bad{color:#b01218}
 .rk-brow{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid #eef0f2}
 .rk-brow small{display:block;color:#5a5d64}
 .rk-draw{background:#fff8e1;border:2px solid #f5b82e;border-radius:8px;padding:14px;margin:14px 0}
@@ -1828,7 +1828,7 @@ body.rk-on .fr-pill{display:none!important}
 .rw-lane{background:rgba(255,255,255,.04);border:1px solid #3a3940;border-top:4px solid #f3f4f6;border-radius:6px;padding:clamp(14px,3vw,22px);display:grid;gap:6px;justify-items:center;min-width:0;transition:transform .3s,border-color .3s,background .3s,opacity .3s}
 .rw-lane.l1{border-top-color:var(--red)}
 .rw-lane.mine{box-shadow:inset 0 0 0 2px var(--pink)}
-.rw-lane.win{border-color:#fff;background:rgba(226,27,45,.16);transform:scale(1.03)}
+.rw-lane.win{border-color:#fff;background:rgba(210,20,28,.16);transform:scale(1.03)}
 .rw-lane.lose{opacity:.5}
 .rw-av{width:clamp(56px,8vw,72px);height:clamp(56px,8vw,72px);border-radius:8px;background:#fff;color:var(--red-deep);display:grid;place-items:center;font:800 clamp(1.5rem,3vw,2rem)/1 var(--body);box-shadow:0 6px 16px rgba(0,0,0,.35)}
 .rw-lp{font:800 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:5px 8px;border-radius:3px;background:#f3f4f6;color:var(--ink);margin-top:4px}
@@ -1848,7 +1848,7 @@ body.rk-on .fr-pill{display:none!important}
 .rw-lt{display:grid;gap:6px;justify-items:center}
 .rw-lt i{width:30px;height:30px;border-radius:50%;background:#2a2a2f;border:1px solid #3c3c42;transition:background .2s,box-shadow .2s}
 .rw-lt small{font:700 .62rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#8d9097}
-.rw-lt i.on.r{background:#ff3346;box-shadow:0 0 16px #ff3346}
+.rw-lt i.on.r{background:#e0242b;box-shadow:0 0 16px #e0242b}
 .rw-lt i.on.y{background:#f5b82e;box-shadow:0 0 16px #f5b82e}
 .rw-lt i.on.g{background:#2fc26b;box-shadow:0 0 16px #2fc26b}
 .rw-status{font:700 1.15rem/1.35 var(--body);color:#fff;margin-top:14px;position:relative}
@@ -1952,7 +1952,7 @@ tr:first-child .rw-rk{background:var(--red);color:#fff}
 .bk-rt{font:700 .78rem/1.2 var(--body);color:#5a5d64;margin-bottom:8px;min-height:1.2em}
 .bk-stack{display:flex;flex-direction:column;justify-content:space-around;gap:10px;flex:1}
 .bk-c{background:#fff;border:1px solid #d4d6da;border-radius:5px;overflow:hidden}
-.bk-c.on{border-color:var(--red);box-shadow:0 0 0 2px rgba(226,27,45,.25)}
+.bk-c.on{border-color:var(--red);box-shadow:0 0 0 2px rgba(210,20,28,.25)}
 .bk-c.bye{border-style:dashed;opacity:.7}
 .bk-h{font:700 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#5a5d64;background:#f3f4f6;padding:6px 8px}
 .bk-c.on .bk-h{background:var(--red-deep);color:#fff}
@@ -2218,7 +2218,7 @@ body.rw-tv .rw-fol{display:none}
   </section>
 
   <section class="final">
-    <div class="wrap"><h2>Help Flint build what comes next.</h2><a class="btn white" href="#programs">Get Involved →</a></div>
+    <div class="wrap"><h2>Help Flint build<br>what comes next.</h2><a class="btn white" href="#programs">Get Involved →</a></div>
   </section>
 
   <section class="program-entry">
@@ -2392,22 +2392,22 @@ body.rw-tv .rw-fol{display:none}
     <figure class="schematic" style="margin:0">
       <svg viewBox="-20 -70 1260 720" role="img" aria-label="Line drawing of a soap box car. Labels show the shell, the cockpit, steering and brakes at the front of the car, and the wheelbase between the front and rear wheels.">
         <image href="{{IMG:img/web/coloring-car.webp}}" x="0" y="0" width="996" height="512"/>
-        <g fill="none" stroke="#b3152d" stroke-width="3" stroke-linecap="round">
+        <g fill="none" stroke="#b01218" stroke-width="3" stroke-linecap="round">
           <!-- shell -->
-          <path d="M640 118 L700 -10 L820 -10"/><circle cx="640" cy="118" r="7" fill="#b3152d"/>
+          <path d="M640 118 L700 -10 L820 -10"/><circle cx="640" cy="118" r="7" fill="#b01218"/>
           <!-- cockpit -->
-          <path d="M300 96 L250 -10 L130 -10"/><circle cx="300" cy="96" r="7" fill="#b3152d"/>
+          <path d="M300 96 L250 -10 L130 -10"/><circle cx="300" cy="96" r="7" fill="#b01218"/>
           <!-- steering: front axle at the front wheel -->
-          <path d="M618 383 L700 600 L1010 600"/><circle cx="618" cy="383" r="7" fill="#b3152d"/>
+          <path d="M618 383 L700 600 L1010 600"/><circle cx="618" cy="383" r="7" fill="#b01218"/>
           <!-- brakes: front, under the nose -->
-          <path d="M772 344 L1010 470"/><circle cx="772" cy="344" r="7" fill="#b3152d"/>
+          <path d="M772 344 L1010 470"/><circle cx="772" cy="344" r="7" fill="#b01218"/>
           <!-- front direction arrow -->
           <path d="M1010 120 L1190 120 M1165 100 L1190 120 L1165 140"/>
           <!-- wheelbase -->
           <path d="M77 300 L77 640 M618 400 L618 640" stroke-dasharray="6 8" stroke-width="2"/>
           <path d="M77 625 L618 625 M97 610 L77 625 L97 640 M598 610 L618 625 L598 640"/>
         </g>
-        <g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="30" font-weight="700" fill="#b3152d" letter-spacing="2">
+        <g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="30" font-weight="700" fill="#b01218" letter-spacing="2">
           <text x="828" y="0">SHELL DESIGN</text>
           <text x="-10" y="0">COCKPIT</text>
           <text x="1020" y="610">STEERING</text>
@@ -2972,7 +2972,7 @@ body.rw-tv .rw-fol{display:none}
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Programs &amp; Resources</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Programs &amp; resources</p><h1>Find your lane</h1><p>Every Flint Racing program and family resource, sorted into four lanes.</p></section>
-    <div class="lanes" id="resLanes"></div>
+    <div class="rlanes" id="resLanes"></div>
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="rules" hidden>
@@ -3219,10 +3219,11 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Partners carousel (4 per page) ---- */
   var PARTNERS={{PARTNERS}};
   var PARTNERS_DEFAULT=JSON.parse(JSON.stringify(PARTNERS));
-  var sp=0, sPages=PARTNERS.length;
+  var sp=0, sPages=PARTNERS.length, PRELOAD=[];
+  PARTNERS.forEach(function(pg){pg.forEach(function(p){if(p.img){var im=new Image();im.src=p.img;PRELOAD.push(im)}})});
   function drawS(){
     sPages=Math.max(1,PARTNERS.length); if(sp>=sPages) sp=0;
-    $("#sTrack").innerHTML=(PARTNERS[sp]||[]).map(function(p){return p.img ? '<div class="s-card logo" title="'+esc(p.name)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+' logo" loading="lazy"></div>'
+    $("#sTrack").innerHTML=(PARTNERS[sp]||[]).map(function(p){return p.img ? '<div class="s-card logo" title="'+esc(p.name)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+' logo" loading="eager" decoding="async"></div>'
       : '<a class="s-card" href="#support"><b>Your Logo Here</b><span>Become a partner</span></a>'}).join("");
     $("#sCount").textContent=(sp+1)+" / "+sPages;
   }
@@ -3571,10 +3572,10 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
-      {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
-      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
-      {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
-      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",label:"Staff",neon:"#e21b2d",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
+      {paint:"#c0141b",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
+      {paint:"#f2b01e",trim:"#111113",helmet:"#d2141c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
+      {paint:"checker",trim:"#d2141c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
+      {paint:"#16171c",trim:"#d2141c",helmet:"#d2141c",num:"6",label:"Staff",neon:"#d2141c",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
     var LIVE={};
     function impact(i){var el=document.querySelectorAll(".impact .stat strong")[i];return el?el.textContent.trim():""}
     function gxStat(k){var t=new Date();t.setHours(0,0,0,0);var iso=t.toISOString().slice(0,10),up=EVENTS.filter(function(e){return (e.e||e.d)>=iso});
@@ -4787,7 +4788,7 @@ window.FRB=(function(){
       '<h3>This month</h3>'+(monthEv.length?'<ul class="pd-mlist">'+monthEv.map(function(e){return '<li><b>'+fmtDate(e.start_date)+'</b> '+esc(e.title)+'<small>'+when(e)+'</small></li>'}).join("")+'</ul>':'<p class="pd-empty">Nothing scheduled this month.</p>')+
       '<div class="pd-contact"><b>Questions?</b> <a href="mailto:info@flintracing.org">info@flintracing.org</a></div></aside>';
     var tabs='<div class="pd-tabs" role="tablist">'+[["overview","Overview"],["programs","Programs & Resources"]].map(function(x){return '<button type="button" role="tab" data-pdt="'+x[0]+'" aria-selected="'+(PD.tab===x[0])+'">'+x[1]+'</button>'}).join("")+'</div>';
-    var body=PD.tab==="programs"?'<div class="lanes pd-lanes">'+lanesHTML()+'</div>':
+    var body=PD.tab==="programs"?'<div class="rlanes pd-lanes">'+lanesHTML()+'</div>':
       '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3><p>'+when(e)+'</p>'+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div></article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
       '<div class="pd-short"><a href="#programs"><b>Programs</b><span>Ways to build</span></a><a href="#race-watch"><b>Live Race</b><span>Race day feed</span></a><a href="#calendar"><b>Calendar</b><span>The whole year</span></a><a href="#printables"><b>Flyers &amp; Forms</b><span>Print and bring</span></a></div>'+
       '<div class="pd-new"><p class="pd-k">New this year</p><p>Summer fun runs at Cronin Derby Downs. Dates are posted on <a href="#fun-runs">Summer Fun Runs</a> once they’re set.</p></div>';
