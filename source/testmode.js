@@ -35,6 +35,12 @@
       if(n<3){var t=times[n++];F.post(H,h.id,{a1:t[0],b1:t[1],a2:t[2],b2:t[3]})} else {cur=h;h.run=2;h.status="staging";h.a_time1=28.66;h.b_time1=28.94}});
     var now=Date.now();H.forEach(function(h,i){h.updated_at=new Date(now-(60-i)*6e4).toISOString()});
     T.race_brackets=[a.bracket,b.bracket]; T.race_heats=H;
+    var P=[];((window.FR&&window.FR.PARTNERS)||[]).forEach(function(pg){pg.forEach(function(p){if(p.img&&!/your logo/i.test(p.name))P.push(p)})});
+    T.race_ads=P.slice(0,6).map(function(p,i){return{id:"ad"+i,name:p.name,tagline:i===0?"Proud to support Flint racers":null,logo_url:p.img,active:true,sort_order:i}});
+    T.race_racers.forEach(function(x,i){var m=T.race_ads.filter(function(a){return a.name.toLowerCase().indexOf(x.sponsor.split(" ")[0].toLowerCase())>=0})[0];if(m)x.logo_url=m.logo_url});
+    T.race_heat_ads=T.race_ads.length?H.filter(function(h){return !F.isBye(h)}).map(function(h,i){return{heat_id:h.id,ad_id:T.race_ads[i%T.race_ads.length].id}}):[];
+    T.race_show=[{id:1,screen:"race",int_title:null,int_until:null,ad_strip:true,feature_ad:null,feature_at:null,hype_text:null,hype_at:null,fact_text:"Soap box cars have no engines. Gravity does all the work.",pinned_shout:null}];
+    T.race_roles=[];
     T.race_state=[{id:1,live:true,current_heat:cur?cur.id:null,banner:"DEMO RACE (test mode only). These names and times are made up.",updated_at:new Date().toISOString()}];
     var t=Date.now();
     T.shoutouts=[{id:"so1",name:"Grandma Pat",message:"Go Maya! The whole family is cheering at the finish line!",status:"approved",created_at:new Date(t-3e5).toISOString()},
@@ -43,7 +49,7 @@
       {id:"so4",name:"Uncle Ray",message:"Waiting for review: you can approve me in Admin > Race day > Shout-outs.",status:"pending",created_at:new Date(t).toISOString()}];
   }
   load();
-  if(T&&!T.race_brackets){race();save();}
+  if(T&&!T.race_show){race();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org"}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -73,8 +79,10 @@
   var files={};
   window.supabase={createClient:function(){return{
     from:function(t){return new Q(t)},
-    rpc:function(fn,args){if(!T)seed();if(fn==="set_race_controller"){T.race_controllers=[{user_id:"ctl-"+args.p_email,email:args.p_email}];save();return Promise.resolve({data:args.p_email,error:null})}
-      if(fn==="clear_race_controller"){T.race_controllers=[];save();return Promise.resolve({data:null,error:null})}return Promise.resolve({data:null,error:{message:"Unknown function"}})},
+    rpc:function(fn,args){if(!T)seed();T.race_roles=T.race_roles||[];
+      if(fn==="set_race_role"){T.race_roles=T.race_roles.filter(function(x){return x.role!==args.p_role});T.race_roles.push({role:args.p_role,user_id:"u-"+args.p_email,email:args.p_email});save();return Promise.resolve({data:args.p_email,error:null})}
+      if(fn==="clear_race_role"){T.race_roles=T.race_roles.filter(function(x){return x.role!==args.p_role});save();return Promise.resolve({data:null,error:null})}
+      return Promise.resolve({data:null,error:{message:"Unknown function"}})},
     auth:{getSession:function(){return Promise.resolve({data:{session:user?{user:user}:null}})},
       onAuthStateChange:function(cb){listeners.push(cb)},
       signInWithPassword:function(){user={id:"test-admin",email:"test-admin@flintracing.org"};listeners.forEach(function(cb){cb("SIGNED_IN",{user:user})});return Promise.resolve({error:null})},
