@@ -3613,24 +3613,25 @@ body.rw-tv .rw-fol{display:none}
     /* AASBD Super Stock shell. u runs tail (0) to nose (1).
        Side: teardrop. Fullest just ahead of the cockpit, gentle taper to a narrower, soft-edged upright tail.
        Front: an upright egg, taller than wide, a little narrower at the bottom. */
-    var X0=-1.7,X1=1.7;
-    var SW=[0.27,0.285,0.298,0.308,0.316,0.322,0.324,0.322,0.316,0.305,0.29],
-        SH=[0.4,0.41,0.42,0.43,0.438,0.442,0.44,0.432,0.42,0.405,0.39];
-    function cap(u,start){if(u<=start)return 1;var d=(u-start)/(1-start);return Math.sqrt(Math.max(0,1-d*d))}
-    function bodyAt(x){var u=(x-X0)/(X1-X0),w=cr(SW,u),h=cr(SH,u),yc=0.75;
-      /* nose: the top rolls down over the front third, the belly curves up only near the tip, so the nose sits low and round */
-      var st=cap(u,0.66),sb=cap(u,0.86),sw=cap(u,0.76),dn=Math.max(0,(u-0.66)/0.34);yc-=0.1*dn*dn;
-      /* tail: tall and blunt, closing in a short soft radius to an upright end */
-      if(u<0.035){var e=(0.035-u)/0.035,t=Math.sqrt(Math.max(0,1-e*e));st*=t;sb*=t;sw*=t}
-      return {w:Math.max(0.004,w*sw),top:yc+h*Math.max(0.01,st),bot:yc-h*0.94*Math.max(0.01,sb)}}
+    /* Flint Racing Super Stock shell, traced from the Flushing Fireballs side photo (u: 0 = tail, 1 = nose).
+       Flat floor at hub height that sits on the axles. Tail is ~70% of full height and closes in an upright seam.
+       Top rises to the cockpit, stays level along the long opening, then rolls down into a round, low nose. */
+    var X0=-1.7,X1=1.7,FLOOR=0.36,HMAX=0.74,WMAX=0.29;
+    var FT=[0.70,0.74,0.78,0.825,0.87,0.92,0.96,0.98,0.99,0.995,1,1,1,0.985,0.955,0.9,0.82,0.73,0.61,0.47,0.3],
+        FW=[0.2,0.4,0.55,0.66,0.75,0.82,0.88,0.92,0.95,0.98,1,1,1,1,1,1,0.995,0.98,0.95,0.9,0.8];
+    function bodyAt(x){var u=Math.max(0,Math.min(1,(x-X0)/(X1-X0))),h=cr(FT,u),w=cr(FW,u);
+      if(u>0.9){var d=(u-0.9)/0.1,c=Math.sqrt(Math.max(0,1-d*d));h=Math.min(h,0.62*c);w*=Math.sqrt(c)}   /* round nose */
+      if(u<0.015){w*=Math.sqrt(Math.max(0,1-Math.pow((0.015-u)/0.015,2)))}                                /* upright seam at the tail */
+      if(u<0.035){h*=0.86+0.14*Math.sqrt(Math.max(0,1-Math.pow((0.035-u)/0.035,2)))}                         /* softly rounded top corner at the tail */
+      return {w:Math.max(0.003,w*WMAX),top:FLOOR+Math.max(0.006,h*HMAX),bot:FLOOR}}
     function finish(P,I){var N=new Float32Array(P.length);for(var i=0;i<I.length;i+=3){var a=I[i]*3,b=I[i+1]*3,c=I[i+2]*3,
         u=[P[b]-P[a],P[b+1]-P[a+1],P[b+2]-P[a+2]],v=[P[c]-P[a],P[c+1]-P[a+1],P[c+2]-P[a+2]],f=crs(u,v);
         [a,b,c].forEach(function(o){N[o]+=f[0];N[o+1]+=f[1];N[o+2]+=f[2]})}
       for(var j=0;j<N.length;j+=3){var q=nrm([N[j],N[j+1],N[j+2]]);N[j]=q[0];N[j+1]=q[1];N[j+2]=q[2]}
       return {p:new Float32Array(P),n:N,i:new Uint16Array(I)}}
-    function body(){var P=[],I=[],NX=120,NA=48,e=2.0;
+    function body(){var P=[],I=[],NX=140,NA=56,e=2.6;
       for(var r=0;r<=NX;r++){var tt=r/NX,x=X0+(X1-X0)*(0.5-0.5*Math.cos(Math.PI*tt)),b=bodyAt(x),yc=(b.top+b.bot)/2,hy=(b.top-b.bot)/2;
-        for(var a=0;a<NA;a++){var an=a/NA*Math.PI*2,c=Math.cos(an),s=Math.sin(an),egg=1-0.14*Math.max(0,-s);P.push(x,yc+hy*Math.sign(s)*Math.pow(Math.abs(s),2/e),egg*b.w*Math.sign(c)*Math.pow(Math.abs(c),2/e))}}
+        for(var a=0;a<NA;a++){var an=a/NA*Math.PI*2,c=Math.cos(an),s=Math.sin(an),ee=s<0?9:e;P.push(x,yc+hy*Math.sign(s)*Math.pow(Math.abs(s),2/ee),b.w*Math.sign(c)*Math.pow(Math.abs(c),2/ee))}}
       for(r=0;r<NX;r++)for(a=0;a<NA;a++){var i0=r*NA+a,i1=r*NA+(a+1)%NA,i2=(r+1)*NA+a,i3=(r+1)*NA+(a+1)%NA;I.push(i0,i2,i1,i1,i2,i3)}
       [[0,X0],[NX,X1]].forEach(function(cap,k){var b=bodyAt(cap[1]),ci=P.length/3;P.push(cap[1]+(k?0.02:-0.05),(b.top+b.bot)/2,0);
         for(a=0;a<NA;a++){var p=cap[0]*NA+a,q=cap[0]*NA+(a+1)%NA;if(k)I.push(ci,p,q);else I.push(ci,q,p)}});
@@ -3643,21 +3644,21 @@ body.rw-tv .rw-fol{display:none}
       for(var i=0;i<prof.length;i++)for(var j=0;j<=S;j++){var an=j/S*Math.PI*2;P.push(cx+prof[i][0]*Math.cos(an),cy+prof[i][0]*Math.sin(an),cz+prof[i][1])}
       for(i=0;i<prof.length-1;i++)for(j=0;j<S;j++){var a=i*(S+1)+j,b=a+S+1;I.push(a,a+1,b,a+1,b+1,b)}return finish(P,I)}
     function merge(list){var P=[],N=[],I=[];list.forEach(function(g){var o=P.length/3;Array.prototype.push.apply(P,g.p);Array.prototype.push.apply(N,g.n);for(var k=0;k<g.i.length;k++)I.push(g.i[k]+o)});return {p:new Float32Array(P),n:new Float32Array(N),i:new Uint16Array(I)}}
-    function partsGeo(){var b=bodyAt(-0.35),bt=b.top,wr=0.34,hw=0.026,tires=[],hubs=[],axles=[];
-      [[1.3,0],[-1.42,0]].forEach(function(w){var bw=0.9;[-1,1].forEach(function(sd){var z=sd*bw;
+    function partsGeo(){var b=bodyAt(-0.2),bt=b.top,wr=0.33,hw=0.026,tires=[],hubs=[],axles=[];
+      [[1.74,0],[-1.68,0]].forEach(function(w){var bw=0.86;[-1,1].forEach(function(sd){var z=sd*bw;
         tires.push(lathe(w[0],wr,z,[[wr*0.8,-hw],[wr*0.88,-hw],[wr*0.97,-hw*0.7],[wr,-hw*0.2],[wr,hw*0.2],[wr*0.97,hw*0.7],[wr*0.88,hw],[wr*0.8,hw]].map(function(p){return [p[0],p[1]*sd]}).reverse()));
         hubs.push(lathe(w[0],wr,z,[[0.001,hw*2.6*sd],[0.045,hw*2.6*sd],[0.06,hw*0.9*sd],[wr*0.81,hw*0.6*sd],[wr*0.81,-hw*0.6*sd]].reverse()))});
         axles.push(lathe(w[0],wr,0,[[0.03,bw],[0.03,-bw]]))});
-      return {cockpit:ell(-0.38,bt-0.02,0,0.5,0.045,0.21),rest:ell(-0.9,bt-0.06,0,0.04,0.02,0.08),torso:ell(-0.36,bt+0.0,0,0.22,0.14,0.24),helmet:ell(-0.2,bt+0.2,0,0.18,0.17,0.17),
-        visor:ell(-0.08,bt+0.18,0,0.08,0.075,0.14),tires:merge(tires),hubs:merge(hubs),axles:merge(axles)}}
+      return {cockpit:ell(-0.21,bt-0.025,0,0.6,0.04,0.205),rest:ell(-0.21,bt-0.05,0,0.5,0.02,0.15),torso:ell(-0.1,bt+0.0,0,0.22,0.13,0.21),helmet:ell(0.06,bt+0.17,0,0.17,0.16,0.16),
+        visor:ell(0.18,bt+0.15,0,0.08,0.07,0.13),tires:merge(tires),hubs:merge(hubs),axles:merge(axles)}}
 
     function decalCanvas(c){var cvx=document.createElement("canvas");cvx.width=1024;cvx.height=256;var g=cvx.getContext("2d");
       var px=function(x){return (x-X0)/(X1-X0)*1024},py=function(y){return (1.3-y)/1.3*256};
       g.fillStyle=c.trim;g.fillRect(0,0,8,8);
       g.lineCap="round";g.strokeStyle=c.trim;g.lineWidth=10;g.beginPath();g.moveTo(px(-1.75),py(0.42));g.lineTo(px(1.75),py(0.42));g.stroke();
-      var nx=px(-1.2),ny=py(0.84),rr=34;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
+      var nx=px(-1.25),ny=py(0.8),rr=32;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
       g.fillStyle="#0b0b0e";g.font="900 "+(c.num.length>1?50:58)+"px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(c.num,nx,ny+3);
-      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.85;g.font="italic 900 46px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="left";g.fillText("FLINT RACING",px(-0.3),py(0.66));
+      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.85;g.font="italic 900 46px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="left";g.fillText("FLINT RACING",px(-0.15),py(0.66));
       return cvx}
 
     var VS="attribute vec3 aP;attribute vec3 aN;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec3 vO;varying vec3 vON;void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=mat3(uM)*aN;vO=aP;vON=aN;gl_Position=uVP*w;}";
@@ -3708,7 +3709,7 @@ body.rw-tv .rw-fol{display:none}
       gl.useProgram(P1.p);gl.uniformMatrix4fv(P1.u.uVP,false,VP);gl.uniformMatrix4fv(P1.u.uM,false,M.ry(yaw,lift));gl.uniform3fv(P1.u.uEye,eye);gl.uniform3fv(P1.u.uNeon,neon);
       gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex[k]);gl.uniform1i(P1.u.uT,0);
       var chk=c.paint==="checker",paint=chk?[0.5,0.5,0.5]:hex(c.paint),dark=[0.012,0.012,0.014];
-      [["body",paint,1.0,90,1.0,chk?1:0,1],["rest",chk?[0.012,0.012,0.014]:paint,1.0,90,1.0,0,0],["cockpit",dark,0.6,50,0.5,0,0],["torso",[0.035,0.035,0.04],0.5,30,0.3,0,0],["helmet",hex(c.helmet),1.2,110,1.0,0,0],["visor",[0.02,0.02,0.03],1.4,140,1.3,0,0],
+      [["body",paint,1.0,90,1.0,chk?1:0,1],["rest",chk?[0.012,0.012,0.014]:paint,1.0,90,1.0,0,0],["cockpit",[0.62,0.55,0.4],0.5,40,0.4,0,0],["torso",[0.035,0.035,0.04],0.5,30,0.3,0,0],["helmet",hex(c.helmet),1.2,110,1.0,0,0],["visor",[0.02,0.02,0.03],1.4,140,1.3,0,0],
        ["tires",[0.018,0.018,0.02],0.12,12,0.05,0,0],["hubs",[0.09,0.09,0.1],0.9,60,0.6,0,0],["axles",[0.08,0.08,0.09],0.5,40,0.3,0,0]].forEach(function(x){var m=meshes[x[0]];
         gl.uniform3fv(P1.u.uC,x[1]);gl.uniform1f(P1.u.uSpec,x[2]);gl.uniform1f(P1.u.uGloss,x[3]);gl.uniform1f(P1.u.uCoat,x[4]);gl.uniform1f(P1.u.uChk,x[5]);gl.uniform1f(P1.u.uDec,x[6]);
         gl.bindBuffer(gl.ARRAY_BUFFER,m.pb);gl.enableVertexAttribArray(P1.a.aP);gl.vertexAttribPointer(P1.a.aP,3,gl.FLOAT,false,0,0);
