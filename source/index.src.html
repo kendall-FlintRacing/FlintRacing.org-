@@ -380,7 +380,7 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 
 /* About / Family Story page (matches live /about scrapbook layout) */
 .crumbs{background:#ececee;border-bottom:1px solid #dcdfe3;font:500 .8rem/1 var(--body);color:#4a4d55}
-.crumbs .wrap{min-height:44px;display:flex;align-items:center;gap:8px}
+.crumbs .wrap{min-height:44px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding-block:8px}
 .crumbs a{color:var(--ink);font-weight:600}
 .ab-hero{background:#19191c;color:#fff;position:relative;overflow:hidden;border-bottom:3px solid #4a4c52}
 .ab-hero::after{content:"";position:absolute;right:-30px;top:-20px;width:340px;height:300px;background:conic-gradient(rgba(255,255,255,.07) 25%,transparent 0 50%,rgba(255,255,255,.07) 0 75%,transparent 0) 0 0/40px 40px;transform:rotate(-10deg);-webkit-mask-image:linear-gradient(225deg,#000 35%,transparent 80%);mask-image:linear-gradient(225deg,#000 35%,transparent 80%)}
@@ -1649,6 +1649,10 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .news-post details p{margin-top:10px;color:#2a2d33}
 /* ===== Race control console ===== */
 .rk-page{background:#e9ebee;min-height:80vh;padding:clamp(1rem,2.5vw,1.6rem) 0 3rem}
+/* breadcrumb bar sits flush under the site header, lined up with the page title */
+.rk-page>.crumbs{margin:calc(-1*clamp(1rem,2.5vw,1.6rem)) 0 clamp(1rem,2.5vw,1.6rem)}.rk-page>.crumbs .wrap{max-width:1240px}
+.cal-page>.crumbs{margin:calc(-1*clamp(2rem,5vw,3.5rem)) 0 clamp(2rem,5vw,3.5rem)}
+.stub>.crumbs{margin:calc(-1*var(--space)) 0 var(--space)}
 .rk-wrap{max-width:1240px}
 .rk-card{background:#fff;color:var(--ink);border:1px solid #d4d6da;border-radius:8px;padding:clamp(14px,2.4vw,22px);margin-bottom:14px}
 .rk-card h2{font:700 clamp(1.6rem,3vw,2.2rem)/1.1 var(--body);text-transform:none;color:var(--ink)}
@@ -2131,7 +2135,7 @@ body.rw-tv .rw-fol{display:none}
           <a class="lane" href="#seasonal-workshops"><span class="num">04</span><h3>Seasonal Workshops</h3><p>Try something new throughout the year.</p><span class="arr">→</span></a>
         </div>
       </div>
-      <div class="group">
+      <div class="group" id="get-involved">
         <header><p class="eyebrow">For our community</p><h2>Four ways to support.</h2><p>Help make these experiences possible by donating your time, sharing your skills, or contributing resources and materials.</p></header>
         <div class="lanes">
           <a class="lane" href="#leadership"><span class="num">01</span><h3>Student Volunteer</h3><p>Learn to lead while giving back.</p><span class="arr">→</span></a>
@@ -2238,7 +2242,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= ABOUT / FAMILY STORY ======================= -->
 <div class="page" data-page="about" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Family Story</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Family Story</span></div></nav>
   <header class="ab-hero"><div class="wrap">
     <p class="eyebrow" style="color:var(--pink)">The memories we build on</p>
     <h1>A family story. A community future.</h1>
@@ -2281,7 +2285,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= BUILDING WORKSHOPS ======================= -->
 <div class="page dark prog-page" data-page="building-workshops" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Building &amp; Workshops</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Building &amp; Workshops</span></div></nav>
   <header class="prog-hero"><div class="wrap">
     <div class="txt">
       <p class="eyebrow">Build something bigger.</p>
@@ -2335,7 +2339,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= TRACK & RACING ======================= -->
 <div class="page dark prog-page" data-page="racing" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Track &amp; Racing</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Track &amp; Racing</span></div></nav>
   <header class="race-hero"><div class="wrap">
     <div>
       <p class="eyebrow" style="color:var(--pink)">Build something bigger.</p>
@@ -2385,7 +2389,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= STEM PROGRAMS ======================= -->
 <div class="page stem-page prog-page" data-page="steam-and-beyond" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>STEM Programs</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">STEM Programs</span></div></nav>
   <header class="stem-hero"><div class="wrap">
     <div>
       <span class="tag mono">PROJECT FILE · STEM PROGRAMS</span>
@@ -2441,7 +2445,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= SEASONAL WORKSHOPS ======================= -->
 <div class="page sw-page" data-page="seasonal-workshops" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Seasonal Workshops</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Seasonal Workshops</span></div></nav>
   <header class="sw-head"><div class="wrap">
     <p class="eyebrow">Build something bigger.</p>
     <h1>Seasonal Workshops</h1>
@@ -2502,7 +2506,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= CRONIN DERBY DOWNS ======================= -->
 <div class="page dark prog-page" data-page="cronin-derby-downs" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Cronin Derby Downs</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Cronin Derby Downs</span></div></nav>
   <div class="wrap cdd-top">
     <section class="cdd-hero2">
       <div class="txt">
@@ -2558,7 +2562,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= REGISTER / INQUIRE QUESTIONNAIRE ======================= -->
 <div class="page dark prog-page" data-page="participate" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Register / Inquire</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Register / Inquire</span></div></nav>
   <div class="wrap"><div class="q-wrap" style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head">
       <p class="eyebrow">Build something bigger.</p>
@@ -2641,6 +2645,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= CALENDAR ======================= -->
 <div class="page dark cal-page" data-page="calendar" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Calendar</span></div></nav>
   <div class="wrap"><div class="cal-col">
     <section class="cal-head">
       <p class="eyebrow">Build something bigger.</p>
@@ -2670,7 +2675,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= STUDENT VOLUNTEERS ======================= -->
 <div class="page dark prog-page" data-page="leadership" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Student Volunteers</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Student Volunteers</span></div></nav>
   <header class="prog-hero"><div class="wrap">
     <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Student Volunteers</h1><p class="lede">Build confidence, practice leadership and help other young people succeed.</p></div>
     <div class="pic"><img src="{{IMG:img/web/2026-racers-group.webp}}" alt="Young racers in Flint Soap Box Derby shirts smiling beside the track" style="object-position:50% 40%"></div>
@@ -2687,7 +2692,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= COMMUNITY VOLUNTEERS ======================= -->
 <div class="page dark prog-page" data-page="serve" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Community Volunteers</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Community Volunteers</span></div></nav>
   <header class="prog-hero"><div class="wrap">
     <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Community Volunteers</h1><p class="lede">Give a little time. Make a lasting difference for Flint’s young builders.</p></div>
     <div class="pic"><img src="{{IMG:img/web/racer-with-veteran.webp}}" alt="A young racer and an older veteran standing together at the track" style="object-position:50% 45%"></div>
@@ -2705,7 +2710,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= SPONSORS & PARTNERS ======================= -->
 <div class="page dark prog-page" data-page="support" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Sponsors &amp; Partners</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Sponsors &amp; Partners</span></div></nav>
   <header class="prog-hero"><div class="wrap">
     <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Sponsors &amp; Partners</h1><p class="lede">Put your resources, relationships and expertise behind hands-on opportunities for our community.</p></div>
     <div class="pic"><img src="{{IMG:img/web/race-day-track-tents.webp}}" alt="Spectator tents and families along the track on race day" style="object-position:50% 50%"></div>
@@ -2724,7 +2729,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= JOIN OUR TEAM ======================= -->
 <div class="page dark prog-page" data-page="join-our-team" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Join Our Team</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Join Our Team</span></div></nav>
   <header class="prog-hero"><div class="wrap">
     <div class="txt"><p class="eyebrow">Build something bigger.</p><h1>Join Our Team</h1><p class="lede">Bring your skills, your ideas and a commitment to help Flint Racing grow.</p></div>
     <div class="pic"><img src="{{IMG:img/web/flint-journal-handshake-bw.webp}}" alt="Black-and-white archive photo of two young racers shaking hands at the start line" style="object-position:50% 45%"></div>
@@ -2741,7 +2746,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= SPIRIT CATALOGUE ======================= -->
 <div class="page spirit-page" data-page="spirit" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Spirit Shop</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Spirit Shop</span></div></nav>
   <header class="sp-hero"><div class="wrap"><p class="eyebrow" style="color:#fff">Flint Racing Spirit Catalogue</p><h1>Wear the work.</h1><p>A little Flint spirit. A lot of shared history.</p>
     <div class="cta-row"><a class="btn black" href="https://www.squadlocker.com/" target="_blank" rel="noopener">Shop on SquadLocker ↗</a></div></div></header>
   <div class="wrap">
@@ -2765,7 +2770,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= DONATE ======================= -->
 <div class="page dark prog-page" data-page="donate" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Donate</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Donate</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Your gift at work</p><h1>Give directly.</h1><p>Help put tools in young people’s hands and opportunity within reach.</p></section>
     <div class="don-grid">
@@ -2797,7 +2802,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= NEWS ======================= -->
 <div class="page dark prog-page" data-page="news-page" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>News &amp; Stories</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">News &amp; Stories</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">From the garage</p><h1>News &amp; Stories</h1><p>Program news, community stories and approved press releases.</p></section>
     <section class="news-empty">
@@ -2810,7 +2815,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= CONTACT ======================= -->
 <div class="page dark prog-page" data-page="contact" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Contact</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Build something bigger.</p><h1>Contact Flint Racing</h1><p>Send your question to our admin team. We’ll follow up by email.</p></section>
     <div class="contact-grid">
@@ -2840,7 +2845,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= PRIVACY ======================= -->
 <div class="page dark prog-page" data-page="privacy" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Privacy</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Privacy</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Build something bigger.</p><h1>Privacy</h1><p>How information is used on the Flint Racing &amp; STEM website.</p></section>
     <article class="legal">
@@ -2862,7 +2867,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= BACKGROUND CHECKS ======================= -->
 <div class="page dark prog-page" data-page="background-check" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Background Checks</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Background Checks</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Build something bigger.</p><h1>Background Checks</h1><p>Help us keep Flint Racing safe and welcoming.</p></section>
     <div class="panels">
@@ -2881,7 +2886,7 @@ body.rw-tv .rw-fol{display:none}
 </div>
 <!-- ======================= SIGN-IN HUB ======================= -->
 <div class="page cs-page" data-page="access" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Sign in</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Sign in</span></div></nav>
   <section class="cs" id="carSelect" aria-roledescription="carousel" aria-label="Choose your portal">
     <div class="wrap cs-wrap">
       <div class="gx">
@@ -2937,7 +2942,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= FLYERS & FORMS (printables) ======================= -->
 <div class="page dark prog-page" data-page="printables" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>Flyers &amp; Forms</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Flyers &amp; Forms</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Print, fill out, bring along</p><h1>Flyers &amp; Forms</h1><p>Printable flyers, registration forms, order forms and field trip forms. Download, print and share.</p></section>
     <div id="prtBox" class="prt-box"><p class="pd-loading">Loading…</p></div>
@@ -2946,7 +2951,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= MY DASHBOARD (members) ======================= -->
 <div class="page dark prog-page me-page" data-page="my-dashboard" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>My dashboard</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="my-dashboard"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span aria-current="page">My dashboard</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <div id="meBox" class="me-box"><p class="pd-loading">Loading…</p></div>
   </div></div>
@@ -2954,7 +2959,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= REGISTER A PROFILE ======================= -->
 <div class="page dark prog-page reg-page" data-page="new-profile" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Register</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span aria-current="page">Register</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Register once</p><h1>Join the Flint Racing roster</h1><p>Create your profile one time. Once Kendall or Kevin approve it, you sign in with just your username and passcode.</p></section>
     <div id="regBox" class="reg-box"></div>
@@ -2963,7 +2968,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= PROGRAM DASHBOARD (families) ======================= -->
 <div class="page dark prog-page pd-page" data-page="program-signin" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Program Dashboard</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="program-signin"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span aria-current="page">Program Dashboard</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">For registered families and crew</p><h1>Program Dashboard</h1><p>Where, when and what time. Everything families need for this season in one place.</p></section>
     <div id="pdBox" class="pd-box"><p class="pd-loading">Loading…</p></div>
@@ -2972,14 +2977,14 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= PROGRAM RESOURCES ======================= -->
 <div class="page dark prog-page" data-page="resources" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Programs &amp; Resources</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page">Programs &amp; Resources</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Programs &amp; resources</p><h1>Find your lane</h1><p>Every Flint Racing program and family resource, sorted into four lanes.</p></section>
     <div class="rlanes" id="resLanes"></div>
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="rules" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>Rules &amp; Guidelines</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Rules &amp; Guidelines</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Family resources</p><h1>Rules &amp; Guidelines</h1><p>Race rules, car specs and how race day works. Official documents are posted here as they’re approved.</p></section>
     <div class="res-list" data-res="rules"></div>
@@ -2987,7 +2992,7 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="parent-resources" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>Parent Resources</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Parent Resources</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Family resources</p><h1>Parent Resources</h1><p>Guides and helpful links for parents and guardians of Flint racers.</p></section>
     <div class="res-list" data-res="parents"></div>
@@ -2995,7 +3000,7 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="forms" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>Registration &amp; Forms</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Registration &amp; Forms</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Family resources</p><h1>Registration &amp; Forms</h1><p>Registration, releases and other forms to download, fill out and bring.</p></section>
     <div class="res-list" data-res="forms"></div>
@@ -3003,7 +3008,7 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="stem-camps" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>STEM Camps</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">STEM Camps</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Explore & experiment</p><h1>STEM Camps</h1><p>Hands-on camps that mix building, science and racing. Dates are posted here once they’re set.</p></section>
     <div class="res-list" data-res="camps"></div>
@@ -3011,7 +3016,7 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="fun-runs" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>Summer Fun Runs</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Summer Fun Runs</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Explore & experiment</p><h1>Summer Fun Runs</h1><p>Low-pressure practice runs at Cronin Derby Downs over the summer. Dates are posted here once they’re set.</p></section>
     <div class="res-list" data-res="funruns"></div>
@@ -3019,7 +3024,7 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="leadership-council" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span>Student Leadership Council</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Student Leadership Council</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Lead & serve</p><h1>Student Leadership Council</h1><p>Students who help shape our programs, mentor younger racers and represent Flint Racing in the community.</p></section>
     <div class="res-list" data-res="council"></div>
@@ -3030,7 +3035,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= RACE-DAY VOLUNTEER SIGN-UP ======================= -->
 <div class="page dark prog-page" data-page="race-volunteer" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Volunteer on race day</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><span aria-current="page">Volunteer on race day</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <section class="cal-head"><p class="eyebrow">Race day crew</p><h1>Volunteer on race day</h1><p>Race day runs on volunteers: greeting families, running the starting ramp, timing, the pits and the finish line. Tell us where you’d like to help.</p></section>
     <div class="vol-wrap">
@@ -3056,18 +3061,19 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= CREW LINK (volunteers) ======================= -->
 <div class="page dark prog-page" data-page="crew" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#get-involved">Get Involved</a><span aria-hidden="true">/</span><a href="#race-volunteer">Volunteer on race day</a><span aria-hidden="true">/</span><span aria-current="page">Your crew pass</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)"><div id="crewBox" class="crew-box"><p>Loading your crew pass…</p></div></div></div>
 </div>
 
 <!-- ======================= STAFF PORTALS ======================= -->
-<div class="page rk-page" data-page="workshop-signin" hidden><div class="wrap rk-wrap"><div id="wsBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
-<div class="page rk-page" data-page="volunteers" hidden><div class="wrap rk-wrap"><div id="volBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
-<div class="page rk-page" data-page="photographer" hidden><div class="wrap rk-wrap"><div id="phBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
-<div class="page rk-page" data-page="teacher" hidden><div class="wrap rk-wrap"><div id="teBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
+<div class="page rk-page" data-page="workshop-signin" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="workshop-signin"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="wsBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
+<div class="page rk-page" data-page="volunteers" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="volunteers"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="volBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
+<div class="page rk-page" data-page="photographer" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="photographer"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="phBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
+<div class="page rk-page" data-page="teacher" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="teacher"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="teBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 
 <!-- ======================= ADMIN PORTAL ======================= -->
 <div class="page dark prog-page" data-page="admin" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Admin</span></div></nav>
+  <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="admin"><div class="wrap"><a href="#home">Home</a></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
     <div class="adm" id="admBox"><p>The admin portal works on the published website (GitHub Pages). In this preview it can’t connect to the database.</p></div>
   </div></div>
@@ -3075,6 +3081,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= LIVE RACE (SPECTATORS) ======================= -->
 <div class="page race-page" data-page="race-watch" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">Live race</span></div></nav>
   <div class="rw-ticker" id="rwTicker" hidden><span class="rw-tag">Trackside cheers</span><div class="rw-track"><div class="rw-run" id="rwRun"></div></div></div>
   <div class="rw-strip-wrap">
     <div class="wrap rw-strip">
@@ -3151,16 +3158,19 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- ======================= RACE CONTROL (CONTROLLER) ======================= -->
 <div class="page rk-page" data-page="race-control" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="race-control"><div class="wrap"><a href="#home">Home</a></div></nav>
   <div class="wrap rk-wrap"><div id="rkBox" class="rk-box"><div class="rk-card"><p>Loading race control…</p></div></div></div>
 </div>
 
 <!-- ======================= TRACK MANAGER ======================= -->
 <div class="page rk-page" data-page="track-manager" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb" data-crumbs="track-manager"><div class="wrap"><a href="#home">Home</a></div></nav>
   <div class="wrap rk-wrap"><div id="tmBox" class="rk-box tm-box"><div class="rk-card"><p>Loading track manager…</p></div></div></div>
 </div>
 
 <!-- ======================= NOT-YET-REBUILT PAGES ======================= -->
 <div class="page stub" data-page="stub" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span aria-current="page" id="stubCrumb">Coming soon</span></div></nav>
   <div class="wrap">
     <div class="stub-card">
       <p class="eyebrow">Being rebuilt</p>
@@ -3190,7 +3200,7 @@ body.rw-tv .rw-fol{display:none}
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
   var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
-  var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1};
+  var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
@@ -3210,7 +3220,7 @@ body.rw-tv .rw-fol{display:none}
     if(show==="seasonal-workshops") renderSeasons();
     closeMenus();
     if(home){ if(h!=="home"&&HOME_ANCHORS[h]){var t=document.getElementById(h);if(t){var y=t.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-8;scrollTo(0,y)}} else scrollTo(0,0); document.title="Flint Racing and STEM | Build Something Bigger"; }
-    else { if(show==="stub") $("#stubTitle").textContent=NAMES[h]; NAMES.about="Our Story"; NAMES.participate="Register / Inquire"; scrollTo(0,0); document.title=NAMES[h]+" | Flint Racing and STEM"; }
+    else { if(show==="stub"){$("#stubTitle").textContent=NAMES[h];$("#stubCrumb").textContent=NAMES[h];} NAMES.about="Our Story"; NAMES.participate="Register / Inquire"; scrollTo(0,0); document.title=NAMES[h]+" | Flint Racing and STEM"; }
   }
   addEventListener("hashchange",route);
 
@@ -4021,7 +4031,7 @@ window.FRB=(function(){
       /* token refreshes and other tabs/preview frames re-announce the same user: don't redraw everything */
       if(session&&USER&&session.user&&session.user.id===USER.id&&ev!=="USER_UPDATED"&&ev!=="PASSWORD_RECOVERY"){USER=session.user;return}
       if(ev==="PASSWORD_RECOVERY"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account.";if(location.hash!=="#team"&&location.hash!=="#access")location.hash="#team"}setUser(session?session.user:null)});
-    window.addEventListener("hashchange",function(){updatePill();if(location.hash==="#admin")renderAdmin(true);if(location.hash==="#access"||location.hash==="#team")renderAccess();renderRK(true);renderTM(true)});
+    window.addEventListener("hashchange",function(){updatePill();setCrumbs();if(location.hash==="#admin")renderAdmin(true);if(location.hash==="#access"||location.hash==="#team")renderAccess();renderRK(true);renderTM(true)});
     renderAccess();
     renderAdmin();
   }
@@ -4119,7 +4129,27 @@ window.FRB=(function(){
       $$("[data-badge]").forEach(function(el){var n=ADMC[el.getAttribute("data-badge")]||0;el.textContent=n;el.hidden=!n});return ADMC})}
   function goTab(k,opt){opt=opt||{};if(k==="members:log"){k="members";MSUB="log"}else if(k==="members"&&!opt.keepSub)MSUB="people";
     if(opt.q!=null){MFIND.q=opt.q;MFIND.f="all"}TAB=k;ADMNAV=false;renderAdmin(true);var b=$("#admBox");if(b&&b.getBoundingClientRect().top<0)scrollTo(0,b.getBoundingClientRect().top+scrollY-80)}
-  function renderAdmin(force){var box=$("#admBox"); if(!box||!window.FR_DB) return;
+
+  /* ---------- Breadcrumbs for signed-in screens: follow who is signed in ---------- */
+  var CRUMB_PAGES={"race-control":["Race control","race"],"track-manager":["Track operations","race"],"volunteers":["Volunteer lists","race"],
+    "workshop-signin":["Workshop sign-in",""],"photographer":["Photographer",""],"teacher":["Teacher planning",""],"program-signin":["Program Dashboard",""]};
+  function setCrumbs(){$$("nav[data-crumbs]").forEach(function(n){var p=n.getAttribute("data-crumbs"),w=$(".wrap",n),sep='<span aria-hidden="true">/</span>',
+      out=['<a href="#home">Home</a>'],cur=function(t){out.push('<span aria-current="page">'+esc(t)+'</span>')},
+      adm=function(tab,t){out.push('<a href="#admin" data-admtab="'+tab+'">'+esc(t)+'</a>')};
+    var signedAdmin=!!(USER&&!USER.is_anonymous&&IS_ADMIN);
+    if(p==="my-dashboard"){if(!ME)out.push('<a href="#access">Sign in</a>');cur("My dashboard")}
+    else if(p==="admin"){
+      if(!signedAdmin){out.push('<a href="#access">Sign in</a>');cur("Admin")}
+      else{var sc=sectOf(TAB);if(!sc||sc.k==="overview")cur("Admin");else{adm("overview","Admin");cur(sc.t)}}
+    } else {var c=CRUMB_PAGES[p]||[p,""];
+      if(signedAdmin){adm("overview","Admin");if(c[1]==="race")adm("race","Race day")}
+      else if(ME)out.push('<a href="#my-dashboard">My dashboard</a>');
+      else out.push('<a href="#access">Sign in</a>');
+      cur(c[0])}
+    w.innerHTML=out.join(sep)})}
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-admtab]");if(!a||EDITING)return;e.preventDefault();
+    var k=a.getAttribute("data-admtab");if(location.hash==="#admin"){goTab(k)}else{TAB=k;ADMNAV=false;location.hash="#admin"}});
+  function renderAdmin(force){setCrumbs();var box=$("#admBox"); if(!box||!window.FR_DB) return;
     var sig=(USER?USER.id:"")+"|"+IS_ADMIN+"|"+TAB;
     if(!force&&USER&&IS_ADMIN&&box.__sig===sig&&box.querySelector(".adm-main")){admCounts();return}
     box.__sig=sig;
