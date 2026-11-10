@@ -3574,7 +3574,7 @@ body.rw-tv .rw-fol{display:none}
   (function(){var root=document.getElementById("carSelect");if(!root)return;
     var CARS=[
       {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",label:"Family",neon:"#ffffff",key:"Username + passcode",stats:[["Young racers reached","kids"],["Years racing (since 2019)","years"],["Cars in the build","cars"]]},
-      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteer check-ins","volunteer_visits"],["Meals served","meals"],["Ways to help","helpways"]]},
+      {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",label:"Crew",neon:"#ffc233",key:"Username + passcode",stats:[["Volunteers this year","volunteers_this_year"],["Meals served","meals"],["Participants served","participants"]]},
       {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",label:"Fans",neon:"#7fe3ff",key:"Just cheer!",stats:[["Top speed","speed"],["Engines","engines"],["Days to race day","countdown"]]},
       {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",label:"Staff",neon:"#e21b2d",key:"Username or admin email",stats:[["Events this season","events"],["Paths to participate","paths"],["Historic home track","track"]]}];
     var LIVE={};
@@ -3587,12 +3587,13 @@ body.rw-tv .rw-fol{display:none}
       if(k==="workshops"){var w=up.filter(function(e){return e.k==="workshop"}).length;return w?String(w):"Coming soon"}
       if(k==="events")return String(up.length);
       if(k==="speed")return "30+ mph";
-      if(k==="helpways")return "7";
+      if(k==="participants"){var pp=Math.max(LIVE.participants||0,LIVE.kids||0),base=parseInt((impact(0)||"120").replace(/[^0-9]/g,""),10)||0;return pp>base?pp.toLocaleString():impact(0)||"120+"}
+      if(k==="volunteers_this_year")return LIVE.volunteers_this_year>0?String(LIVE.volunteers_this_year):"Season starting";
       if(k==="years")return String(new Date().getFullYear()-2019);
       if(k==="engines")return "0 (gravity!)";
       if(k==="countdown"){var r=EVENTS.filter(function(e){return e.k==="racing"&&e.d>=iso})[0];if(!r)return "Soon";var d=Math.round((new Date(r.d+"T00:00:00")-t)/864e5);return d===0?"Today!":d+" days"}
       if(LIVE[k]>0)return LIVE[k].toLocaleString();return "Tally starts soon"}
-    window.FR_gxLive=function(d){LIVE=d||{};show(cur,0)};
+    window.FR_gxLive=function(d){Object.keys(d||{}).forEach(function(k){LIVE[k]=d[k]});show(cur,0)};
     var cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=cards.length,cur=0;
     var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var thumbs=root.querySelector(".gx-thumbs");
@@ -3997,7 +3998,8 @@ window.FRB=(function(){
 
   var started=false;
   function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();
-    db.rpc("public_stats",{p_year:null}).then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
+    db.rpc("public_stats",{p_year:null}).then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});
+    db.rpc("public_member_counts").then(function(r){if(!r.error&&r.data&&window.FR_gxLive)window.FR_gxLive(r.data)},function(){});}
   Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
     FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true; startUp();
   }).catch(function(e){ if(window.console)console.warn("Live content didn’t load; showing built-in content.",e); startUp(); });
