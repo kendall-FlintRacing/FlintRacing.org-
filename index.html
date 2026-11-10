@@ -2471,7 +2471,6 @@ body.rw-tv .rw-fol{display:none}
           <dl class="bul-contact">
             <dt>Organization</dt><dd>Flint Racing &amp; STEM</dd>
             <dt>Email</dt><dd><a href="mailto:info@flintracing.org">info@flintracing.org</a></dd>
-            <dt>Phone</dt><dd class="placeholder">Coming soon</dd>
             <dt>Questions</dt><dd><a href="#participate" data-interest="steam">Send an inquiry →</a></dd>
           </dl>
         </section>
@@ -2826,7 +2825,6 @@ body.rw-tv .rw-fol{display:none}
         <h2>Reach us</h2>
         <dl>
           <div><dt>Email</dt><dd><a href="mailto:info@flintracing.org" id="ctEmail">info@flintracing.org</a><button class="copy-btn" type="button" id="ctCopy">Copy</button></dd></div>
-          <div><dt>Phone</dt><dd class="placeholder">Coming soon</dd></div>
           <div><dt>Where</dt><dd>Flint, Michigan<br><span style="font-weight:500;color:#c9cbd0;font-size:.92rem">Workshops at our workshop space · Racing at Cronin Derby Downs</span></dd></div>
         </dl>
       </section>
@@ -2878,7 +2876,7 @@ body.rw-tv .rw-fol{display:none}
       <section class="panel"><h2>Who needs a background check?</h2><p>Staff, teachers, coaches and volunteers who supervise or regularly work directly with youth should contact Flint Racing about screening before their assignment begins. Staff will confirm the requirements for your role and whether an existing clearance can be accepted.</p><p>Families attending with their children and participants should check with staff if they are taking on a volunteer or supervisory role.</p></section>
       <section class="panel"><h2>Complete your screening through True Hire</h2><p>Use Flint Racing’s application link once staff has directed you to complete a check.</p>
         <div class="shield-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/></svg><span>Enter sensitive screening information only on the provider’s application, never in a website inquiry.</span></div>
-        <p class="q-note" style="margin:0">Our program-specific application link is being connected. Please contact Flint Racing for instructions before starting a check.</p>
+        <p class="q-note" style="margin:0">Contact Flint Racing first. Staff will send you Flint Racing’s own True Hire application link and confirm what your role needs.</p>
         <div class="cta-row"><a class="btn deep" href="#contact">Contact Flint Racing</a><a class="btn outline-red" href="https://true-hire.com/background-checks-for-volunteers/" target="_blank" rel="noopener">About True Hire screening ↗</a></div></section>
     </div>
     <div class="bc-steps">
@@ -3184,11 +3182,11 @@ body.rw-tv .rw-fol{display:none}
 <footer class="site-foot">
   <div class="wrap">
     <div class="f-grid">
-      <div><h4>Home</h4><ul><li><a href="#home">Home</a></li><li><a href="#building-workshops">Building Workshops</a></li><li><a href="#racing">Track &amp; Racing</a></li><li><a href="#race-watch">Live Race / Tournament</a></li></ul></div>
-      <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#programs">Programs</a></li><li><a href="#calendar">Calendar</a></li><li><a href="#resources">Resources</a></li><li><a href="#printables">Flyers &amp; Forms</a></li></ul></div>
+      <div><h4>Home</h4><ul><li><a href="#home">Home</a></li><li><a href="#race-watch">Live Race</a></li><li><a href="#access">Sign In</a></li><li><a href="#team">Staff Sign In</a></li><li><a href="#calendar">Calendar</a></li><li><a href="#printables">Flyers &amp; Forms</a></li></ul></div>
+      <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#programs">Programs</a></li><li><a href="#resources">Resources</a></li></ul></div>
       <a class="f-logo" href="#home"><img src="img/logo-white.webp" alt="Flint Racing home"></a>
-      <div><h4>Take part</h4><ul><li><a href="#participate">Get Involved</a></li><li><a href="#support">Support Flint Racing</a></li><li><a href="#serve">Volunteer</a></li><li><a href="#background-check">Background Check</a></li></ul></div>
-      <div><h4>Connect</h4><ul><li><a href="#news-page">News &amp; Stories</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#contact">Contact</a></li><li><a href="#access">Sign In</a></li><li><a href="#team">Staff sign in</a></li><li><a href="mailto:info@flintracing.org">info@flintracing.org</a></li></ul></div>
+      <div><h4>Take part</h4><ul><li><a href="#donate">Donate</a></li><li><a href="#participate">Get Involved</a></li><li><a href="#serve">Volunteer</a></li><li><a href="#background-check">Background Check</a></li></ul></div>
+      <div><h4>Connect</h4><ul><li><a href="#news-page">News &amp; Stories</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#contact">Contact</a></li></ul></div>
     </div>
     <div class="f-base"><span>© <span id="yr">2026</span> Flint Racing and STEM</span><span>Build Something Bigger.</span></div>
   </div>
@@ -3594,7 +3592,7 @@ body.rw-tv .rw-fol{display:none}
       if(k==="cars")return impact(1)||"24–30";
       if(k==="paths")return impact(2)||"4";
       if(k==="track")return impact(3)||"1";
-      if(k==="workshops"){var w=up.filter(function(e){return e.k==="workshop"}).length;return w?String(w):"Coming soon"}
+      if(k==="workshops"){var w=up.filter(function(e){return e.k==="workshop"}).length;return String(w)}
       if(k==="events")return String(up.length);
       if(k==="speed")return "30+ mph";
       if(k==="participants"){var pp=Math.max(LIVE.participants||0,LIVE.kids||0),base=parseInt((impact(0)||"120").replace(/[^0-9]/g,""),10)||0;return pp>base?pp.toLocaleString():impact(0)||"120+"}
@@ -4045,7 +4043,7 @@ window.FRB=(function(){
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
   function updatePill(){var p=$(".fr-pill");
-    if(IS_ADMIN&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
+    if(false){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
     else if(p) p.hidden=true;}
 
   /* ---------- Edit mode ---------- */
