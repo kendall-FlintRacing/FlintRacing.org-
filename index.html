@@ -894,7 +894,8 @@ a.ycell:hover{background:#fbe2e5}
 /* Edit mode */
 .fr-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--ink);color:#fff;border-top:3px solid var(--red);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));font-size:.88rem}
 .fr-bar b{font:800 1.1rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
-.fr-bar .btns{display:flex;gap:8px;flex-wrap:wrap}
+.fr-bar .btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fr-bar select.mini{padding:7px 8px;max-width:200px}
 .fr-bar .mini:not(.solid){background:#fff}
 .fr-bar .mini.solid{background:var(--red);border-color:#fff;color:#fff}
 .fr-pill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:55;background:var(--ink);color:#fff;border:2px solid var(--red);border-radius:999px;padding:10px 16px;font:700 .85rem/1 var(--body);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3)}
@@ -911,6 +912,7 @@ body.fr-editing [data-ck][contenteditable="true"]:focus{outline:2px solid var(--
 body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .fr-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:4px;padding:10px 14px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.25)}
 
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* Stub pages */
 .stub{padding-block:var(--space);min-height:50vh}
 .stub-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:6px;padding:clamp(1.5rem,4vw,3rem);display:grid;gap:14px;max-width:720px}
@@ -1849,9 +1851,11 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 
   /* ---- Partners carousel (4 per page) ---- */
   var PARTNERS=[[{"name": "Goyette Mechanical", "img": "img/partners/goyette.webp"}, {"name": "Ideal Group", "img": "img/partners/ideal-group.webp"}, {"name": "United Way of Southeastern Michigan", "img": "img/partners/united-way.webp"}, {"name": "Flint Community Schools", "img": "img/partners/flint-community-schools.webp"}], [{"name": "Community Foundation of Greater Flint", "img": "img/partners/community-foundation.webp"}, {"name": "Huntington Bank", "img": "img/partners/huntington.webp"}, {"name": "City of Flint", "img": "img/partners/city-of-flint.webp"}, {"name": "UAW Local 598", "img": "img/partners/uaw-598.webp"}], [{"name": "Keep Genesee County Beautiful", "img": "img/partners/kgcb.webp"}, {"name": "Your Logo Here", "img": ""}], [{"name": "Motor City Sign Works", "img": "img/partners/motor-city.webp"}, {"name": "Graphics Galore", "img": "img/partners/graphics-galore.webp"}, {"name": "Moonwalk Man", "img": "img/partners/moonwalk-man.webp"}, {"name": "Behind Your Design", "img": "img/partners/bd.webp"}]];
+  var PARTNERS_DEFAULT=JSON.parse(JSON.stringify(PARTNERS));
   var sp=0, sPages=PARTNERS.length;
   function drawS(){
-    $("#sTrack").innerHTML=PARTNERS[sp].map(function(p){return p.img ? '<div class="s-card logo" title="'+p.name+'"><img src="'+p.img+'" alt="'+p.name+' logo" loading="lazy"></div>'
+    sPages=Math.max(1,PARTNERS.length); if(sp>=sPages) sp=0;
+    $("#sTrack").innerHTML=(PARTNERS[sp]||[]).map(function(p){return p.img ? '<div class="s-card logo" title="'+esc(p.name)+'"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+' logo" loading="lazy"></div>'
       : '<a class="s-card" href="#support"><b>Your Logo Here</b><span>Become a partner</span></a>'}).join("");
     $("#sCount").textContent=(sp+1)+" / "+sPages;
   }
@@ -2157,8 +2161,9 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     var f=b.getAttribute("data-f");document.querySelectorAll('.sp-filters button').forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});
     document.querySelectorAll('#spGrid .sp-item').forEach(function(it){it.hidden=!!f&&it.getAttribute("data-cat")!==f})})});
   /* ---- Partner wall on Sponsors page (same logos as the homepage carousel) ---- */
-  (function(){var all=[];PARTNERS.forEach(function(pg){pg.forEach(function(p){if(p.img)all.push(p)})});
-    $("#partnerWall").innerHTML=all.map(function(p){return '<div><img src="'+p.img+'" alt="'+p.name+' logo" loading="lazy"></div>'}).join("")})();
+  function drawWall(){var all=[];PARTNERS.forEach(function(pg){pg.forEach(function(p){if(p.img)all.push(p)})});
+    $("#partnerWall").innerHTML=all.map(function(p){return '<div><img src="'+esc(p.img)+'" alt="'+esc(p.name)+' logo" loading="lazy"></div>'}).join("")}
+  drawWall();
   /* ---- Donate: pledge goes to the questionnaire (no payments taken) ---- */
   $("#donForm").addEventListener("submit",function(e){e.preventDefault();
     var other=$("#da-other").value.trim(), pick=(document.querySelector('input[name="amt"]:checked')||{}).value;
@@ -2172,7 +2177,9 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     setTimeout(function(){b.textContent="Copy"},2000)});
   $("#yr").textContent=new Date().getFullYear();
   /* Shared hooks for the Supabase + Admin layer */
-  window.FR={EVENTS:EVENTS,NOTES:BULLETIN_NOTES,route:route,
+  window.FR={EVENTS:EVENTS,NOTES:BULLETIN_NOTES,route:route,PARTNERS:PARTNERS,PARTNERS_DEFAULT:PARTNERS_DEFAULT,
+    setPartners:function(list){PARTNERS.length=0;list.forEach(function(pg){PARTNERS.push(pg)});sp=0;drawS();drawWall()},
+    recaptureForm:function(){if(document.getElementById("qForm"))qFormHTML=qCard.innerHTML.replace(/ contenteditable="true"/g,"")},
     refresh:function(){nowStrip();monthOptions();var h=(location.hash||"#home").slice(1);
       if(h==="calendar")renderCal();if(h==="racing")renderBoard();if(h==="seasonal-workshops")renderSeasons();},
     esc:esc};
@@ -2202,7 +2209,10 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
-  var TAGGED=[];
+  var TAGGED=[], DEF={};
+  var DATA=["#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+    "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
+    "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
     $$("main > .page").forEach(function(p){var id=p.getAttribute("data-page");if(id&&id!=="stub")out.push([id,p])});
     var f=$("footer.site-foot");if(f)out.push(["foot",f]);return out}
@@ -2213,13 +2223,23 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
         if($$(TEXT_SEL,el).some(function(c){return !c.closest(DYN)})) return; /* only innermost */
         var txt=(el.textContent||"").replace(/\s+/g," ").trim(); if(!txt) return;
         var base=name+"|"+el.tagName.toLowerCase()+"|"+hash(txt); seen[base]=(seen[base]||0)+1;
-        el.setAttribute("data-ck",base+(seen[base]>1?"|"+seen[base]:"")); el.__def=el.innerHTML; TAGGED.push(el);
+        var k=base+(seen[base]>1?"|"+seen[base]:""); el.setAttribute("data-ck",k); DEF[k]=el.innerHTML; TAGGED.push(el);
+      });
+      /* pass 2: any remaining visible words (labels, buttons, breadcrumbs, badges…) */
+      var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), nodes=[];
+      while(w.nextNode()){var t=w.currentNode,pe=t.parentElement;
+        if(!/[A-Za-z0-9]/.test(t.nodeValue)||!pe||pe.closest(DATA)||pe.closest("[data-ck]")) continue; nodes.push(t);}
+      nodes.forEach(function(t){var pe=t.parentElement,el;
+        if(pe.childNodes.length===1&&!/^(LABEL|SELECT|TEXTAREA|OPTION)$/.test(pe.tagName)) el=pe;
+        else {el=document.createElement("span");el.className="fr-t";pe.insertBefore(el,t);el.appendChild(t);}
+        var txt=t.nodeValue.replace(/\s+/g," ").trim(), base=name+"|t|"+hash(txt); seen[base]=(seen[base]||0)+1;
+        var k=base+(seen[base]>1?"|"+seen[base]:""); el.setAttribute("data-ck",k); DEF[k]=el.innerHTML; TAGGED.push(el);
       });
       $$("img",root).forEach(function(img){
         if(img.closest(DYN)) return;
         var id=img.getAttribute("alt")||img.getAttribute("src").slice(-40);
         var base=name+"|img|"+hash(id); seen[base]=(seen[base]||0)+1;
-        img.setAttribute("data-ci",base+(seen[base]>1?"|"+seen[base]:"")); img.__def=img.getAttribute("src"); TAGGED.push(img);
+        var k=base+(seen[base]>1?"|"+seen[base]:""); img.setAttribute("data-ci",k); DEF[k]=img.getAttribute("src"); TAGGED.push(img);
       });
     });
   }
@@ -2242,13 +2262,15 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 
   var CONTENT={};
   function applyContent(){
-    $$("[data-ck]").forEach(function(el){var v=CONTENT[el.getAttribute("data-ck")];
-      if(v&&v.kind==="text") el.innerHTML=clean(v.value); else if(el.__def!=null&&!v) el.innerHTML=el.__def;});
-    $$("[data-ci]").forEach(function(img){var v=CONTENT[img.getAttribute("data-ci")];
-      if(v&&v.kind==="image"&&(/^https:\/\//.test(v.value)||(window.FR_TEST&&/^data:image\//.test(v.value)))){img.src=v.value;img.removeAttribute("srcset")} else if(!v&&img.__def) img.setAttribute("src",img.__def);});
+    $$("[data-ck]").forEach(function(el){var k=el.getAttribute("data-ck"),v=CONTENT[k];
+      if(v&&v.kind==="text") el.innerHTML=clean(v.value); else if(!v&&DEF[k]!=null&&el.innerHTML!==DEF[k]) el.innerHTML=DEF[k];});
+    var pl=CONTENT["data|partners"]; if(pl){try{FR.setPartners(JSON.parse(pl.value))}catch(e){}} else if(FR.PARTNERS.length&&JSON.stringify(FR.PARTNERS)!==JSON.stringify(FR.PARTNERS_DEFAULT)) FR.setPartners(JSON.parse(JSON.stringify(FR.PARTNERS_DEFAULT)));
+    FR.recaptureForm();
+    $$("[data-ci]").forEach(function(img){var k=img.getAttribute("data-ci"),v=CONTENT[k];
+      if(v&&v.kind==="image"&&(/^https:\/\//.test(v.value)||(window.FR_TEST&&/^data:image\//.test(v.value)))){img.src=v.value;img.removeAttribute("srcset")} else if(!v&&DEF[k]&&img.getAttribute("src")!==DEF[k]) img.setAttribute("src",DEF[k]);});
   }
 
-  tagAll();
+  tagAll(); FR.recaptureForm();
   if(!window.supabase||!window.supabase.createClient) return;
   var db; try{db=window.supabase.createClient(SB_URL,SB_KEY)}catch(e){return}
 
@@ -2297,24 +2319,30 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   var EDITING=false, bar=null, imgBtn=null, fileIn=null, imgTarget=null;
   function setEditing(on){
     if(on&&!IS_ADMIN) return; EDITING=!!on; document.body.classList.toggle("fr-editing",EDITING);
-    $$("[data-ck]").forEach(function(el){if(el.tagName==="A") return; if(EDITING) el.setAttribute("contenteditable","true"); else el.removeAttribute("contenteditable")});
+    $$("[data-ck]").forEach(function(el){if(EDITING&&!el.closest("a,button,summary,label")) el.setAttribute("contenteditable","true"); else el.removeAttribute("contenteditable")});
     if(EDITING&&!bar){bar=document.createElement("div");bar.className="fr-bar";
-      bar.innerHTML='<span><b>Editing</b> &nbsp;Click text to change it. Double-click a button or link to edit its words. Hover a photo to replace it. Changes save when you click away.</span><span class="btns"><a class="mini" href="#admin">Admin dashboard</a><button class="mini solid" type="button" id="frDone">Done editing</button></span>';
-      document.body.appendChild(bar); $("#frDone").onclick=function(){setEditing(false)};}
+      var opts=$$("main > .page").filter(function(p){return p.getAttribute("data-page")!=="stub"}).map(function(p){var id=p.getAttribute("data-page"),h=p.querySelector("h1");
+        return '<option value="'+id+'">'+esc(id==="home"?"Home":(h?h.textContent.replace(/\s+/g," ").trim():id))+'</option>'}).join("");
+      bar.innerHTML='<span><b>Editing</b> &nbsp;Click any words to change them, including buttons and links. Hover a photo to replace it. Changes save when you click away.</span><span class="btns"><label class="sr" for="frGo">Go to page</label><select id="frGo" class="mini">'+opts+'</select><a class="mini" href="#admin">Admin dashboard</a><button class="mini solid" type="button" id="frDone">Done editing</button></span>';
+      document.body.appendChild(bar); $("#frDone").onclick=function(){setEditing(false)};
+      $("#frGo").onchange=function(){location.hash="#"+this.value};}
+    if(EDITING&&$("#frGo")){var cur=(location.hash||"#home").slice(1);if($('#frGo option[value="'+cur+'"]'))$("#frGo").value=cur}
     if(bar) bar.hidden=!EDITING; if(imgBtn&&!EDITING) imgBtn.hidden=true; updatePill();
   }
   document.addEventListener("focusin",function(e){var el=e.target.closest&&e.target.closest("[data-ck]");if(EDITING&&el) el.__before=el.innerHTML});
   document.addEventListener("focusout",function(e){var el=e.target.closest&&e.target.closest("[data-ck]");if(!EDITING||!el)return;
-    if(el.tagName==="A") el.removeAttribute("contenteditable");
+    if(el.closest("a,button,summary,label")) el.removeAttribute("contenteditable");
     if(el.innerHTML!==el.__before) saveText(el);});
-  document.addEventListener("click",function(e){if(!EDITING||!e.target.closest)return;var ed=e.target.closest("[data-ck]");
-    if(ed&&ed.getAttribute("contenteditable")==="true"&&ed.closest("a,summary")) e.preventDefault();},true);
-  document.addEventListener("dblclick",function(e){if(!EDITING)return;var a=e.target.closest("a[data-ck]");if(!a)return;
-    e.preventDefault();a.setAttribute("contenteditable","true");a.focus();});
+  /* In edit mode, clicking words inside a link or button edits them instead of following it */
+  document.addEventListener("click",function(e){if(!EDITING||!e.target.closest||e.target.closest(".fr-bar,.fr-test,.fr-pill,.fr-imgbtn"))return;
+    var ed=e.target.closest("[data-ck]"); if(!ed||!ed.closest("a,button,summary,label")) return;
+    e.preventDefault(); e.stopPropagation();
+    if(ed.getAttribute("contenteditable")!=="true"){ed.setAttribute("contenteditable","true");ed.focus();}},true);
+  window.addEventListener("hashchange",function(){if(EDITING&&$("#frGo")){var cur=(location.hash||"#home").slice(1);if($('#frGo option[value="'+cur+'"]'))$("#frGo").value=cur}});
   document.addEventListener("keydown",function(e){if(EDITING&&e.key==="Enter"&&!e.shiftKey&&e.target.closest&&e.target.closest("[data-ck]")&&!/^P$|^LI$|^DD$/.test(e.target.tagName)){e.preventDefault();e.target.blur()}});
-  function saveText(el){var key=el.getAttribute("data-ck"),val=clean(el.innerHTML),def=clean(el.__def||"");
+  function saveText(el){var key=el.getAttribute("data-ck"),val=clean(el.innerHTML),def=clean(DEF[key]||"");
     var p=(val===def||!val)?db.from("site_content").delete().eq("key",key):db.from("site_content").upsert({key:key,kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id});
-    p.then(function(r){if(r.error)throw r.error;if(val===def||!val){delete CONTENT[key];el.innerHTML=el.__def}else CONTENT[key]={key:key,kind:"text",value:val};toast(val===def||!val?"Restored the original":"Saved")})
+    p.then(function(r){if(r.error)throw r.error;if(val===def||!val){delete CONTENT[key];el.innerHTML=DEF[key]||""}else CONTENT[key]={key:key,kind:"text",value:val};FR.recaptureForm();toast(val===def||!val?"Restored the original":"Saved")})
      .catch(function(){toast("Couldn’t save. Check your connection.")});}
 
   /* Photo replace button */
@@ -2346,10 +2374,10 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
     if(!USER){box.innerHTML=signInHTML();bindSignIn();return}
     if(!IS_ADMIN){box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b></span><button class="mini" type="button" id="admOut">Sign out</button></div><h2 style="margin-top:14px">Waiting for admin access</h2><p style="margin-top:8px;color:#4a4d55">This account doesn’t have admin access yet. Once the site owner grants it, sign out and back in.</p>';$("#admOut").onclick=signOut;return}
     box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b> · Admin</span><span class="row" style="margin:0"><button class="mini solid" type="button" id="admEdit">Edit the site</button><button class="mini" type="button" id="admOut">Sign out</button></span></div>'+
-      '<div class="adm-tabs" role="tablist">'+[["overview","Overview"],["events","Events"],["notes","Bulletin notes"],["inq","Inquiries"],["edits","Site edits"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>'}).join("")+'</div><div class="adm-panel" id="admPanel">Loading…</div>';
+      '<div class="adm-tabs" role="tablist">'+[["overview","Overview"],["events","Events"],["notes","Bulletin notes"],["inq","Inquiries"],["partners","Partners"],["edits","Site edits"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>'}).join("")+'</div><div class="adm-panel" id="admPanel">Loading…</div>';
     $("#admOut").onclick=signOut; $("#admEdit").onclick=function(){location.hash="#home";setTimeout(function(){setEditing(true)},50)};
     $$(".adm-tabs button",box).forEach(function(b){b.onclick=function(){TAB=b.getAttribute("data-tab");renderAdmin()}});
-    ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,edits:tabEdits})[TAB]();
+    ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,partners:tabPartners,edits:tabEdits})[TAB]();
   }
   function signInHTML(){return '<h2>Admin sign in</h2><form id="admForm" novalidate><label class="f" for="adm-email">Email<input type="email" id="adm-email" autocomplete="username" required></label><label class="f" for="adm-pass">Password<input type="password" id="adm-pass" autocomplete="current-password" required minlength="8"></label><div class="row"><button class="btn deep" type="submit" id="admSubmit">Sign in</button><button class="mini" type="button" id="admMode">Create an account</button><button class="mini" type="button" id="admForgot">Forgot password</button></div><p class="msg" id="admMsg" role="status"></p></form>'}
   function bindSignIn(){var mode="in",msg=$("#admMsg");
@@ -2407,8 +2435,37 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
       $$("select[data-id]",P).forEach(function(s){s.onchange=function(){db.from("inquiries").update({status:s.value}).eq("id",s.getAttribute("data-id")).then(function(x){toast(x.error?"Couldn’t update":"Updated");tabInq()})}});
     });
   }
+  function uploadFile(file){return new Promise(function(ok,bad){
+    if(file.size>8*1024*1024){bad(new Error("big"));return}
+    var ext=(file.name.split(".").pop()||"png").toLowerCase().replace(/[^a-z0-9]/g,""),path="partners/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext;
+    db.storage.from("site-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type}).then(function(r){if(r.error)throw r.error;ok(db.storage.from("site-images").getPublicUrl(path).data.publicUrl)}).catch(bad)})}
+  function tabPartners(){var P=$("#admPanel"),list=[];
+    FR.PARTNERS.forEach(function(pg,si){pg.forEach(function(p){list.push({slide:si+1,name:p.name,img:p.img})})});
+    function draw(){
+      P.innerHTML='<p style="color:#4a4d55">Logos on the homepage carousel (up to 4 per slide) and the Sponsors page. A row with no logo shows the “Your Logo Here” card.</p><div class="adm-scroll"><table class="adm-table" style="min-width:640px"><thead><tr><th>Slide</th><th>Logo</th><th>Name</th><th></th></tr></thead><tbody>'+
+        list.map(function(p,i){return '<tr data-i="'+i+'"><td style="width:80px"><input type="number" min="1" max="12" value="'+p.slide+'" aria-label="Slide number"></td><td style="width:130px">'+(p.img?'<img src="'+esc(p.img)+'" alt="" style="max-width:110px;max-height:50px;object-fit:contain">':'<small>Your Logo Here card</small>')+'</td><td><input type="text" value="'+esc(p.name)+'" aria-label="Partner name"></td><td><button class="mini" type="button" data-act="logo">Replace logo</button> <button class="mini" type="button" data-act="up" aria-label="Move up">↑</button> <button class="mini" type="button" data-act="down" aria-label="Move down">↓</button> <button class="mini red" type="button" data-act="rm">Remove</button></td></tr>'}).join("")+
+        '</tbody></table></div><div class="row"><button class="mini" type="button" id="ptAdd">Add a partner</button><button class="mini" type="button" id="ptCard">Add a “Your Logo Here” card</button><button class="btn deep" type="button" id="ptSave">Save partners</button><button class="mini red" type="button" id="ptReset">Restore original list</button></div>';
+      $$("tbody tr",P).forEach(function(tr){var i=+tr.getAttribute("data-i"),inp=$$("input",tr);
+        inp[0].onchange=function(){list[i].slide=Math.max(1,parseInt(this.value,10)||1)}; inp[1].oninput=function(){list[i].name=this.value};
+        $$("button",tr).forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-act");
+          if(a==="rm"){list.splice(i,1);draw()} else if(a==="up"&&i>0){var t=list[i-1];list[i-1]=list[i];list[i]=t;draw()} else if(a==="down"&&i<list.length-1){var t2=list[i+1];list[i+1]=list[i];list[i]=t2;draw()}
+          else if(a==="logo"){pick(function(f){toast("Uploading…");uploadFile(f).then(function(u){list[i].img=u;draw();toast("Logo added. Click Save partners.")}).catch(function(){toast("Couldn’t upload. Use a JPG, PNG or WebP under 8 MB.")})})}}});});
+      $("#ptAdd").onclick=function(){pick(function(f){toast("Uploading…");uploadFile(f).then(function(u){var last=list.length?list[list.length-1].slide:1;list.push({slide:last,name:"New partner",img:u});draw();toast("Added. Name it, then click Save partners.")}).catch(function(){toast("Couldn’t upload that logo.")})})};
+      $("#ptCard").onclick=function(){var last=list.length?list[list.length-1].slide:1;list.push({slide:last,name:"Your Logo Here",img:""});draw()};
+      $("#ptSave").onclick=function(){var pages={};list.forEach(function(p){(pages[p.slide]=pages[p.slide]||[]).push({name:p.name.trim()||"Partner",img:p.img})});
+        var out=Object.keys(pages).map(Number).sort(function(a,b){return a-b}).map(function(k){return pages[k]});
+        if(out.some(function(pg){return pg.length>4})){toast("Each slide can hold up to 4. Change some slide numbers.");return}
+        db.from("site_content").upsert({key:"data|partners",kind:"text",value:JSON.stringify(out),updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(r){
+          if(r.error){toast("Couldn’t save partners.");return} CONTENT["data|partners"]={key:"data|partners",kind:"text",value:JSON.stringify(out)};FR.setPartners(out);toast("Partners saved");tabPartners()})};
+      $("#ptReset").onclick=function(){var b=this;if(b.textContent!=="Confirm restore"){b.textContent="Confirm restore";return}
+        db.from("site_content").delete().eq("key","data|partners").then(function(){delete CONTENT["data|partners"];FR.setPartners(JSON.parse(JSON.stringify(FR.PARTNERS_DEFAULT)));toast("Original list restored");tabPartners()})};
+    }
+    function pick(cb){var f=document.createElement("input");f.type="file";f.accept="image/jpeg,image/png,image/webp,image/gif";f.onchange=function(){if(f.files[0])cb(f.files[0])};f.click()}
+    draw();
+  }
   function tabEdits(){var P=$("#admPanel"),keys=Object.keys(CONTENT).sort();
     P.innerHTML=keys.length?'<p style="color:#4a4d55">Every change made with Edit the site. Restore puts the original back.</p>'+keys.map(function(k){var c=CONTENT[k],pg=k.split("|")[0];
+      if(k==="data|partners") return '<div class="inq"><header><b>Partners list</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header><p>Partner logos were changed in the Partners tab.</p></div>';
       return '<div class="inq"><header><b>'+esc(pg)+'</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header>'+(c.kind==="image"?'<p>Photo replaced · <a href="'+esc(c.value)+'" target="_blank" rel="noopener">view</a></p>':'<p>'+esc(c.value.replace(/<[^>]+>/g,"").slice(0,160))+'</p>')+'</div>'}).join(""):'<p style="color:#4a4d55">No edits yet. Click Edit the site to start.</p>';
     $$("button[data-k]",P).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-k");db.from("site_content").delete().eq("key",k).then(function(x){if(!x.error){delete CONTENT[k];applyContent()}toast(x.error?"Couldn’t restore":"Restored");tabEdits()})}});
   }
