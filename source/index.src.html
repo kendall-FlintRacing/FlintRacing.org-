@@ -862,6 +862,33 @@ a.ycell:hover{background:#fbe2e5}
 .adm .msg{margin-top:12px;font-size:.9rem;font-weight:600}
 .adm .msg.err{color:#8f1023}.adm .msg.ok{color:#1d6b3a}
 /* admin v2 */
+.pv-banner{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff6dc;color:#4a3800;border:2px dashed #e0b23b;border-radius:12px;padding:12px 16px}
+.pv-banner div:first-child{display:grid;gap:3px;flex:1;min-width:220px}
+.pv-banner span{font-size:.9rem}
+.pv-banner .pv-sw{display:flex;gap:6px}
+.pv-banner .pv-sw a{border:1.5px solid #c99a2a;border-radius:999px;padding:7px 14px;font-weight:800;text-decoration:none;color:#4a3800;background:#fff}
+.pv-banner .pv-sw a[aria-current=true]{background:#111113;color:#fff;border-color:#111113}
+.pv-wrap{display:grid;gap:16px}
+.pv-list{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;align-items:center;background:#f6f7f8;border-radius:12px;padding:12px}
+.pv-list .adm-g{color:#6b6e75;margin:0;white-space:nowrap}
+.pv-grp{display:flex;flex-wrap:wrap;gap:6px}
+.pv-list button{text-align:left;border:1.5px solid #dcdee2;background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font:inherit;color:var(--ink)}
+.pv-list button b{font-size:.88rem}
+.pv-list button span{display:none}
+@media (max-width:640px){.pv-list{grid-template-columns:1fr}}
+.pv-list button:hover{border-color:#9a9da3}
+.pv-list button[aria-current=true]{border-color:var(--red-deep);background:var(--red-deep);color:#fff}
+.pv-top p.pv-d{color:#5a5d64;font-size:.92rem;margin-top:4px}
+.pv-stage{display:grid;gap:10px;min-width:0}
+.pv-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.pv-top h3{font-size:1.5rem}
+.pv-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pv-size{display:inline-flex;border:1.5px solid #c3c6cc;border-radius:8px;overflow:hidden}
+.pv-size button{border:0;background:#fff;padding:7px 11px;font:700 .82rem/1 var(--body);cursor:pointer}
+.pv-size button[aria-pressed=true]{background:var(--ink);color:#fff}
+.pv-screen{position:relative;overflow:hidden;background:#0f0f12;border-radius:12px;border:8px solid #1b1c21;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.pv-screen iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
+.pv-note{font-size:.88rem;color:#4a4d55}
 .adm.adm2{display:grid;grid-template-columns:268px minmax(0,1fr);padding:0;overflow:visible;border-radius:12px;background:linear-gradient(90deg,#111216 268px,#fff 268px);margin-top:4px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .adm-side{background:#111216;color:#e3e5e9;border-radius:12px 0 0 12px;padding:18px 14px;display:flex;flex-direction:column;gap:14px;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;scrollbar-width:thin}
 .adm-me{display:flex;gap:10px;align-items:center;padding:4px 6px 12px;border-bottom:1px solid #26272e}
@@ -3131,7 +3158,7 @@ body.rw-tv .rw-fol{display:none}
   var pendingNote=null;
   document.addEventListener("click",function(e){var a=e.target.closest("a[data-interest]");if(a){pendingInterest=a.getAttribute("data-interest");pendingNote=a.getAttribute("data-note")}});
   function route(){
-    var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew";
+    var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew"; if(h.indexOf("my-dashboard/")===0) h="my-dashboard";
     if(ALIAS[h]){pendingInterest=pendingInterest||ALIAS[h];h="participate"}
     var real=document.querySelector('[data-page="'+h+'"]');
     var home=!!HOME_ANCHORS[h]||(!NAMES[h]&&!real);
@@ -4693,7 +4720,8 @@ window.FRB=(function(){
   /* ---------- Crew link (#crew/<token>) ---------- */
   function renderCrew(){var box=$("#crewBox"),tok=(location.hash.split("/")[1]||"").trim();if(!box)return;
     if(!tok){box.innerHTML='<div class="crew-pass"><h1>Crew pass</h1><p>Open the crew link from your email to see your race-day role.</p></div>';return}
-    db.rpc("crew_view",{p_token:tok}).then(function(r){var c=r.data;
+    var sample=tok==="sample"&&IS_ADMIN;
+    (sample?Promise.resolve({data:{first_name:"Marcus",role:"Check-in table",area:"event",shift:"Morning",assignment:"Welcome tent at 7:45 AM. Hand out wristbands and programs.",checked_in_at:null}}):db.rpc("crew_view",{p_token:tok})).then(function(r){var c=r.data;
       if(r.error||!c){box.innerHTML='<div class="crew-pass"><h1>Link not found</h1><p>This crew link isn’t active. Check the newest email from Flint Racing, or email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div>';return}
       box.innerHTML='<div class="crew-pass"><p class="t-kicker">Race day crew pass</p><h1>'+esc(c.first_name)+'</h1>'+
         '<dl class="crew-dl"><div><dt>Role</dt><dd>'+esc(c.role||"Assigned on race morning")+'</dd></div><div><dt>Area</dt><dd>'+(c.area==="track"?"The track":c.area==="event"?"The event":"To be assigned")+'</dd></div><div><dt>Shift</dt><dd>'+esc(c.shift||"All day")+'</dd></div></dl>'+
@@ -5004,7 +5032,13 @@ window.FRB=(function(){
     workshop:["Workshop sign-in desk","Signs families in and counts meals"],teacher:["Teacher","Suggest events and list materials"],photographer:["Photographer","Upload photo albums"],
     controller:["Race control","Runs the live race feed"],track:["Track operations","Shout-outs, intermissions and sponsor ads"],volunteers:["Race-day volunteer lists","Volunteer lists and check-in"]};
   var MKIND={workshop:"Building workshop",race_day:"Race day",event:"Event or camp",other:"Something else"};
-  function hasRole(r){return !!(ME&&(ME.roles||[]).indexOf(r)>=0)}
+  var PREVROLES=null;
+  function hasRole(r){var R=PREVROLES||(ME&&ME.roles)||[];return R.indexOf(r)>=0}
+  function sampleProfile(kind){var d=function(days,h){return new Date(Date.now()-days*864e5+(h||0)*36e5).toISOString()},fam=kind!=="crew";
+    return fam?{member:{username:"taylorfamily",display_name:"Jordan Taylor",kind:"family",roles:["family"],first_year:2025,email:"family@example.com",phone:"810-555-0100",kids:[{name:"Maya T.",age:"11"},{name:"Eli T.",age:"8"}]},
+        hours:14,workshops:6,race_days:1,events:2,years:2,open:null,recent:[{kind:"workshop",started_at:d(9,-2),ended_at:d(9,1)},{kind:"workshop",started_at:d(23,-2),ended_at:d(23,1)},{kind:"event",started_at:d(40,-3),ended_at:d(40,0)},{kind:"race_day",started_at:d(160,-5),ended_at:d(160,3)}]}:
+      {member:{username:"samrivera",display_name:"Sam Rivera",kind:"crew",roles:["volunteer","workshop","teacher","photographer","controller","track","volunteers"],first_year:2024,email:"crew@example.com",phone:null,kids:[]},
+        hours:62.5,workshops:18,race_days:2,events:4,years:3,open:null,recent:[{kind:"workshop",started_at:d(2,-3),ended_at:d(2,1)},{kind:"event",started_at:d(12,-4),ended_at:d(12,0)},{kind:"workshop",started_at:d(16,-3),ended_at:d(16,1)}]}}
   var MSPACES=[["#program-signin","Program Dashboard","Dates, times, places and the bulletin",function(){return true},1],
     ["#workshop-signin","Workshop sign-in","Sign families in and count meals",function(){return hasRole("workshop")}],
     ["#teacher","Teacher planning","Suggest events and list materials",function(){return hasRole("teacher")}],
@@ -5107,14 +5141,15 @@ window.FRB=(function(){
   function fmtTime(iso){return new Date(iso).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}
   function renderMe(){var box=$("#meBox");if(!box||hashBase()!=="my-dashboard")return;
     if(!ME){box.__sig="";
+      if(USER&&!USER.is_anonymous&&IS_ADMIN){var kind=(location.hash.split("/")[1]||"family")==="crew"?"crew":"family";drawMe(box,sampleProfile(kind),kind);return}
       if(USER&&!USER.is_anonymous){box.innerHTML='<div class="me-gate"><p class="me-k">Admin account</p><h2 class="mem-h">You’re signed in as an admin</h2><p class="mem-sub" style="margin:8px 0 14px">Admins work from the Admin portal. Personal dashboards are for families and crew who sign in with a username.</p><a class="btn deep" href="#admin">Open Admin</a></div>';return}
       if(box.querySelector("#meMem"))return;
       box.innerHTML='<div class="me-gate">'+memHTML("me",{kicker:"My dashboard",title:"Sign in with your username",sub:"Families and crew: use the username and passcode you registered with."})+'</div>';bindMem("me",function(){});return}
     if(box.__busy)return;box.__busy=true;
     db.rpc("my_profile").then(function(r){box.__busy=false;if(r.error||!r.data){box.innerHTML='<div class="me-gate"><p>Couldn’t load your profile. Refresh to try again.</p></div>';return}drawMe(box,r.data);logView("my-dashboard")});
   }
-  function drawMe(box,P){var m=P.member,fam=m.kind==="family",roles=m.roles||[];
-    var sp=MSPACES.filter(function(s){return s[3]()});
+  function drawMe(box,P,preview){var m=P.member,fam=m.kind==="family",roles=m.roles||[];
+    if(preview)PREVROLES=roles;var sp=MSPACES.filter(function(s){return s[3]()});PREVROLES=null;
     var tiles=[[P.years,(P.years===1?"Season":"Seasons")+" with Flint Racing"],[fmtHrs(P.hours),fam?"Hours at the shop":"Volunteer hours"],[P.workshops,"Workshops"],[P.race_days,"Race days"]];
     var open=P.open,clock=open?'<div class="me-card me-clock on"><p class="me-k">You’re checked in</p><h2>'+esc(MKIND[open.kind]||"Checked in")+'</h2><p>Since '+fmtTime(open.started_at)+'. Check out when you leave so your hours count.</p><button class="btn deep" type="button" id="meClock">Check out</button></div>':
       '<div class="me-card me-clock"><p class="me-k">Here today?</p><h2>Check in</h2><p>Check in when you arrive and out when you leave. It builds your '+(fam?'workshop count and hours':'volunteer hours')+'.</p><div class="me-kinds" role="radiogroup" aria-label="What are you here for?">'+
@@ -5133,6 +5168,8 @@ window.FRB=(function(){
           '<div class="me-card"><p class="me-k">Your profile</p><h2>Account</h2><ul class="me-list"><li><span>Email<small>'+esc(m.email||"—")+'</small></span></li><li><span>Phone<small>'+esc(m.phone||"—")+'</small></span></li></ul>'+
             '<details><summary>Change my passcode</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current passcode<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New passcode<input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type the new one again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save new passcode</button><p class="t-msg" role="status"></p></form></details>'+
             '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div></div></div>';
+    if(preview){box.insertAdjacentHTML("afterbegin",'<div class="pv-banner"><div><b>Admin preview · sample '+(fam?"family":"crew member")+'</b><span>This is what '+(fam?"a family":"a crew member with every role")+' sees. The names and numbers are made up; buttons here don’t save anything.</span></div><div class="pv-sw"><a href="#my-dashboard/family"'+(fam?' aria-current="true"':'')+'>Family</a><a href="#my-dashboard/crew"'+(!fam?' aria-current="true"':'')+'>Crew</a></div></div>');
+      $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")){el.disabled=true}});$("#meOut").onclick=null;return}
     $("#meOut").onclick=signOut;
     $("#meClock").onclick=function(){var b=this,k=($('input[name=meKind]:checked',box)||{}).value;b.disabled=true;
       db.rpc("member_clock",{p_kind:k||"other"}).then(function(x){b.disabled=false;if(x.error){toast(x.error.message);return}
@@ -5292,10 +5329,37 @@ window.FRB=(function(){
       var fl=$(".sp-filters"),cats=[];r.data.forEach(function(x){if(cats.indexOf(x.category)<0)cats.push(x.category)});
       if(fl){$$("button",fl).forEach(function(b){b.remove()});fl.insertAdjacentHTML("beforeend",['<button type="button" aria-pressed="true" data-f="">All items</button>'].concat(cats.map(function(c){return '<button type="button" aria-pressed="false" data-f="'+esc(c)+'">'+esc(c)+'</button>'})).join(""));
         $$("button",fl).forEach(function(b){b.onclick=function(){var f=b.getAttribute("data-f");$$("button",fl).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});$$("#spGrid .sp-item").forEach(function(it){it.hidden=!!f&&it.getAttribute("data-cat")!==f})}})}})}
-  function tabEdits(){var P=$("#admPanel"),keys=Object.keys(CONTENT).sort();
-    P.innerHTML=keys.length?'<p style="color:#4a4d55">Every change made with Edit the site. Restore puts the original back.</p>'+keys.map(function(k){var c=CONTENT[k],pg=k.split("|")[0];
+  var EDSUB="previews", PVSEL="#my-dashboard/family", PVW=390;
+  var PVPAGES=[["Families",[["#my-dashboard/family","My dashboard","Family profile, stats, check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"]]],
+    ["Crew & staff",[["#my-dashboard/crew","My dashboard: crew","Volunteer profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#volunteers","Volunteer lists","Race-day crew and check-in"],["#crew/sample","Volunteer crew pass","What a race-day volunteer’s link shows (sample)"]]],
+    ["Race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
+    ["Admins",[["#team","Staff Garage","Admin sign-in page"]]]];
+  function pvFind(h){var o=null;PVPAGES.forEach(function(g){g[1].forEach(function(x){if(x[0]===h)o={g:g[0],h:x[0],t:x[1],d:x[2]}})});return o}
+  function tabEdits(){var P=$("#admPanel");
+    var sub='<div class="mb-sub" role="tablist"><button type="button" role="tab" data-esub="previews" aria-selected="'+(EDSUB==="previews")+'">Page previews</button><button type="button" role="tab" data-esub="history" aria-selected="'+(EDSUB==="history")+'">Change history</button></div>';
+    if(EDSUB==="history"){tabEditsHistory(P,sub);}
+    else{var cur=pvFind(PVSEL)||pvFind("#my-dashboard/family");
+      P.innerHTML=sub+'<div class="pv-wrap"><nav class="pv-list" aria-label="Pages to preview">'+PVPAGES.map(function(g){return '<p class="adm-g">'+esc(g[0])+'</p><div class="pv-grp">'+g[1].map(function(x){return '<button type="button" data-pv="'+x[0]+'"'+(x[0]===cur.h?' aria-current="true"':'')+' title="'+esc(x[2])+'"><b>'+esc(x[1])+'</b><span>'+esc(x[2])+'</span></button>'}).join("")+'</div>'}).join("")+'</nav>'+
+        '<section class="pv-stage"><div class="pv-top"><div><p class="adm-crumb">'+esc(cur.g)+'</p><h3>'+esc(cur.t)+'</h3><p class="pv-d">'+esc(cur.d)+'</p></div><div class="pv-tools"><div class="pv-size" role="group" aria-label="Preview size">'+[[390,"Phone"],[820,"Tablet"],[1280,"Desktop"]].map(function(z){return '<button type="button" data-w="'+z[0]+'" aria-pressed="'+(PVW===z[0])+'">'+z[1]+'</button>'}).join("")+'</div>'+
+          '<button class="mini" type="button" id="pvReload">Reload</button><button class="mini" type="button" id="pvOpen">Open page</button><button class="mini solid" type="button" id="pvEdit">Edit this page</button></div></div>'+
+          '<div class="pv-screen" id="pvScreen"><iframe id="pvFrame" title="Preview of '+esc(cur.t)+'" src="'+esc(location.href.split("#")[0]+cur.h)+'"></iframe></div>'+
+          '<p class="pv-note"><b>What you can change with Edit this page:</b> page titles, intro text and photos. The working parts of a dashboard (buttons, lists and forms) are built in code. Tell Claude what to change there.</p></section></div>';
+      function fit(){var sc=$("#pvScreen"),f=$("#pvFrame");if(!sc||!f)return;sc.style.maxWidth="";var w=sc.clientWidth-16,k=Math.min(1,w/PVW),h=PVW===390?760:PVW===820?900:820;
+        if(k===1)sc.style.maxWidth=(PVW+16)+"px";f.style.width=PVW+"px";f.style.height=h+"px";f.style.transform="scale("+k+")";sc.style.height=Math.round(h*k)+16+"px"}
+      fit();if(!window.__pvFit){window.__pvFit=1;addEventListener("resize",function(){if($("#pvFrame"))fit_()})}window.fit_=fit;
+      $$("[data-pv]",P).forEach(function(b){b.onclick=function(){PVSEL=b.getAttribute("data-pv");tabEdits()}});
+      $$("[data-w]",P).forEach(function(b){b.onclick=function(){PVW=+b.getAttribute("data-w");$$("[data-w]",P).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});fit()}});
+      $("#pvReload").onclick=function(){var f=$("#pvFrame");f.src=f.src};
+      $("#pvOpen").onclick=function(){location.hash=cur.h};
+      $("#pvEdit").onclick=function(){location.hash=cur.h;setTimeout(function(){setEditing(true)},120)};
+    }
+    $$("[data-esub]",P).forEach(function(b){b.onclick=function(){EDSUB=b.getAttribute("data-esub");tabEdits()}});
+  }
+  function fit_(){if(window.fit_)window.fit_()}
+  function tabEditsHistory(P,sub){var keys=Object.keys(CONTENT).sort();
+    P.innerHTML=sub+(keys.length?'<p style="color:#4a4d55">Every change made with Edit the site. Restore puts the original back.</p>'+keys.map(function(k){var c=CONTENT[k],pg=k.split("|")[0];
       if(k==="data|partners") return '<div class="inq"><header><b>Partners list</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header><p>Partner logos were changed in the Partners tab.</p></div>';
-      return '<div class="inq"><header><b>'+esc(pg)+'</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header>'+(c.kind==="image"?'<p>Photo replaced · <a href="'+esc(c.value)+'" target="_blank" rel="noopener">view</a></p>':'<p>'+esc(c.value.replace(/<[^>]+>/g,"").slice(0,160))+'</p>')+'</div>'}).join(""):'<p style="color:#4a4d55">No edits yet. Click Edit the site to start.</p>';
+      return '<div class="inq"><header><b>'+esc(pg)+'</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header>'+(c.kind==="image"?'<p>Photo replaced · <a href="'+esc(c.value)+'" target="_blank" rel="noopener">view</a></p>':'<p>'+esc(c.value.replace(/<[^>]+>/g,"").slice(0,160))+'</p>')+'</div>'}).join(""):'<p style="color:#4a4d55">No edits yet. Click Edit the site to start.</p>');
     $$("button[data-k]",P).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-k");db.from("site_content").delete().eq("key",k).then(function(x){if(!x.error){delete CONTENT[k];applyContent()}toast(x.error?"Couldn’t restore":"Restored");tabEdits()})}});
   }
 })();
