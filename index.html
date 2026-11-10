@@ -972,6 +972,67 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .acc-wait{background:#f3f4f6;border-radius:6px;padding:14px;margin-top:14px}
 .acc-wait p{color:#4a4d55;margin-top:4px}
 .acc-card .row{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+/* ===== Sign in: choose your ride ===== */
+.cs-page{background:#07070b;color:#fff;overflow-x:clip}
+.cs{--n:#ff3b5c;position:relative;overflow:hidden;padding:clamp(1.2rem,3vw,2rem) 0 clamp(2.4rem,5vw,3.6rem);background:radial-gradient(ellipse 70% 55% at 50% 0%,color-mix(in srgb,var(--n) 22%,transparent),transparent 70%),#07070b;transition:background .6s}
+.cs-floor{position:absolute;left:-60%;right:-60%;bottom:-2%;height:62%;pointer-events:none;background-image:linear-gradient(color-mix(in srgb,var(--n) 45%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--n) 45%,transparent) 1px,transparent 1px);background-size:64px 64px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(to top,#000 20%,transparent 85%);mask-image:linear-gradient(to top,#000 20%,transparent 85%);opacity:.55;animation:csgrid 3s linear infinite}
+@keyframes csgrid{to{background-position:0 64px,0 0}}
+.cs-wrap{position:relative;z-index:1}
+.cs-top{text-align:center;display:grid;gap:6px;justify-items:center}
+.cs-k{font:800 .8rem/1 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--n);text-shadow:0 0 12px var(--n);animation:csblink 2.4s steps(1) infinite}
+@keyframes csblink{50%{opacity:.55}}
+.cs-top h1{color:#fff;font-size:clamp(2.6rem,7.5vw,5rem);line-height:.95;text-shadow:0 0 18px color-mix(in srgb,var(--n) 70%,transparent),0 0 2px #fff}
+.cs-sub{color:#c9cbd0;font-size:1.02rem}
+.cs-stage{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(4px,2vw,20px);margin-top:clamp(.6rem,2vw,1.2rem)}
+.cs-cars{position:relative;height:clamp(210px,34vw,330px)}
+.cs-slot{position:absolute;left:50%;top:0;bottom:0;width:min(560px,92%);transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s,filter .55s;cursor:pointer}
+.cs-slot.pos0{transform:translateX(-50%) scale(1);opacity:1;z-index:3;cursor:default}
+.cs-slot.posL{transform:translateX(-132%) scale(.5);opacity:.35;filter:brightness(.55) saturate(.6) blur(1px);z-index:2}
+.cs-slot.posR{transform:translateX(32%) scale(.5);opacity:.35;filter:brightness(.55) saturate(.6) blur(1px);z-index:2}
+.cs-slot.posX{transform:translateX(-50%) scale(.3);opacity:0;pointer-events:none;z-index:1}
+@media (max-width:760px){.cs-slot.posL,.cs-slot.posR{opacity:0;pointer-events:none}}
+@media (max-width:760px){.cs-stage{grid-template-columns:1fr;position:relative}.cs-cars{height:clamp(200px,58vw,300px)}.cs-arrow{position:absolute;top:50%;margin-top:-24px;width:48px;height:48px}.cs-prev{left:0}.cs-next{right:0}.cs-slot{width:100%}}
+.cs-beam{position:absolute;left:50%;top:-30%;width:62%;height:118%;transform:translateX(-50%);background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--sn,var(--n)) 30%,transparent) 70%,color-mix(in srgb,var(--sn,var(--n)) 45%,transparent));clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(8px);opacity:.7}
+.cs-spot{position:absolute;left:50%;bottom:4%;width:78%;height:20%;transform:translateX(-50%);border-radius:50%;border:3px solid var(--sn,var(--n));background:radial-gradient(ellipse at center,color-mix(in srgb,var(--sn,var(--n)) 70%,transparent) 0,color-mix(in srgb,var(--sn,var(--n)) 25%,transparent) 45%,transparent 72%);box-shadow:0 0 22px var(--sn,var(--n)),0 0 60px color-mix(in srgb,var(--sn,var(--n)) 60%,transparent),inset 0 0 22px var(--sn,var(--n))}
+.cs-car{position:absolute;left:50%;bottom:14%;width:86%;transform:translateX(-50%);z-index:2}
+.cs-car svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--sn,var(--n)) 85%,transparent)) drop-shadow(0 14px 10px rgba(0,0,0,.55));animation:csfloat 3.2s ease-in-out infinite}
+@keyframes csfloat{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-14px) rotate(.6deg)}}
+.cs-slot.pos0 .wh{transform-box:fill-box;transform-origin:center;animation:csspin 1.1s linear infinite}
+@keyframes csspin{to{transform:rotate(360deg)}}
+.cs-arrow{width:clamp(48px,6vw,68px);height:clamp(48px,6vw,68px);border-radius:50%;border:3px solid var(--n);background:rgba(7,7,11,.6);color:var(--n);display:grid;place-items:center;cursor:pointer;box-shadow:0 0 14px color-mix(in srgb,var(--n) 70%,transparent),inset 0 0 10px color-mix(in srgb,var(--n) 40%,transparent);transition:transform .15s,background .2s;z-index:4;animation:csnudge 2.2s ease-in-out infinite}
+.cs-next{animation-name:csnudgeR}
+.cs-arrow svg{width:55%;height:55%;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px var(--n))}
+.cs-arrow:hover,.cs-arrow:focus-visible{background:var(--n);color:#0b0b0e;transform:scale(1.08)}
+@keyframes csnudge{50%{translate:-4px 0}}
+@keyframes csnudgeR{50%{translate:4px 0}}
+.cs-dots{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.cs-dots button{width:34px;height:8px;border-radius:999px;border:0;background:rgba(255,255,255,.18);cursor:pointer;padding:0;transition:background .2s,box-shadow .2s}
+.cs-dots button[aria-pressed="true"]{background:var(--n);box-shadow:0 0 10px var(--n)}
+.cs-info{max-width:640px;margin:clamp(1rem,2.5vw,1.6rem) auto 0;text-align:center}
+.cs-card{display:grid;gap:10px;justify-items:center;animation:csin .45s ease-out}
+@keyframes csin{from{opacity:0;transform:translateY(10px)}}
+.cs-n{font:800 .74rem/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:#a9abb1}
+.cs-card h2{color:#fff;font-size:clamp(2.4rem,6vw,3.8rem);line-height:.95;text-shadow:0 0 16px color-mix(in srgb,var(--n) 75%,transparent)}
+.cs-desc{color:#e3e5e9;font-size:1.06rem;max-width:52ch}
+.cs-stats{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:7px;width:min(380px,100%)}
+.cs-stats li{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;text-align:left}
+.cs-stats span{font:700 .78rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#c9cbd0}
+.cs-stats i{display:block;height:12px;background:linear-gradient(90deg,var(--n) calc(var(--v)*20%),rgba(255,255,255,.14) 0);-webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 4px),transparent calc(20% - 4px) 20%);mask:repeating-linear-gradient(90deg,#000 0 calc(20% - 4px),transparent calc(20% - 4px) 20%);filter:drop-shadow(0 0 4px var(--n))}
+.cs-key{font-size:.92rem;color:#c9cbd0}
+.cs-key b{color:#fff}
+.cs-form{display:grid;gap:8px;width:min(460px,100%);margin-top:4px}
+.cs-lbl{font:700 .85rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#c9cbd0}
+.cs-row{display:flex;gap:8px;flex-wrap:wrap}
+.cs-row input{flex:1;min-width:170px;font:800 1.2rem/1.2 var(--body);letter-spacing:.08em;background:#0e0e14;color:#fff;border:2px solid color-mix(in srgb,var(--n) 70%,#333);border-radius:8px;padding:12px 14px;text-align:center}
+.cs-row input:focus{outline:none;border-color:var(--n);box-shadow:0 0 14px color-mix(in srgb,var(--n) 70%,transparent)}
+.cs-go{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 22px;border:0;border-radius:8px;background:var(--n);color:#0b0b0e;font:900 1.15rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;box-shadow:0 0 18px color-mix(in srgb,var(--n) 75%,transparent);transition:transform .15s}
+.cs-go:hover{transform:translateY(-2px)}
+.cs-acts{margin-top:4px}
+.cs-page .t-msg{color:#ff8a98}
+.cs-fine{font-size:.86rem;color:#a9abb1}
+.cs-fine a{color:#fff}
+.cs-hint{text-align:center;color:#6d7077;font-size:.8rem;margin-top:18px;letter-spacing:.08em}
+@media (prefers-reduced-motion:reduce){.cs-floor,.cs-k,.cs-car svg,.cs-slot.pos0 .wh,.cs-arrow,.cs-card{animation:none}.cs-slot{transition:none}}
 /* ===== The Grandstand (guest passes) ===== */
 .gs-head{text-align:center;max-width:720px;margin:0 auto 22px;display:grid;gap:10px;justify-items:center}
 .gs-head h1{color:#fff;font-size:clamp(2.6rem,7vw,4.4rem)}
@@ -2415,44 +2476,70 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <!-- ======================= SIGN-IN HUB ======================= -->
-<div class="page dark prog-page gs-page" data-page="access" hidden>
+<div class="page cs-page" data-page="access" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Sign in</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="gs-head">
-      <p class="eyebrow">Welcome to the Grandstand</p>
-      <h1>Grab your pass.</h1>
-      <p>Families and volunteers don’t need an account. Pick the pass that fits and you’re in.</p>
-    </section>
-    <div class="gs-passes">
-      <section class="ticket t-family" aria-labelledby="famPassTitle">
-        <div class="t-main">
-          <p class="t-kicker">Admit families</p>
-          <h2 id="famPassTitle">Family Pass</h2>
-          <p class="t-say">Workshop dates, times and places for registered families, plus this month’s bulletin.</p>
-          <form id="famForm" class="t-form" novalidate>
-            <label for="fam-code">Family code<input type="text" id="fam-code" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="From your registration email"></label>
-            <button class="btn deep" type="submit" id="famGo">Open the Program Dashboard</button>
+  <section class="cs" id="carSelect" aria-roledescription="carousel" aria-label="Choose your portal">
+    <div class="cs-floor" aria-hidden="true"></div>
+    <div class="wrap cs-wrap">
+      <div class="cs-top">
+        <p class="cs-k">Player select</p>
+        <h1>Choose your ride</h1>
+        <p class="cs-sub">Families, volunteers and race fans don’t need an account.</p>
+      </div>
+      <div class="cs-stage">
+        <button class="cs-arrow cs-prev" type="button" aria-label="Previous ride"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
+        <div class="cs-cars" aria-live="off">
+          <div class="cs-slot" data-i="0" data-neon="#ff3b5c"><div class="cs-beam" aria-hidden="true"></div><div class="cs-car" data-paint="#e21b2d" data-trim="#ffffff" data-helmet="#f5b82e" data-num="1" aria-hidden="true"></div><div class="cs-spot" aria-hidden="true"></div></div>
+          <div class="cs-slot" data-i="1" data-neon="#ffc233"><div class="cs-beam" aria-hidden="true"></div><div class="cs-car" data-paint="#f5b82e" data-trim="#111113" data-helmet="#e21b2d" data-num="7" aria-hidden="true"></div><div class="cs-spot" aria-hidden="true"></div></div>
+          <div class="cs-slot" data-i="2" data-neon="#7fe3ff"><div class="cs-beam" aria-hidden="true"></div><div class="cs-car" data-paint="checker" data-trim="#e21b2d" data-helmet="#ffffff" data-num="27" aria-hidden="true"></div><div class="cs-spot" aria-hidden="true"></div></div>
+          <div class="cs-slot" data-i="3" data-neon="#ff5a68"><div class="cs-beam" aria-hidden="true"></div><div class="cs-car" data-paint="#17191f" data-trim="#e21b2d" data-helmet="#e21b2d" data-num="00" aria-hidden="true"></div><div class="cs-spot" aria-hidden="true"></div></div>
+        </div>
+        <button class="cs-arrow cs-next" type="button" aria-label="Next ride"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+      </div>
+      <div class="cs-dots" role="group" aria-label="Choose a ride"></div>
+      <div class="cs-info">
+        <article class="cs-card" data-card="0" aria-label="Family Pass">
+          <p class="cs-n">Ride 01 / 04 · Families</p>
+          <h2>Family Pass</h2>
+          <p class="cs-desc">For registered families. Unlock workshop dates, times and places, plus this month’s bulletin.</p>
+          <ul class="cs-stats"><li><span>Schedules</span><i style="--v:5"></i></li><li><span>Race day</span><i style="--v:3"></i></li><li><span>Behind the scenes</span><i style="--v:1"></i></li></ul>
+          <p class="cs-key"><b>Ignition key:</b> the family code from your registration email</p>
+          <form id="famForm" class="cs-form" novalidate>
+            <label for="fam-code" class="cs-lbl">Family code</label>
+            <div class="cs-row"><input type="text" id="fam-code" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter code"><button class="cs-go" type="submit" id="famGo">Start engine</button></div>
             <p class="t-msg" id="famMsg" role="status"></p>
           </form>
-          <p class="t-fine">Lost your code? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p>
-        </div>
-        <div class="t-stub" aria-hidden="true"><span>FAMILY</span><b>2027</b></div>
-      </section>
-      <section class="ticket t-vol" aria-labelledby="volPassTitle">
-        <div class="t-main">
-          <p class="t-kicker">Admit crew</p>
-          <h2 id="volPassTitle">Volunteer Pass</h2>
-          <p class="t-say">Help at the event or on the track on race day. No account needed.</p>
-          <a class="btn deep" href="#race-volunteer">Sign up to volunteer</a>
-          <div class="t-or"><b>Already signed up?</b> Open the crew link we emailed you. It shows your role, shift and race-day check-in.</div>
-          <p class="t-fine">Lost your link? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p>
-        </div>
-        <div class="t-stub" aria-hidden="true"><span>CREW</span><b>2027</b></div>
-      </section>
+          <p class="cs-fine">Lost your code? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p>
+        </article>
+        <article class="cs-card" data-card="1" aria-label="Volunteer Crew" hidden>
+          <p class="cs-n">Ride 02 / 04 · Volunteers</p>
+          <h2>Volunteer Crew</h2>
+          <p class="cs-desc">Help at the event or on the track on race day. Already signed up? Your crew link shows your role, shift and check-in.</p>
+          <ul class="cs-stats"><li><span>Schedules</span><i style="--v:2"></i></li><li><span>Race day</span><i style="--v:5"></i></li><li><span>Behind the scenes</span><i style="--v:3"></i></li></ul>
+          <p class="cs-key"><b>Ignition key:</b> none. Just sign up.</p>
+          <div class="cs-acts"><a class="cs-go" href="#race-volunteer">Sign up to volunteer</a></div>
+          <p class="cs-fine">Lost your crew link? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p>
+        </article>
+        <article class="cs-card" data-card="2" aria-label="Race Fan" hidden>
+          <p class="cs-n">Ride 03 / 04 · Race fans</p>
+          <h2>Race Fan</h2>
+          <p class="cs-desc">Follow every heat live on race day: the starting lights, run times, brackets and winners. Send a shout-out from the stands.</p>
+          <ul class="cs-stats"><li><span>Schedules</span><i style="--v:1"></i></li><li><span>Race day</span><i style="--v:5"></i></li><li><span>Behind the scenes</span><i style="--v:1"></i></li></ul>
+          <p class="cs-key"><b>Ignition key:</b> none. Everyone’s welcome.</p>
+          <div class="cs-acts"><a class="cs-go" href="#race-watch">Watch race day live</a></div>
+        </article>
+        <article class="cs-card" data-card="3" aria-label="Team Garage" hidden>
+          <p class="cs-n">Ride 04 / 04 · Flint Racing team</p>
+          <h2>Team Garage</h2>
+          <p class="cs-desc">For admins, teachers, photographers, workshop staff and race-day crew. Sign in or create your team account.</p>
+          <ul class="cs-stats"><li><span>Schedules</span><i style="--v:4"></i></li><li><span>Race day</span><i style="--v:4"></i></li><li><span>Behind the scenes</span><i style="--v:5"></i></li></ul>
+          <p class="cs-key"><b>Ignition key:</b> your team account</p>
+          <div class="cs-acts"><a class="cs-go" href="#team">Enter the Garage</a></div>
+        </article>
+      </div>
+      <p class="cs-hint" aria-hidden="true">Use ← → or swipe to switch rides</p>
     </div>
-    <a class="gs-watch" href="#race-watch"><span><b>Just here to watch?</b> Follow every heat live on race day.</span><em>View Live Race Day →</em></a>
-    <a class="gs-team" href="#team"><span><b>Flint Racing team member?</b> Admins, teachers, photographers and race-day crew sign in at the Garage.</span><em>Go to the Garage →</em></a>
-  </div></div>
+  </section>
 </div>
 
 <!-- ======================= THE GARAGE: TEAM SIGN IN ======================= -->
@@ -3072,6 +3159,35 @@ body.rw-tv .rw-fol{display:none}
     try{navigator.clipboard.writeText("info@flintracing.org").then(ok,sel)}catch(x){sel()}
     setTimeout(function(){b.textContent="Copy"},2000)});
   $("#yr").textContent=new Date().getFullYear();
+  /* ---- Sign in: choose your ride (car select) ---- */
+  (function(){var root=document.getElementById("carSelect");if(!root)return;
+    var slots=Array.prototype.slice.call(root.querySelectorAll(".cs-slot")),cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=slots.length,cur=0,dots=root.querySelector(".cs-dots");
+    function car(d,k){var chk=d.paint==="checker",id="csck"+k,fill=chk?"url(#"+id+")":d.paint,num=String(d.num||"");
+      return '<svg viewBox="0 0 340 150" focusable="false">'+(chk?'<defs><pattern id="'+id+'" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fff"/><rect width="8" height="8" fill="#111"/><rect x="8" y="8" width="8" height="8" fill="#111"/></pattern></defs>':'')+
+        '<path d="M24 96C22 78 48 66 112 62L214 58C262 57 304 70 320 88C326 95 320 104 310 105L44 110C32 110 25 104 24 96Z" fill="'+fill+'" stroke="#0b0b0e" stroke-width="3"/>'+
+        '<path d="M40 93C84 85 238 79 312 91" fill="none" stroke="'+d.trim+'" stroke-width="7" stroke-linecap="round"/>'+
+        '<path d="M138 63C146 47 198 45 208 60Z" fill="#0b0b0e"/>'+
+        '<circle cx="176" cy="44" r="17" fill="'+d.helmet+'" stroke="#0b0b0e" stroke-width="3"/><path d="M179 37h14a6.5 6.5 0 0 1 0 13h-14z" fill="#0b0b0e"/><path d="M162 39h7" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>'+
+        '<circle cx="98" cy="86" r="17" fill="#fff" stroke="#0b0b0e" stroke-width="3"/><text x="98" y="'+(num.length>1?92:93)+'" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="800" font-size="'+(num.length>1?18:21)+'" fill="#0b0b0e">'+num.replace(/[^0-9A-Za-z]/g,"")+'</text>'+
+        [76,262].map(function(x){return '<g class="wh"><circle cx="'+x+'" cy="112" r="21" fill="#0b0b0e"/><circle cx="'+x+'" cy="112" r="11" fill="#9a9da3"/><path d="M'+x+' 102v20M'+(x-10)+' 112h20" stroke="#0b0b0e" stroke-width="3"/></g>'}).join("")+'</svg>'}
+    slots.forEach(function(s,k){var c=s.querySelector(".cs-car");c.innerHTML=car(c.dataset,k);s.style.setProperty("--sn",s.getAttribute("data-neon"))});
+    dots.innerHTML=cards.map(function(c,k){return '<button type="button" aria-label="'+(c.getAttribute("aria-label")||"Ride "+(k+1))+'"></button>'}).join("");
+    var dotBtns=Array.prototype.slice.call(dots.children);
+    function show(i){cur=(i+n)%n;
+      slots.forEach(function(s,k){var d=((k-cur)%n+n)%n;if(d>n/2)d-=n;s.className="cs-slot "+(d===0?"pos0":d===1?"posR":d===-1?"posL":"posX")});
+      cards.forEach(function(c,k){c.hidden=k!==cur});
+      dotBtns.forEach(function(b,k){b.setAttribute("aria-pressed",String(k===cur))});
+      root.style.setProperty("--n",slots[cur].getAttribute("data-neon"));}
+    root.querySelector(".cs-prev").onclick=function(){show(cur-1)};
+    root.querySelector(".cs-next").onclick=function(){show(cur+1)};
+    dotBtns.forEach(function(b,k){b.onclick=function(){show(k)}});
+    slots.forEach(function(s,k){s.onclick=function(){if(k!==cur)show(k)}});
+    root.addEventListener("keydown",function(e){if(/INPUT|TEXTAREA|SELECT/.test((e.target||{}).tagName))return;if(e.key==="ArrowLeft"){e.preventDefault();show(cur-1)}else if(e.key==="ArrowRight"){e.preventDefault();show(cur+1)}});
+    document.addEventListener("keydown",function(e){if(location.hash!=="#access"||e.defaultPrevented||/INPUT|TEXTAREA|SELECT/.test((e.target||{}).tagName)||e.target.closest&&e.target.closest("#carSelect"))return;if(e.key==="ArrowLeft")show(cur-1);else if(e.key==="ArrowRight")show(cur+1)});
+    var x0=null;root.querySelector(".cs-cars").addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
+    root.querySelector(".cs-cars").addEventListener("touchend",function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(cur+(dx<0?1:-1));x0=null});
+    show(0);})();
+
   /* Shared hooks for the Supabase + Admin layer */
   window.FR={EVENTS:EVENTS,NOTES:BULLETIN_NOTES,route:route,PARTNERS:PARTNERS,PARTNERS_DEFAULT:PARTNERS_DEFAULT,
     setPartners:function(list){PARTNERS.length=0;list.forEach(function(pg){PARTNERS.push(pg)});sp=0;drawS();drawWall()},
@@ -3211,12 +3327,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#accAuth","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#accAuth",".cs-dots",".cs-cars","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#accAuth","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#accAuth",".cs-dots",".cs-cars","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
