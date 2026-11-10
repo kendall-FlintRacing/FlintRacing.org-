@@ -904,6 +904,11 @@ body.fr-editing a[data-ck]{cursor:pointer}
 body.fr-editing [data-ck]:hover{outline-color:var(--red);background:rgba(226,27,45,.06)}
 body.fr-editing [data-ck][contenteditable="true"]:focus{outline:2px solid var(--red);background:rgba(255,255,255,.9);color:var(--ink)}
 .fr-imgbtn{position:absolute;z-index:58;background:var(--red);color:#fff;border:2px solid #fff;border-radius:4px;font:700 .82rem/1 var(--body);padding:9px 12px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.fr-test{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:56;max-width:min(360px,calc(100vw - 28px));background:#fff7e0;color:#5b4500;border:2px solid #d9a400;border-radius:6px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.82rem;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.fr-test b{font:800 1rem/1 var(--display);text-transform:uppercase;color:#5b4500}
+.fr-test a,.fr-test button{font:700 .78rem/1 var(--body);color:#5b4500;background:#fff;border:1.5px solid #d9a400;border-radius:4px;padding:6px 8px;cursor:pointer;text-decoration:none}
+@media (max-width:600px){.fr-test span{display:none}.fr-test{padding:8px 10px}}
+body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .fr-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:4px;padding:10px 14px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.25)}
 
 /* Stub pages */
@@ -2240,7 +2245,7 @@ body.fr-editing [data-ck][contenteditable="true"]:focus{outline:2px solid var(--
     $$("[data-ck]").forEach(function(el){var v=CONTENT[el.getAttribute("data-ck")];
       if(v&&v.kind==="text") el.innerHTML=clean(v.value); else if(el.__def!=null&&!v) el.innerHTML=el.__def;});
     $$("[data-ci]").forEach(function(img){var v=CONTENT[img.getAttribute("data-ci")];
-      if(v&&v.kind==="image"&&/^https:\/\//.test(v.value)){img.src=v.value;img.removeAttribute("srcset")} else if(!v&&img.__def) img.setAttribute("src",img.__def);});
+      if(v&&v.kind==="image"&&(/^https:\/\//.test(v.value)||(window.FR_TEST&&/^data:image\//.test(v.value)))){img.src=v.value;img.removeAttribute("srcset")} else if(!v&&img.__def) img.setAttribute("src",img.__def);});
   }
 
   tagAll();
@@ -2260,9 +2265,13 @@ body.fr-editing [data-ck][contenteditable="true"]:focus{outline:2px solid var(--
 
   Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
     window.FR_DB=db; FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true;
+    if(window.FR_TEST) testChip();
     initAuth();
   }).catch(function(){ /* offline or blocked: keep built-in content */ });
 
+  function testChip(){var c=document.createElement("div");c.className="fr-test";c.setAttribute("role","note");
+    c.innerHTML='<b>Test mode</b><span>No login needed. Changes stay in this browser only.</span><a href="#admin">Admin</a><button type="button">Reset test data</button>';
+    document.body.appendChild(c);var b=c.querySelector("button");b.onclick=function(){if(b.textContent!=="Confirm reset"){b.textContent="Confirm reset";return}window.FR_TEST_RESET()};}
   /* ---------- Toast ---------- */
   var tt; function toast(m){var t=$(".fr-toast");if(!t){t=document.createElement("div");t.className="fr-toast";t.setAttribute("role","status");document.body.appendChild(t)}
     t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},2400)}

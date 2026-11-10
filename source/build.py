@@ -74,8 +74,14 @@ def build(embed):
     return src
 
 
+CDN_TAG = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>'
+
+
 if __name__ == "__main__":
     art = build(True)
+    # Claude preview: swap the real database for the in-browser test mode
+    assert CDN_TAG in art
+    art = art.replace(CDN_TAG, "<script>\n" + open(os.path.join(HERE, "testmode.js")).read() + "</script>")
     open(os.path.join(HERE, "flint-racing-site.html"), "w").write(art)
     page = build(False)
     i = page.index("</style>") + len("</style>")
