@@ -3610,16 +3610,21 @@ body.rw-tv .rw-fol{display:none}
     function cr(arr,t){var m=arr.length-1,f=Math.max(0,Math.min(1,t))*m,i=Math.min(m-1,Math.floor(f)),u=f-i,p0=arr[Math.max(0,i-1)],p1=arr[i],p2=arr[i+1],p3=arr[Math.min(m,i+2)];
       return 0.5*(2*p1+(-p0+p2)*u+(2*p0-5*p1+4*p2-p3)*u*u+(-p0+3*p1-3*p2+p3)*u*u*u)}
     /* Real Super Stock shell: a smooth capsule, taller than wide, bullet-round at both ends */
-    var X0=-1.7,X1=1.7,BL=1.7,BC=0.55,BHW=0.31,BHH=0.42,BY=0.71;
-    function bodyAt(x){var d=Math.max(0,Math.abs(x)-(BL-BC))/BC,s=Math.sqrt(Math.max(0.0004,1-d*d)),k=x<0?1-0.07*(-x/BL):1;
-      return {w:BHW*s*k,top:BY+BHH*s*k+0.02*(1-Math.abs(x)/BL),bot:BY-BHH*s*k}}
+    /* nose: long, gently tapered and rounded (aerodynamic); tail: cut off flat and upright with softly rounded edges */
+    var X0=-1.7,X1=1.7,BL=1.7,NC=0.95,TC=0.09,BHW=0.31,BHH=0.42,BY=0.71;
+    function bodyAt(x){var s,yc=BY;
+      if(x>BL-NC){var d=Math.min(1,(x-(BL-NC))/NC);s=Math.pow(Math.max(0,1-Math.pow(d,2.2)),0.5);yc=BY-0.1*d*d}
+      else if(x<-(BL-TC)){var e=Math.min(1,(-x-(BL-TC))/TC);s=Math.sqrt(Math.max(0,1-e*e))}
+      else s=1;
+      s=Math.max(0.02,s);var taper=x>0?1-0.08*(x/BL):1;
+      return {w:BHW*s*taper,top:yc+BHH*s*taper,bot:yc-BHH*s*taper*0.92}}
     function finish(P,I){var N=new Float32Array(P.length);for(var i=0;i<I.length;i+=3){var a=I[i]*3,b=I[i+1]*3,c=I[i+2]*3,
         u=[P[b]-P[a],P[b+1]-P[a+1],P[b+2]-P[a+2]],v=[P[c]-P[a],P[c+1]-P[a+1],P[c+2]-P[a+2]],f=crs(u,v);
         [a,b,c].forEach(function(o){N[o]+=f[0];N[o+1]+=f[1];N[o+2]+=f[2]})}
       for(var j=0;j<N.length;j+=3){var q=nrm([N[j],N[j+1],N[j+2]]);N[j]=q[0];N[j+1]=q[1];N[j+2]=q[2]}
       return {p:new Float32Array(P),n:N,i:new Uint16Array(I)}}
     function body(){var P=[],I=[],NX=110,NA=48,e=2.1;
-      for(var r=0;r<=NX;r++){var x=X0+(X1-X0)*r/NX,b=bodyAt(x),yc=(b.top+b.bot)/2,hy=(b.top-b.bot)/2;
+      for(var r=0;r<=NX;r++){var tt=r/NX,x=X0+(X1-X0)*(0.5-0.5*Math.cos(Math.PI*tt)),b=bodyAt(x),yc=(b.top+b.bot)/2,hy=(b.top-b.bot)/2;
         for(var a=0;a<NA;a++){var an=a/NA*Math.PI*2,c=Math.cos(an),s=Math.sin(an);P.push(x,yc+hy*Math.sign(s)*Math.pow(Math.abs(s),2/e),b.w*Math.sign(c)*Math.pow(Math.abs(c),2/e))}}
       for(r=0;r<NX;r++)for(a=0;a<NA;a++){var i0=r*NA+a,i1=r*NA+(a+1)%NA,i2=(r+1)*NA+a,i3=(r+1)*NA+(a+1)%NA;I.push(i0,i2,i1,i1,i2,i3)}
       [[0,X0],[NX,X1]].forEach(function(cap,k){var b=bodyAt(cap[1]),ci=P.length/3;P.push(cap[1]+(k?0.02:-0.05),(b.top+b.bot)/2,0);
