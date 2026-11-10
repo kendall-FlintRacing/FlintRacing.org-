@@ -922,7 +922,7 @@ a.ycell:hover{background:#fbe2e5}
 .adm-nav button[aria-current=page]::before{content:"";position:absolute;left:-14px;top:8px;bottom:8px;width:4px;border-radius:0 4px 4px 0;background:var(--red)}
 .adm-nav span,.adm-foot span{flex:1}
 .adm-nav em{font-style:normal;background:var(--red);color:#fff;font:800 .72rem/1 var(--body);border-radius:999px;padding:4px 7px}
-.adm-nav a span::after{content:" ↗";color:#6b6d75;font-size:.8em}
+.adm-nav a.ext span::after{content:" ↗";color:#6b6d75;font-size:.8em}
 .adm-foot{margin-top:auto;border-top:1px solid #26272e;padding-top:10px;display:grid;gap:2px}
 .adm-foot .adm-editbtn{background:var(--red-deep);color:#fff}
 .adm-foot .adm-editbtn svg{color:#fff}
@@ -1133,6 +1133,12 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .mem-on{gap:8px}
 .mem-on p{color:#3b3e45}
 .mem-on .mem-out{justify-self:start;background:transparent;border:0;color:var(--red-deep);font-weight:800;cursor:pointer;padding:6px 0;text-decoration:underline}
+.mem-lnk{border:0;background:transparent;padding:0;font:inherit;font-weight:700;color:var(--red-deep);text-decoration:underline;cursor:pointer}
+.mem-dark .mem-lnk{color:var(--n)}
+.mem-alt{text-align:center;font-weight:700;color:var(--n)}
+.staff-auth{width:min(460px,100%);background:#fff;color:var(--ink);border-radius:12px;padding:18px;text-align:left;display:grid;gap:10px}
+.staff-auth .auth{max-width:none}
+.staff-auth .mem-lnk{justify-self:start;color:var(--red-deep)}
 /* dark version inside the car select */
 .mem-in{width:min(460px,100%)}
 .mem-dark{color:#fff;background:#16171c;border:1px solid color-mix(in srgb,var(--n) 55%,#333);border-radius:12px;padding:18px;box-shadow:0 0 30px color-mix(in srgb,var(--n) 18%,transparent)}
@@ -2872,36 +2878,12 @@ body.rw-tv .rw-fol{display:none}
         </article>
         <article class="cs-card" data-card="3" aria-label="Staff Garage" hidden>
           <h2>Staff Garage</h2>
-          <p class="cs-desc">Admins only. Kendall and Kevin sign in here with email to run the whole site. Everyone else uses the Family Pass or Crew Pass.</p>
-          <div class="cs-acts"><a class="cs-go" href="#team">Enter the Staff Garage</a></div>
+          <p class="cs-desc">For Flint Racing staff: admins, teachers, photographers and race-day leads. Sign in once and you go straight to the portal you’re approved for.</p>
+          <div class="mem-in staff-in" id="accAuth"></div>
         </article>
       </div>
     </div>
   </section>
-</div>
-
-<!-- ======================= THE GARAGE: TEAM SIGN IN ======================= -->
-<div class="page dark prog-page gr-page" data-page="team" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Staff Garage</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="gr-head">
-      <p class="eyebrow">Admins only past this point</p>
-      <h1>Staff Garage</h1>
-      <p>Kendall and Kevin sign in here with email. Families, volunteers, teachers, photographers and race-day crew: use your username on the <a href="#access" style="color:#fff">Family or Crew Pass</a> instead.</p>
-    </section>
-    <div class="gr-grid">
-      <div class="badge">
-        <div class="badge-clip" aria-hidden="true"></div>
-        <div class="badge-top"><span>CREW CREDENTIAL</span><b>Flint Racing &amp; STEM</b></div>
-        <div class="badge-body" id="accAuth"><p>Loading…</p></div>
-        <div class="badge-bar" aria-hidden="true"></div>
-      </div>
-      <figure class="gr-photo">
-        <img src="{{IMG:img/web/2026-racers-group.webp}}" alt="Flint Racing racers and crew together at the track" loading="lazy">
-        <figcaption><b>Every great race starts in the garage.</b><span>Thank you for building something bigger with us.</span></figcaption>
-      </figure>
-    </div>
-  </div></div>
 </div>
 
 <!-- ======================= MY DASHBOARD (members) ======================= -->
@@ -3537,7 +3519,7 @@ body.rw-tv .rw-fol{display:none}
       {paint:"#c4000e",trim:"#ffffff",helmet:"#f5b82e",num:"8",neon:"#ffffff",key:"Username + passcode",stats:[["Schedules",10],["Race day",6],["Behind the scenes",2]]},
       {paint:"#f2b01e",trim:"#111113",helmet:"#e8001c",num:"12",neon:"#ffc233",key:"Username + passcode",stats:[["Schedules",4],["Race day",10],["Behind the scenes",6]]},
       {paint:"checker",trim:"#e8001c",helmet:"#f4f4f4",num:"24",neon:"#7fe3ff",key:"None. Everyone’s welcome",stats:[["Schedules",2],["Race day",10],["Behind the scenes",2]]},
-      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",neon:"#e21b2d",key:"Admin email",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
+      {paint:"#16171c",trim:"#e8001c",helmet:"#e8001c",num:"6",neon:"#e21b2d",key:"Username or admin email",stats:[["Schedules",8],["Race day",8],["Behind the scenes",10]]}];
     var cards=Array.prototype.slice.call(root.querySelectorAll(".cs-card")),n=cards.length,cur=0;
     var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
     var thumbs=root.querySelector(".gx-thumbs");
@@ -3685,6 +3667,9 @@ body.rw-tv .rw-fol{display:none}
     function up(e){if(x0==null)return;var dx=e.clientX-x0;cam.dragging=false;x0=null;if(e.pointerType==="touch"&&Math.abs(dx)>60){cam.drag=d0;show(cur+(dx<0?1:-1),dx<0?1:-1)}kick()}
     cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);
     window.addEventListener("resize",function(){dirty=true;kick()});
+    window.FR_car=function(i){show(i,0)};
+    function teamToCar(){if(location.hash==="#team"){show(3,0);location.replace(location.href.split("#")[0]+"#access")}}
+    window.addEventListener("hashchange",teamToCar);teamToCar();
     window.addEventListener("hashchange",function(){if(location.hash==="#access"){if(!THUMBED)setTimeout(function(){makeThumbs();kick()},60);kick()}});
     document.addEventListener("visibilitychange",kick);
     show(0);
@@ -3931,8 +3916,8 @@ window.FRB=(function(){
   var USER=null, IS_ADMIN=false, IS_CTRL=false, IS_TRACK=false;
   function initAuth(){
     db.auth.getSession().then(function(r){handleAuthLink();setUser(r.data&&r.data.session?r.data.session.user:null)});
-    db.auth.onAuthStateChange(function(ev,session){if(ev==="PASSWORD_RECOVERY"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account.";if(location.hash!=="#team")location.hash="#team"}setUser(session?session.user:null)});
-    window.addEventListener("hashchange",function(){updatePill();if(location.hash==="#admin")renderAdmin();if(location.hash==="#team")renderAccess();renderRK(true);renderTM(true)});
+    db.auth.onAuthStateChange(function(ev,session){if(ev==="PASSWORD_RECOVERY"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account.";if(location.hash!=="#team"&&location.hash!=="#access")location.hash="#team"}setUser(session?session.user:null)});
+    window.addEventListener("hashchange",function(){updatePill();if(location.hash==="#admin")renderAdmin();if(location.hash==="#access"||location.hash==="#team")renderAccess();renderRK(true);renderTM(true)});
     renderAccess();
     renderAdmin();
   }
@@ -4040,7 +4025,7 @@ window.FRB=(function(){
         '<div class="adm-find" role="search"><label class="adm-q">'+ico("search")+'<input type="search" id="admQ" placeholder="Search admin" aria-label="Search admin: sections, people, events and more" autocomplete="off" aria-controls="admRes" aria-expanded="false"><kbd aria-hidden="true">/</kbd></label><div class="adm-res" id="admRes" role="listbox" hidden></div></div>'+
         '<button class="adm-menu" type="button" id="admMenu" aria-expanded="'+ADMNAV+'">'+ico("menu")+'<span>Menu</span><b>'+esc(cur.t)+'</b></button>'+
         '<nav class="adm-nav">'+SECT.map(function(g){return '<p class="adm-g">'+esc(g[0])+'</p>'+g[1].map(function(s){return '<button type="button" data-tab="'+s[0]+'"'+(TAB===s[0]?' aria-current="page"':'')+'>'+ico(s[3])+'<span>'+esc(s[1])+'</span>'+(s[4]?'<em data-badge="'+s[4]+'" hidden></em>':'')+'</button>'}).join("")}).join("")+
-          '<p class="adm-g">Race-day screens</p>'+RLINKS.map(function(l){return '<a href="'+l[0]+'">'+ico(l[2])+'<span>'+esc(l[1])+'</span>'+(l[3]?'<em data-badge="'+l[3]+'" hidden></em>':'')+'</a>'}).join("")+'</nav>'+
+          '<p class="adm-g">Race-day controls</p>'+RLINKS.map(function(l){return '<a href="'+l[0]+'"'+(l[0]==="#race-watch"?' class="ext"':'')+'>'+ico(l[2])+'<span>'+esc(l[1])+'</span>'+(l[3]?'<em data-badge="'+l[3]+'" hidden></em>':'')+'</a>'}).join("")+'</nav>'+
         '</aside>'+
       '<section class="adm-main"><header class="adm-head"><div><p class="adm-crumb">'+esc(cur.g)+'</p><h2>'+(cur.k==="overview"?'Welcome back, '+esc(first)+'.':esc(cur.t))+'</h2><p>'+esc(cur.d)+'</p></div><div class="adm-acts"><button type="button" class="adm-editbtn" id="admEdit">'+ico("edit")+'Edit the site</button><button type="button" id="admOut">'+ico("out")+'Sign out</button></div></header><div class="adm-panel" id="admPanel"><p class="adm-loading">Loading…</p></div></section>';
     $("#admOut").onclick=signOut; $("#admEdit").onclick=function(){location.hash="#home";setTimeout(function(){setEditing(true)},50)};
@@ -4195,19 +4180,19 @@ window.FRB=(function(){
     ["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["volunteers","#volunteers","Race-day volunteers"]];
   var STAFF={};
   function canSpace(k){if(IS_ADMIN)return true;if(k==="controller")return IS_CTRL;if(k==="track")return IS_TRACK;if(k==="volunteers")return IS_CTRL||IS_TRACK||IS_VOLS;return !!STAFF[k]}
+  var STAFFUI=null;
   function renderAccess(){var box=$("#accAuth");if(!box||!window.FR_DB)return;
-    if(!USER||USER.is_anonymous||RECOVERY){$$(".acc-spaces [data-space]").forEach(function(a){a.classList.remove("yours")});
-      if(!box.querySelector("#accAuthBody"))box.innerHTML=signInHTML("acc");bindSignIn("acc");
-      var nt=box.querySelector(".acc-memnote");if(ME&&!nt){box.insertAdjacentHTML("afterbegin",'<p class="auth-note acc-memnote">You’re signed in with your username (@'+esc(ME.username)+'). This garage is only for admins. <a href="#my-dashboard">Go to my dashboard</a></p>')}else if(!ME&&nt)nt.remove();return}
-    var name=USER.is_anonymous?crewName():((USER.user_metadata&&USER.user_metadata.full_name)||""),mine=SPACES.filter(function(s){return canSpace(s[0])});
-    box.innerHTML='<div class="auth"><p class="acc-k">Signed in</p><h2>'+esc(name||"Welcome back")+'</h2><p class="acc-email">'+(USER.email?esc(USER.email):'Clocked in with a crew code on this device')+'</p>'+(AUTH_NOTE?'<p class="auth-note">'+esc(AUTH_NOTE)+'</p>':'')+
-      (mine.length?'<p class="acc-sub">Your spaces</p><div class="acc-mine">'+mine.map(function(s){return '<a class="btn deep" href="'+s[1]+'">'+esc(s[2])+' →</a>'}).join("")+'</div>':
-        '<div class="acc-wait"><b>This garage is for admins.</b><p>If you’re an admin, ask Kendall or Kevin to turn on Admin for the email above, then sign out and back in. Families and crew: sign out and use your username on the <a href="#access">Family or Crew Pass</a>.</p></div>')+
-      '<div class="row">'+(USER.is_anonymous?'':'<button class="mini" type="button" id="accPw">Change password</button>')+'<button class="mini" type="button" id="accOut">'+(USER.is_anonymous?'Clock out':'Sign out')+'</button></div></div>';
-    $("#accOut").onclick=signOut;
-    if($("#accPw"))$("#accPw").onclick=function(){RECOVERY=true;AUTHUI.acc={mode:"reset",email:USER.email};box.innerHTML=signInHTML("acc").replace("Admin sign in","Change your password");bindSignIn("acc");
-      var c=document.createElement("button");c.type="button";c.className="auth-link";c.textContent="Cancel";c.onclick=function(){RECOVERY=false;renderAccess()};box.querySelector(".auth").appendChild(c)};
-    $$(".acc-spaces [data-space]").forEach(function(a){var ok=canSpace(a.getAttribute("data-space"));a.classList.toggle("yours",ok)});
+    if(RECOVERY||STAFFUI){if(!box.querySelector("#accAuthBody")){AUTHUI.acc={mode:RECOVERY?"reset":STAFFUI,email:""};
+        box.innerHTML='<div class="staff-auth">'+signInHTML("acc").replace("Admin sign in",RECOVERY?"Choose a new password":STAFFUI==="up"?"New admin account":"Admin password reset")+'<button type="button" class="mem-lnk" id="staffBack">← Back to staff sign in</button></div>';
+        bindSignIn("acc");$("#staffBack").onclick=function(){STAFFUI=null;RECOVERY=false;AUTH_NOTE="";box.innerHTML="";renderAccess()}}return}
+    if(USER&&!USER.is_anonymous){var name=(USER.user_metadata&&USER.user_metadata.full_name)||USER.email;
+      box.innerHTML='<div class="mem mem-on mem-dark"><p class="mem-k">Signed in'+(IS_ADMIN?' · Admin':'')+'</p><h2 class="mem-h">'+esc(name)+'</h2><p>'+esc(USER.email||"")+'</p>'+(AUTH_NOTE?'<p class="auth-note">'+esc(AUTH_NOTE)+'</p>':'')+
+        (IS_ADMIN?'<a class="cs-go" href="#admin">Open Admin</a><p class="mem-sub">Admin includes race control, track operations and every other portal.</p>':'<p class="mem-sub">This account isn’t an admin yet. Kendall or Kevin can turn it on in Admin → Admins, then sign in again.</p>')+
+        '<button class="mem-out" type="button">Sign out</button></div>';$(".mem-out",box).onclick=signOut;return}
+    if(ME){box.innerHTML=memOnHTML("mistaff",true);$(".mem-out",box).onclick=signOut;return}
+    if(box.querySelector("#staffMem"))return;
+    box.innerHTML=memHTML("staff",{dark:true,staff:true,go:"Start engine",sub:"Admins: use your email. Staff: use your username."});bindMem("staff");
+    $$("[data-staffui]",box).forEach(function(x){x.onclick=function(){STAFFUI=x.getAttribute("data-staffui");box.innerHTML="";renderAccess()}});
   }
   /* Links from emails: confirmation, password reset or an expired link */
   function handleAuthLink(){var flag=AUTH_Q.get("auth"),hp=new URLSearchParams(AUTH_HASH.replace(/^#/,"")),err=hp.get("error_description");
@@ -4215,7 +4200,8 @@ window.FRB=(function(){
     if(err) AUTH_NOTE=/expired|invalid/i.test(err)?"That link has expired or was already used. Sign in, or ask for a new link below.":"That link didn’t work: "+err;
     else if(flag==="confirmed") AUTH_NOTE="Your email is confirmed. Welcome to the Flint Racing team site.";
     else if(flag==="reset"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account."}
-    try{history.replaceState(null,"",base()+"#team")}catch(e){location.hash="#team"} FR.route();}
+    if(window.FR_car)window.FR_car(3);
+    try{history.replaceState(null,"",base()+"#access")}catch(e){location.hash="#access"} FR.route();}
 
   function tabEvents(){var P=$("#admPanel");
     db.from("events").select("*").order("start_date").then(function(r){if(r.error){P.textContent="Couldn’t load events.";return}
@@ -5047,21 +5033,25 @@ window.FRB=(function(){
     ["#track-manager","Track operations","Shout-outs, intermissions and ads",function(){return hasRole("track")}],
     ["#volunteers","Volunteer lists","Race-day crew and check-in",function(){return hasRole("volunteers")||hasRole("controller")||hasRole("track")}],
     ["#race-watch","Live Race","Follow every heat on race day",function(){return true}]];
+  var PORTALS=[["controller","#race-control","Race control"],["track","#track-manager","Track operations"],["workshop","#workshop-signin","Workshop sign-in"],["teacher","#teacher","Teacher planning"],["photographer","#photographer","Photographer"],["volunteers","#volunteers","Volunteer lists"]];
+  function landing(){if(IS_ADMIN)return ["#admin","Admin"];if(!ME)return ["#access","Sign in"];
+    var st=PORTALS.filter(function(x){return hasRole(x[0])});return st.length===1?[st[0][1],st[0][2]]:["#my-dashboard","my dashboard"]}
   function firstName(n){return String(n||"").trim().split(/\s+/)[0]}
   function logView(k){if(!USER||!(ME||!USER.is_anonymous))return;if(LOGGED[k]&&Date.now()-LOGGED[k]<6e5)return;LOGGED[k]=Date.now();
     try{db.rpc("log_view",{p_what:k}).then(function(){},function(){})}catch(e){}}
 
   function memHTML(px,o){o=o||{};
     return '<form class="mem'+(o.dark?' mem-dark':'')+'" id="'+px+'Mem" novalidate>'+(o.kicker?'<p class="mem-k">'+esc(o.kicker)+'</p>':'')+(o.title?'<h2 class="mem-h">'+esc(o.title)+'</h2>':'')+(o.sub?'<p class="mem-sub">'+o.sub+'</p>':'')+
-      '<label class="mem-f" for="'+px+'-u">Username<input type="text" id="'+px+'-u" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="24"></label>'+
-      '<label class="mem-f" for="'+px+'-p">Passcode<span class="mem-pw"><input type="password" id="'+px+'-p" autocomplete="current-password" maxlength="64"><button type="button" class="mem-eye" aria-label="Show passcode" aria-pressed="false">Show</button></span></label>'+
+      '<label class="mem-f" for="'+px+'-u">'+(o.staff?'Username or admin email':'Username')+'<input type="text" id="'+px+'-u" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="'+(o.staff?160:24)+'"></label>'+
+      '<label class="mem-f" for="'+px+'-p">'+(o.staff?'Passcode or password':'Passcode')+'<span class="mem-pw"><input type="password" id="'+px+'-p" autocomplete="current-password" maxlength="64"><button type="button" class="mem-eye" aria-label="Show passcode" aria-pressed="false">Show</button></span></label>'+
       '<label class="mem-keep"><input type="checkbox" id="'+px+'-k"><span>Keep me signed in on this device<small>Leave this off on shared tablets and phones.</small></span></label>'+
       '<button class="cs-go mem-go" type="submit">'+esc(o.go||"Start engine")+'</button><p class="t-msg mem-msg" role="status"></p>'+
-      '<p class="mem-links"><a href="mailto:info@flintracing.org?subject=Forgot%20my%20Flint%20Racing%20passcode">Forgot your username or passcode?</a></p>'+
-      '<div class="mem-new"><span>First time here?</span><a href="#new-profile" data-regkind="'+(o.kind||"")+'">Register once →</a></div></form>'}
+      '<p class="mem-links"><a href="mailto:info@flintracing.org?subject=Forgot%20my%20Flint%20Racing%20passcode">Forgot your username or passcode?</a>'+(o.staff?'<span>·</span><button type="button" class="mem-lnk" data-staffui="forgot">Admin password reset</button>':'')+'</p>'+
+      (o.staff?'<div class="mem-new"><span>New here?</span><span><a href="#new-profile" data-regkind="crew">Register as staff →</a> <button type="button" class="mem-lnk" data-staffui="up">New admin account</button></span></div>':
+      '<div class="mem-new"><span>First time here?</span><a href="#new-profile" data-regkind="'+(o.kind||"")+'">Register once →</a></div>')+'</form>'}
   function memOnHTML(px,dark){var r=(ME.roles||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k});
     return '<div class="mem mem-on'+(dark?' mem-dark':'')+'"><p class="mem-k">Signed in</p><h2 class="mem-h">'+esc(ME.display_name)+'</h2><p>@'+esc(ME.username)+(r.length?' · '+esc(r.join(", ")):'')+'</p>'+
-      '<a class="cs-go" href="#my-dashboard">Open my dashboard</a><button class="mem-out" type="button">Not you? Sign out</button></div>'}
+      '<a class="cs-go" href="'+landing()[0]+'">Open '+esc(landing()[1])+'</a>'+(landing()[0]!=="#my-dashboard"?'<a class="mem-alt" href="#my-dashboard">My dashboard and hours</a>':'')+'<button class="mem-out" type="button">Not you? Sign out</button></div>'}
   function memSignIn(u,p,keep){var wasAnon=!!(USER&&USER.is_anonymous),hadUser=!!USER;
     var pre=hadUser&&!wasAnon?db.auth.signOut():Promise.resolve();
     return pre.then(function(){return wasAnon?{}:db.auth.signInAnonymously()}).then(function(r){
@@ -5074,13 +5064,19 @@ window.FRB=(function(){
     f.onsubmit=function(e){e.preventDefault();var u=$("#"+px+"-u").value.trim().toLowerCase(),p=pw.value,k=$("#"+px+"-k").checked,m=$(".mem-msg",f),b=$(".mem-go",f);
       if(!u||!p){m.textContent="Enter your username and passcode.";return}
       b.disabled=true;m.textContent="Checking…";
+      if(u.indexOf("@")>0){
+        db.auth.signInWithPassword({email:u,password:p}).then(function(r){
+          if(r.error){b.disabled=false;m.textContent=/confirm/i.test(r.error.message||"")?"Confirm your email first: open the link we sent you.":"That email and password don’t match. Admin password reset is just below.";pw.value="";return}
+          return db.auth.getSession().then(function(s){return setUser(s.data&&s.data.session?s.data.session.user:null)}).then(function(){b.disabled=false;m.textContent="";
+            if(!IS_ADMIN){toast("Signed in. This account isn’t an admin yet.");return}toast("Welcome back!");location.hash="#admin"})})
+        .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."});return}
       memSignIn(u,p,k).then(function(d){b.disabled=false;
         if(!d.ok){m.textContent=d.status==="pending"?"Thanks for registering! Kendall or Kevin still need to approve your profile. We’ll email you when it’s ready.":
           d.status==="paused"?"This profile is paused. Email info@flintracing.org to turn it back on.":d.status==="declined"?"This profile wasn’t approved. Email info@flintracing.org with any questions.":
           d.locked?"Too many wrong tries. Wait 15 minutes, then try again.":"That username and passcode don’t match. Check the spelling and try again.";pw.value="";pw.focus();return}
-        m.textContent="";toast("Welcome, "+firstName(d.display_name)+"!");if(after)after();else location.hash="#my-dashboard"})
+        m.textContent="";toast("Welcome, "+firstName(d.display_name)+"!");if(after)after();else location.hash=landing()[0]})
       .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."})}}
-  function renderMemCards(){$$("a.util.dash").forEach(function(a){a.setAttribute("href",ME?"#my-dashboard":"#program-signin")});$$(".mem-in").forEach(function(box){var px="mi"+box.getAttribute("data-mem");
+  function renderMemCards(){$$("a.util.dash").forEach(function(a){a.setAttribute("href",ME?"#my-dashboard":"#program-signin")});$$(".mem-in[data-mem]").forEach(function(box){var px="mi"+box.getAttribute("data-mem");
     if(ME){box.innerHTML=memOnHTML(px,true);$(".mem-out",box).onclick=signOut;return}
     if(box.querySelector("form.mem"))return;
     box.innerHTML=memHTML(px,{dark:true,kind:box.getAttribute("data-kind"),sub:"One username works on both the Family and Crew Pass."});bindMem(px)})}
@@ -5332,8 +5328,7 @@ window.FRB=(function(){
   var EDSUB="previews", PVSEL="#my-dashboard/family", PVW=390;
   var PVPAGES=[["Families",[["#my-dashboard/family","My dashboard","Family profile, stats, check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"]]],
     ["Crew & staff",[["#my-dashboard/crew","My dashboard: crew","Volunteer profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#volunteers","Volunteer lists","Race-day crew and check-in"],["#crew/sample","Volunteer crew pass","What a race-day volunteer’s link shows (sample)"]]],
-    ["Race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
-    ["Admins",[["#team","Staff Garage","Admin sign-in page"]]]];
+    ["Race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]]];
   function pvFind(h){var o=null;PVPAGES.forEach(function(g){g[1].forEach(function(x){if(x[0]===h)o={g:g[0],h:x[0],t:x[1],d:x[2]}})});return o}
   function tabEdits(){var P=$("#admPanel");
     var sub='<div class="mb-sub" role="tablist"><button type="button" role="tab" data-esub="previews" aria-selected="'+(EDSUB==="previews")+'">Page previews</button><button type="button" role="tab" data-esub="history" aria-selected="'+(EDSUB==="history")+'">Change history</button></div>';
