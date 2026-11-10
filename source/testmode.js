@@ -13,7 +13,7 @@
        inquiries:[{id:"inq-sample",created_at:new Date().toISOString(),first_name:"Sample",last_name:"Family",role:"Parent or guardian",organization:null,
          interests:"Building Workshops",youth_count:2,youth_ages:"9 and 12",message:"This is a sample inquiry so you can see how they look.",email:"sample@example.com",
          phone:null,contact_by:"Email",best_time:"Evening",email_updates:true,status:"new"}]};
-    race(); save();
+    race(); members(); save();
   }
   /* Demo race day so the live race page and its controls can be tried.
      Two brackets alternate: Super Stock (double elimination, 6 cars + 2 byes) and Masters (single elimination, 5 cars + 3 byes). */
@@ -55,8 +55,23 @@
       {id:"so3",name:"Northside families",message:"Thank you volunteers for keeping the track running!",status:"approved",created_at:new Date(t-1e5).toISOString()},
       {id:"so4",name:"Uncle Ray",message:"Waiting for review: you can approve me in Admin > Race day > Shout-outs.",status:"pending",created_at:new Date(t).toISOString()}];
   }
+  /* Demo member profiles (username + passcode). Passcode for every demo profile: racing26 */
+  function members(){var now=Date.now(),d=function(days,h){return new Date(now-days*864e5+(h||0)*36e5).toISOString()};
+    T.members=[{id:"m1",username:"taylorfamily",display_name:"Jordan Taylor",kind:"family",email:"jordan@example.com",phone:"810-555-0142",kids:[{name:"Maya T.",age:"11"},{name:"Eli T.",age:"8"}],requested:["family"],roles:["family"],status:"approved",about:null,admin_note:null,first_year:2025,created_at:d(400),approved_at:d(399),last_seen_at:d(2)},
+      {id:"m2",username:"samrivera",display_name:"Sam Rivera",kind:"crew",email:"sam@example.com",phone:null,kids:[],requested:["volunteer","workshop","photographer"],roles:["volunteer","workshop","photographer"],status:"approved",about:"Former racer, happy to help anywhere.",admin_note:null,first_year:2026,created_at:d(120),approved_at:d(119),last_seen_at:d(5)},
+      {id:"m3",username:"morganfam",display_name:"Alex Morgan",kind:"family",email:"alex@example.com",phone:null,kids:[{name:"Zoe M.",age:"10"}],requested:["family"],roles:[],status:"pending",about:"Heard about you at school.",admin_note:null,first_year:2026,created_at:d(1),approved_at:null,last_seen_at:null},
+      {id:"m4",username:"coachdee",display_name:"Dee Williams",kind:"crew",email:"dee@example.com",phone:"810-555-0199",kids:[],requested:["teacher","volunteer"],roles:[],status:"pending",about:"Science teacher at Northside.",admin_note:null,first_year:2026,created_at:d(0,-3),approved_at:null,last_seen_at:null}];
+    T.mpass={m1:"racing26",m2:"racing26",m3:"racing26",m4:"racing26"};T.msess={};
+    T.member_hours=[{id:"h1",member_id:"m1",kind:"workshop",started_at:d(30,-1),ended_at:d(30,2),note:null,added_by:"self"},{id:"h2",member_id:"m1",kind:"workshop",started_at:d(16,-1),ended_at:d(16,2),note:null,added_by:"self"},
+      {id:"h3",member_id:"m1",kind:"race_day",started_at:d(160,-4),ended_at:d(160,4),note:null,added_by:"admin"},{id:"h4",member_id:"m2",kind:"workshop",started_at:d(16,-2),ended_at:d(16,2),note:null,added_by:"self"},
+      {id:"h5",member_id:"m2",kind:"event",started_at:d(9,-3),ended_at:d(9,1),note:null,added_by:"self"}];
+    T.access_log=[{id:"l1",at:d(0,-3),member_id:"m4",who:"coachdee",action:"register",detail:"crew"},{id:"l2",at:d(1),member_id:"m3",who:"morganfam",action:"register",detail:"family"},
+      {id:"l3",at:d(2,1),member_id:"m1",who:"taylorfamily",action:"view:dates",detail:null},{id:"l4",at:d(2),member_id:"m1",who:"taylorfamily",action:"sign_in",detail:"kept signed in"},
+      {id:"l5",at:d(3),member_id:null,who:"taylorfam",action:"signin_failed",detail:"unknown username"},{id:"l6",at:d(5),member_id:"m2",who:"samrivera",action:"sign_in",detail:"this visit"}];
+  }
   load();
   if(T&&(!T.race_show||!T.staff||!T.crew_codes)){race();save();}
+  if(T&&!T.members){members();save();}
   addEventListener("storage",function(e){if(e.key===KEY)load()});
   var user={id:"test-admin",email:"test-admin@flintracing.org",user_metadata:{full_name:"Test Admin"}}, listeners=[];
   function rid(){return Math.random().toString(36).slice(2,10)}
@@ -111,6 +126,42 @@
       if(fn==="crew_code_info"){var o={};Object.keys(T.crew_codes).forEach(function(k){o[k]={updated_at:T.crew_codes[k].at,active:T.code_sessions.filter(function(x){return x.role===k}).length}});return R(o)}
       if(fn==="redeem_crew_code"){var role=Object.keys(T.crew_codes).filter(function(k){return T.crew_codes[k].code===args.p_code})[0];if(!role)return R(null);
         T.code_sessions=T.code_sessions.filter(function(x){return !(x.user_id===user.id&&x.role===role)});T.code_sessions.push({user_id:user.id,role:role,expires_at:new Date(Date.now()+16*36e5).toISOString()});save();return R(role)}
+      T.members=T.members||[];T.member_hours=T.member_hours||[];T.access_log=T.access_log||[];T.mpass=T.mpass||{};T.msess=T.msess||{};
+      var ROLES=["family","volunteer","workshop","teacher","photographer","controller","track","volunteers"];
+      function mlog(m,w,a,d){T.access_log.unshift({id:rid(),at:new Date().toISOString(),member_id:m,who:w,action:a,detail:d||null});T.access_log=T.access_log.slice(0,600)}
+      function curM(){var s=user&&T.msess[user.id];if(!s||s.exp<Date.now())return null;var m=T.members.filter(function(x){return x.id===s.mid})[0];return m&&m.status==="approved"?m:null}
+      function weak(p){return !p||p.length<6||/^(.)\1*$/.test(p)||["123456","654321","password","123123","qwerty"].indexOf(p.toLowerCase())>=0}
+      if(fn==="member_username_free")return R(!T.members.some(function(m){return m.username===String(args.p_username||"").trim().toLowerCase()}));
+      if(fn==="member_register"){var u=String(args.p_username||"").trim().toLowerCase();
+        if(!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(u))return R(null,"Usernames are 3 to 24 letters or numbers (dots, dashes and underscores are OK).");
+        if(T.members.some(function(m){return m.username===u}))return R(null,"That username is taken. Try another.");
+        if(weak(args.p_passcode))return R(null,"Pick a passcode of at least 6 characters that isn’t easy to guess.");
+        var id="m"+rid();T.members.unshift({id:id,username:u,display_name:args.p_name,kind:args.p_kind,email:args.p_email,phone:args.p_phone||null,kids:args.p_kids||[],requested:(args.p_requested||[]).filter(function(r){return ROLES.indexOf(r)>=0}),roles:[],status:"pending",about:args.p_about||null,admin_note:null,first_year:new Date().getFullYear(),created_at:new Date().toISOString(),approved_at:null,last_seen_at:null});
+        T.mpass[id]=args.p_passcode;mlog(id,u,"register",args.p_kind);save();return R(u)}
+      if(fn==="member_signin"){var un=String(args.p_username||"").trim().toLowerCase(),mm=T.members.filter(function(m){return m.username===un})[0];
+        if(!mm||T.mpass[mm.id]!==args.p_passcode){mlog(mm?mm.id:null,un,"signin_failed",mm?"wrong passcode":"unknown username");save();return R({ok:false})}
+        if(mm.status!=="approved"){mlog(mm.id,un,"signin_blocked",mm.status);save();return R({ok:false,status:mm.status})}
+        T.msess[user.id]={mid:mm.id,exp:Date.now()+(args.p_keep?30*864e5:12*36e5)};mm.last_seen_at=new Date().toISOString();mlog(mm.id,un,"sign_in",args.p_keep?"kept signed in":"this visit");save();
+        return R({ok:true,username:mm.username,display_name:mm.display_name,roles:mm.roles})}
+      if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
+      if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year}:null)}
+      if(fn==="my_profile"){var c2=curM();if(!c2)return R(null);var hs=T.member_hours.filter(function(h){return h.member_id===c2.id}).sort(function(a,b){return a.started_at<b.started_at?1:-1});
+        var days=function(k){var o={};hs.forEach(function(h){if(k.indexOf(h.kind)>=0)o[h.started_at.slice(0,10)]=1});return Object.keys(o).length},yrs={};yrs[c2.first_year]=1;hs.forEach(function(h){yrs[h.started_at.slice(0,4)]=1});
+        var op=hs.filter(function(h){return !h.ended_at&&Date.now()-new Date(h.started_at)<16*36e5})[0];
+        return R({member:{username:c2.username,display_name:c2.display_name,kind:c2.kind,roles:c2.roles,first_year:c2.first_year,email:c2.email,phone:c2.phone,kids:c2.kids,since:c2.created_at},
+          hours:Math.round(hs.reduce(function(a,h){return a+(h.ended_at?(new Date(h.ended_at)-new Date(h.started_at))/36e5:0)},0)*10)/10,workshops:days(["workshop"]),race_days:days(["race_day"]),events:days(["event","other"]),years:Object.keys(yrs).length,
+          open:op?{id:op.id,kind:op.kind,started_at:op.started_at}:null,recent:hs.slice(0,12).map(function(h){return{kind:h.kind,started_at:h.started_at,ended_at:h.ended_at,note:h.note}})})}
+      if(fn==="member_clock"){var c3=curM();if(!c3)return R(null,"Sign in first.");var o3=T.member_hours.filter(function(h){return h.member_id===c3.id&&!h.ended_at})[0];
+        if(o3){o3.ended_at=new Date().toISOString();mlog(c3.id,c3.username,"clock_out",o3.kind);save();return R({clocked:"out",hours:(new Date(o3.ended_at)-new Date(o3.started_at))/36e5})}
+        T.member_hours.push({id:rid(),member_id:c3.id,kind:args.p_kind,started_at:new Date().toISOString(),ended_at:null,note:null,added_by:"self"});mlog(c3.id,c3.username,"clock_in",args.p_kind);save();return R({clocked:"in"})}
+      if(fn==="member_set_passcode"){var c4=curM();if(!c4)return R(null,"Sign in first.");if(T.mpass[c4.id]!==args.p_old)return R(null,"Your current passcode isn’t right.");if(weak(args.p_new))return R(null,"Pick a passcode of at least 6 characters that isn’t easy to guess.");T.mpass[c4.id]=args.p_new;mlog(c4.id,c4.username,"passcode_changed");save();return R(null)}
+      if(fn==="log_view"){var c5=curM(),w5=c5?c5.username:(user&&!user.is_anonymous?user.email:null);if(w5){mlog(c5?c5.id:null,w5,"view:"+String(args.p_what||"").replace(/[^a-z0-9_-]/g,"").slice(0,40));save()}return R(null)}
+      if(fn==="program_dashboard_member"){var c6=curM();if(!c6&&!(user&&user.id==="test-admin"))return R(null);mlog(c6?c6.id:null,c6?c6.username:user.email,"view:dates");save();
+        var t6=new Date().toISOString().slice(0,10),D6={};T.event_details.forEach(function(x){D6[x.event_id]=x});
+        return R({events:T.events.filter(function(e){return e.published&&(e.end_date||e.start_date)>=t6}).sort(function(a,b){return a.start_date>b.start_date?1:-1}).map(function(e){var d=D6[e.id]||{};return{id:e.id,start_date:e.start_date,end_date:e.end_date,title:e.title,kind:e.kind,tbc:e.to_be_confirmed,description:e.description,start_time:d.start_time,end_time:d.end_time,location:d.location,notes:d.notes}})})}
+      if(fn==="admin_member_update"){var m7=T.members.filter(function(x){return x.id===args.p_id})[0];if(!m7)return R(null,"Profile not found");m7.roles=(args.p_roles||[]).filter(function(r){return ROLES.indexOf(r)>=0});m7.status=args.p_status;if(args.p_status==="approved"&&!m7.approved_at)m7.approved_at=new Date().toISOString();
+        if(args.p_status!=="approved")Object.keys(T.msess).forEach(function(k){if(T.msess[k].mid===m7.id)delete T.msess[k]});mlog(m7.id,user.email,"admin_update",args.p_status+" · "+m7.roles.join(", "));save();return R(null)}
+      if(fn==="admin_reset_passcode"){if(weak(args.p_new))return R(null,"Pick a passcode of at least 6 characters that isn’t easy to guess.");T.mpass[args.p_id]=args.p_new;Object.keys(T.msess).forEach(function(k){if(T.msess[k].mid===args.p_id)delete T.msess[k]});mlog(args.p_id,user.email,"admin_reset_passcode");save();return R(null)}
       if(fn==="list_accounts")return R([{user_id:"test-admin",email:"test-admin@flintracing.org",full_name:"Test Admin",created_at:new Date().toISOString(),last_sign_in_at:new Date().toISOString(),is_admin:true,staff_roles:T.staff.filter(function(x){return x.user_id==="test-admin"}).map(function(x){return x.role}),race_role:null},
         {user_id:"u-kevin@example.com",email:"kevin@example.com",full_name:"Kevin C.",created_at:new Date().toISOString(),last_sign_in_at:null,is_admin:(T.extra_admins||[]).indexOf("kevin@example.com")>=0,staff_roles:T.staff.filter(function(x){return x.email==="kevin@example.com"}).map(function(x){return x.role}),race_role:null}]);
       return Promise.resolve({data:null,error:{message:"Unknown function"}})},
