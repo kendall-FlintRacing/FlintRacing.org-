@@ -850,6 +850,62 @@ a.ycell:hover{background:#fbe2e5}
 .shield-note{display:flex;gap:12px;align-items:flex-start;background:#fdecee;border:1px solid #f2b8bf;border-radius:4px;padding:12px 14px;color:#8f1023;font-size:.9rem;font-weight:600}
 .shield-note svg{width:22px;height:22px;flex:none}
 
+/* ===== Sign-in hub + Admin portal ===== */
+.hub{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:22px}
+.hub a,.hub div{background:#fff;color:var(--ink);border-radius:6px;padding:20px;display:grid;gap:8px;text-decoration:none;border-top:4px solid var(--red-deep);align-content:start}
+.hub a:hover{transform:translateY(-2px)}
+.hub b{font:800 1.4rem/1 var(--display);text-transform:uppercase}
+.hub span{color:#4a4d55;font-size:.9rem;line-height:1.5}
+.hub .soon{border-top-color:#9a9da3;opacity:.8}
+.hub .soon em{font-style:normal;font:700 .62rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;border:1px dashed #9a9da3;padding:4px 6px;border-radius:3px;justify-self:start;color:#4a4d55}
+.adm{background:#fff;color:var(--ink);border-radius:6px;padding:clamp(1.2rem,3vw,2rem);margin-top:22px}
+.adm h2{font-size:clamp(1.7rem,3vw,2.2rem);color:var(--ink)}
+.adm .f{display:block;font:600 .9rem/1.3 var(--body);margin-top:14px}
+.adm .f input,.adm .f select,.adm .f textarea,.adm-table input,.adm-table select{display:block;width:100%;margin-top:6px;font:400 .95rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:9px 10px;color:var(--ink);background:#fff;min-width:0}
+.adm textarea{min-height:110px;resize:vertical}
+.adm .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.adm .msg{margin-top:12px;font-size:.9rem;font-weight:600}
+.adm .msg.err{color:#8f1023}.adm .msg.ok{color:#1d6b3a}
+.adm-tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:2px solid var(--ink);margin:18px 0 0}
+.adm-tabs button{border:0;background:#eceef1;color:var(--ink);font:700 .9rem/1 var(--body);padding:12px 14px;border-radius:4px 4px 0 0;cursor:pointer}
+.adm-tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.adm-panel{padding-top:18px}
+.adm-who{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.adm-who span{font-size:.9rem;color:#4a4d55}
+.adm-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:760px}
+.adm-table th{text-align:left;font:700 .7rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#5a5d64;padding:8px 6px;border-bottom:2px solid #d4d6da}
+.adm-table td{padding:6px;border-bottom:1px solid #e6e7ea;vertical-align:middle}
+.adm-table td input[type=checkbox]{width:auto;display:inline;margin:0}
+.adm-scroll{overflow-x:auto}
+.mini{border:1.5px solid var(--ink);background:#fff;color:var(--ink);font:600 .8rem/1 var(--body);padding:8px 10px;border-radius:4px;cursor:pointer;white-space:nowrap}
+.mini.red{border-color:var(--red-deep);color:var(--red-deep)}
+.mini.solid{background:var(--ink);color:#fff}
+.mini:disabled{opacity:.5;cursor:default}
+.inq{border:1px solid #e1e3e6;border-left:4px solid var(--red-deep);border-radius:4px;padding:14px;display:grid;gap:6px;margin-top:12px}
+.inq.done{border-left-color:#9a9da3;opacity:.75}
+.inq header{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.inq b{font-size:1rem}
+.inq small{color:#6d7077}
+.inq p{font-size:.9rem;color:#3b3e45;overflow-wrap:anywhere}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+.stat-row div{background:#f3f4f6;border-radius:4px;padding:14px;display:grid;gap:4px}
+.stat-row b{font:800 2rem/1 var(--display)}
+.stat-row span{font-size:.8rem;color:#5a5d64}
+/* Edit mode */
+.fr-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--ink);color:#fff;border-top:3px solid var(--red);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));font-size:.88rem}
+.fr-bar b{font:800 1.1rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.fr-bar .btns{display:flex;gap:8px;flex-wrap:wrap}
+.fr-bar .mini:not(.solid){background:#fff}
+.fr-bar .mini.solid{background:var(--red);border-color:#fff;color:#fff}
+.fr-pill{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:55;background:var(--ink);color:#fff;border:2px solid var(--red);border-radius:999px;padding:10px 16px;font:700 .85rem/1 var(--body);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+body.fr-editing{padding-bottom:70px}
+body.fr-editing [data-ck]{outline:1.5px dashed rgba(226,27,45,.55);outline-offset:2px;cursor:text}
+body.fr-editing a[data-ck]{cursor:pointer}
+body.fr-editing [data-ck]:hover{outline-color:var(--red);background:rgba(226,27,45,.06)}
+body.fr-editing [data-ck][contenteditable="true"]:focus{outline:2px solid var(--red);background:rgba(255,255,255,.9);color:var(--ink)}
+.fr-imgbtn{position:absolute;z-index:58;background:var(--red);color:#fff;border:2px solid #fff;border-radius:4px;font:700 .82rem/1 var(--body);padding:9px 12px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.fr-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:4px;padding:10px 14px;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+
 /* Stub pages */
 .stub{padding-block:var(--space);min-height:50vh}
 .stub-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:6px;padding:clamp(1.5rem,4vw,3rem);display:grid;gap:14px;max-width:720px}
@@ -1701,6 +1757,31 @@ a.ycell:hover{background:#fbe2e5}
     </div>
   </div></div>
 </div>
+<!-- ======================= SIGN-IN HUB ======================= -->
+<div class="page dark prog-page" data-page="access" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><span>Sign in</span></div></nav>
+  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
+    <section class="cal-head"><p class="eyebrow">Team &amp; family access</p><h1>Sign in</h1><p>Choose your space. Families get workshop details by email; the Program Dashboard is an extra place to find them.</p></section>
+    <div class="hub">
+      <a href="#admin"><b>Admin</b><span>Edit every page, photo and card. Manage events, bulletin notes and inquiries.</span></a>
+      <div class="soon"><em>Coming soon</em><b>Program Dashboard</b><span>Families: where, when and what time workshops are held.</span></div>
+      <div class="soon"><em>Coming soon</em><b>Workshop sign-in</b><span>Building Workshop attendance, teams and meal counts.</span></div>
+      <div class="soon"><em>Coming soon</em><b>Race Day</b><span>Volunteer lists, check-in and role links for officials.</span></div>
+      <div class="soon"><em>Coming soon</em><b>Photographer</b><span>Event albums and uploads.</span></div>
+      <div class="soon"><em>Coming soon</em><b>Teacher planning</b><span>Seasonal workshop ideas, materials and planning dates.</span></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======================= ADMIN PORTAL ======================= -->
+<div class="page dark prog-page" data-page="admin" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Admin</span></div></nav>
+  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
+    <section class="cal-head"><p class="eyebrow">Flint Racing &amp; STEM</p><h1>Admin</h1><p>Edit the public site and manage events, bulletin notes and inquiries.</p></section>
+    <div class="adm" id="admBox"><p>The admin portal works on the published website (GitHub Pages). In this preview it can’t connect to the database.</p></div>
+  </div></div>
+</div>
+
 <!-- ======================= NOT-YET-REBUILT PAGES ======================= -->
 <div class="page stub" data-page="stub" hidden>
   <div class="wrap">
@@ -1731,7 +1812,7 @@ a.ycell:hover{background:#fbe2e5}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"View Race","access":"Sign In","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact"};
+  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"View Race","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -1862,12 +1943,14 @@ a.ycell:hover{background:#fbe2e5}
   function upcoming(){var t=todayKey();return EVENTS.filter(function(e){return (e.e||e.d)>=t})}
 
   /* Happening now strip: next two monthly workshops */
-  (function(){var n=upcoming().filter(function(e){return e.t==="Monthly STEAM Workshop"}).slice(0,2);
-    if(n.length) $("#nowDates").innerHTML=n.map(function(e){var dt=pd(e.d);return '<a href="#calendar"><time datetime="'+e.d+'">'+DOW[dt.getDay()]+', '+MON[dt.getMonth()].slice(0,3)+' '+dt.getDate()+', '+dt.getFullYear()+'</time></a>'}).join("");})();
+  function nowStrip(){var n=upcoming().filter(function(e){return e.t==="Monthly STEAM Workshop"}).slice(0,2);
+    if(n.length) $("#nowDates").innerHTML=n.map(function(e){var dt=pd(e.d);return '<a href="#calendar"><time datetime="'+e.d+'">'+DOW[dt.getDay()]+', '+MON[dt.getMonth()].slice(0,3)+' '+dt.getDate()+', '+dt.getFullYear()+'</time></a>'}).join("");}
+  nowStrip();
 
   var cs={view:"list",q:"",m:"",k:""}, cur=new Date(); cur=new Date(cur.getFullYear(),cur.getMonth(),1);
-  (function(){var keys={};upcoming().forEach(function(e){keys[e.d.slice(0,7)]=1});
-    $("#fm").innerHTML='<option value="">All upcoming months</option>'+Object.keys(keys).sort().map(function(k){var p=k.split("-");return '<option value="'+k+'">'+MON[+p[1]-1]+' '+p[0]+'</option>'}).join("");})();
+  function monthOptions(){var keys={};upcoming().forEach(function(e){keys[e.d.slice(0,7)]=1});
+    $("#fm").innerHTML='<option value="">All upcoming months</option>'+Object.keys(keys).sort().map(function(k){var p=k.split("-");return '<option value="'+k+'">'+MON[+p[1]-1]+' '+p[0]+'</option>'}).join("");}
+  monthOptions();
   function match(e){var q=cs.q.trim().toLowerCase();
     if(q&&(e.t+" "+KIND[e.k]).toLowerCase().indexOf(q)<0) return false;
     if(cs.k&&e.k!==cs.k) return false; return true}
@@ -2009,7 +2092,7 @@ a.ycell:hover{background:#fbe2e5}
   }
   function openForm(interest,note){
     if(!document.getElementById("qForm")){qCard.innerHTML=qFormHTML;bindForm()}
-    $("#qNote").hidden=!!FORM_ENDPOINT;
+    $("#qNote").hidden=!!(FORM_ENDPOINT||window.FR_DB);
     if(interest){
       if(!qDirty) qForm.querySelectorAll('#q-picks input').forEach(function(i){i.checked=false});
       var box=document.getElementById("qi-"+interest);if(box)box.checked=true}
@@ -2038,7 +2121,14 @@ a.ycell:hover{background:#fbe2e5}
         youth_count:f.youth_count.value,youth_ages:f.youth_ages.value.trim(),message:f.message.value.trim(),email:email,phone:phone,contact_by:by,best_time:f.best_time.value||"Any time",email_updates:f.email_updates.checked?"Yes":"No"};
       var btn=$("#qSubmit"); btn.disabled=true; btn.textContent="Sending…";
       function done(sent){showDone(data,sent)}
-      if(FORM_ENDPOINT){
+      var db=window.FR_DB;
+      if(db){
+        var row={first_name:data.first_name,last_name:data.last_name,role:data.role,organization:data.organization||null,interests:data.interests,
+          youth_count:data.youth_count?parseInt(data.youth_count,10):null,youth_ages:data.youth_ages||null,message:data.message||null,email:data.email,
+          phone:data.phone||null,contact_by:data.contact_by,best_time:data.best_time,email_updates:data.email_updates==="Yes"};
+        db.from("inquiries").insert(row).then(function(r){if(r.error)throw r.error;done(true)})
+          .catch(function(){btn.disabled=false;btn.textContent="Send";err.textContent="We couldn’t send your answers. Check your connection and try again, or email info@flintracing.org.";err.hidden=false});
+      } else if(FORM_ENDPOINT){
         fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)})
           .then(function(r){if(!r.ok)throw 0;done(true)})
           .catch(function(){btn.disabled=false;btn.textContent="Send";err.textContent="We couldn’t send your answers. Check your connection and try again.";err.hidden=false});
@@ -2076,9 +2166,246 @@ a.ycell:hover{background:#fbe2e5}
     try{navigator.clipboard.writeText("info@flintracing.org").then(ok,sel)}catch(x){sel()}
     setTimeout(function(){b.textContent="Copy"},2000)});
   $("#yr").textContent=new Date().getFullYear();
+  /* Shared hooks for the Supabase + Admin layer */
+  window.FR={EVENTS:EVENTS,NOTES:BULLETIN_NOTES,route:route,
+    refresh:function(){nowStrip();monthOptions();var h=(location.hash||"#home").slice(1);
+      if(h==="calendar")renderCal();if(h==="racing")renderBoard();if(h==="seasonal-workshops")renderSeasons();},
+    esc:esc};
   route();
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+/* ===== Supabase layer: live content, events, notes, inquiries, and the Admin portal =====
+   Public key below is the project's publishable key (safe to ship in a website).
+   Everything else is protected by row-level security in the database. */
+(function(){
+  var SB_URL="https://zoypyxeaxxxjvkmsjgro.supabase.co";
+  var SB_KEY="sb_publishable_JaTtgQGFEE_RnVsT6xmIog_ADFMQcrL";
+  var FR=window.FR; if(!FR) return;
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var esc=FR.esc;
+
+  /* ---------- Tag every editable text and photo with a stable key ---------- */
+  var TEXT_SEL=["h1","h2","h3","h4","p","li","figcaption","dt","dd",".eyebrow","a.btn",".signal b",".signal small",".hero-note",".spirit-tag",
+    ".merch b",".merch span",".stat strong",".stat span",".story-cap",".feat small",".n-card small",".pe-card .k",".lane .num",".ln",
+    ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
+    ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
+    ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
+  var DYN=["#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+    "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
+    "form","svg","script","style",".fr-bar",".crumbs"].join(",");
+  function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
+  var TAGGED=[];
+  function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
+    $$("main > .page").forEach(function(p){var id=p.getAttribute("data-page");if(id&&id!=="stub")out.push([id,p])});
+    var f=$("footer.site-foot");if(f)out.push(["foot",f]);return out}
+  function tagAll(){
+    scopes().forEach(function(sc){var name=sc[0],root=sc[1],seen={};
+      $$(TEXT_SEL,root).forEach(function(el){
+        if(el.closest(DYN)) return;
+        if($$(TEXT_SEL,el).some(function(c){return !c.closest(DYN)})) return; /* only innermost */
+        var txt=(el.textContent||"").replace(/\s+/g," ").trim(); if(!txt) return;
+        var base=name+"|"+el.tagName.toLowerCase()+"|"+hash(txt); seen[base]=(seen[base]||0)+1;
+        el.setAttribute("data-ck",base+(seen[base]>1?"|"+seen[base]:"")); el.__def=el.innerHTML; TAGGED.push(el);
+      });
+      $$("img",root).forEach(function(img){
+        if(img.closest(DYN)) return;
+        var id=img.getAttribute("alt")||img.getAttribute("src").slice(-40);
+        var base=name+"|img|"+hash(id); seen[base]=(seen[base]||0)+1;
+        img.setAttribute("data-ci",base+(seen[base]>1?"|"+seen[base]:"")); img.__def=img.getAttribute("src"); TAGGED.push(img);
+      });
+    });
+  }
+
+  /* ---------- Safe HTML for edited text ---------- */
+  var OK_TAGS={B:1,STRONG:1,I:1,EM:1,BR:1,A:1,SMALL:1,SPAN:1};
+  function clean(html){
+    var doc=new DOMParser().parseFromString("<div>"+html+"</div>","text/html"), root=doc.body.firstChild;
+    (function walk(n){Array.prototype.slice.call(n.childNodes).forEach(function(c){
+      if(c.nodeType===3) return;
+      if(c.nodeType!==1||!OK_TAGS[c.tagName]){ if(c.nodeType===1){walk(c);while(c.firstChild)n.insertBefore(c.firstChild,c)} n.removeChild(c); return; }
+      Array.prototype.slice.call(c.attributes).forEach(function(a){
+        var keep=c.tagName==="A"&&a.name==="href"&&/^(#|https:\/\/|mailto:|tel:)/i.test(a.value.trim());
+        if(!keep) c.removeAttribute(a.name)});
+      if(c.tagName==="A"&&/^https:/i.test(c.getAttribute("href")||"")){c.setAttribute("target","_blank");c.setAttribute("rel","noopener")}
+      walk(c);
+    })})(root);
+    return root.innerHTML.replace(/&nbsp;/g," ").trim();
+  }
+
+  var CONTENT={};
+  function applyContent(){
+    $$("[data-ck]").forEach(function(el){var v=CONTENT[el.getAttribute("data-ck")];
+      if(v&&v.kind==="text") el.innerHTML=clean(v.value); else if(el.__def!=null&&!v) el.innerHTML=el.__def;});
+    $$("[data-ci]").forEach(function(img){var v=CONTENT[img.getAttribute("data-ci")];
+      if(v&&v.kind==="image"&&/^https:\/\//.test(v.value)){img.src=v.value;img.removeAttribute("srcset")} else if(!v&&img.__def) img.setAttribute("src",img.__def);});
+  }
+
+  tagAll();
+  if(!window.supabase||!window.supabase.createClient) return;
+  var db; try{db=window.supabase.createClient(SB_URL,SB_KEY)}catch(e){return}
+
+  /* ---------- Load live data (falls back silently to the built-in content) ---------- */
+  function loadEvents(){return db.from("events").select("*").order("start_date").then(function(r){
+    if(r.error) throw r.error;
+    var list=r.data.map(function(e){var o={id:e.id,d:e.start_date,t:e.title,k:e.kind,desc:e.description,pub:e.published};if(e.end_date)o.e=e.end_date;if(e.to_be_confirmed)o.tbc=1;return o});
+    FR.EVENTS.length=0; list.filter(function(e){return e.pub}).forEach(function(e){FR.EVENTS.push(e)}); return r.data;})}
+  function loadNotes(){return db.from("bulletin_notes").select("*").order("created_at").then(function(r){
+    if(r.error) throw r.error; Object.keys(FR.NOTES).forEach(function(k){delete FR.NOTES[k]});
+    r.data.forEach(function(n){(FR.NOTES[n.month]=FR.NOTES[n.month]||[]).push({from:n.author,text:n.body})}); return r.data;})}
+  function loadContent(){return db.from("site_content").select("key,kind,value").then(function(r){
+    if(r.error) throw r.error; CONTENT={}; r.data.forEach(function(c){CONTENT[c.key]=c}); applyContent(); return r.data;})}
+
+  Promise.all([loadEvents(),loadNotes(),loadContent()]).then(function(){
+    window.FR_DB=db; FR.refresh(); var n=$("#qNote"); if(n) n.hidden=true;
+    initAuth();
+  }).catch(function(){ /* offline or blocked: keep built-in content */ });
+
+  /* ---------- Toast ---------- */
+  var tt; function toast(m){var t=$(".fr-toast");if(!t){t=document.createElement("div");t.className="fr-toast";t.setAttribute("role","status");document.body.appendChild(t)}
+    t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},2400)}
+
+  /* ---------- Auth + admin ---------- */
+  var USER=null, IS_ADMIN=false;
+  function initAuth(){
+    db.auth.getSession().then(function(r){setUser(r.data&&r.data.session?r.data.session.user:null)});
+    db.auth.onAuthStateChange(function(ev,session){setUser(session?session.user:null)});
+    window.addEventListener("hashchange",function(){if(location.hash==="#admin")renderAdmin()});
+    renderAdmin();
+  }
+  function setUser(u){USER=u;
+    if(!u){IS_ADMIN=false;setEditing(false);updatePill();renderAdmin();return}
+    db.from("admins").select("user_id").eq("user_id",u.id).maybeSingle().then(function(r){IS_ADMIN=!!(r.data);updatePill();renderAdmin();
+      if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
+  }
+  function updatePill(){var p=$(".fr-pill");
+    if(IS_ADMIN&&!EDITING){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
+    else if(p) p.hidden=true;}
+
+  /* ---------- Edit mode ---------- */
+  var EDITING=false, bar=null, imgBtn=null, fileIn=null, imgTarget=null;
+  function setEditing(on){
+    if(on&&!IS_ADMIN) return; EDITING=!!on; document.body.classList.toggle("fr-editing",EDITING);
+    $$("[data-ck]").forEach(function(el){if(el.tagName==="A") return; if(EDITING) el.setAttribute("contenteditable","true"); else el.removeAttribute("contenteditable")});
+    if(EDITING&&!bar){bar=document.createElement("div");bar.className="fr-bar";
+      bar.innerHTML='<span><b>Editing</b> &nbsp;Click text to change it. Double-click a button or link to edit its words. Hover a photo to replace it. Changes save when you click away.</span><span class="btns"><a class="mini" href="#admin">Admin dashboard</a><button class="mini solid" type="button" id="frDone">Done editing</button></span>';
+      document.body.appendChild(bar); $("#frDone").onclick=function(){setEditing(false)};}
+    if(bar) bar.hidden=!EDITING; if(imgBtn&&!EDITING) imgBtn.hidden=true; updatePill();
+  }
+  document.addEventListener("focusin",function(e){var el=e.target.closest&&e.target.closest("[data-ck]");if(EDITING&&el) el.__before=el.innerHTML});
+  document.addEventListener("focusout",function(e){var el=e.target.closest&&e.target.closest("[data-ck]");if(!EDITING||!el)return;
+    if(el.tagName==="A") el.removeAttribute("contenteditable");
+    if(el.innerHTML!==el.__before) saveText(el);});
+  document.addEventListener("click",function(e){if(!EDITING||!e.target.closest)return;var ed=e.target.closest("[data-ck]");
+    if(ed&&ed.getAttribute("contenteditable")==="true"&&ed.closest("a,summary")) e.preventDefault();},true);
+  document.addEventListener("dblclick",function(e){if(!EDITING)return;var a=e.target.closest("a[data-ck]");if(!a)return;
+    e.preventDefault();a.setAttribute("contenteditable","true");a.focus();});
+  document.addEventListener("keydown",function(e){if(EDITING&&e.key==="Enter"&&!e.shiftKey&&e.target.closest&&e.target.closest("[data-ck]")&&!/^P$|^LI$|^DD$/.test(e.target.tagName)){e.preventDefault();e.target.blur()}});
+  function saveText(el){var key=el.getAttribute("data-ck"),val=clean(el.innerHTML),def=clean(el.__def||"");
+    var p=(val===def||!val)?db.from("site_content").delete().eq("key",key):db.from("site_content").upsert({key:key,kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id});
+    p.then(function(r){if(r.error)throw r.error;if(val===def||!val){delete CONTENT[key];el.innerHTML=el.__def}else CONTENT[key]={key:key,kind:"text",value:val};toast(val===def||!val?"Restored the original":"Saved")})
+     .catch(function(){toast("Couldn’t save. Check your connection.")});}
+
+  /* Photo replace button */
+  document.addEventListener("mouseover",function(e){if(!EDITING)return;var img=e.target.closest&&e.target.closest("[data-ci]");if(!img)return;showImgBtn(img)});
+  document.addEventListener("focusin",function(e){if(EDITING&&e.target.matches&&e.target.matches("[data-ci]"))showImgBtn(e.target)});
+  function showImgBtn(img){
+    if(!imgBtn){imgBtn=document.createElement("button");imgBtn.type="button";imgBtn.className="fr-imgbtn";imgBtn.textContent="Replace photo";document.body.appendChild(imgBtn);
+      fileIn=document.createElement("input");fileIn.type="file";fileIn.accept="image/jpeg,image/png,image/webp,image/gif";fileIn.hidden=true;document.body.appendChild(fileIn);
+      imgBtn.onclick=function(){fileIn.value="";fileIn.click()};
+      fileIn.onchange=function(){if(fileIn.files[0]&&imgTarget)uploadImg(imgTarget,fileIn.files[0])};}
+    imgTarget=img; var r=img.getBoundingClientRect(); if(r.width<40||r.height<30) return;
+    imgBtn.hidden=false; imgBtn.style.left=(r.left+scrollX+10)+"px"; imgBtn.style.top=(r.top+scrollY+10)+"px";
+  }
+  function uploadImg(img,file){
+    if(file.size>8*1024*1024){toast("That photo is over 8 MB. Please use a smaller file.");return}
+    var ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"");
+    var path="content/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext, key=img.getAttribute("data-ci");
+    toast("Uploading…");
+    db.storage.from("site-images").upload(path,file,{cacheControl:"31536000",upsert:false,contentType:file.type}).then(function(r){
+      if(r.error) throw r.error; var url=db.storage.from("site-images").getPublicUrl(path).data.publicUrl;
+      return db.from("site_content").upsert({key:key,kind:"image",value:url,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(r2){
+        if(r2.error) throw r2.error; CONTENT[key]={key:key,kind:"image",value:url}; img.src=url; img.removeAttribute("srcset"); toast("Photo replaced");});
+    }).catch(function(){toast("Couldn’t upload that photo. Try a JPG, PNG or WebP under 8 MB.")});
+  }
+
+  /* ---------- Admin dashboard ---------- */
+  var TAB="overview";
+  function renderAdmin(){var box=$("#admBox"); if(!box||!window.FR_DB) return;
+    if(!USER){box.innerHTML=signInHTML();bindSignIn();return}
+    if(!IS_ADMIN){box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b></span><button class="mini" type="button" id="admOut">Sign out</button></div><h2 style="margin-top:14px">Waiting for admin access</h2><p style="margin-top:8px;color:#4a4d55">This account doesn’t have admin access yet. Once the site owner grants it, sign out and back in.</p>';$("#admOut").onclick=signOut;return}
+    box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b> · Admin</span><span class="row" style="margin:0"><button class="mini solid" type="button" id="admEdit">Edit the site</button><button class="mini" type="button" id="admOut">Sign out</button></span></div>'+
+      '<div class="adm-tabs" role="tablist">'+[["overview","Overview"],["events","Events"],["notes","Bulletin notes"],["inq","Inquiries"],["edits","Site edits"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>'}).join("")+'</div><div class="adm-panel" id="admPanel">Loading…</div>';
+    $("#admOut").onclick=signOut; $("#admEdit").onclick=function(){location.hash="#home";setTimeout(function(){setEditing(true)},50)};
+    $$(".adm-tabs button",box).forEach(function(b){b.onclick=function(){TAB=b.getAttribute("data-tab");renderAdmin()}});
+    ({overview:tabOverview,events:tabEvents,notes:tabNotes,inq:tabInq,edits:tabEdits})[TAB]();
+  }
+  function signInHTML(){return '<h2>Admin sign in</h2><form id="admForm" novalidate><label class="f" for="adm-email">Email<input type="email" id="adm-email" autocomplete="username" required></label><label class="f" for="adm-pass">Password<input type="password" id="adm-pass" autocomplete="current-password" required minlength="8"></label><div class="row"><button class="btn deep" type="submit" id="admSubmit">Sign in</button><button class="mini" type="button" id="admMode">Create an account</button><button class="mini" type="button" id="admForgot">Forgot password</button></div><p class="msg" id="admMsg" role="status"></p></form>'}
+  function bindSignIn(){var mode="in",msg=$("#admMsg");
+    function m(t,ok){msg.textContent=t;msg.className="msg "+(ok?"ok":"err")}
+    $("#admMode").onclick=function(){mode=mode==="in"?"up":"in";$("#admSubmit").textContent=mode==="in"?"Sign in":"Create account";this.textContent=mode==="in"?"Create an account":"I already have an account";$("#adm-pass").autocomplete=mode==="in"?"current-password":"new-password";m("")};
+    $("#admForgot").onclick=function(){var em=$("#adm-email").value.trim();if(!em){m("Enter your email first.");return}
+      db.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname+"#admin"}).then(function(r){m(r.error?"Couldn’t send the reset email. Check the address.":"Check your email for a reset link.",!r.error)})};
+    $("#admForm").onsubmit=function(e){e.preventDefault();var em=$("#adm-email").value.trim(),pw=$("#adm-pass").value;
+      if(!/^\S+@\S+\.\S+$/.test(em)||pw.length<8){m("Enter your email and a password of at least 8 characters.");return}
+      if(mode==="in") db.auth.signInWithPassword({email:em,password:pw}).then(function(r){if(r.error)m("That email and password didn’t match.")});
+      else db.auth.signUp({email:em,password:pw,options:{emailRedirectTo:location.origin+location.pathname+"#admin"}}).then(function(r){
+        m(r.error?"Couldn’t create the account: "+r.error.message:"Account created. Check your email to confirm it, then ask the site owner to grant admin access.",!r.error)});};
+  }
+  function signOut(){setEditing(false);db.auth.signOut()}
+
+  function tabOverview(){var P=$("#admPanel");
+    Promise.all([db.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),db.from("site_content").select("key",{count:"exact",head:true})]).then(function(r){
+      var t=new Date().toISOString().slice(0,10), up=FR.EVENTS.filter(function(e){return (e.e||e.d)>=t}).length;
+      P.innerHTML='<div class="stat-row"><div><b>'+(r[0].count||0)+'</b><span>New inquiries</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(r[1].count||0)+'</b><span>Site edits saved</span></div></div>'+
+        '<h3 style="margin-top:20px;font-size:1.3rem">How editing works</h3><p style="color:#4a4d55;margin-top:6px;max-width:70ch">Click <b>Edit the site</b>, then browse to any page. Click any heading, paragraph or caption to change it, double-click a button or link to change its words, and hover a photo to replace it. Changes are live for visitors as soon as you click away. To undo a change, use the Site edits tab.</p>';});
+  }
+  function tabEvents(){var P=$("#admPanel");
+    db.from("events").select("*").order("start_date").then(function(r){if(r.error){P.textContent="Couldn’t load events.";return}
+      var kinds=["workshop","camp","racing"];
+      function row(e){e=e||{};return '<tr data-id="'+(e.id||"")+'"><td><input type="date" value="'+(e.start_date||"")+'" aria-label="Start date"></td><td><input type="date" value="'+(e.end_date||"")+'" aria-label="End date (optional)"></td><td><input type="text" value="'+esc(e.title||"")+'" aria-label="Title"></td><td><select aria-label="Type">'+kinds.map(function(k){return '<option'+(e.kind===k?' selected':'')+'>'+k+'</option>'}).join("")+'</select></td><td><input type="checkbox"'+(e.to_be_confirmed?' checked':'')+' aria-label="To be confirmed"></td><td><input type="checkbox"'+(e.published!==false?' checked':'')+' aria-label="Shown on site"></td><td><button class="mini solid" type="button" data-act="save">Save</button> '+(e.id?'<button class="mini red" type="button" data-act="del">Delete</button>':'')+'</td></tr>'}
+      P.innerHTML='<p style="color:#4a4d55">Dates only appear publicly; times and locations stay in your emails.</p><div class="adm-scroll"><table class="adm-table"><thead><tr><th>Start</th><th>End</th><th>Title</th><th>Type</th><th>TBC</th><th>Shown</th><th></th></tr></thead><tbody>'+row(null)+r.data.map(row).join("")+'</tbody></table></div>';
+      $$("button[data-act]",P).forEach(function(b){b.onclick=function(){var tr=b.closest("tr"),id=tr.getAttribute("data-id"),f=$$("input,select",tr);
+        if(b.getAttribute("data-act")==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+          db.from("events").delete().eq("id",id).then(function(x){toast(x.error?"Couldn’t delete":"Deleted");afterEvents()});return}
+        var rec={start_date:f[0].value,end_date:f[1].value||null,title:f[2].value.trim(),kind:f[3].value,to_be_confirmed:f[4].checked,published:f[5].checked};
+        if(!rec.start_date||!rec.title){toast("Add a start date and a title.");return}
+        (id?db.from("events").update(rec).eq("id",id):db.from("events").insert(rec)).then(function(x){toast(x.error?"Couldn’t save: "+x.error.message:"Saved");if(!x.error)afterEvents()});}});
+    });
+    function afterEvents(){loadEvents().then(function(){FR.refresh();tabEvents()})}
+  }
+  function tabNotes(){var P=$("#admPanel"),now=new Date(),mk=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0");
+    db.from("bulletin_notes").select("*").order("month",{ascending:false}).then(function(r){if(r.error){P.textContent="Couldn’t load notes.";return}
+      P.innerHTML='<form id="noteForm" novalidate><label class="f" for="nt-month">Month it shows<input type="month" id="nt-month" value="'+mk+'" required></label><label class="f" for="nt-from">From<input type="text" id="nt-from" value="Flint Racing admin" maxlength="80"></label><label class="f" for="nt-body">Note<textarea id="nt-body" maxlength="2000" required></textarea></label><div class="row"><button class="btn deep" type="submit">Post note</button></div></form>'+
+        r.data.map(function(n){return '<div class="inq"><header><b>'+esc(n.month)+' · '+esc(n.author)+'</b><button class="mini red" type="button" data-id="'+n.id+'">Delete</button></header><p>'+esc(n.body)+'</p></div>'}).join("");
+      $("#noteForm").onsubmit=function(e){e.preventDefault();var b=$("#nt-body").value.trim();if(!b){toast("Write a note first.");return}
+        db.from("bulletin_notes").insert({month:$("#nt-month").value,author:$("#nt-from").value.trim()||"Flint Racing admin",body:b}).then(function(x){toast(x.error?"Couldn’t post":"Posted");loadNotes().then(function(){FR.refresh();tabNotes()})})};
+      $$("button[data-id]",P).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}
+        db.from("bulletin_notes").delete().eq("id",b.getAttribute("data-id")).then(function(){loadNotes().then(function(){FR.refresh();tabNotes()})})}});
+    });
+  }
+  var INQ_FILTER="new";
+  function tabInq(){var P=$("#admPanel");
+    var q=db.from("inquiries").select("*").order("created_at",{ascending:false}).limit(200); if(INQ_FILTER) q=q.eq("status",INQ_FILTER);
+    q.then(function(r){if(r.error){P.textContent="Couldn’t load inquiries.";return}
+      P.innerHTML='<div class="row" style="margin-top:0">'+[["new","New"],["in progress","In progress"],["done","Done"],["","All"]].map(function(f){return '<button class="mini'+(INQ_FILTER===f[0]?' solid':'')+'" type="button" data-f="'+f[0]+'">'+f[1]+'</button>'}).join("")+'</div>'+
+        (r.data.length?r.data.map(function(i){var d=new Date(i.created_at);return '<div class="inq'+(i.status==="done"?' done':'')+'"><header><b>'+esc(i.first_name+" "+i.last_name)+'</b><small>'+d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})+'</small><select data-id="'+i.id+'" aria-label="Status">'+["new","in progress","done"].map(function(s){return '<option'+(i.status===s?' selected':'')+'>'+s+'</option>'}).join("")+'</select></header>'+
+          '<p><b>'+esc(i.role)+'</b>'+(i.organization?' · '+esc(i.organization):'')+'</p><p>Interested in: '+esc(i.interests)+'</p>'+((i.youth_count||i.youth_ages)?'<p>Young people: '+esc([i.youth_count,i.youth_ages&&("ages "+i.youth_ages)].filter(Boolean).join(", "))+'</p>':'')+
+          (i.message?'<p>“'+esc(i.message)+'”</p>':'')+'<p>Reach by '+esc(i.contact_by)+' · '+esc(i.email)+(i.phone?' · '+esc(i.phone):'')+' · '+esc(i.best_time||"Any time")+(i.email_updates?' · wants email updates':'')+'</p></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No inquiries here.</p>');
+      $$("button[data-f]",P).forEach(function(b){b.onclick=function(){INQ_FILTER=b.getAttribute("data-f");tabInq()}});
+      $$("select[data-id]",P).forEach(function(s){s.onchange=function(){db.from("inquiries").update({status:s.value}).eq("id",s.getAttribute("data-id")).then(function(x){toast(x.error?"Couldn’t update":"Updated");tabInq()})}});
+    });
+  }
+  function tabEdits(){var P=$("#admPanel"),keys=Object.keys(CONTENT).sort();
+    P.innerHTML=keys.length?'<p style="color:#4a4d55">Every change made with Edit the site. Restore puts the original back.</p>'+keys.map(function(k){var c=CONTENT[k],pg=k.split("|")[0];
+      return '<div class="inq"><header><b>'+esc(pg)+'</b><button class="mini red" type="button" data-k="'+esc(k)+'">Restore original</button></header>'+(c.kind==="image"?'<p>Photo replaced · <a href="'+esc(c.value)+'" target="_blank" rel="noopener">view</a></p>':'<p>'+esc(c.value.replace(/<[^>]+>/g,"").slice(0,160))+'</p>')+'</div>'}).join(""):'<p style="color:#4a4d55">No edits yet. Click Edit the site to start.</p>';
+    $$("button[data-k]",P).forEach(function(b){b.onclick=function(){var k=b.getAttribute("data-k");db.from("site_content").delete().eq("key",k).then(function(x){if(!x.error){delete CONTENT[k];applyContent()}toast(x.error?"Couldn’t restore":"Restored");tabEdits()})}});
+  }
+})();
+</script>
+
 
 </body>
 </html>
