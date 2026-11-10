@@ -92,5 +92,8 @@ if __name__ == "__main__":
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
         + ('<meta name="robots" content="noindex, nofollow">\n' if NOINDEX else '')
+        # The repo name ends in ".github.io", so the address can open without its final "/".
+        # Without it, every photo and logo path points to the wrong folder. Add the slash first.
+        + '<script>(function(){var p=location.pathname;if(location.protocol!=="file:"&&!/\\/$/.test(p)&&!/\\.html?$/i.test(p))location.replace(p+"/"+location.search+location.hash)})()</script>\n'
         + page[:i] + "\n</head>\n<body>\n" + page[i:] + "\n</body>\n</html>\n")
     print("artifact bytes:", len(art))
