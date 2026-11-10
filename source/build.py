@@ -75,7 +75,7 @@ def build(embed):
 
 
 # Until launch day: keep the test address out of Google and other search engines
-NOINDEX = True
+NOINDEX = False
 
 CDN_TAG = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>'
 
