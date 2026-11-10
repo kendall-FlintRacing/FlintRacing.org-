@@ -861,6 +861,117 @@ a.ycell:hover{background:#fbe2e5}
 .adm .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
 .adm .msg{margin-top:12px;font-size:.9rem;font-weight:600}
 .adm .msg.err{color:#8f1023}.adm .msg.ok{color:#1d6b3a}
+/* admin v2 */
+.adm.adm2{display:grid;grid-template-columns:268px minmax(0,1fr);padding:0;overflow:visible;border-radius:12px;background:linear-gradient(90deg,#111216 268px,#fff 268px);margin-top:4px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.adm-side{background:#111216;color:#e3e5e9;border-radius:12px 0 0 12px;padding:18px 14px;display:flex;flex-direction:column;gap:14px;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;scrollbar-width:thin}
+.adm-me{display:flex;gap:10px;align-items:center;padding:4px 6px 12px;border-bottom:1px solid #26272e}
+.adm-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--red-deep);color:#fff;font:italic 900 1.2rem/1 var(--display);flex:none}
+.adm-me b{display:block;color:#fff;font-size:.95rem;line-height:1.2;overflow-wrap:anywhere}
+.adm-me small{color:#9a9ca3;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.adm-find{position:relative}
+.adm-q{display:flex;align-items:center;gap:8px;background:#1c1d23;border:1.5px solid #2f3038;border-radius:10px;padding:0 10px;transition:border-color .15s}
+.adm-q:focus-within{border-color:#fff}
+.adm-q svg{width:18px;height:18px;color:#9a9ca3;flex:none}
+.adm-q input{flex:1;min-width:0;background:transparent;border:0;color:#fff;font:500 .95rem/1 var(--body);padding:11px 0;outline:none}
+.adm-q input::placeholder{color:#8a8c93}
+.adm-q input::-webkit-search-cancel-button{filter:invert(1)}
+.adm-q kbd{font:700 .72rem/1 var(--body);color:#9a9ca3;border:1px solid #3a3b44;border-radius:4px;padding:3px 6px}
+.adm-res{position:absolute;left:0;right:-180px;top:calc(100% + 6px);z-index:30;background:#fff;color:var(--ink);border-radius:10px;box-shadow:0 18px 48px rgba(0,0,0,.4);max-height:420px;overflow:auto;padding:6px}
+.adm-res button{display:grid;grid-template-columns:86px 1fr;gap:2px 10px;width:100%;text-align:left;border:0;background:transparent;border-radius:7px;padding:9px 10px;cursor:pointer;font:inherit;color:inherit}
+.adm-res button[aria-selected=true],.adm-res button:hover{background:#f3f4f6}
+.adm-res small{grid-row:span 2;font:800 .66rem/1.4 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--red-deep);padding-top:3px}
+.adm-res b{font-size:.95rem}
+.adm-res span{font-size:.82rem;color:#5a5d64}
+.adm-nores{padding:12px;color:#5a5d64;font-size:.92rem}
+.adm-menu{display:none}
+.adm-nav{display:grid;gap:2px}
+.adm-g{font:800 .68rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#7c7e86;margin:12px 8px 6px}
+.adm-g:first-child{margin-top:0}
+.adm-nav button,.adm-nav a,.adm-foot button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#d6d8dc;font:600 .93rem/1.2 var(--body);text-align:left;padding:7px 10px;border-radius:8px;cursor:pointer;text-decoration:none;position:relative}
+.adm-nav svg,.adm-foot svg{width:18px;height:18px;flex:none;color:#9a9ca3}
+.adm-nav button:hover,.adm-nav a:hover,.adm-foot button:hover{background:#1e1f25;color:#fff}
+.adm-nav button[aria-current=page]{background:#fff;color:var(--ink)}
+.adm-nav button[aria-current=page] svg{color:var(--red-deep)}
+.adm-nav button[aria-current=page]::before{content:"";position:absolute;left:-14px;top:8px;bottom:8px;width:4px;border-radius:0 4px 4px 0;background:var(--red)}
+.adm-nav span,.adm-foot span{flex:1}
+.adm-nav em{font-style:normal;background:var(--red);color:#fff;font:800 .72rem/1 var(--body);border-radius:999px;padding:4px 7px}
+.adm-nav a span::after{content:" ↗";color:#6b6d75;font-size:.8em}
+.adm-foot{margin-top:auto;border-top:1px solid #26272e;padding-top:10px;display:grid;gap:2px}
+.adm-foot .adm-editbtn{background:var(--red-deep);color:#fff}
+.adm-foot .adm-editbtn svg{color:#fff}
+.adm-foot .adm-editbtn:hover{background:var(--red)}
+.adm-main{min-width:0;padding:clamp(18px,3vw,30px);background:#fff;border-radius:0 12px 12px 0}
+.adm-acts{display:flex;gap:8px;flex-wrap:wrap}
+.adm-acts button{display:inline-flex;align-items:center;gap:7px;border:1.5px solid #d5d7dc;background:#fff;border-radius:8px;padding:8px 12px;font:700 .88rem/1 var(--body);cursor:pointer;color:var(--ink)}
+.adm-acts button svg{width:16px;height:16px}
+.adm-acts .adm-editbtn{background:var(--red-deep);border-color:var(--red-deep);color:#fff}
+.adm-acts button:hover{border-color:var(--ink)}
+.adm-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap;border-bottom:1px solid #e3e5e9;padding-bottom:14px;margin-bottom:6px}
+.adm-crumb{font:800 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--red-deep);margin-bottom:8px}
+.adm-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem)}
+.adm-head p:last-child{color:#5a5d64;margin-top:6px}
+.adm-loading{color:#6b6e75}
+@media (max-width:900px){
+  .adm.adm2{grid-template-columns:1fr}
+  .adm-side{position:static;max-height:none;border-radius:12px 12px 0 0;padding:14px;gap:10px}
+  .adm-res{right:0}
+  .adm-me{display:none}
+  .adm-menu{display:flex;align-items:center;gap:10px;width:100%;border:1.5px solid #2f3038;background:#1c1d23;color:#fff;border-radius:10px;padding:10px 12px;font:600 .95rem/1 var(--body);cursor:pointer}
+  .adm-menu svg{width:18px;height:18px}
+  .adm-menu b{margin-left:auto;font-weight:800}
+  .adm.adm2{background:#fff}
+  .adm-nav{display:none}
+  .adm-side.open .adm-nav{display:grid}
+  .adm-nav button[aria-current=page]::before{display:none}
+  .adm-main{border-radius:0 0 12px 12px}
+}
+/* overview */
+.ov-cols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;margin-top:16px}
+@media (max-width:760px){.ov-cols{grid-template-columns:1fr}}
+.ov-card{border:1px solid #e3e5e9;border-radius:12px;padding:16px;display:grid;gap:10px;align-content:start}
+.ov-todo{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ov-todo button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid #ececef;background:#fafafb;border-radius:9px;padding:11px 12px;cursor:pointer;font:inherit;color:var(--ink)}
+.ov-todo button:hover{border-color:var(--red-deep);background:#fff}
+.ov-todo svg{width:20px;height:20px;color:var(--red-deep);flex:none}
+.ov-todo span{flex:1}
+.ov-todo i{font-style:normal;color:var(--red-deep);font-weight:800}
+.ov-clear{display:flex;gap:10px;align-items:center;color:#17803d;font-weight:700}
+.ov-clear svg{width:22px;height:22px}
+.ov-nums{grid-template-columns:1fr 1fr}
+.ov-nums div{background:#f6f7f8;border-radius:9px;padding:14px;display:grid;gap:4px}
+.ov-nums b{font:italic 900 2.1rem/1 var(--display)}
+.ov-nums span{font-size:.82rem;color:#5a5d64;font-weight:600}
+.ov-nums .on b{color:#17803d}.ov-nums .off b{color:#9a9ca3}
+.ov-acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.ov-act{display:grid;gap:4px;text-align:left;border:1.5px solid #e3e5e9;background:#fff;border-radius:12px;padding:14px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .15s,transform .15s}
+.ov-act:hover{border-color:var(--red-deep);transform:translateY(-2px)}
+.ov-act svg{width:26px;height:26px;padding:5px;border-radius:8px;background:#fbe2e5;color:var(--red-deep);margin-bottom:6px}
+.ov-act b{font:800 1.1rem/1.05 var(--display);text-transform:uppercase}
+.ov-act span{font-size:.84rem;color:#5a5d64}
+.ov-csv{display:flex;flex-wrap:wrap;gap:8px}
+.ov-csv small{color:#6b6e75;font-weight:600}
+/* donations */
+.dn-status{display:flex;gap:14px;align-items:center;border-radius:12px;padding:16px;margin:16px 0;flex-wrap:wrap}
+.dn-status svg{width:30px;height:30px;flex:none}
+.dn-status div{flex:1;min-width:220px;display:grid;gap:3px}
+.dn-status span{color:#3b3e45;font-size:.93rem}
+.dn-status.on{background:#e9f7ee;color:#17803d}.dn-status.warn{background:#fff6dc;color:#7a5600}.dn-status.off{background:#f3f4f6;color:#4a4d55}
+.dn-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:18px;align-items:start}
+@media (max-width:860px){.dn-grid{grid-template-columns:1fr}}
+.dn-form .f small{display:block;font-weight:500;color:#5a5d64;margin-top:3px}
+.dn-how{background:#f6f7f8;border-radius:12px;padding:16px;display:grid;gap:10px}
+.dn-how ol{margin:0;padding-left:20px;display:grid;gap:8px;font-size:.93rem;color:#2c2e33}
+/* donate page */
+.don-fq{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.don-fq label{position:relative;cursor:pointer}
+.don-fq input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.don-fq span{display:grid;place-items:center;min-height:48px;border:2px solid var(--ink);border-radius:4px;font:800 1.1rem/1 var(--display);text-transform:uppercase;background:#fff;color:var(--ink)}
+.don-fq input:checked+span{background:var(--ink);color:#fff}
+.don-fq input:focus-visible+span{outline:3px solid var(--red);outline-offset:2px}
+#donNote.on{background:#e9f7ee;border-color:#9fd8b2;color:#14532d}
+#donNote.err{background:#fde3e6;border-color:#f3a3ad;color:#8f1023}
+.don-safe{font-size:.82rem;color:#6d7077}
+
 .adm-tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:2px solid var(--ink);margin:18px 0 0}
 .adm-tabs button{border:0;background:#eceef1;color:var(--ink);font:700 .9rem/1 var(--body);padding:12px 14px;border-radius:4px 4px 0 0;cursor:pointer}
 .adm-tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
@@ -2576,16 +2687,17 @@ body.rw-tv .rw-fol{display:none}
     <section class="cal-head"><p class="eyebrow">Your gift at work</p><h1>Give directly.</h1><p>Help put tools in young people’s hands and opportunity within reach.</p></section>
     <div class="don-grid">
       <section class="panel">
-        <p class="q-note" style="margin:0">Online donations are being connected. Checkout will open here once Flint Racing’s Stripe account is linked. Until then, send us your pledge and we’ll follow up with ways to give.</p>
+        <p class="q-note" id="donNote" style="margin:0">Online donations are being connected. Until then, send us your pledge and we’ll follow up with ways to give.</p>
         <form class="don-form" id="donForm" novalidate>
-          <fieldset><legend>Choose an amount</legend>
+          <fieldset class="don-freq" id="donFreq" hidden><legend>How often?</legend><div class="don-fq"><label><input type="radio" name="dfq" value="once" checked><span>One time</span></label><label><input type="radio" name="dfq" value="monthly"><span>Monthly</span></label></div></fieldset>
+          <fieldset id="donAmtSet"><legend>Choose an amount</legend>
             <div class="amounts"><label><input type="radio" name="amt" value="25" id="da-25"><span>$25</span></label><label><input type="radio" name="amt" value="50" id="da-50" checked><span>$50</span></label><label><input type="radio" name="amt" value="100" id="da-100"><span>$100</span></label><label><input type="radio" name="amt" value="250" id="da-250"><span>$250</span></label></div>
             <label class="f" for="da-other">Other amount (USD) <span class="opt">(optional)</span><input type="number" id="da-other" min="1" inputmode="decimal" placeholder="e.g. 75"></label>
           </fieldset>
           <label class="f" for="da-use">What would you like to support?<select id="da-use"><option>Where it’s needed most</option><option>STEM education</option><option>Racing development</option><option>Leadership and workforce development</option><option>Community stewardship</option></select></label>
           <label class="f" for="da-rec">How would you like your donation recognized?<select id="da-rec"><option>Remain anonymous</option><option>List my name</option><option>List my company name</option></select></label>
-          <div class="cta-row"><button class="btn deep" type="submit">Send my pledge →</button><a class="btn outline-red" href="#support">Other ways to support</a></div>
-          <p style="font-size:.82rem;color:#6d7077">No payment is taken on this page. Card details will only ever be entered on Stripe’s secure checkout page.</p>
+          <div class="cta-row"><button class="btn deep" type="submit" id="donGo">Send my pledge →</button><a class="btn outline-red" href="#support">Other ways to support</a></div>
+          <p class="don-safe" id="donSafe">No payment is taken on this page. Card details will only ever be entered on Stripe’s secure checkout page.</p>
         </form>
       </section>
       <section class="panel">
@@ -2890,7 +3002,6 @@ body.rw-tv .rw-fol{display:none}
 <div class="page dark prog-page" data-page="admin" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#access">Sign in</a><span aria-hidden="true">/</span><span>Admin</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Flint Racing &amp; STEM</p><h1>Admin</h1><p>Edit the public site and manage events, bulletin notes and inquiries.</p></section>
     <div class="adm" id="admBox"><p>The admin portal works on the published website (GitHub Pages). In this preview it can’t connect to the database.</p></div>
   </div></div>
 </div>
@@ -3358,12 +3469,35 @@ body.rw-tv .rw-fol{display:none}
   function drawWall(){var all=[];PARTNERS.forEach(function(pg){pg.forEach(function(p){if(p.img)all.push(p)})});
     $("#partnerWall").innerHTML=all.map(function(p){return '<div><img src="'+esc(p.img)+'" alt="'+esc(p.name)+' logo" loading="lazy"></div>'}).join("")}
   drawWall();
-  /* ---- Donate: pledge goes to the questionnaire (no payments taken) ---- */
+  /* ---- Donate: Stripe Payment Link when connected (Admin → Donations), otherwise a pledge to the questionnaire ---- */
+  var DON=null;
+  function donAmounts(list){var box=document.querySelector("#donForm .amounts");if(!box)return;var cur=(document.querySelector('input[name="amt"]:checked')||{}).value;
+    if(list.map(String).indexOf(cur)<0)cur=null;
+    box.innerHTML=list.map(function(a,i){return '<label><input type="radio" name="amt" value="'+a+'" id="da-'+a+'"'+((cur?String(a)===cur:i===Math.min(1,list.length-1))?' checked':'')+'><span>$'+a+'</span></label>'}).join("");
+    box.style.gridTemplateColumns="repeat("+Math.min(list.length,4)+",1fr)"}
+  window.FR_setDonate=function(c){DON=c&&c.link?c:null;var on=!!DON,mon=!!(DON&&DON.monthly);
+    donAmounts(on&&DON.amounts&&DON.amounts.length?DON.amounts:[25,50,100,250]);
+    $("#donNote").textContent=on?"Give securely with a card, Apple Pay or Google Pay. You’ll finish on Stripe’s checkout page and get an emailed receipt.":"Online donations are being connected. Until then, send us your pledge and we’ll follow up with ways to give.";
+    $("#donNote").classList.toggle("on",on);$("#donFreq").hidden=!mon;$("#donGo").textContent=on?"Donate with Stripe →":"Send my pledge →";
+    $("#donSafe").textContent=on?"Card details are entered only on Stripe’s secure page. Flint Racing never sees your card number.":"No payment is taken on this page. Card details will only ever be entered on Stripe’s secure checkout page.";
+    syncFreq()};
+  function syncFreq(){var m=DON&&DON.monthly&&(document.querySelector('input[name="dfq"]:checked')||{}).value==="monthly";$("#donAmtSet").hidden=!!m;
+    if(DON)$("#donGo").textContent=m?"Give monthly with Stripe →":"Donate with Stripe →"}
+  document.querySelectorAll('input[name="dfq"]').forEach(function(r){r.addEventListener("change",syncFreq)});
   $("#donForm").addEventListener("submit",function(e){e.preventDefault();
     var other=$("#da-other").value.trim(), pick=(document.querySelector('input[name="amt"]:checked')||{}).value;
-    var amt=other?other:pick; pendingInterest="sponsor";
+    var amt=other?other:pick;
+    if(DON){var monthly=DON.monthly&&(document.querySelector('input[name="dfq"]:checked')||{}).value==="monthly";
+      var slug=function(v){return v.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)};
+      var ref="web_"+slug($("#da-use").value)+"_"+slug($("#da-rec").value);
+      var url=monthly?DON.monthly:DON.link,cents=Math.round(parseFloat(String(amt).replace(/[^0-9.]/g,""))*100);
+      if(!monthly&&!(cents>=100)){alertDon("Enter an amount of at least $1.");return}
+      url+=(url.indexOf("?")<0?"?":"&")+"client_reference_id="+encodeURIComponent(ref)+(monthly?"":"&prefilled_amount="+cents);
+      window.FR_lastDonateUrl=url;var w=null;try{w=window.open(url,"_blank","noopener")}catch(x){}if(!w)location.href=url;return}
+    pendingInterest="sponsor";
     pendingNote="Donation pledge: $"+amt+" · Support: "+$("#da-use").value+" · Recognition: "+$("#da-rec").value;
     location.hash="#participate";});
+  function alertDon(m){var n=$("#donNote");n.textContent=m;n.classList.add("err");setTimeout(function(){n.classList.remove("err");window.FR_setDonate(DON)},3500)}
   /* ---- Contact: copy email ---- */
   $("#ctCopy").addEventListener("click",function(){var b=this;
     function ok(){b.textContent="Copied"}function sel(){var r=document.createRange();r.selectNodeContents($("#ctEmail"));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected"}
@@ -3751,7 +3885,7 @@ window.FRB=(function(){
     if(r.error) throw r.error; Object.keys(FR.NOTES).forEach(function(k){delete FR.NOTES[k]});
     r.data.forEach(function(n){(FR.NOTES[n.month]=FR.NOTES[n.month]||[]).push({from:n.author,text:n.body})}); return r.data;})}
   function loadContent(){return db.from("site_content").select("key,kind,value").then(function(r){
-    if(r.error) throw r.error; CONTENT={}; r.data.forEach(function(c){CONTENT[c.key]=c}); applyContent(); return r.data;})}
+    if(r.error) throw r.error; CONTENT={}; r.data.forEach(function(c){CONTENT[c.key]=c}); applyContent(); applyDonate(); return r.data;})}
 
   var started=false;
   function startUp(){if(started)return;started=true;window.FR_DB=db;if(window.FR_TEST)testChip();initAuth();applyStats();renderPortals();renderSpirit();}
@@ -3771,7 +3905,7 @@ window.FRB=(function(){
   function initAuth(){
     db.auth.getSession().then(function(r){handleAuthLink();setUser(r.data&&r.data.session?r.data.session.user:null)});
     db.auth.onAuthStateChange(function(ev,session){if(ev==="PASSWORD_RECOVERY"){RECOVERY=true;AUTH_NOTE="Choose a new password for your account.";if(location.hash!=="#team")location.hash="#team"}setUser(session?session.user:null)});
-    window.addEventListener("hashchange",function(){if(location.hash==="#admin")renderAdmin();if(location.hash==="#team")renderAccess();renderRK(true);renderTM(true)});
+    window.addEventListener("hashchange",function(){updatePill();if(location.hash==="#admin")renderAdmin();if(location.hash==="#team")renderAccess();renderRK(true);renderTM(true)});
     renderAccess();
     renderAdmin();
   }
@@ -3787,7 +3921,7 @@ window.FRB=(function(){
       if(IS_ADMIN) loadEvents().then(function(){FR.refresh()});});
   }
   function updatePill(){var p=$(".fr-pill");
-    if(IS_ADMIN&&!EDITING){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
+    if(IS_ADMIN&&!EDITING&&location.hash!=="#admin"){if(!p){p=document.createElement("button");p.className="fr-pill";p.type="button";p.textContent="Admin · Edit this page";p.onclick=function(){setEditing(true)};document.body.appendChild(p)}p.hidden=false}
     else if(p) p.hidden=true;}
 
   /* ---------- Edit mode ---------- */
@@ -3843,17 +3977,125 @@ window.FRB=(function(){
     }).catch(function(){toast("Couldn’t upload that photo. Try a JPG, PNG or WebP under 8 MB.")});
   }
 
-  /* ---------- Admin dashboard ---------- */
-  var TAB="overview";
+  /* ---------- Admin dashboard: side toolbar, search and sections ---------- */
+  var TAB="overview", ADMC={}, ADMIDX=null, ADMNAV=false;
+  var ICO={home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>',users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M18 14c2 .8 3 3 3 6"/>',
+    inbox:'<path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 2h6l1-2h5"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    pin:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',note:'<path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/>',folder:'<path d="M3 6h7l2 2h9v11H3z"/>',
+    check:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12l3 3 5-6"/>',layout:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 10v10"/>',news:'<path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v9a2 2 0 0 1-2 2M7 9h7M7 13h7"/>',
+    shirt:'<path d="M8 3l-5 3 2 4 3-1v12h8V9l3 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',star:'<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',undo:'<path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
+    heart:'<path d="M12 20s-7-4.5-9-9.5C1.7 6.8 4.3 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c2.9 0 5.5 2.8 4.2 6.5-2 5-9 9.5-9 9.5z"/>',flag:'<path d="M5 21V4M5 4h13l-2 4 2 4H5"/>',
+    edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',out:'<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+    menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
+  function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICO[k]||"")+'</svg>'}
+  var SECT=[["Home",[["overview","Overview","Everything that needs you, at a glance","home"]]],
+    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["team","Admins","Kendall and Kevin’s email accounts","shield"]]],
+    ["Programs",[["events","Events","Dates on the public calendar","cal"],["families","Times & places","Private times and locations for signed-in members","pin"],["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
+    ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["spirit","Spirit Shop","Shirts, hats and product photos","shirt"],["partners","Partners","Sponsor and partner logos","star"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
+    ["Fundraising",[["donate","Donations","Connect the Donate page to Stripe checkout","heart"]]],
+    ["Race day",[["race","Race day setup","Racers, brackets, sponsors, ads and the race-day team","flag"]]]];
+  var RLINKS=[["#race-control","Race control","live"],["#track-manager","Track operations","star","so"],["#volunteers","Volunteer lists","users","vol"],["#workshop-signin","Workshop sign-in","check"],["#race-watch","Spectator view","ext"]];
+  function sectOf(k){var o=null;SECT.forEach(function(g){g[1].forEach(function(s){if(s[0]===k)o={g:g[0],k:s[0],t:s[1],d:s[2],i:s[3],b:s[4]}})});return o}
+  function admCounts(){return Promise.all([db.from("members").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),
+      db.from("albums").select("id",{count:"exact",head:true}).eq("status","submitted"),db.from("teacher_plans").select("id",{count:"exact",head:true}).eq("status","submitted"),
+      db.from("race_volunteers").select("id",{count:"exact",head:true}).eq("status","new"),db.from("shoutouts").select("id",{count:"exact",head:true}).eq("status","pending")]).then(function(r){
+      var c=function(i){return (r[i]&&r[i].count)||0};ADMC={mem:c(0),inq:c(1),rev:c(2)+c(3),albums:c(2),plans:c(3),vol:c(4),so:c(5)};
+      $$("[data-badge]").forEach(function(el){var n=ADMC[el.getAttribute("data-badge")]||0;el.textContent=n;el.hidden=!n});return ADMC})}
+  function goTab(k,opt){opt=opt||{};if(k==="members:log"){k="members";MSUB="log"}else if(k==="members"&&!opt.keepSub)MSUB="people";
+    if(opt.q!=null){MFIND.q=opt.q;MFIND.f="all"}TAB=k;ADMNAV=false;renderAdmin();var b=$("#admBox");if(b&&b.getBoundingClientRect().top<0)scrollTo(0,b.getBoundingClientRect().top+scrollY-80)}
   function renderAdmin(){var box=$("#admBox"); if(!box||!window.FR_DB) return;
-    if(!USER||USER.is_anonymous){if(!box.querySelector("#admAuthBody")){box.innerHTML=(ME?'<p class="auth-note">You’re signed in with your username (@'+esc(ME.username)+'). Admin uses a separate email sign-in. <a href="#my-dashboard">Go to my dashboard</a></p>':'')+signInHTML();bindSignIn()}return}
-    if(!IS_ADMIN){box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b></span><button class="mini" type="button" id="admOut">Sign out</button></div><h2 style="margin-top:14px">Waiting for admin access</h2><p style="margin-top:8px;color:#4a4d55">This account doesn’t have admin access yet. Once the site owner grants it, sign out and back in.</p>';$("#admOut").onclick=signOut;return}
-    box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b> · Admin</span><span class="row" style="margin:0"><button class="mini solid" type="button" id="admEdit">Edit the site</button><button class="mini" type="button" id="admOut">Sign out</button></span></div>'+
-      '<div class="adm-tabs" role="tablist">'+[["overview","Overview"],["members","Members"],["team","Admins"],["events","Events"],["families","Families"],["notes","Bulletin"],["inq","Inquiries"],["news","News"],["resources","Resources"],["home","Homepage"],["spirit","Spirit Shop"],["partners","Partners"],["reviews","Reviews"],["race","Race day"],["edits","Site edits"]].map(function(t){return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>'}).join("")+'</div><div class="adm-panel" id="admPanel">Loading…</div>';
+    if(!USER||USER.is_anonymous){box.classList.remove("adm2");if(!box.querySelector("#admAuthBody")){box.innerHTML=(ME?'<p class="auth-note">You’re signed in with your username (@'+esc(ME.username)+'). Admin uses a separate email sign-in. <a href="#my-dashboard">Go to my dashboard</a></p>':'')+signInHTML();bindSignIn()}return}
+    if(!IS_ADMIN){box.classList.remove("adm2");box.innerHTML='<div class="adm-who"><span>Signed in as <b>'+esc(USER.email)+'</b></span><button class="mini" type="button" id="admOut">Sign out</button></div><h2 style="margin-top:14px">Waiting for admin access</h2><p style="margin-top:8px;color:#4a4d55">This account doesn’t have admin access yet. Once the site owner grants it, sign out and back in.</p>';$("#admOut").onclick=signOut;return}
+    var cur=sectOf(TAB)||sectOf("overview"),name=((USER.user_metadata&&USER.user_metadata.full_name)||USER.email||"Admin"),first=firstName(name);
+    box.classList.add("adm2");
+    box.innerHTML='<aside class="adm-side'+(ADMNAV?' open':'')+'" aria-label="Admin menu">'+
+        '<div class="adm-me"><span class="adm-av" aria-hidden="true">'+esc(first.charAt(0).toUpperCase())+'</span><span><b>'+esc(name)+'</b><small>Admin</small></span></div>'+
+        '<div class="adm-find" role="search"><label class="adm-q">'+ico("search")+'<input type="search" id="admQ" placeholder="Search admin" aria-label="Search admin: sections, people, events and more" autocomplete="off" aria-controls="admRes" aria-expanded="false"><kbd aria-hidden="true">/</kbd></label><div class="adm-res" id="admRes" role="listbox" hidden></div></div>'+
+        '<button class="adm-menu" type="button" id="admMenu" aria-expanded="'+ADMNAV+'">'+ico("menu")+'<span>Menu</span><b>'+esc(cur.t)+'</b></button>'+
+        '<nav class="adm-nav">'+SECT.map(function(g){return '<p class="adm-g">'+esc(g[0])+'</p>'+g[1].map(function(s){return '<button type="button" data-tab="'+s[0]+'"'+(TAB===s[0]?' aria-current="page"':'')+'>'+ico(s[3])+'<span>'+esc(s[1])+'</span>'+(s[4]?'<em data-badge="'+s[4]+'" hidden></em>':'')+'</button>'}).join("")}).join("")+
+          '<p class="adm-g">Race-day screens</p>'+RLINKS.map(function(l){return '<a href="'+l[0]+'">'+ico(l[2])+'<span>'+esc(l[1])+'</span>'+(l[3]?'<em data-badge="'+l[3]+'" hidden></em>':'')+'</a>'}).join("")+'</nav>'+
+        '</aside>'+
+      '<section class="adm-main"><header class="adm-head"><div><p class="adm-crumb">'+esc(cur.g)+'</p><h2>'+(cur.k==="overview"?'Welcome back, '+esc(first)+'.':esc(cur.t))+'</h2><p>'+esc(cur.d)+'</p></div><div class="adm-acts"><button type="button" class="adm-editbtn" id="admEdit">'+ico("edit")+'Edit the site</button><button type="button" id="admOut">'+ico("out")+'Sign out</button></div></header><div class="adm-panel" id="admPanel"><p class="adm-loading">Loading…</p></div></section>';
     $("#admOut").onclick=signOut; $("#admEdit").onclick=function(){location.hash="#home";setTimeout(function(){setEditing(true)},50)};
-    $$(".adm-tabs button",box).forEach(function(b){b.onclick=function(){TAB=b.getAttribute("data-tab");renderAdmin()}});
-    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,families:tabFamilies,notes:tabNotes,inq:tabInq,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace})[TAB]();
+    $("#admMenu").onclick=function(){ADMNAV=!ADMNAV;$(".adm-side",box).classList.toggle("open",ADMNAV);this.setAttribute("aria-expanded",String(ADMNAV))};
+    $$(".adm-nav button[data-tab]",box).forEach(function(b){b.onclick=function(){goTab(b.getAttribute("data-tab"))}});
+    bindAdmSearch();admCounts();
+    ({overview:tabOverview,members:tabMembers,team:tabTeam,events:tabEvents,families:tabFamilies,notes:tabNotes,inq:tabInq,news:tabNews,resources:tabResources,home:tabHome,spirit:tabSpirit,partners:tabPartners,reviews:tabReviews,edits:tabEdits,race:tabRace,donate:tabDonate})[TAB]();
   }
+  /* Search: sections, common jobs, and the people and things in the database */
+  var ADM_JOBS=[["Approve new profiles","members","approve register pending family crew"],["Change someone’s roles","members","role teacher photographer workshop race control track"],["Reset a passcode","members","password passcode locked forgot"],
+    ["Fix or add volunteer hours","members","hours check in clock"],["See who signed in","members:log","log visitor sign-in who viewed dates security"],["Make someone an admin","team","admin kevin access"],
+    ["Add an event to the calendar","events","date calendar workshop camp race"],["Set workshop times and places","families","time location address private"],["Post a monthly note","notes","bulletin announcement"],
+    ["Post a news story","news","story article press"],["Add a form or link","resources","pdf form link waiver"],["Approve photos","reviews","album photographer pictures"],["Approve a teacher plan","reviews","lesson teacher materials"],
+    ["Change the homepage slideshow","home","slides photos numbers stats"],["Add a sponsor logo","partners","sponsor logo partner"],["Add a shirt or hat","spirit","spiritwear merch shirt hat"],["Undo a site change","edits","undo history revert"],
+    ["Edit text or photos on any page","@edit","edit text photo page wording"],["Connect Stripe donations","donate","stripe payment donate donation checkout link"],["Add racers and sponsors for race day","race","racers bracket heats ads sponsors"],
+    ["Approve shout-outs","#track-manager","shoutout shout-out intermission ads"],["Run the live race feed","#race-control","race control timer lights heats"],["Assign race-day volunteers","#volunteers","volunteer crew shift"],
+    ["Download rosters (.csv)","overview","csv export roster spreadsheet download"]];
+  function admIndex(){if(ADMIDX)return Promise.resolve(ADMIDX);
+    return Promise.all([db.from("members").select("display_name,username,email,status,kind"),db.from("events").select("title,start_date"),db.from("inquiries").select("first_name,last_name,email,organization,status"),
+      db.from("news_posts").select("title"),db.from("spirit_items").select("name"),db.from("race_racers").select("display_name,team,car_number"),db.from("race_volunteers").select("first_name,last_name,email"),db.from("resources").select("title")]).then(function(r){
+      var d=function(i){return (r[i]&&r[i].data)||[]},o=[];
+      d(0).forEach(function(m){o.push({k:"Member",t:m.display_name,s:"@"+m.username+(m.status!=="approved"?" · "+m.status:""),x:[m.display_name,m.username,m.email].join(" "),go:"members",q:m.username})});
+      d(1).forEach(function(e){o.push({k:"Event",t:e.title,s:fmtDate(e.start_date,{month:"short",day:"numeric",year:"numeric"}),x:e.title,go:"events"})});
+      d(2).forEach(function(i){o.push({k:"Inquiry",t:(i.first_name||"")+" "+(i.last_name||""),s:(i.organization||i.email||"")+(i.status==="new"?" · new":""),x:[i.first_name,i.last_name,i.email,i.organization].join(" "),go:"inq"})});
+      d(3).forEach(function(n){o.push({k:"Story",t:n.title,s:"News & Stories",x:n.title,go:"news"})});
+      d(4).forEach(function(n){o.push({k:"Spirit Shop",t:n.name,s:"Item",x:n.name,go:"spirit"})});
+      d(5).forEach(function(n){o.push({k:"Racer",t:n.display_name,s:[n.team,n.car_number?"#"+n.car_number:""].filter(Boolean).join(" · "),x:[n.display_name,n.team,n.car_number].join(" "),go:"race"})});
+      d(6).forEach(function(n){o.push({k:"Volunteer",t:n.first_name+" "+n.last_name,s:"Race-day volunteer",x:[n.first_name,n.last_name,n.email].join(" "),go:"#volunteers"})});
+      d(7).forEach(function(n){o.push({k:"Resource",t:n.title,s:"Resources",x:n.title,go:"resources"})});
+      ADMIDX=o;setTimeout(function(){ADMIDX=null},120000);return o})}
+  function bindAdmSearch(){var q=$("#admQ"),res=$("#admRes"),hits=[],sel=0;if(!q)return;
+    function go(h){res.hidden=true;q.setAttribute("aria-expanded","false");q.value="";
+      if(h.go==="@edit"){location.hash="#home";setTimeout(function(){setEditing(true)},50);return}
+      if(h.go.charAt(0)==="#"){location.hash=h.go;return}
+      goTab(h.go,h.q!=null?{q:h.q}:{})}
+    function draw(){var v=q.value.trim().toLowerCase();if(!v){res.hidden=true;q.setAttribute("aria-expanded","false");return}
+      var words=v.split(/\s+/),m=function(s){s=String(s||"").toLowerCase();return words.every(function(w){return s.indexOf(w)>=0})};
+      var secs=[];SECT.forEach(function(g){g[1].forEach(function(s){if(m(s[1]+" "+s[2]+" "+g[0]))secs.push({k:"Section",t:s[1],s:s[2],go:s[0],i:s[3]})})});
+      var jobs=ADM_JOBS.filter(function(j){return m(j[0]+" "+j[2])}).map(function(j){return{k:"Do this",t:j[0],s:(sectOf(j[1].split(":")[0])||{t:j[1].charAt(0)==="#"?"Race-day screen":"Edit mode"}).t,go:j[1]}});
+      admIndex().then(function(idx){if(q.value.trim().toLowerCase()!==v)return;
+        var data=idx.filter(function(x){return m(x.x)}).slice(0,12);hits=secs.slice(0,4).concat(jobs.slice(0,5)).concat(data);sel=0;
+        res.innerHTML=hits.length?hits.map(function(h,i){return '<button type="button" role="option" data-i="'+i+'" aria-selected="'+(i===0)+'"><small>'+esc(h.k)+'</small><b>'+esc(h.t)+'</b>'+(h.s?'<span>'+esc(h.s)+'</span>':'')+'</button>'}).join(""):'<p class="adm-nores">Nothing matches “'+esc(q.value.trim())+'”.</p>';
+        res.hidden=false;q.setAttribute("aria-expanded","true");
+        $$("button",res).forEach(function(b){b.onmousedown=function(e){e.preventDefault()};b.onclick=function(){go(hits[+b.getAttribute("data-i")])}})})}
+    q.oninput=draw;q.onfocus=function(){if(q.value.trim())draw()};q.onblur=function(){setTimeout(function(){res.hidden=true;q.setAttribute("aria-expanded","false")},150)};
+    q.onkeydown=function(e){var bs=$$("button",res);
+      if(e.key==="ArrowDown"||e.key==="ArrowUp"){if(!bs.length)return;e.preventDefault();sel=(sel+(e.key==="ArrowDown"?1:-1)+bs.length)%bs.length;bs.forEach(function(b,i){b.setAttribute("aria-selected",String(i===sel))});bs[sel].scrollIntoView({block:"nearest"})}
+      else if(e.key==="Enter"){e.preventDefault();if(hits[sel]&&!res.hidden)go(hits[sel])}
+      else if(e.key==="Escape"){q.value="";res.hidden=true;q.blur()}};
+  }
+  document.addEventListener("keydown",function(e){if((e.key==="/"||(e.key==="k"&&(e.metaKey||e.ctrlKey)))&&location.hash==="#admin"&&!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||"")&&!document.activeElement.isContentEditable){var q=$("#admQ");if(q){e.preventDefault();q.focus()}}});
+
+  /* ---------- Admin → Donations: Stripe Payment Link ---------- */
+  function donateCfg(){try{return JSON.parse((CONTENT["data|donate"]||{}).value||"null")}catch(e){return null}}
+  function tabDonate(){var P=$("#admPanel"),c=donateCfg()||{},live=!!c.link,test=/\/test_/.test(c.link||"");
+    P.innerHTML='<div class="dn-status '+(live?(test?"warn":"on"):"off")+'">'+ico(live?"check":"heart")+'<div><b>'+(live?(test?"Connected in Stripe test mode":"Donations are live"):"Not connected yet")+'</b><span>'+
+        (live?(test?"This is a test link: no real cards are charged. Swap in your live link when you’re ready.":"The Donate button opens Stripe’s secure checkout with the donor’s amount filled in."):"Until you add a link, the Donate page collects pledges and sends them to Inquiries.")+'</span></div>'+(live?'<a class="mini" href="#donate">View the Donate page</a>':'')+'</div>'+
+      '<div class="dn-grid"><form class="dn-form" id="dnForm" novalidate>'+
+        '<label class="f">Stripe donation link <small>From a Payment Link set to “Customers choose what to pay”. Starts with https://buy.stripe.com/ or https://donate.stripe.com/</small><input type="url" id="dn-link" value="'+esc(c.link||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
+        '<label class="f">Monthly giving link <small>(optional) A second Payment Link with a monthly price. Adds a One-time / Monthly choice.</small><input type="url" id="dn-monthly" value="'+esc(c.monthly||"")+'" placeholder="https://buy.stripe.com/…" autocomplete="off" spellcheck="false"></label>'+
+        '<label class="f">Suggested amounts <small>Dollars, separated by commas</small><input type="text" id="dn-amts" value="'+esc((c.amounts||[25,50,100,250]).join(", "))+'" inputmode="numeric"></label>'+
+        '<div class="row"><button class="mini solid" type="submit">Save</button>'+(live?'<button class="mini" type="button" id="dnTry">Open my link</button><button class="mini red" type="button" id="dnOff">Disconnect</button>':'')+'</div></form>'+
+      '<aside class="dn-how"><p class="me-k">One-time setup in Stripe</p><ol>'+
+        '<li>In your Stripe Dashboard, open <b>Payment Links</b> and click <b>+ New</b>.</li>'+
+        '<li>Choose <b>Customers choose what to pay</b>. Name it “Donation to Flint Racing and STEM”. Set the minimum to $1.</li>'+
+        '<li>Under <b>Options</b>, turn on <b>Collect customers’ names</b>. Optional: add a dropdown field “How should we recognize your gift?” (Anonymous / My name / My company).</li>'+
+        '<li>Under <b>After payment</b>, keep Stripe’s confirmation page, or redirect to your website’s Donate page.</li>'+
+        '<li>Click <b>Create link</b>, then <b>Copy</b>, and paste it here.</li></ol>'+
+        '<p class="me-fine">Card numbers are only ever typed on Stripe’s page. Your site never sees them and no secret keys are stored here. Each gift shows up in Stripe with the fund the donor picked (in “Client reference ID”).</p></aside></div>';
+    function ok(u){return !u||/^https:\/\/[^\s]+$/.test(u)}
+    $("#dnForm").onsubmit=function(e){e.preventDefault();var link=$("#dn-link").value.trim(),mon=$("#dn-monthly").value.trim();
+      if(!link){toast("Paste your Stripe donation link first.");return}
+      if(!ok(link)||!ok(mon)){toast("Links need to start with https://");return}
+      if(!/stripe\.com\//.test(link)&&!confirm("That link isn’t on stripe.com. Save it anyway? (Only if you set up a custom Stripe domain.)"))return;
+      var amts=$("#dn-amts").value.split(/[,\s]+/).map(function(x){return Math.round(+x.replace(/[^0-9.]/g,""))}).filter(function(x){return x>0&&x<100000}).slice(0,6);
+      var val=JSON.stringify({link:link,monthly:mon||null,amounts:amts.length?amts:[25,50,100,250]});
+      db.from("site_content").upsert({key:"data|donate",kind:"text",value:val,updated_at:new Date().toISOString(),updated_by:USER.id}).then(function(x){if(okToast(x,"Saved. The Donate page now opens Stripe checkout.")){CONTENT["data|donate"]={key:"data|donate",kind:"text",value:val};applyDonate();tabDonate()}})};
+    if($("#dnTry"))$("#dnTry").onclick=function(){window.open(c.link,"_blank","noopener")};
+    if($("#dnOff"))$("#dnOff").onclick=function(){var b=this;if(b.textContent!=="Confirm disconnect"){b.textContent="Confirm disconnect";return}
+      db.from("site_content").delete().eq("key","data|donate").then(function(x){if(okToast(x,"Disconnected. The Donate page is back to pledges.")){delete CONTENT["data|donate"];applyDonate();tabDonate()}})};
+  }
+  function applyDonate(){if(window.FR_setDonate)window.FR_setDonate(donateCfg())}
   /* ---------- Sign in, create account, forgot password, set a new password ----------
      One widget used on the Sign in page, Admin and every team screen. */
   var AUTHUI={}, RECOVERY=false, AUTH_NOTE="";
@@ -4651,7 +4893,7 @@ window.FRB=(function(){
         (ev.length?'<div class="adm-scroll"><table class="adm-table" style="min-width:820px"><thead><tr><th>Date</th><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Note for families</th><th></th></tr></thead><tbody>'+ev.map(function(e){var d=D[e.id]||{};
           return '<tr data-id="'+e.id+'"><td style="white-space:nowrap">'+fmtDate(e.start_date)+'</td><td>'+esc(e.title)+'</td><td style="width:100px"><input type="text" maxlength="20" value="'+esc(d.start_time||"")+'" placeholder="10:00 AM" aria-label="Start time"></td><td style="width:100px"><input type="text" maxlength="20" value="'+esc(d.end_time||"")+'" placeholder="1:00 PM" aria-label="End time"></td>'+
             '<td><input type="text" maxlength="160" value="'+esc(d.location||"")+'" placeholder="Flint Racer Space" aria-label="Location"></td><td><input type="text" maxlength="1000" value="'+esc(d.notes||"")+'" placeholder="Bring safety glasses" aria-label="Note"></td><td><button class="mini solid" type="button">Save</button></td></tr>'}).join("")+'</tbody></table></div>':'<p>No upcoming events. Add them in the Events tab.</p>')+'</div>';
-      $("#toMem2").onclick=function(){TAB="members";renderAdmin()};
+      $("#toMem2").onclick=function(){goTab("members")};
       $$("tbody tr[data-id]",P).forEach(function(tr){$("button",tr).onclick=function(){var id=tr.getAttribute("data-id"),f=$$("input",tr);
         var rec={event_id:id,start_time:f[0].value.trim()||null,end_time:f[1].value.trim()||null,location:f[2].value.trim()||null,notes:f[3].value.trim()||null};
         db.from("event_details").delete().eq("event_id",id).then(function(){return db.from("event_details").insert(rec)}).then(function(x){okToast(x,"Saved")})}});
@@ -4982,21 +5224,19 @@ window.FRB=(function(){
     if(kind==="members") return Promise.all([db.from("members").select("*").order("display_name"),db.from("member_hours").select("*")]).then(function(r){if(!okToast(r[0]))return;var H={};(r[1].data||[]).forEach(function(h){if(h.ended_at)H[h.member_id]=(H[h.member_id]||0)+(new Date(h.ended_at)-new Date(h.started_at))/36e5});
       csv([["Name","Username","Type","Status","Roles","Email","Phone","Racers","Hours","Registered","Last seen"]].concat((r[0].data||[]).map(function(m){return [m.display_name,m.username,m.kind,m.status,(m.roles||[]).join(" "),m.email,m.phone,(m.kids||[]).map(function(k){return k.name}).join("; "),Math.round((H[m.id]||0)*10)/10,m.created_at,m.last_seen_at]})),"flint-racing-members.csv")});
     if(kind==="accounts") return db.rpc("list_accounts").then(function(r){if(okToast(r))csv([["Email","Name","Joined","Last sign in","Admin","Staff roles","Race-day role"]].concat((r.data||[]).map(function(a){return [a.email,a.full_name,a.created_at,a.last_sign_in_at,a.is_admin?"yes":"no",(a.staff_roles||[]).join(" "),a.race_role]})),"accounts.csv")});}
-  function tabOverview(){var P=$("#admPanel"),first=((USER.user_metadata&&USER.user_metadata.full_name)||"").split(" ")[0];
-    Promise.all([db.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),db.from("albums").select("id",{count:"exact",head:true}).eq("status","submitted"),
-      db.from("teacher_plans").select("id",{count:"exact",head:true}).eq("status","submitted"),db.from("race_volunteers").select("id",{count:"exact",head:true}).eq("status","new"),db.from("shoutouts").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("members").select("id",{count:"exact",head:true}).eq("status","pending")]).then(function(r){
-      var c=function(i){return r[i].count||0},t=todayISO(),up=FR.EVENTS.filter(function(e){return (e.e||e.d)>=t}).length;
-      var tile=function(go,title,sub,n){return '<button type="button" class="ov-tile" data-go="'+go+'"><b>'+title+'</b><span>'+sub+'</span>'+(n?'<em>'+n+'</em>':'')+'</button>'};
-      P.innerHTML='<div class="ov-hi"><h2>Welcome back'+(first?", "+esc(first.charAt(0).toUpperCase()+first.slice(1)):"")+'.</h2><p>Everything you run, in one place.</p></div>'+
-        '<div class="stat-row"><div><b>'+c(0)+'</b><span>New inquiries</span></div><div><b>'+(c(1)+c(2))+'</b><span>Waiting for review</span></div><div><b>'+c(5)+'</b><span>Profiles to approve</span></div><div><b>'+c(3)+'</b><span>New volunteers</span></div><div><b>'+up+'</b><span>Upcoming events</span></div></div>'+
-        '<h3 class="ov-h">The website</h3><div class="ov-grid">'+tile("edit","Edit the site","Every page, photo and card")+tile("tab:news","News & Stories","Post a story")+tile("tab:resources","Resources","Forms, links and dates")+tile("tab:spirit","Spirit Shop","Shirts, hats and photos")+tile("tab:home","Homepage","Slideshow and numbers")+tile("tab:partners","Partners","Sponsor logos")+tile("tab:edits","Site edits","Undo a change")+'</div>'+
-        '<h3 class="ov-h">People & programs</h3><div class="ov-grid">'+tile("tab:members","Members","Approve profiles, roles, hours",c(5))+tile("tab:members:log","Who’s been in","Sign-in and visit log")+tile("tab:team","Admins","Kendall and Kevin’s accounts")+tile("tab:inq","Inquiries","Questionnaire replies",c(0))+tile("tab:reviews","Reviews","Albums and teacher plans",c(1)+c(2))+tile("tab:families","Times & places","Private details for members")+tile("tab:events","Events","The calendar")+tile("tab:notes","Bulletin","Monthly notes")+tile("#workshop-signin","Workshop sign-in","Attendance and meals")+'</div>'+
-        '<h3 class="ov-h">Race day</h3><div class="ov-grid">'+tile("tab:race","Race day setup","Racers, sponsors and team")+tile("#race-control","Race control","Live feed and results")+tile("#track-manager","Track operations","Shout-outs and ads",c(4))+tile("#volunteers","Volunteers","Lists and check-in",c(3))+tile("#race-watch","Spectator view","What fans see")+'</div>'+
-        '<h3 class="ov-h">Download rosters</h3><div class="row">'+[["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["members","Member profiles"],["inquiries","Inquiries"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' (.csv)</button>'}).join("")+'</div>';
+  function tabOverview(){var P=$("#admPanel");
+    Promise.all([admCounts(),db.from("members").select("id",{count:"exact",head:true}).eq("status","approved")]).then(function(r){var c=r[0],mem=(r[1]&&r[1].count)||0,t=todayISO(),up=FR.EVENTS.filter(function(e){return (e.e||e.d)>=t}).length,dn=donateCfg();
+      var todo=[[c.mem,"profile","profiles","waiting for approval","tab:members","users"],[c.inq,"new inquiry","new inquiries","to answer","tab:inq","inbox"],[c.albums,"photo album","photo albums","to review","tab:reviews","check"],
+        [c.plans,"teacher plan","teacher plans","to review","tab:reviews","note"],[c.vol,"race-day volunteer","race-day volunteers","to place","#volunteers","flag"],[c.so,"shout-out","shout-outs","to approve","#track-manager","star"]].filter(function(x){return x[0]});
+      var tile=function(go,i,title,sub){return '<button type="button" class="ov-act" data-go="'+go+'">'+ico(i)+'<b>'+title+'</b><span>'+sub+'</span></button>'};
+      P.innerHTML='<div class="ov-cols"><section class="ov-card"><p class="me-k">Needs you</p>'+(todo.length?'<ul class="ov-todo">'+todo.map(function(x){return '<li><button type="button" data-go="'+x[4]+'">'+ico(x[5])+'<span><b>'+x[0]+' '+(x[0]===1?x[1]:x[2])+'</b> '+x[3]+'</span><i aria-hidden="true">→</i></button></li>'}).join("")+'</ul>':'<p class="ov-clear">'+ico("check")+'You’re all caught up.</p>')+'</section>'+
+        '<section class="ov-card ov-nums"><div><b>'+mem+'</b><span>Approved members</span></div><div><b>'+up+'</b><span>Upcoming events</span></div><div><b>'+(c.inq||0)+'</b><span>New inquiries</span></div><div class="'+(dn&&dn.link?"on":"off")+'"><b>'+(dn&&dn.link?(/\/test_/.test(dn.link)?"Test":"Live"):"Off")+'</b><span>Stripe donations</span></div></section></div>'+
+        '<h3 class="ov-h">Quick actions</h3><div class="ov-acts">'+tile("edit","edit","Edit the site","Change any text or photo")+tile("tab:events","cal","Add an event","Public calendar dates")+tile("tab:news","news","Post a story","News & Stories")+
+          tile("tab:members","users","Approve profiles","Roles and hours")+tile("tab:members:log","shield","Who’s been in","Sign-in log")+tile("tab:race","flag","Race day setup","Racers and sponsors")+tile("tab:donate","heart","Donations","Stripe checkout")+tile("tab:home","layout","Homepage","Slideshow and numbers")+'</div>'+
+        '<h3 class="ov-h">Download rosters</h3><div class="ov-csv">'+[["members","Member profiles"],["workshop","Workshop sign-ins"],["volunteers","Race-day volunteers"],["racers","Racers"],["inquiries","Inquiries"],["accounts","Admin accounts"]].map(function(x){return '<button class="mini" type="button" data-csv="'+x[0]+'">'+x[1]+' <small>.csv</small></button>'}).join("")+'</div>';
       $$("[data-go]",P).forEach(function(b){b.onclick=function(){var g=b.getAttribute("data-go");
         if(g==="edit"){location.hash="#home";setTimeout(function(){setEditing(true)},60);return}
-        if(g.indexOf("tab:")===0){TAB=g.slice(4);if(TAB==="members:log"){TAB="members";MSUB="log"}else if(TAB==="members")MSUB="people";renderAdmin();scrollTo(0,$("#admBox").getBoundingClientRect().top+scrollY-90);return}
-        if(/^#(race-control|track-manager|volunteers|race-watch)$/.test(g)&&g!=="#race-watch"){location.hash=g;return} location.hash=g}});
+        if(g.indexOf("tab:")===0){goTab(g.slice(4));return} location.hash=g}});
       $$("[data-csv]",P).forEach(function(b){b.onclick=function(){rosterCSV(b.getAttribute("data-csv"))}});
     });
   }
@@ -5016,7 +5256,7 @@ window.FRB=(function(){
       $$(".acc-table input[data-r]",P).forEach(function(i){i.onchange=function(){var tr=i.closest("tr"),em=tr.getAttribute("data-email"),id=tr.getAttribute("data-id"),on=i.checked;
         (on?db.rpc("grant_admin",{p_email:em}):db.rpc("revoke_admin",{p_user:id})).then(function(x){if(x.error){toast(x.error.message);i.checked=!on;return}toast((on?"Admin turned on for ":"Admin turned off for ")+em)})}});
       $("#accCsv").onclick=function(){rosterCSV("accounts")};
-      $("#toMem").onclick=function(){TAB="members";renderAdmin()};
+      $("#toMem").onclick=function(){goTab("members")};
     });
   }
 
