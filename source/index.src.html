@@ -3606,7 +3606,7 @@ body.rw-tv .rw-fol{display:none}
     /* Flint Racing Super Stock shell, traced from the Flushing Fireballs side photo (u: 0 = tail, 1 = nose).
        Flat floor at hub height that sits on the axles. Tail is ~70% of full height and closes in an upright seam.
        Top rises to the cockpit, stays level along the long opening, then rolls down into a round, low nose. */
-    var X0=-1.7,X1=1.7,FLOOR=0.36,HMAX=0.74,WMAX=0.29;
+    var X0=-1.84,X1=1.84,FLOOR=0.37,HMAX=0.8,WMAX=0.315;
     var FT=[0.70,0.74,0.78,0.825,0.87,0.92,0.96,0.98,0.99,0.995,1,1,1,0.985,0.955,0.9,0.82,0.73,0.61,0.47,0.3],
         FW=[0.2,0.4,0.55,0.66,0.75,0.82,0.88,0.92,0.95,0.98,1,1,1,1,1,1,0.995,0.98,0.95,0.9,0.8];
     function bodyAt(x){var u=Math.max(0,Math.min(1,(x-X0)/(X1-X0))),h=cr(FT,u),w=cr(FW,u);
@@ -3634,21 +3634,21 @@ body.rw-tv .rw-fol{display:none}
       for(var i=0;i<prof.length;i++)for(var j=0;j<=S;j++){var an=j/S*Math.PI*2;P.push(cx+prof[i][0]*Math.cos(an),cy+prof[i][0]*Math.sin(an),cz+prof[i][1])}
       for(i=0;i<prof.length-1;i++)for(j=0;j<S;j++){var a=i*(S+1)+j,b=a+S+1;I.push(a,a+1,b,a+1,b+1,b)}return finish(P,I)}
     function merge(list){var P=[],N=[],I=[];list.forEach(function(g){var o=P.length/3;Array.prototype.push.apply(P,g.p);Array.prototype.push.apply(N,g.n);for(var k=0;k<g.i.length;k++)I.push(g.i[k]+o)});return {p:new Float32Array(P),n:new Float32Array(N),i:new Uint16Array(I)}}
-    function partsGeo(){var b=bodyAt(-0.2),bt=b.top,wr=0.33,hw=0.026,tires=[],hubs=[],axles=[];
-      [[1.74,0],[-1.68,0]].forEach(function(w){var bw=0.86;[-1,1].forEach(function(sd){var z=sd*bw;
+    function partsGeo(){var b=bodyAt(-0.3),bt=b.top,wr=0.34,hw=0.026,tires=[],hubs=[],axles=[];
+      [[1.88,0],[-1.82,0]].forEach(function(w){var bw=0.9;[-1,1].forEach(function(sd){var z=sd*bw;
         tires.push(lathe(w[0],wr,z,[[wr*0.8,-hw],[wr*0.88,-hw],[wr*0.97,-hw*0.7],[wr,-hw*0.2],[wr,hw*0.2],[wr*0.97,hw*0.7],[wr*0.88,hw],[wr*0.8,hw]].map(function(p){return [p[0],p[1]*sd]}).reverse()));
         hubs.push(lathe(w[0],wr,z,[[0.001,hw*2.6*sd],[0.045,hw*2.6*sd],[0.06,hw*0.9*sd],[wr*0.81,hw*0.6*sd],[wr*0.81,-hw*0.6*sd]].reverse()))});
         axles.push(lathe(w[0],wr,0,[[0.03,bw],[0.03,-bw]]))});
-      return {cockpit:ell(-0.21,bt-0.025,0,0.6,0.04,0.205),rest:ell(-0.21,bt-0.05,0,0.5,0.02,0.15),torso:ell(-0.1,bt+0.0,0,0.22,0.13,0.21),helmet:ell(0.06,bt+0.17,0,0.17,0.16,0.16),
-        visor:ell(0.18,bt+0.15,0,0.08,0.07,0.13),tires:merge(tires),hubs:merge(hubs),axles:merge(axles)}}
+      return {cockpit:ell(-0.24,bt-0.025,0,0.66,0.04,0.22),rest:ell(-0.24,bt-0.05,0,0.55,0.02,0.16),torso:ell(-0.36,bt+0.0,0,0.22,0.13,0.22),helmet:ell(-0.24,bt+0.17,0,0.17,0.16,0.16),
+        visor:ell(-0.12,bt+0.15,0,0.08,0.07,0.13),tires:merge(tires),hubs:merge(hubs),axles:merge(axles)}}
 
     function decalCanvas(c){var cvx=document.createElement("canvas");cvx.width=1024;cvx.height=256;var g=cvx.getContext("2d");
       var px=function(x){return (x-X0)/(X1-X0)*1024},py=function(y){return (1.3-y)/1.3*256};
       g.fillStyle=c.trim;g.fillRect(0,0,8,8);
       g.lineCap="round";g.strokeStyle=c.trim;g.lineWidth=10;g.beginPath();g.moveTo(px(-1.75),py(0.42));g.lineTo(px(1.75),py(0.42));g.stroke();
-      var nx=px(-1.25),ny=py(0.8),rr=32;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
+      var nx=px(-1.3),ny=py(0.74),rr=34;g.fillStyle="#fff";g.strokeStyle="#0b0b0e";g.lineWidth=7;g.beginPath();g.arc(nx,ny,rr,0,Math.PI*2);g.fill();g.stroke();
       g.fillStyle="#0b0b0e";g.font="900 "+(c.num.length>1?50:58)+"px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(c.num,nx,ny+3);
-      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.85;g.font="italic 900 46px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="left";g.fillText("FLINT RACING",px(-0.15),py(0.66));
+      g.fillStyle=c.paint==="#16171c"?"#ffffff":"#0b0b0e";g.globalAlpha=.88;g.font="italic 900 56px 'Barlow Condensed','Arial Narrow',Arial,sans-serif";g.textAlign="center";g.fillText("FLINT RACING",px(0.25),py(0.7));
       return cvx}
 
     var VS="attribute vec3 aP;attribute vec3 aN;uniform mat4 uM;uniform mat4 uVP;varying vec3 vW;varying vec3 vN;varying vec3 vO;varying vec3 vON;void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=mat3(uM)*aN;vO=aP;vON=aN;gl_Position=uVP*w;}";
@@ -3656,7 +3656,7 @@ body.rw-tv .rw-fol{display:none}
       "vec3 env(vec3 r){float h=r.y;vec3 c=mix(vec3(0.03,0.03,0.035),vec3(0.16,0.17,0.19),smoothstep(-0.3,0.7,h));c+=vec3(2.2)*smoothstep(0.45,0.75,h)*(1.0-smoothstep(0.06,0.13,abs(fract(r.x*1.4+0.25)-0.5)));c+=uNeon*0.45*exp(-pow((h+0.08)/0.12,2.0));return c;}"+
       "void main(){vec3 N=normalize(vN);vec3 V=normalize(uEye-vW);if(dot(N,V)<0.0)N=-N;vec3 base=uC;"+
       "if(uChk>0.5){float k=mod(floor(vO.x*4.0)+floor(vO.y*4.0)+floor(vO.z*4.0+100.0),2.0);base=mix(vec3(0.012),vec3(0.86),k);}"+
-      "if(uDec>0.5){vec4 d=texture2D(uT,vec2((vO.x+1.7)/3.4,(1.3-vO.y)/1.3));float side=smoothstep(0.2,0.55,abs(normalize(vON).z));base=mix(base,pow(d.rgb,vec3(2.2)),d.a*side);"+
+      "if(uDec>0.5){vec4 d=texture2D(uT,vec2((vO.x+1.84)/3.68,(1.3-vO.y)/1.3));float side=smoothstep(0.2,0.55,abs(normalize(vON).z));base=mix(base,pow(d.rgb,vec3(2.2)),d.a*side);"+
       "float az=abs(vO.z),top=smoothstep(0.3,0.6,normalize(vON).y);vec3 tr=pow(texture2D(uT,vec2(0.003,0.01)).rgb,vec3(2.2));"+
       "base=mix(base,tr,top*(1.0-smoothstep(0.075,0.085,az)));base=mix(base,vec3(0.01),top*smoothstep(0.075,0.085,az)*(1.0-smoothstep(0.1,0.11,az)));base=mix(base,tr,top*smoothstep(0.1,0.11,az)*(1.0-smoothstep(0.125,0.135,az)));}"+
       "vec3 L1=normalize(vec3(0.35,1.0,0.55));vec3 L2=normalize(vec3(-0.7,0.35,-0.4));float d1=max(dot(N,L1),0.0),d2=max(dot(N,L2),0.0);"+
