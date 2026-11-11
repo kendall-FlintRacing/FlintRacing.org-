@@ -2660,7 +2660,7 @@ body.rw-tv .rw-fol{display:none}
           <h3>Program contact</h3>
           <dl class="bul-contact">
             <dt>Organization</dt><dd>Flint Racing &amp; STEM</dd>
-            <dt>Email</dt><dd><a href="mailto:info@flintracing.org">info@flintracing.org</a></dd>
+            <dt>Email</dt><dd><a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></dd>
             <dt>Questions</dt><dd><a href="#participate" data-interest="steam">Send an inquiry →</a></dd>
           </dl>
         </section>
@@ -3016,7 +3016,7 @@ body.rw-tv .rw-fol{display:none}
       <section class="contact-card">
         <h2>Reach us</h2>
         <dl>
-          <div><dt>Email</dt><dd><a href="mailto:info@flintracing.org" id="ctEmail">info@flintracing.org</a><button class="copy-btn" type="button" id="ctCopy">Copy</button></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:info@flintsoapbox.org" id="ctEmail">info@flintsoapbox.org</a><button class="copy-btn" type="button" id="ctCopy">Copy</button></dd></div>
           <div><dt>Where</dt><dd>Flint, Michigan<br><span style="font-weight:500;color:#c9cbd0;font-size:.92rem">Workshops at our workshop space · Racing at Cronin Derby Downs</span></dd></div>
         </dl>
       </section>
@@ -3054,7 +3054,7 @@ body.rw-tv .rw-fol{display:none}
       <h2>Browser preferences and sessions</h2>
       <p>The website uses browser storage and cookies for sign-in sessions, access codes and some operational tools. Shared devices should be signed out after use.</p>
       <h2>Contact, corrections and questions</h2>
-      <p>Contact Flint Racing &amp; STEM at <a href="mailto:info@flintracing.org" style="color:var(--red-deep);font-weight:600">info@flintracing.org</a> or through the <a href="#contact" style="color:var(--red-deep);font-weight:600">Contact page</a> to ask about your information, request a correction, discuss photo permissions, or ask about available deletion and retention options. Staff will review requests in the context of program, safety and recordkeeping needs.</p>
+      <p>Contact Flint Racing &amp; STEM at <a href="mailto:info@flintsoapbox.org" style="color:var(--red-deep);font-weight:600">info@flintsoapbox.org</a> or through the <a href="#contact" style="color:var(--red-deep);font-weight:600">Contact page</a> to ask about your information, request a correction, discuss photo permissions, or ask about available deletion and retention options. Staff will review requests in the context of program, safety and recordkeeping needs.</p>
       <p class="fine">This notice describes the prelaunch website. Program staff should confirm retention periods, service providers and the final privacy contact before launch.</p>
     </article>
   </div></div>
@@ -3217,7 +3217,7 @@ body.rw-tv .rw-fol{display:none}
       <section class="panel"><p class="eyebrow">What campers do</p><h2>Build it, test it, race it</h2><p>Each day mixes a hands-on build with the science behind it: why some cars roll farther, how weight and wheels change speed, and how to make a design better after a test run.</p>
         <ul class="feature-list"><li>Design &amp; build</li><li>Gravity, friction &amp; speed</li><li>Test runs</li><li>Teamwork</li></ul></section>
       <section class="panel"><p class="eyebrow">Good to know</p><h2>Before you sign up</h2>
-        <dl class="camp-facts"><dt>Ages</dt><dd>To be announced</dd><dt>Days</dt><dd>Monday to Friday, one week per session</dd><dt>Times &amp; place</dt><dd>Emailed to registered families</dd><dt>Cost</dt><dd>To be announced</dd><dt>Questions</dt><dd><a href="mailto:info@flintracing.org">info@flintracing.org</a></dd></dl></section>
+        <dl class="camp-facts"><dt>Ages</dt><dd>To be announced</dd><dt>Days</dt><dd>Monday to Friday, one week per session</dd><dt>Times &amp; place</dt><dd>Emailed to registered families</dd><dt>Cost</dt><dd>To be announced</dd><dt>Questions</dt><dd><a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></dd></dl></section>
     </div>
     <section class="camp-files" aria-labelledby="campFilesH" hidden><h2 id="campFilesH">Camp forms &amp; links</h2><div class="res-list" data-res="camps"></div></section>
     <section class="panel wide next-step"><h2>Ready to sign up?</h2><p>Your request goes to Flint Racing admin for review. Staff will follow up by email with the camp details, forms and next steps. Sending a request does not confirm a place.</p>
@@ -3732,7 +3732,7 @@ body.rw-tv .rw-fol{display:none}
           youth_count:data.youth_count?parseInt(data.youth_count,10):null,youth_ages:data.youth_ages||null,message:data.message||null,email:data.email,
           phone:data.phone||null,contact_by:data.contact_by,best_time:data.best_time,email_updates:data.email_updates==="Yes"};
         db.from("inquiries").insert(row).then(function(r){if(r.error)throw r.error;done(true)})
-          .catch(function(){btn.disabled=false;btn.textContent="Send";err.textContent="We couldn’t send your answers. Check your connection and try again, or email info@flintracing.org.";err.hidden=false});
+          .catch(function(){btn.disabled=false;btn.textContent="Send";err.textContent="We couldn’t send your answers. Check your connection and try again, or email info@flintsoapbox.org.";err.hidden=false});
       } else if(FORM_ENDPOINT){
         fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)})
           .then(function(r){if(!r.ok)throw 0;done(true)})
@@ -3792,7 +3792,7 @@ body.rw-tv .rw-fol{display:none}
   /* ---- Contact: copy email ---- */
   $("#ctCopy").addEventListener("click",function(){var b=this;
     function ok(){b.textContent="Copied"}function sel(){var r=document.createRange();r.selectNodeContents($("#ctEmail"));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected"}
-    try{navigator.clipboard.writeText("info@flintracing.org").then(ok,sel)}catch(x){sel()}
+    try{navigator.clipboard.writeText("info@flintsoapbox.org").then(ok,sel)}catch(x){sel()}
     setTimeout(function(){b.textContent="Copy"},2000)});
   $("#yr").textContent=new Date().getFullYear();
   /* ---- Sign in: 3D car select (hand-built WebGL, no libraries) ---- */
@@ -5041,7 +5041,7 @@ window.FRB=(function(){
     var bulletin='<aside class="pd-bul"><p class="pd-k">Monthly bulletin</p><h2>'+now.toLocaleDateString([],{month:"long",year:"numeric"})+'</h2>'+
       (notes.length?notes.map(function(n){return '<div class="pd-note">'+(n.text?'<p>'+esc(n.text)+'</p>':'')+(n.file?'<a class="pd-file" href="'+esc(n.file)+'" target="_blank" rel="noopener">📄 Download this month’s bulletin</a>':'')+'<small>'+esc(n.from||"Flint Racing")+'</small></div>'}).join(""):'<p class="pd-empty">No announcements yet this month.</p>')+
       '<h3>This month</h3>'+(monthEv.length?'<ul class="pd-mlist">'+monthEv.map(function(e){return '<li><b>'+fmtDate(e.start_date)+'</b> '+esc(e.title)+(when(e)?'<small>'+when(e)+'</small>':'')+'</li>'}).join("")+'</ul>':'<p class="pd-empty">Nothing scheduled this month.</p>')+
-      '<div class="pd-contact"><b>Questions?</b> <a href="mailto:info@flintracing.org">info@flintracing.org</a></div></aside>';
+      '<div class="pd-contact"><b>Questions?</b> <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></div></aside>';
     var tabs='<div class="pd-tabs" role="tablist">'+[["overview","Overview"],["programs","Programs & Resources"]].map(function(x){return '<button type="button" role="tab" data-pdt="'+x[0]+'" aria-selected="'+(PD.tab===x[0])+'">'+x[1]+'</button>'}).join("")+'</div>';
     var body=PD.tab==="programs"?'<div class="rlanes pd-lanes">'+lanesHTML()+'</div>':
       '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3>'+(when(e)?'<p>'+when(e)+'</p>':'')+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div></article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
@@ -5060,7 +5060,7 @@ window.FRB=(function(){
       var mine=list.filter(function(x){return x.page===key});
       var wrapSec=box.closest(".camp-files");if(wrapSec)wrapSec.hidden=!mine.length;
       box.innerHTML=mine.length?mine.map(function(x){var isFile=/\/site-files\//.test(x.url||"");return '<article class="res-item">'+(x.event_date?'<p class="res-date">'+fmtDate(x.event_date,{weekday:"long",month:"long",day:"numeric",year:"numeric"})+'</p>':'')+'<h3>'+esc(x.title)+'</h3>'+(x.description?'<p>'+esc(x.description)+'</p>':'')+(x.url?'<a class="btn deep" href="'+esc(x.url)+'" target="_blank" rel="noopener">'+(isFile?"Download":"Open link")+' →</a>':'')+'</article>'}).join(""):
-        '<div class="res-empty"><h3>Nothing posted yet.</h3><p>We post here as soon as it’s ready. Questions? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div>'})}
+        '<div class="res-empty"><h3>Nothing posted yet.</h3><p>We post here as soon as it’s ready. Questions? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>'})}
 
   /* ---------- Race-day volunteer sign-up ---------- */
   var vf=$("#volForm");
@@ -5068,9 +5068,9 @@ window.FRB=(function(){
     var rec={first_name:g("v-first"),last_name:g("v-last"),email:g("v-email"),phone:g("v-phone")||null,area:(vf.querySelector('input[name="v-area"]:checked')||{}).value||"either",shift:$("#v-shift").value,notes:g("v-notes")||null,over18:$("#v-adult").checked,status:"new"};
     if(!rec.first_name||!rec.last_name){m.textContent="Add your first and last name.";return}
     if(!/^\S+@\S+\.\S+$/.test(rec.email)){m.textContent="Add an email so we can send your crew link.";return}
-    if(!window.FR_DB){m.textContent="Sign-ups can’t reach our system right now. Email info@flintracing.org instead.";return}
+    if(!window.FR_DB){m.textContent="Sign-ups can’t reach our system right now. Email info@flintsoapbox.org instead.";return}
     $("#volGo").disabled=true;m.textContent="Sending…";
-    db.from("race_volunteers").insert(rec).then(function(r){$("#volGo").disabled=false;if(r.error){m.textContent="That didn’t go through. Please try again, or email info@flintracing.org.";return}
+    db.from("race_volunteers").insert(rec).then(function(r){$("#volGo").disabled=false;if(r.error){m.textContent="That didn’t go through. Please try again, or email info@flintsoapbox.org.";return}
       vf.hidden=true;$("#volDone").hidden=false;$("#volDone").scrollIntoView({behavior:"smooth",block:"center"})})};
 
   /* ---------- Crew link (#crew/<token>) ---------- */
@@ -5078,7 +5078,7 @@ window.FRB=(function(){
     if(!tok){box.innerHTML='<div class="crew-pass"><h1>Crew pass</h1><p>Open the crew link from your email to see your race-day role.</p></div>';return}
     var sample=tok==="sample"&&IS_ADMIN;
     (sample?Promise.resolve({data:{first_name:"Marcus",role:"Check-in table",area:"event",shift:"Morning",assignment:"Welcome tent at 7:45 AM. Hand out wristbands and programs.",checked_in_at:null}}):db.rpc("crew_view",{p_token:tok})).then(function(r){var c=r.data;
-      if(r.error||!c){box.innerHTML='<div class="crew-pass"><h1>Link not found</h1><p>This crew link isn’t active. Check the newest email from Flint Racing, or email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div>';return}
+      if(r.error||!c){box.innerHTML='<div class="crew-pass"><h1>Link not found</h1><p>This crew link isn’t active. Check the newest email from Flint Racing, or email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>';return}
       box.innerHTML='<div class="crew-pass"><p class="t-kicker">Race day crew pass</p><h1>'+esc(c.first_name)+'</h1>'+
         '<dl class="crew-dl"><div><dt>Role</dt><dd>'+esc(c.role||"Assigned on race morning")+'</dd></div><div><dt>Area</dt><dd>'+(c.area==="track"?"The track":c.area==="event"?"The event":"To be assigned")+'</dd></div><div><dt>Shift</dt><dd>'+esc(c.shift||"All day")+'</dd></div></dl>'+
         (c.assignment?'<div class="crew-note"><b>Your assignment</b><p>'+esc(c.assignment)+'</p></div>':'')+
@@ -5461,7 +5461,7 @@ window.FRB=(function(){
   function fmtSize(b){return !b?"":b>1048576?(b/1048576).toFixed(1)+" MB":Math.max(1,Math.round(b/1024))+" KB"}
   function renderPrintables(){var box=$("#prtBox");if(!box)return;
     db.from("resources").select("*").eq("page","printables").order("sort_order").then(function(r){var all=(r.data||[]).filter(function(x){return x.published&&x.url});
-      if(!all.length){box.innerHTML='<div class="prt-empty"><h2>Printables are on the way.</h2><p>Flyers and forms will appear here as soon as they’re posted. Need something now? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div>';return}
+      if(!all.length){box.innerHTML='<div class="prt-empty"><h2>Printables are on the way.</h2><p>Flyers and forms will appear here as soon as they’re posted. Need something now? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>';return}
       var cats=PRT_CATS.slice();all.forEach(function(x){if(x.category&&cats.indexOf(x.category)<0)cats.push(x.category)});
       box.innerHTML=cats.map(function(c){var items=all.filter(function(x){return (x.category||"Other")===c});if(!items.length)return "";
         return '<section class="prt-sec"><h2>'+esc(c)+'</h2><div class="prt-grid">'+items.map(function(x){var k=fileKind(x.file_name||x.url);
@@ -5562,7 +5562,7 @@ window.FRB=(function(){
       '<label class="mem-f" for="'+px+'-p">'+(o.staff?'Passcode or password':'Passcode')+'<span class="mem-pw"><input type="password" id="'+px+'-p" autocomplete="current-password" maxlength="64"><button type="button" class="mem-eye" aria-label="Show passcode" aria-pressed="false">Show</button></span></label>'+
       '<label class="mem-keep"><input type="checkbox" id="'+px+'-k"><span>Keep me signed in on this device<small>Leave this off on shared tablets and phones.</small></span></label>'+
       '<button class="cs-go mem-go" type="submit">'+esc(o.go||"Start engine")+'</button><p class="t-msg mem-msg" role="status"></p>'+
-      '<p class="mem-links"><a href="mailto:info@flintracing.org?subject=Forgot%20my%20Flint%20Racing%20passcode">Forgot your username or passcode?</a>'+(o.staff?'<span>·</span><button type="button" class="mem-lnk" data-staffui="forgot">Admin password reset</button>':'')+'</p>'+
+      '<p class="mem-links"><a href="mailto:info@flintsoapbox.org?subject=Forgot%20my%20Flint%20Racing%20passcode">Forgot your username or passcode?</a>'+(o.staff?'<span>·</span><button type="button" class="mem-lnk" data-staffui="forgot">Admin password reset</button>':'')+'</p>'+
       (o.staff?'<div class="mem-new"><span>New here?</span><span><a href="#new-profile" data-regkind="crew">Register as staff →</a> <button type="button" class="mem-lnk" data-staffui="up">New admin account</button></span></div>':
       '<div class="mem-new"><span>First time here?</span><a href="#new-profile" data-regkind="'+(o.kind||"")+'">Register once →</a></div>')+'</form>'}
   function memOnHTML(px,dark){var r=(ME.roles||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k});
@@ -5588,7 +5588,7 @@ window.FRB=(function(){
         .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."});return}
       memSignIn(u,p,k).then(function(d){b.disabled=false;
         if(!d.ok){m.textContent=d.status==="pending"?"Thanks for registering! Kendall or Kevin still need to approve your profile. We’ll email you when it’s ready.":
-          d.status==="paused"?"This profile is paused. Email info@flintracing.org to turn it back on.":d.status==="declined"?"This profile wasn’t approved. Email info@flintracing.org with any questions.":
+          d.status==="paused"?"This profile is paused. Email info@flintsoapbox.org to turn it back on.":d.status==="declined"?"This profile wasn’t approved. Email info@flintsoapbox.org with any questions.":
           d.locked?"Too many wrong tries. Wait 15 minutes, then try again.":"That username and passcode don’t match. Check the spelling and try again.";pw.value="";pw.focus();return}
         m.textContent="";toast("Welcome, "+firstName(d.display_name)+"!");if(after)after();else location.hash=landing()[0]})
       .catch(function(err){b.disabled=false;m.textContent=err.message||"Couldn’t sign in. Try again."})}}
@@ -5678,10 +5678,10 @@ window.FRB=(function(){
           (roles.length<=1&&!fam?'<p class="me-fine">Need another space, like Race control or Photographer? Ask Kendall or Kevin to add it to your profile.</p>':'')+'</div>'+
         '<div class="me-card"><p class="me-k">Your history</p><h2>Recent check-ins</h2>'+(recent?'<ul class="me-list">'+recent+'</ul>':'<p class="me-empty">Nothing yet. Check in the next time you’re at the shop or the track.</p>')+'</div></div>'+
         '<div class="me-col">'+clock+
-          (fam?'<div class="me-card"><p class="me-k">Your household</p><h2>Racers</h2>'+(kids?'<div class="me-kids">'+kids+'</div>':'<p class="me-empty">No racers listed.</p>')+'<p class="me-fine">Adding a racer or changing details? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div>':'')+
+          (fam?'<div class="me-card"><p class="me-k">Your household</p><h2>Racers</h2>'+(kids?'<div class="me-kids">'+kids+'</div>':'<p class="me-empty">No racers listed.</p>')+'<p class="me-fine">Adding a racer or changing details? Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div>':'')+
           '<div class="me-card"><p class="me-k">Your profile</p><h2>Account</h2><ul class="me-list"><li><span>Email<small>'+esc(m.email||"—")+'</small></span></li><li><span>Phone<small>'+esc(m.phone||"—")+'</small></span></li></ul>'+
             '<details><summary>Change my passcode</summary><form class="me-pw" id="mePw" novalidate><label class="f">Current passcode<input type="password" autocomplete="current-password" maxlength="64"></label><label class="f">New passcode<input type="password" autocomplete="new-password" maxlength="64"></label><label class="f">Type the new one again<input type="password" autocomplete="new-password" maxlength="64"></label><button class="btn deep" type="submit" style="justify-self:start">Save new passcode</button><p class="t-msg" role="status"></p></form></details>'+
-            '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div></div></div>';
+            '<p class="me-fine">To change your name, email or roles, email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a>.</p></div></div></div>';
     if(preview){box.insertAdjacentHTML("afterbegin",'<div class="pv-banner"><div><b>Admin preview · sample '+(fam?"family":"crew member")+'</b><span>This is what '+(fam?"a family":"a crew member with every role")+' sees. The names and numbers are made up; buttons here don’t save anything.</span></div><div class="pv-sw"><a href="#my-dashboard/family"'+(fam?' aria-current="true"':'')+'>Family</a><a href="#my-dashboard/crew"'+(!fam?' aria-current="true"':'')+'>Crew</a></div></div>');
       $$("button,input",box).forEach(function(el){if(!el.closest(".pv-banner")){el.disabled=true}});$("#meOut").onclick=null;return}
     $("#meOut").onclick=signOut;
