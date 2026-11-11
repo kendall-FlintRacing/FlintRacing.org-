@@ -512,7 +512,7 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .q-step{border:0;margin:0;padding:0;display:grid;gap:16px}
 .q-step+.q-step{margin-top:30px;padding-top:26px;border-top:1px solid #e6e7ea}
 .q-step legend{display:flex;align-items:center;gap:12px;font:800 1.7rem/1 var(--display);text-transform:uppercase;color:var(--ink);padding:0;margin-bottom:16px}
-.q-step legend span{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--red-deep);color:#fff;font:700 1rem/1 var(--body)}
+.q-step legend>span:first-child{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--red-deep);color:#fff;font:700 1rem/1 var(--body)}
 .q-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .q-grid .full{grid-column:1/-1}
 @media (max-width:600px){.q-grid{grid-template-columns:1fr}}
@@ -635,6 +635,9 @@ dialog.sbd-dlg[open]{animation:sbdIn .2s ease-out}
 .sbd-dlg .q-grid{gap:14px}
 .sbd-dlg .q-actions{margin-top:20px}
 .sbd-fee-note{background:#fff7e0;border:1px solid #f0d58a;color:#5b4500;border-radius:4px;padding:9px 12px;font-size:.84rem;margin:0 0 16px}
+dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
+.q-dlg .q-step legend{font-size:1.45rem}
+.q-dlg .q-done h2{font-size:clamp(1.8rem,4vw,2.3rem)}
 .sbd-done{text-align:center;padding:10px 0 4px}
 .sbd-done h3{font-size:1.9rem;color:var(--ink);margin:6px 0 8px}
 .sbd-done p{color:#4b4f57;margin:0 auto 18px;max-width:40ch}
@@ -2582,7 +2585,7 @@ body.rw-tv .rw-fol{display:none}
       <details class="lane4"><summary><span class="ln">Lane 1</span><span><h3>Community &amp; School Racing</h3><p>Celebrate the cars, teamwork and skills developed by our school and community building groups.</p></span><span class="go" aria-hidden="true">›</span></summary>
         <div class="more"><p>School teams attend with their teacher or school chaperone. Families and outside groups provide their own chaperone.</p><div><a class="btn deep" href="#participate" data-interest="racing" data-note="Interested in: Community & School Racing">Ask about Community &amp; School Racing</a></div></div></details>
       <details class="lane4"><summary><span class="ln">Lane 2</span><span><h3>Sanctioned Soap Box Derby Racing</h3><p>Explore official race participation, division requirements and the local pathway toward Akron. Eligibility and qualification requirements are confirmed for each event.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>Ask staff about official division rules, local qualification and Akron coordination before making travel plans.</p><div><a class="btn deep" href="#participate" data-interest="racing" data-note="Interested in: Sanctioned Soap Box Derby Racing">Ask about Sanctioned Racing</a></div></div></details>
+        <div class="more"><p>Ask staff about official division rules, local qualification and Akron coordination before making travel plans.</p><div><button class="btn deep" type="button" data-sbd-open aria-haspopup="dialog">Quick register for sanctioned racing →</button></div></div></details>
       <details class="lane4"><summary><span class="ln">Lane 3</span><span><h3>Masters Racing</h3><p>Learn about our Masters racing opportunities and the preparation required for that event.</p></span><span class="go" aria-hidden="true">›</span></summary>
         <div class="more"><p>Contact staff to discuss the available Masters format and eligibility before beginning a build.</p><div><a class="btn deep" href="#participate" data-interest="racing" data-note="Interested in: Masters Racing">Ask about Masters Racing</a></div></div></details>
       <details class="lane4"><summary><span class="ln">Lane 4</span><span><h3>Rally &amp; Track Experiences</h3><p>Explore additional opportunities for track time and racing practice when scheduled. Availability and participation requirements vary by session.</p></span><span class="go" aria-hidden="true">›</span></summary>
@@ -2639,6 +2642,12 @@ body.rw-tv .rw-fol{display:none}
       <div class="q-actions"><button class="btn red" type="submit" id="sbdSend">Send inquiry</button><button class="btn outline-red" type="button" id="sbdCancel">Cancel</button></div>
     </form>
   </div>
+</dialog>
+
+<!-- Program Register / Inquire questionnaire, shown as a pop-up (the form moves in here while open) -->
+<dialog class="sbd-dlg q-dlg" id="qDlg" aria-labelledby="qDlgH">
+  <div class="sbd-top"><img src="{{LOGO_DARK}}" alt=""><div><h2 id="qDlgH">Register / Inquire</h2><p>About two minutes. We’ll follow up with the right forms and next steps.</p></div><button class="sbd-x" type="button" id="qDlgClose" aria-label="Close">×</button></div>
+  <div id="qDlgSlot"></div>
 </dialog>
 
 <!-- ======================= STEM PROGRAMS ======================= -->
@@ -3703,8 +3712,8 @@ body.rw-tv .rw-fol{display:none}
           .catch(function(){btn.disabled=false;btn.textContent="Send inquiry";err.textContent="We couldn’t send your inquiry. Check your connection and try again, or email info@flintsoapbox.org.";err.hidden=false});
       });
     }
-    $("#sbdOpen").addEventListener("click",function(){
-      opener=this; if(!$("#sbdForm")){body.innerHTML=formHTML;bind()}
+    document.addEventListener("click",function(e){var t=e.target.closest("#sbdOpen,[data-sbd-open]");if(!t)return;
+      opener=t; if(!$("#sbdForm")){body.innerHTML=formHTML;bind()}
       renderSbdDate(); dlg.showModal(); var first=dlg.querySelector('input[name="parent"]'); if(first)first.focus()});
     $("#sbdClose").onclick=close;
     dlg.addEventListener("click",function(e){if(e.target===dlg)close()});
@@ -3854,11 +3863,34 @@ body.rw-tv .rw-fol{display:none}
     if(d.youth_count||d.youth_ages) rows.push(["Young people",[d.youth_count,d.youth_ages&&"ages "+d.youth_ages].filter(Boolean).join(", ")]);
     rows.push(["Reach me by",d.contact_by+(d.contact_by==="Email"?" · "+d.email:" · "+d.phone)+" · "+d.best_time]);
     if(d.message) rows.push(["Note",d.message]);
-    qCard.innerHTML='<div class="q-done" role="status"><p class="eyebrow">'+(sent?"Request sent":"Preview: not sent")+'</p><h2>Thanks, '+esc(d.first_name)+'.</h2><p>'+(sent?"We received your answers. Our team will follow up by "+esc(d.contact_by.toLowerCase())+" with next steps and the right forms for what you’re interested in.":"This form isn’t connected to an inbox yet, so nothing was sent. Here’s what a visitor would submit:")+'</p><dl>'+rows.map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'}).join("")+'</dl><div class="q-actions"><a class="btn deep" href="#home">Back to home</a><button class="btn outline-red" type="button" id="qAgain">Send another</button></div></div>';
+    qCard.innerHTML='<div class="q-done" role="status"><p class="eyebrow">'+(sent?"Request sent":"Preview: not sent")+'</p><h2>Thanks, '+esc(d.first_name)+'.</h2><p>'+(sent?"We received your answers. Our team will follow up by "+esc(d.contact_by.toLowerCase())+" with next steps and the right forms for what you’re interested in.":"This form isn’t connected to an inbox yet, so nothing was sent. Here’s what a visitor would submit:")+'</p><dl>'+rows.map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'}).join("")+'</dl><div class="q-actions">'+(qDlg.open?'<button class="btn deep" type="button" id="qDone">Done</button>':'<a class="btn deep" href="#home">Back to home</a>')+'<button class="btn outline-red" type="button" id="qAgain">Send another</button></div></div>';
+    var qd=document.getElementById("qDone"); if(qd){qd.onclick=function(){qDlg.close()};qd.focus()}
     $("#qAgain").onclick=function(){qCard.innerHTML=qFormHTML;bindForm();openForm(null)};
-    qCard.scrollIntoView({block:"start"});
+    if(qDlg.open) qDlg.scrollTop=0; else qCard.scrollIntoView({block:"start"});
   }
   qFormHTML=qCard.innerHTML; bindForm();
+
+  /* ---- Register / Inquire as a pop-up: links to #participate (and its aliases) open the questionnaire over the
+     current page with the background blurred. Visiting #participate directly still shows the full page. ---- */
+  var qDlg=$("#qDlg"), qHome=document.createComment("qCard home"), qOpener=null;
+  qCard.parentNode.insertBefore(qHome,qCard);
+  function isInquiryLink(a){var h=(a.getAttribute("href")||"").slice(1);return a.getAttribute("href").charAt(0)==="#"&&(h==="participate"||!!ALIAS[h])}
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a[href^='#']"); if(!a||!isInquiryLink(a)||e.metaKey||e.ctrlKey||e.shiftKey) return;
+    if(!document.querySelector('[data-page="participate"]').hidden) return;
+    e.preventDefault(); qOpener=a; closeMenus();
+    var h=a.getAttribute("href").slice(1), interest=a.getAttribute("data-interest")||ALIAS[h]||null, note=a.getAttribute("data-note");
+    setTimeout(function(){pendingInterest=null;pendingNote=null},0);
+    if(document.querySelector(".q-done")){qCard.innerHTML=qFormHTML;bindForm()}
+    $("#qDlgSlot").appendChild(qCard); openForm(interest,note); qDlg.showModal(); qDlg.scrollTop=0;
+    var f=document.getElementById("q-first"); if(f) f.focus();
+  },true);
+  $("#qDlgClose").onclick=function(){qDlg.close()};
+  qDlg.addEventListener("click",function(e){if(e.target===qDlg)qDlg.close()});
+  qDlg.addEventListener("close",function(){
+    if(document.querySelector(".q-done")){qCard.innerHTML=qFormHTML;bindForm()}
+    qHome.parentNode.insertBefore(qCard,qHome.nextSibling); if(qOpener) qOpener.focus()});
+  addEventListener("hashchange",function(){if(qDlg.open)qDlg.close()});
 
   /* ---- Spirit catalogue filter ---- */
   document.querySelectorAll('.sp-filters button').forEach(function(b){b.addEventListener("click",function(){
@@ -4246,12 +4278,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
