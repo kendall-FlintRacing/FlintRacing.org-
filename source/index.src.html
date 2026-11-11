@@ -608,6 +608,36 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .race-plan .btn{margin-right:30px}
 @media (max-width:700px){.race-plan{grid-template-columns:1fr}.race-plan .btn{justify-self:start}}
 
+/* ===== Track & Racing: Sanctioned racers strip + quick inquiry pop-up ===== */
+.sbd{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,3vw,32px);align-items:center;margin-top:26px;padding:clamp(18px,3vw,28px);border-radius:6px;background:linear-gradient(135deg,#22242b 0%,#1a1c22 100%);border:1px solid rgba(255,255,255,.1);border-left:6px solid var(--red)}
+.sbd-logo{width:clamp(92px,13vw,132px);aspect-ratio:1;background:#fff;border-radius:8px;display:grid;place-items:center;padding:10px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.sbd-logo img{width:100%;height:100%;object-fit:contain}
+.sbd-k{font:700 .74rem/1.2 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin:0 0 6px}
+.sbd h2{font-size:clamp(1.6rem,3.4vw,2.2rem);color:#fff}
+.sbd-date{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:10px 0 6px;font:800 clamp(1.5rem,3vw,2rem)/1 var(--display);text-transform:uppercase;color:#fff}
+.sbd-date small{font:600 .8rem/1 var(--body);letter-spacing:.12em;color:var(--amber)}
+.sbd p.sbd-fee{margin:0;color:#c9cbd0;font-size:.9rem;max-width:60ch}
+.sbd .btn{min-height:52px;padding:0 26px}
+@media (max-width:720px){.sbd{grid-template-columns:auto 1fr}.sbd .btn{grid-column:1/-1;width:100%}}
+@media (max-width:440px){.sbd{gap:14px 16px;align-items:start}.sbd-logo{width:72px;padding:6px}}
+dialog.sbd-dlg{width:min(520px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:0;border:0;border-radius:8px;background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+dialog.sbd-dlg::backdrop{background:rgba(11,11,14,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+dialog.sbd-dlg[open]{animation:sbdIn .2s ease-out}
+@keyframes sbdIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){dialog.sbd-dlg[open]{animation:none}}
+.sbd-dlg .sbd-top{display:flex;gap:14px;align-items:center;padding:20px 22px 16px;border-bottom:1px solid #e6e7ea}
+.sbd-dlg .sbd-top img{width:54px;height:54px;object-fit:contain;flex:none}
+.sbd-dlg .sbd-top h2{font-size:1.6rem;color:var(--ink)}
+.sbd-dlg .sbd-top p{margin:4px 0 0;font-size:.85rem;color:#6d7077}
+.sbd-x{margin-left:auto;align-self:flex-start;width:40px;height:40px;border:0;border-radius:50%;background:#f3f4f6;color:var(--ink);font:400 1.5rem/1 var(--body);cursor:pointer;flex:none}
+.sbd-x:hover{background:#e6e7ea}
+.sbd-dlg .q-card{margin:0;border-radius:0;padding:18px 22px 22px}
+.sbd-dlg .q-grid{gap:14px}
+.sbd-dlg .q-actions{margin-top:20px}
+.sbd-fee-note{background:#fff7e0;border:1px solid #f0d58a;color:#5b4500;border-radius:4px;padding:9px 12px;font-size:.84rem;margin:0 0 16px}
+.sbd-done{text-align:center;padding:10px 0 4px}
+.sbd-done h3{font-size:1.9rem;color:var(--ink);margin:6px 0 8px}
+.sbd-done p{color:#4b4f57;margin:0 auto 18px;max-width:40ch}
 /* ===== Track & Racing: How it works (#how-racing) ===== */
 .hiw{margin-top:clamp(2.5rem,5vw,3.5rem);display:grid;gap:clamp(18px,2.4vw,26px);scroll-margin-top:96px}
 .hiw-head{display:grid;gap:10px;max-width:70ch}
@@ -2577,8 +2607,39 @@ body.rw-tv .rw-fol{display:none}
       <p>Your request goes to Flint Racing admin for review. Staff will follow up by email about availability, requirements and next steps, and organize the relevant email list. Sending a request does not confirm a place.</p>
       <div class="row"><a class="btn deep" href="#participate" data-interest="racing">Ask about racing</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
+
+    <section class="sbd" id="sanctioned-racers" aria-labelledby="sbdH">
+      <div class="sbd-logo"><img src="{{LOGO_DARK}}" alt="Flint Soap Box Derby logo"></div>
+      <div>
+        <p class="sbd-k">For sanctioned racers</p>
+        <h2 id="sbdH">Looking for a local Derby?</h2>
+        <p class="sbd-date"><span id="sbdDate">Sat · Jun 05, 2027</span><small>Flint Soap Box Derby</small></p>
+        <p class="sbd-fee">Sanctioned racers are welcome at our local race. Send a quick inquiry and we’ll email you the forms and fees. Race day registration has a fee for racers not affiliated with our program.</p>
+      </div>
+      <button class="btn red" type="button" id="sbdOpen" aria-haspopup="dialog">Quick register →</button>
+    </section>
   </div>
 </div>
+
+<!-- Sanctioned racer quick inquiry (opens over the Track & Racing page) -->
+<dialog class="sbd-dlg" id="sbdDlg" aria-labelledby="sbdDlgH">
+  <div class="sbd-top"><img src="{{LOGO_DARK}}" alt=""><div><h2 id="sbdDlgH">Quick register</h2><p id="sbdDlgDate">Flint Soap Box Derby · Race Day</p></div><button class="sbd-x" type="button" id="sbdClose" aria-label="Close">×</button></div>
+  <div class="q-card" id="sbdBody">
+    <form id="sbdForm" novalidate>
+      <p class="sbd-fee-note">We’ll email you the necessary forms and fees. Race day registration has a fee if you’re not affiliated with our program.</p>
+      <div class="q-grid">
+        <label class="f full">Parent / guardian name<input type="text" name="parent" autocomplete="name" required></label>
+        <label class="f full">Parent / guardian email<input type="email" name="email" autocomplete="email" required></label>
+        <label class="f">Racer’s name<input type="text" name="racer" autocomplete="off" required></label>
+        <label class="f">Racer’s age<input type="number" name="age" min="5" max="99" inputmode="numeric" required></label>
+        <label class="f">Phone <span class="opt">(optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
+        <label class="f">ZIP code<input type="text" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="10" required></label>
+      </div>
+      <p class="q-err" id="sbdErr" role="alert" hidden></p>
+      <div class="q-actions"><button class="btn red" type="submit" id="sbdSend">Send inquiry</button><button class="btn outline-red" type="button" id="sbdCancel">Cancel</button></div>
+    </form>
+  </div>
+</dialog>
 
 <!-- ======================= STEM PROGRAMS ======================= -->
 <div class="page stem-page prog-page" data-page="steam-and-beyond" hidden>
@@ -3603,7 +3664,54 @@ body.rw-tv .rw-fol{display:none}
     var t=todayKey(), rows=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t});
     $("#raceBoard").innerHTML=rows.map(function(e){var f=fmtShort(e.d);var main=/Race Day/.test(e.t);
       return '<div class="board-row"><span class="d">'+f.w+' · '+f.m+' '+String(f.d).padStart(2,"0")+'</span><span class="n">'+e.t+'</span><span class="s'+(main?' main':'')+(e.tbc?' tbc':'')+'">'+(main?"Race day":e.tbc?"To be confirmed":"Racing")+'</span></div>'}).join("")||'<div class="board-row"><span class="n">No upcoming dates are published yet.</span></div>';
+    renderSbdDate();
   }
+
+  /* ---- Track & Racing: sanctioned racer quick inquiry (pop-up over the page; saves to Inquiries) ---- */
+  function nextRaceDay(){var t=todayKey();return EVENTS.filter(function(e){return e.k==="racing"&&/Race Day/i.test(e.t)&&(e.e||e.d)>=t}).sort(function(a,b){return a.d<b.d?-1:1})[0]}
+  function renderSbdDate(){var e=nextRaceDay(),txt="Date to be announced";
+    if(e){var f=fmtShort(e.d);txt=f.w+" · "+f.m+" "+String(f.d).padStart(2,"0")+", "+e.d.slice(0,4)+(e.tbc?" (to be confirmed)":"")}
+    $("#sbdDate").textContent=txt; $("#sbdDlgDate").textContent="Flint Soap Box Derby · "+txt}
+  (function(){
+    var dlg=$("#sbdDlg"), body=$("#sbdBody"), formHTML=body.innerHTML, opener=null;
+    function close(){if(dlg.open)dlg.close()}
+    function bind(){
+      var f=$("#sbdForm"), err=$("#sbdErr");
+      $("#sbdCancel").onclick=close;
+      f.addEventListener("submit",function(ev){
+        ev.preventDefault();
+        var x=f.elements, parent=x.parent.value.trim().replace(/\s+/g," "), email=x.email.value.trim(), racer=x.racer.value.trim(),
+            age=x.age.value.trim(), phone=x.phone.value.trim(), zip=x.zip.value.trim(), errs=[];
+        if(parent.split(" ").length<2) errs.push("the parent or guardian’s first and last name");
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.push("a complete email address");
+        if(!racer) errs.push("the racer’s name");
+        if(!/^\d{1,2}$/.test(age)) errs.push("the racer’s age");
+        if(phone&&phone.replace(/\D/g,"").length<10) errs.push("a full phone number (or leave it blank)");
+        if(!/^\d{5}(-\d{4})?$/.test(zip)) errs.push("a 5-digit ZIP code");
+        if(errs.length){err.textContent="Please add "+errs.join(", ")+".";err.hidden=false;return}
+        err.hidden=true;
+        var sp=parent.lastIndexOf(" "), race=$("#sbdDate").textContent, btn=$("#sbdSend");
+        var row={first_name:parent.slice(0,sp),last_name:parent.slice(sp+1),role:"Parent or guardian",organization:null,
+          interests:"Sanctioned racer · local Derby / race day",youth_count:1,youth_ages:age,
+          message:"Sanctioned racer quick inquiry\nRacer: "+racer+", age "+age+"\nZIP: "+zip+"\nRace: Flint Soap Box Derby · "+race+"\nPlease email forms and fees (unaffiliated racers pay a race day registration fee).",
+          email:email,phone:phone||null,contact_by:"Email",best_time:"Any time",email_updates:false};
+        function done(sent){body.innerHTML='<div class="sbd-done" role="status"><p class="eyebrow">'+(sent?"Inquiry sent":"Preview: not sent")+'</p><h3>Thanks, '+esc(row.first_name)+'!</h3><p>'+(sent?"We’ll email the forms and fees for "+esc(racer)+" to "+esc(email)+".":"This preview isn’t connected to the inbox, so nothing was sent.")+'</p><button class="btn red" type="button" id="sbdBack">Back to Track &amp; Racing</button></div>';
+          $("#sbdBack").onclick=close; $("#sbdBack").focus()}
+        var db=window.FR_DB; if(!db){done(false);return}
+        btn.disabled=true; btn.textContent="Sending…";
+        db.from("inquiries").insert(row).then(function(r){if(r.error)throw r.error;done(true)})
+          .catch(function(){btn.disabled=false;btn.textContent="Send inquiry";err.textContent="We couldn’t send your inquiry. Check your connection and try again, or email info@flintsoapbox.org.";err.hidden=false});
+      });
+    }
+    $("#sbdOpen").addEventListener("click",function(){
+      opener=this; if(!$("#sbdForm")){body.innerHTML=formHTML;bind()}
+      renderSbdDate(); dlg.showModal(); var first=dlg.querySelector('input[name="parent"]'); if(first)first.focus()});
+    $("#sbdClose").onclick=close;
+    dlg.addEventListener("click",function(e){if(e.target===dlg)close()});
+    dlg.addEventListener("close",function(){if(!$("#sbdForm")){body.innerHTML=formHTML;bind()} if(opener)opener.focus()});
+    addEventListener("hashchange",close);
+    bind();
+  })();
   var SEASON_ICON={fall:'<path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15z"/><path d="M5 19l9-9"/>',winter:'<path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7"/>',spring:'<path d="M12 21v-9"/><path d="M12 12C12 8 9 6 5 6c0 4 3 6 7 6z"/><path d="M12 14c0-4 3-6 7-6 0 4-3 6-7 6z"/>',summer:'<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>'};
   function seasonOf(s){var m=+s.slice(5,7);return m>=9&&m<=11?"fall":(m===12||m<=2)?"winter":m<=5?"spring":"summer"}
   /* ---- Monthly bulletin notes ----
@@ -4138,12 +4246,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
