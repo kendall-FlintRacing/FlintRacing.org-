@@ -1655,6 +1655,25 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .news-post summary{cursor:pointer;font-weight:800;color:var(--red-deep)}
 .news-post details p{margin-top:10px;color:#2a2d33}
 /* ===== Race control console ===== */
+
+/* ===== STEM Camps page ===== */
+.camp-sessions{margin-top:clamp(2rem,4vw,3rem);display:grid;gap:16px}
+.camp-head{display:flex;justify-content:space-between;align-items:flex-end;gap:8px 20px;flex-wrap:wrap}
+.camp-head h2{margin:0}.camp-head p{margin:0;color:#c9cbd1;max-width:52ch}
+.camp-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.camp-card{background:#fff;color:var(--ink);border-radius:12px;padding:20px;display:grid;gap:10px;align-content:start;border-top:6px solid var(--red)}
+.camp-card .camp-n{font:700 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep)}
+.camp-card h3{margin:0;font:800 clamp(1.6rem,3.6vw,2rem)/1 var(--display);text-transform:uppercase}
+.camp-card p{margin:0;color:#4a4d55}
+.camp-card .btn{justify-self:start}
+.camp-card.past{opacity:.6}
+.camp-empty{background:#18191e;border:1px dashed #3a3c44;border-radius:12px;padding:20px;color:#c9cbd1}
+.camp-facts{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0}
+.camp-facts dt{font-weight:700}.camp-facts dd{margin:0}
+.camp-files{margin-top:clamp(2rem,4vw,3rem)}
+.camp-files h2{margin:0 0 12px}
+.sw-camp{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap;background:var(--ink);color:#fff;border-left:6px solid var(--red);border-radius:10px;padding:16px 20px;margin-top:18px}
+.sw-camp p{margin:0;color:#c9cbd1;max-width:56ch}.sw-camp b{display:block;font:800 1.35rem/1.1 var(--display);text-transform:uppercase;color:#fff;margin-bottom:4px}
 .rk-page{background:#e9ebee;min-height:80vh;padding:clamp(1rem,2.5vw,1.6rem) 0 3rem}
 /* ===== Workshop check-in kiosk (#kiosk): full screen, touch first ===== */
 html.kiosk-on header.site-nav,html.kiosk-on footer.site-foot,html.kiosk-on .fr-test,html.kiosk-on .fr-pill{display:none!important}
@@ -2583,6 +2602,7 @@ body.rw-tv .rw-fol{display:none}
         <div class="year-head"><h2 id="yearTitle">The year at a glance</h2><span id="yearRange"></span></div>
         <div class="year-grid" id="yearGrid"></div>
       </section>
+      <div class="sw-camp"><div><b>Summer STEM Camps</b><p>A week of hands-on building, science and racing. See the sessions and sign up.</p></div><a class="btn deep" href="#stem-camps">See camp sessions →</a></div>
     </div>
   </div>
 </div>
@@ -3091,12 +3111,27 @@ body.rw-tv .rw-fol{display:none}
   </div></div>
 </div>
 <div class="page dark prog-page" data-page="stem-camps" hidden>
-  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">STEM Camps</span></div></nav>
-  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">Explore & experiment</p><h1>STEM Camps</h1><p>Hands-on camps that mix building, science and racing. Dates are posted here once they’re set.</p></section>
-    <div class="res-list" data-res="camps"></div>
-    <p class="res-back"><a class="btn outline-red" href="#resources">← All programs &amp; resources</a></p>
-  </div></div>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><a href="#seasonal-workshops">Seasonal Workshops</a><span aria-hidden="true">/</span><span aria-current="page">STEM Camps</span></div></nav>
+  <header class="prog-hero"><div class="wrap">
+    <div class="txt"><p class="eyebrow">Summer STEM Camps</p><h1>STEM Camps</h1><p class="lede">A week of hands-on building, science and racing. Campers design, build and test, then see how their ideas hold up on the hill.</p>
+      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="camps" data-note="Interested in: Summer STEM Camp">Sign up for camp</a><a class="btn outline-red" href="#seasonal-workshops">← Seasonal Workshops</a></div></div>
+    <div class="pic"><img src="img/web/two-cars-track.webp" alt="Two soap box cars racing side by side down the hill" style="object-position:50% 85%"></div>
+  </div></header>
+  <div class="wrap">
+    <section class="camp-sessions" aria-labelledby="campSessH">
+      <div class="camp-head"><h2 id="campSessH">Camp sessions</h2><p>Pick the week that works. Times and the location are emailed to registered families.</p></div>
+      <div class="camp-cards" id="campCards"></div>
+    </section>
+    <div class="panels">
+      <section class="panel"><p class="eyebrow">What campers do</p><h2>Build it, test it, race it</h2><p>Each day mixes a hands-on build with the science behind it: why some cars roll farther, how weight and wheels change speed, and how to make a design better after a test run.</p>
+        <ul class="feature-list"><li>Design &amp; build</li><li>Gravity, friction &amp; speed</li><li>Test runs</li><li>Teamwork</li></ul></section>
+      <section class="panel"><p class="eyebrow">Good to know</p><h2>Before you sign up</h2>
+        <dl class="camp-facts"><dt>Ages</dt><dd>To be announced</dd><dt>Days</dt><dd>Monday to Friday, one week per session</dd><dt>Times &amp; place</dt><dd>Emailed to registered families</dd><dt>Cost</dt><dd>To be announced</dd><dt>Questions</dt><dd><a href="mailto:info@flintracing.org">info@flintracing.org</a></dd></dl></section>
+    </div>
+    <section class="camp-files" aria-labelledby="campFilesH" hidden><h2 id="campFilesH">Camp forms &amp; links</h2><div class="res-list" data-res="camps"></div></section>
+    <section class="panel wide next-step"><h2>Ready to sign up?</h2><p>Your request goes to Flint Racing admin for review. Staff will follow up by email with the camp details, forms and next steps. Sending a request does not confirm a place.</p>
+      <div class="cta-row"><a class="btn deep" href="#participate" data-interest="camps" data-note="Interested in: Summer STEM Camp">Sign up for camp</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div></section>
+  </div>
 </div>
 <div class="page dark prog-page" data-page="fun-runs" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#resources">Programs &amp; Resources</a><span aria-hidden="true">/</span><span aria-current="page">Summer Fun Runs</span></div></nav>
@@ -3534,7 +3569,7 @@ body.rw-tv .rw-fol{display:none}
       var ws=inM.filter(function(e){return e.t==="Monthly STEAM Workshop"}), camps=inM.filter(function(e){return e.k==="camp"}), build=inM.some(function(e){return /Building Workshop/.test(e.t)});
       var val,href=null,interest="steam";
       if(ws.length){val="Workshop · Sat "+ws.map(function(e){return pd(e.d).getDate()}).join(", ");href="#participate"}
-      else if(camps.length){val="Summer Camps · "+camps.map(function(e){return pd(e.d).getDate()+"–"+pd(e.e).getDate()}).join(", ");href="#participate";interest="camps"}
+      else if(camps.length){val="Summer Camps · "+camps.map(function(e){return pd(e.d).getDate()+"–"+pd(e.e).getDate()}).join(", ");href="#stem-camps";interest=null}
       else if(build){val="Build season →";href="#building-workshops";interest=null}
       else val="To be announced";
       var cls="ycell"+(ws.length||camps.length?" has":"")+(k===0?" now":"");
@@ -4085,7 +4120,7 @@ window.FRB=(function(){
   function loadEvents(){return db.from("events").select("*").order("start_date").then(function(r){
     if(r.error) throw r.error;
     var list=r.data.map(function(e){var o={id:e.id,d:e.start_date,t:e.title,k:e.kind,desc:e.description,pub:e.published};if(e.end_date)o.e=e.end_date;if(e.to_be_confirmed)o.tbc=1;return o});
-    FR.EVENTS.length=0; list.filter(function(e){return e.pub}).forEach(function(e){FR.EVENTS.push(e)}); return r.data;})}
+    FR.EVENTS.length=0; list.filter(function(e){return e.pub}).forEach(function(e){FR.EVENTS.push(e)}); setTimeout(renderCamps,0); return r.data;})}
   function loadNotes(){return db.from("bulletin_notes").select("*").order("created_at").then(function(r){
     if(r.error) throw r.error; Object.keys(FR.NOTES).forEach(function(k){delete FR.NOTES[k]});
     r.data.forEach(function(n){(FR.NOTES[n.month]=FR.NOTES[n.month]||[]).push({from:n.author,text:n.body||"",file:n.file_url||null,fname:n.file_name||null})}); return r.data;})}
@@ -4929,6 +4964,7 @@ window.FRB=(function(){
   function renderRes(){var h=hashBase(),key=RES_MAP[h];if(!key)return;var box=$('[data-res="'+key+'"]');if(!box)return;
     (RES_CACHE?Promise.resolve(RES_CACHE):db.from("resources").select("*").order("sort_order").then(function(r){RES_CACHE=r.error?[]:(r.data||[]).filter(function(x){return x.published});return RES_CACHE})).then(function(list){
       var mine=list.filter(function(x){return x.page===key});
+      var wrapSec=box.closest(".camp-files");if(wrapSec)wrapSec.hidden=!mine.length;
       box.innerHTML=mine.length?mine.map(function(x){var isFile=/\/site-files\//.test(x.url||"");return '<article class="res-item">'+(x.event_date?'<p class="res-date">'+fmtDate(x.event_date,{weekday:"long",month:"long",day:"numeric",year:"numeric"})+'</p>':'')+'<h3>'+esc(x.title)+'</h3>'+(x.description?'<p>'+esc(x.description)+'</p>':'')+(x.url?'<a class="btn deep" href="'+esc(x.url)+'" target="_blank" rel="noopener">'+(isFile?"Download":"Open link")+' →</a>':'')+'</article>'}).join(""):
         '<div class="res-empty"><h3>Nothing posted yet.</h3><p>We post here as soon as it’s ready. Questions? Email <a href="mailto:info@flintracing.org">info@flintracing.org</a>.</p></div>'})}
 
@@ -4962,6 +4998,19 @@ window.FRB=(function(){
   function bindTop(box){var o=$("[data-out]",box);if(o)o.onclick=signOut}
 
 
+
+  /* ---------- STEM Camps: session cards from the calendar ---------- */
+  function renderCamps(){var box=document.getElementById("campCards");if(!box||hashBase()!=="stem-camps")return;
+    var today=new Date().toISOString().slice(0,10),camps=(FR.EVENTS||[]).filter(function(e){return e.k==="camp"}).sort(function(a,b){return a.d>b.d?1:-1});
+    var up=camps.filter(function(e){return (e.e||e.d)>=today});
+    var M=["January","February","March","April","May","June","July","August","September","October","November","December"],D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    var pdx=function(x){var p=x.split("-");return new Date(+p[0],+p[1]-1,+p[2])};
+    var range=function(e){var a=pdx(e.d),b=pdx(e.e||e.d);return a.getMonth()===b.getMonth()?M[a.getMonth()]+" "+a.getDate()+(e.e?"–"+b.getDate():"")+", "+a.getFullYear():M[a.getMonth()]+" "+a.getDate()+" – "+M[b.getMonth()]+" "+b.getDate()+", "+b.getFullYear()};
+    var days=function(e){var a=pdx(e.d),b=pdx(e.e||e.d);return D[a.getDay()]+(e.e?"–"+D[b.getDay()]:"")};
+    if(!up.length){box.innerHTML='<div class="camp-empty">Next summer’s camp dates aren’t posted yet. <a href="#participate" data-interest="camps" data-note="Interested in: Summer STEM Camp">Sign up for camp news</a> and we’ll email you when they are.</div>';return}
+    box.innerHTML=up.map(function(e,n){var name=(String(e.t).split("·")[1]||"Session "+(n+1)).trim(),when=range(e);
+      return '<article class="camp-card"><span class="camp-n">'+esc(name)+(e.tbc?' · To be confirmed':'')+'</span><h3>'+esc(when.replace(/, \d{4}$/,""))+'</h3><p>'+esc(days(e))+' · '+esc(String(pdx(e.d).getFullYear()))+'</p>'+
+        '<a class="btn deep" href="#participate" data-interest="camps" data-note="'+esc("Interested in: Summer STEM Camp, "+name+" ("+when+")")+'">Sign up for '+esc(name)+'</a></article>'}).join("")}
   /* ---------- Workshop check-in kiosk (#kiosk) ----------
      Runs on a tablet signed in as workshop staff. Families type their 4-digit family code, tap the kids who are here,
      and the screen goes back to the keypad. Each event day starts at zero; headcounts live in Workshop sign-in. */
@@ -5212,7 +5261,7 @@ window.FRB=(function(){
   /* ---------- Route the new pages ---------- */
   function renderPortals(){var h=hashBase();
     if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews();
-    renderKiosk();renderWS();renderVol();renderPH();renderTE();}
+    renderKiosk();renderCamps();renderWS();renderVol();renderPH();renderTE();}
   window.addEventListener("hashchange",renderPortals);
   /* ---------- Admin → Families: private times and places ---------- */
   function famKind(e){return (e.kind||"")+"|"+String(e.title||"").split("·")[0].replace(/\s+/g," ").trim().toLowerCase()}
