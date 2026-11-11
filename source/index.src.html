@@ -607,6 +607,51 @@ a.s-card{text-decoration:none;transition:transform .15s}a.s-card:hover{transform
 .race-plan p{color:#fde8ea;margin-top:8px;max-width:60ch}
 .race-plan .btn{margin-right:30px}
 @media (max-width:700px){.race-plan{grid-template-columns:1fr}.race-plan .btn{justify-self:start}}
+
+/* ===== Track & Racing: How it works (#how-racing) ===== */
+.hiw{margin-top:clamp(2.5rem,5vw,3.5rem);display:grid;gap:clamp(18px,2.4vw,26px);scroll-margin-top:96px}
+.hiw-head{display:grid;gap:10px;max-width:70ch}
+.hiw-k{margin:0;font:700 .74rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+.hiw-head h2{margin:0;font-size:clamp(2.2rem,4.5vw,3rem);color:#fff;text-wrap:balance}
+.hiw-lede{margin:0;color:#d6d8dc;font-size:1.08rem;line-height:1.6}
+.hiw-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;position:relative}
+.hiw-steps::before{content:"";position:absolute;left:28px;right:28px;top:27px;border-top:3px dashed rgba(255,255,255,.28)}
+.hiw-steps li{position:relative;display:grid;gap:8px;align-content:start}
+.hiw-n{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#0c0c10;border:3px solid #fff;color:#fff;font:800 1.6rem/1 var(--display);position:relative;z-index:1}
+.hiw-fin .hiw-n{background:var(--red-deep);border-color:#fff;box-shadow:0 0 0 4px #0c0c10,0 0 0 7px #fff}
+.hiw-steps h3{margin:6px 0 0;font-size:1.45rem;color:#fff}
+.hiw-steps p{margin:0;color:#c9cbd0;max-width:30ch}
+.hiw-sub{margin:10px 0 0;font-size:1.5rem;color:#fff}
+.hiw-paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.hiw-path{background:#fff;color:var(--ink);border-radius:4px;border-left:10px solid var(--ink);padding:clamp(16px,2vw,22px);display:grid;gap:8px;align-content:start}
+.hiw-path h4{margin:0;font:800 1.5rem/1.05 var(--display);text-transform:uppercase}
+.hiw-path p{margin:0;color:#3b3e45}
+.hiw-path .btn{justify-self:start;margin-top:4px}
+.hiw-own{border-left-color:var(--red-deep)}
+.hiw-tag{font:700 .78rem/1 var(--body)!important;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep)!important}
+.hiw-tag b{font:800 2.2rem/1 var(--display);letter-spacing:0;margin-right:4px;vertical-align:-4px;color:var(--ink)}
+.hiw-visits{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:6px}
+.hiw-visits li{display:flex;align-items:center;gap:10px;font-weight:700}
+.hiw-visits li::before{content:"";flex:none;width:14px;height:14px;border-radius:50%;border:3px solid var(--red-deep)}
+.hiw-free{background:var(--red-deep);color:#fff;border-radius:4px;padding:clamp(18px,2.6vw,28px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(16px,3vw,36px);align-items:center;position:relative;overflow:hidden}
+.hiw-free::after{content:"";position:absolute;right:0;top:0;bottom:0;width:22px;background:conic-gradient(#fff 25%,#111 0 50%,#fff 0 75%,#111 0) 0 0/11px 11px;opacity:.9}
+.hiw-free>div{position:relative;z-index:1;min-width:0}
+.hiw-free-h{margin:0 0 6px;font:800 clamp(1.9rem,4vw,2.7rem)/1 var(--display);text-transform:uppercase}
+.hiw-free p{margin:0}
+.hiw-reg{display:grid;gap:12px;padding-right:20px}
+.hiw-acts{display:flex;gap:10px;flex-wrap:wrap}
+.btn.white-ghost{background:transparent;color:#fff;border:2px solid #fff}
+.btn.white-ghost:hover,.btn.white-ghost:focus-visible{background:#fff;color:var(--red-deep)}
+@media (max-width:900px){
+  .hiw-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}.hiw-steps::before{display:none}
+  .hiw-paths{grid-template-columns:minmax(0,1fr)}
+  .hiw-free{grid-template-columns:minmax(0,1fr)}.hiw-free::after{display:none}.hiw-reg{padding-right:0}}
+@media (max-width:520px){
+  .hiw-steps{grid-template-columns:minmax(0,1fr)}
+  .hiw-steps li{grid-template-columns:56px minmax(0,1fr);column-gap:14px}
+  .hiw-steps li .hiw-n{grid-row:span 2}
+  .hiw-steps h3{margin:0;align-self:end}
+  .hiw-steps::before{display:block;left:27px;right:auto;top:28px;bottom:28px;border-top:0;border-left:3px dashed rgba(255,255,255,.28)}}
 .sec-title{font-size:clamp(2.2rem,4.5vw,3rem);color:#fff;margin:clamp(2.5rem,5vw,3.5rem) 0 16px}
 .sec-title small{display:block;font:700 .74rem/1 var(--body);letter-spacing:.16em;color:var(--pink);margin-bottom:10px}
 
@@ -2475,6 +2520,33 @@ body.rw-tv .rw-fol{display:none}
       <section class="panel"><h2>Racing throughout the year</h2><p>Explore our racing formats below. Dates and formats are confirmed through each published event; an overview is not a promise that registration is open.</p></section>
     </div>
 
+
+    <section class="hiw" id="how-racing" aria-labelledby="hiwH">
+      <div class="hiw-head">
+        <p class="hiw-k">How it works</p>
+        <h2 id="hiwH">From the first bolt to the finish line</h2>
+        <p class="hiw-lede">Here’s how a season comes together. Schools and groups sign up, build their own soap box cars side by side with our crew, take them out for practice runs, then race for real in our sanctioned race. The winner earns a trip to nationals in Akron, Ohio.</p>
+      </div>
+      <ol class="hiw-steps">
+        <li><span class="hiw-n" aria-hidden="true">1</span><h3>Sign up</h3><p>Your school or group registers for our building workshop.</p></li>
+        <li><span class="hiw-n" aria-hidden="true">2</span><h3>Build together</h3><p>Six weeks of hands-on, side-by-side building. Every team rolls out with a car of its own.</p></li>
+        <li><span class="hiw-n" aria-hidden="true">3</span><h3>Practice runs</h3><p>Get a feel for the hill at Cronin Derby Downs before it counts.</p></li>
+        <li class="hiw-fin"><span class="hiw-n" aria-hidden="true">4</span><h3>Race day</h3><p>Compete in our sanctioned race. The winner heads to nationals in Akron, Ohio.</p></li>
+      </ol>
+      <h3 class="hiw-sub">Two ways for schools and groups to join</h3>
+      <div class="hiw-paths">
+        <article class="hiw-path"><p class="hiw-tag"><b>6</b> weeks</p><h4>Local schools</h4><p>Build with us for six weeks in a row, from the first piece to a finished, race-ready car.</p></article>
+        <article class="hiw-path"><p class="hiw-tag"><b>3</b> visits</p><h4>Out-of-town schools &amp; groups</h4><p>Coming from farther away? Our limited program fits the drive. You join us just three times:</p>
+          <ul class="hiw-visits"><li>Information night</li><li>Shell reveal day</li><li>Impound &amp; race day</li></ul></article>
+        <article class="hiw-path hiw-own"><p class="hiw-tag">Your way</p><h4>Racers &amp; families</h4><p>Individual racers are welcome in our race. Local families and builders who want to build a car together can reach out, and we’ll talk through your options.</p>
+          <a class="btn outline-red" href="#participate" data-interest="racing" data-note="Interested in: building a car as a family or individual racer">Talk to us about building</a></article>
+      </div>
+      <div class="hiw-free">
+        <div><p class="hiw-free-h">Free to race. Free to eat.</p><p>Every participant takes part at no cost, and every participant and volunteer eats free.</p></div>
+        <div class="hiw-reg"><p><b>Registration is required, in two parts:</b> one for the building workshop and a separate one for race day. Signing up for one doesn’t sign you up for the other.</p>
+          <div class="hiw-acts"><a class="btn white" href="#participate" data-interest="building" data-note="Registering for: building workshop">Register for a building workshop</a><a class="btn white-ghost" href="#participate" data-interest="racing" data-note="Registering for: race day">Register to race</a></div></div>
+      </div>
+    </section>
     <h2 class="sec-title"><small>Pick your lane</small>Explore the racing formats</h2>
     <div class="lanes4">
       <details class="lane4"><summary><span class="ln">Lane 1</span><span><h3>Community &amp; School Racing</h3><p>Celebrate the cars, teamwork and skills developed by our school and community building groups.</p></span><span class="go" aria-hidden="true">›</span></summary>
@@ -3244,7 +3316,7 @@ body.rw-tv .rw-fol{display:none}
           <div><h3>Follow your racer</h3><p>Tap Follow on any racer and their next heat and results stay at the top of your screen.</p></div>
           <div><h3>Cheer them on</h3><p>Send a shout-out from the stands. Our team shares them on the big screen.</p></div>
         </div>
-        <div class="row"><a class="rw-btn red" href="#calendar">See the calendar</a><a class="rw-btn" href="#racing">About racing</a></div>
+        <div class="row"><a class="rw-btn red" href="#calendar">See the calendar</a><a class="rw-btn" href="#how-racing">How racing works</a></div>
       </div>
       <div id="rwOn" hidden aria-live="polite"></div>
     </section>
@@ -3341,6 +3413,7 @@ body.rw-tv .rw-fol{display:none}
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
+  var PAGE_ANCHORS={"how-racing":"racing"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
@@ -3348,6 +3421,7 @@ body.rw-tv .rw-fol{display:none}
   function route(){
     var h=(location.hash||"#home").slice(1); if(h.indexOf("crew/")===0) h="crew"; if(h.indexOf("my-dashboard/")===0) h="my-dashboard";
     if(ALIAS[h]){pendingInterest=pendingInterest||ALIAS[h];h="participate"}
+    var anchor=null; if(PAGE_ANCHORS[h]){anchor=h;h=PAGE_ANCHORS[h]}
     var real=document.querySelector('[data-page="'+h+'"]');
     var home=!!HOME_ANCHORS[h]||(!NAMES[h]&&!real);
     var show=home?"home":(real?h:"stub");
@@ -3358,7 +3432,8 @@ body.rw-tv .rw-fol{display:none}
     if(show==="seasonal-workshops") renderSeasons();
     closeMenus();
     if(home){ if(h!=="home"&&HOME_ANCHORS[h]){var t=document.getElementById(h);if(t){var y=t.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-8;scrollTo(0,y)}} else scrollTo(0,0); document.title="Flint Racing and STEM | Build Something Bigger"; }
-    else { if(show==="stub"){$("#stubTitle").textContent=NAMES[h];$("#stubCrumb").textContent=NAMES[h];} NAMES.about="Our Story"; NAMES.participate="Register / Inquire"; scrollTo(0,0); document.title=NAMES[h]+" | Flint Racing and STEM"; }
+    else { if(show==="stub"){$("#stubTitle").textContent=NAMES[h];$("#stubCrumb").textContent=NAMES[h];} NAMES.about="Our Story"; NAMES.participate="Register / Inquire"; scrollTo(0,0); document.title=NAMES[h]+" | Flint Racing and STEM";
+      if(anchor){var at=document.getElementById(anchor);if(at)requestAnimationFrame(function(){scrollTo(0,at.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-12)})} }
   }
   addEventListener("hashchange",route);
 
