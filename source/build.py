@@ -74,8 +74,8 @@ def build(embed):
     return src
 
 
-# Until launch day: keep the test address out of Google and other search engines
-NOINDEX = True
+# Launched on flintracing.org (Nov 11, 2026). Set True to hide a test copy from search engines.
+NOINDEX = False
 
 CDN_TAG = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>'
 
