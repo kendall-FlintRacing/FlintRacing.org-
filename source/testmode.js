@@ -80,6 +80,8 @@
   Q.prototype.order=function(col,o){this.ord=[col,!(o&&o.ascending===false)];return this};
   Q.prototype.limit=function(){return this};
   Q.prototype.eq=function(k,v){this.f.push([k,v]);return this};
+  Q.prototype.gte=function(k,v){this.f.push([k,v,"gte"]);return this};
+  Q.prototype.lte=function(k,v){this.f.push([k,v,"lte"]);return this};
   Q.prototype.maybeSingle=function(){this.single=true;return this};
   Q.prototype.insert=function(r){this.op="insert";this.row=r;return this};
   Q.prototype.upsert=function(r){this.op="upsert";this.row=r;return this};
@@ -87,7 +89,7 @@
   Q.prototype.delete=function(){this.op="delete";return this};
   Q.prototype.then=function(ok,bad){
     if(!T) seed();
-    var s=this, rows=T[s.t]||(T[s.t]=[]), m=function(r){return s.f.every(function(f){return r[f[0]]===f[1]})}, res;
+    var s=this, rows=T[s.t]||(T[s.t]=[]), m=function(r){return s.f.every(function(f){return f[2]==="gte"?r[f[0]]>=f[1]:f[2]==="lte"?r[f[0]]<=f[1]:r[f[0]]===f[1]})}, res;
     if(s.op==="select"){var d=rows.filter(m).slice();
       if(s.ord){var c=s.ord[0],asc=s.ord[1];d.sort(function(a,b){return (a[c]>b[c]?1:a[c]<b[c]?-1:0)*(asc?1:-1)})}
       res=s.head?{data:null,count:d.length,error:null}:{data:s.single?(d[0]||null):JSON.parse(JSON.stringify(d)),error:null}}
@@ -99,9 +101,13 @@
     return Promise.resolve(res).then(ok,bad);
   };
   var files={};
+  function famCodes(){var used={};(T.members||[]).forEach(function(m){if(m.family_code)used[m.family_code]=1});
+    (T.members||[]).forEach(function(m){if(!m.family_code&&m.status==="approved"&&(m.roles||[]).indexOf("family")>=0){var c=m.username==="taylorfamily"?"4821":m.username==="morganfam"?"3057":null;
+      while(!c||used[c]){c=String(Math.floor(Math.random()*10000)).padStart(4,"0")}m.family_code=c;used[c]=1}})}
+  var KFAIL=[];
   window.supabase={createClient:function(){return{
-    from:function(t){return new Q(t)},
-    rpc:function(fn,args){if(!T)seed();T.race_roles=T.race_roles||[];
+    from:function(t){if(T&&t==="members")famCodes();return new Q(t)},
+    rpc:function(fn,args){if(!T)seed();T.race_roles=T.race_roles||[];famCodes();
       if(fn==="set_race_role"){T.race_roles=T.race_roles.filter(function(x){return x.role!==args.p_role});T.race_roles.push({role:args.p_role,user_id:"u-"+args.p_email,email:args.p_email});save();return Promise.resolve({data:args.p_email,error:null})}
       if(fn==="clear_race_role"){T.race_roles=T.race_roles.filter(function(x){return x.role!==args.p_role});save();return Promise.resolve({data:null,error:null})}
       var R=function(d,e){return Promise.resolve({data:d===undefined?null:d,error:e?{message:e}:null})};
@@ -144,7 +150,23 @@
         T.msess[user.id]={mid:mm.id,exp:Date.now()+(args.p_keep?30*864e5:12*36e5)};mm.last_seen_at=new Date().toISOString();mlog(mm.id,un,"sign_in",args.p_keep?"kept signed in":"this visit");save();
         return R({ok:true,username:mm.username,display_name:mm.display_name,roles:mm.roles})}
       if(fn==="member_signout"){var c0=curM();if(c0)mlog(c0.id,c0.username,"sign_out");if(user)delete T.msess[user.id];save();return R(null)}
-      if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year}:null)}
+      if(fn==="my_member"){var c1=curM();return R(c1?{id:c1.id,username:c1.username,display_name:c1.display_name,kind:c1.kind,roles:c1.roles,first_year:c1.first_year,family_code:c1.family_code||null}:null)}
+      if(fn==="kiosk_lookup"||fn==="kiosk_checkin"){var today=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+        var fm=T.members.filter(function(m){return m.family_code===args.p_code&&m.status==="approved"&&(m.roles||[]).indexOf("family")>=0})[0];
+        var last=function(m){return String(m.display_name).trim().split(/\s+/).pop()};
+        if(fn==="kiosk_lookup"){KFAIL=KFAIL.filter(function(x){return Date.now()-x<12e4});if(KFAIL.length>=5)return R({ok:false,locked:true});
+          if(!fm){KFAIL.push(Date.now());return R({ok:false,locked:KFAIL.length>=5})}
+          var s0=T.workshop_signins.filter(function(w){return w.member_id===fm.id&&w.session_date===today})[0];
+          return R({ok:true,family:last(fm),kids:(fm.kids||[]).map(function(k){return k.name}).filter(Boolean),already:s0?s0.kid_names||[]:[],adults:s0?s0.volunteers:null,at:s0?s0.created_at:null})}
+        if(!fm)return R(null,"That code didn’t match");
+        var names=(fm.kids||[]).map(function(k){return k.name}).filter(function(n){return (args.p_kids||[]).indexOf(n)>=0});
+        if(!names.length)return R(null,"Pick at least one racer");
+        var ad=Math.max(0,Math.min(10,+args.p_adults||0)),ex=T.workshop_signins.filter(function(w){return w.member_id===fm.id&&w.session_date===today})[0];
+        if(ex){ex.kids=names.length;ex.kid_names=names;ex.volunteers=ad;ex.source="kiosk";if(args.p_event)ex.event_id=args.p_event}
+        else T.workshop_signins.push({id:"ws"+Date.now(),created_at:new Date().toISOString(),session_date:today,event_id:args.p_event||null,team:null,last_name:last(fm),kids:names.length,volunteers:ad,notes:null,member_id:fm.id,kid_names:names,source:"kiosk"});
+        save();return R({ok:true,kids:names})}
+      if(fn==="admin_new_family_code"){var tm=T.members.filter(function(m){return m.id===args.p_id})[0];if(!tm)return R(null,"Profile not found");
+        var nc;do{nc=String(Math.floor(Math.random()*10000)).padStart(4,"0")}while(T.members.some(function(m){return m.family_code===nc}));tm.family_code=nc;save();return R(nc)}
       if(fn==="my_profile"){var c2=curM();if(!c2)return R(null);var hs=T.member_hours.filter(function(h){return h.member_id===c2.id}).sort(function(a,b){return a.started_at<b.started_at?1:-1});
         var days=function(k){var o={};hs.forEach(function(h){if(k.indexOf(h.kind)>=0)o[h.started_at.slice(0,10)]=1});return Object.keys(o).length},yrs={};yrs[c2.first_year]=1;hs.forEach(function(h){yrs[h.started_at.slice(0,4)]=1});
         var op=hs.filter(function(h){return !h.ended_at&&Date.now()-new Date(h.started_at)<16*36e5})[0];

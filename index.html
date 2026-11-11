@@ -1656,6 +1656,79 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .news-post details p{margin-top:10px;color:#2a2d33}
 /* ===== Race control console ===== */
 .rk-page{background:#e9ebee;min-height:80vh;padding:clamp(1rem,2.5vw,1.6rem) 0 3rem}
+/* ===== Workshop check-in kiosk (#kiosk): full screen, touch first ===== */
+html.kiosk-on header.site-nav,html.kiosk-on footer.site-foot,html.kiosk-on .fr-test,html.kiosk-on .fr-pill{display:none!important}
+html.kiosk-on body{background:#0e0f12}
+.kiosk-page{--ki-ink:#0e0f12;--ki-panel:#18191e;--ki-line:#2c2e35;--ki-dim:#a3a6ae;--ki-ok:#2fbf71;
+  min-height:100vh;min-height:100dvh;background:var(--ki-ink);background-image:radial-gradient(rgba(255,255,255,.05) .8px,transparent .8px);background-size:6px 6px;color:#fff;
+  display:flex;justify-content:center;padding-block:max(18px,env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.kiosk-page{align-items:center}
+.ki-box{width:min(620px,100%);display:flex;flex-direction:column;gap:18px}
+@media (min-height:860px) and (min-width:600px){.ki-box{width:min(700px,100%);gap:24px}.ki-pad{width:min(480px,100%);gap:16px}.ki-pad button{min-height:100px;font-size:2.8rem}.ki-kid{min-height:96px;font-size:1.8rem}.ki-go{min-height:84px;font-size:1.9rem}.ki-card{padding:36px}}
+.ki-box .rk-card{color:var(--ink)}
+.ki-load{color:var(--ki-dim);text-align:center;margin-top:30vh}
+.ki-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;border-bottom:4px solid var(--red);padding-bottom:12px}
+.ki-head p{margin:0;font:700 .78rem/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;color:#ff5a60}
+.ki-head h1{margin:.15em 0 0;font:italic 800 clamp(1.9rem,6vw,2.8rem)/.95 var(--display);text-transform:uppercase;text-wrap:balance}
+.ki-head .ki-date{font:600 1rem/1.2 var(--body);color:var(--ki-dim);letter-spacing:0;text-transform:none}
+.ki-card{background:var(--ki-panel);border:1px solid var(--ki-line);border-radius:16px;padding:clamp(18px,4vw,30px);display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
+.ki-card h2{margin:0;font:800 clamp(1.7rem,5vw,2.3rem)/1 var(--display);text-transform:uppercase}
+.ki-card>p{margin:0;color:var(--ki-dim);font-size:1.02rem;max-width:42ch}
+.ki-dots{display:flex;gap:16px;margin:6px 0}
+.ki-dots span{width:24px;height:24px;border-radius:50%;border:3px solid #6b6e77;transition:background .12s,border-color .12s}
+.ki-dots span.on{background:#fff;border-color:#fff}
+.ki-dots.bad{animation:kiShake .35s}
+@keyframes kiShake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.ki-msg{min-height:1.4em;margin:0;font-weight:700;color:#ff6a6f}
+.ki-msg.ok{color:var(--ki-dim);font-weight:600}
+.ki-pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(400px,100%)}
+.ki-pad button{min-height:76px;border-radius:14px;border:0;background:#2a2c33;color:#fff;font:800 2.2rem/1 var(--display);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.ki-pad button:active{background:var(--red);transform:scale(.97)}
+.ki-pad button.ki-fn{font:700 1rem/1 var(--body);background:transparent;border:2px solid #3a3c44;color:var(--ki-dim)}
+.ki-pad button:disabled{opacity:.35;cursor:not-allowed}
+.ki-kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;width:100%}
+.ki-kid{display:flex;align-items:center;gap:14px;min-height:78px;padding:12px 16px;border-radius:14px;border:3px solid #3a3c44;background:#22242a;color:#fff;font:800 1.5rem/1.1 var(--display);text-transform:uppercase;text-align:left;cursor:pointer;touch-action:manipulation}
+.ki-kid i{flex:none;width:34px;height:34px;border-radius:8px;border:3px solid #6b6e77;display:grid;place-items:center;font-style:normal;font:900 1.3rem/1 var(--body)}
+.ki-kid[aria-pressed="true"]{border-color:var(--red);background:#3a1517}
+.ki-kid[aria-pressed="true"] i{background:var(--red);border-color:var(--red)}
+.ki-kid[aria-pressed="true"] i::before{content:"✓"}
+.ki-adults{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;color:var(--ki-dim);font-weight:600}
+.ki-step{display:flex;align-items:center;gap:6px}
+.ki-step button{width:56px;height:56px;border-radius:12px;border:0;background:#2a2c33;color:#fff;font:800 1.8rem/1 var(--display);cursor:pointer}
+.ki-step b{min-width:44px;font:800 2rem/1 var(--display);color:#fff;font-variant-numeric:tabular-nums}
+.ki-go{width:100%;min-height:68px;border:0;border-radius:14px;background:var(--red);color:#fff;font:800 1.6rem/1 var(--display);text-transform:uppercase;cursor:pointer}
+.ki-go:disabled{background:#3a3c44;color:#8a8d95;cursor:not-allowed}
+.ki-back{background:none;border:0;color:var(--ki-dim);font:600 1rem/1 var(--body);text-decoration:underline;cursor:pointer;padding:8px}
+.ki-done{border-color:var(--ki-ok)}
+.ki-flag{width:84px;height:84px;border-radius:50%;background:var(--ki-ok);display:grid;place-items:center;font:900 2.8rem/1 var(--body)}
+.ki-done h2{font-size:clamp(2rem,6vw,2.8rem)}
+.ki-names{font:800 1.5rem/1.2 var(--display);text-transform:uppercase;color:#fff;margin:0}
+.ki-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--ki-dim);font-size:.92rem}
+.ki-foot b{color:#fff;font-variant-numeric:tabular-nums}
+.ki-exit{background:none;border:1px solid #3a3c44;color:#8a8d95;border-radius:8px;padding:9px 12px;font:600 .82rem/1 var(--body);cursor:pointer;position:relative;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+.ki-exit::after{content:"";position:absolute;inset:0;background:rgba(210,20,28,.45);transform:scaleX(0);transform-origin:left}
+.ki-exit.hold::after{transform:scaleX(1);transition:transform 1.5s linear}
+.ki-exit span{position:relative}
+.ki-kbd{position:absolute;left:-9999px}
+@media (prefers-reduced-motion:reduce){.ki-dots.bad{animation:none}.ki-exit.hold::after{transition:none}}
+/* Workshop sign-in: kiosk link and headcount by event */
+.ws-kiosk{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#111216;color:#fff;border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.ws-kiosk p{margin:0;font-size:.9rem;color:#c9cbd1;max-width:46ch}
+.ws-kiosk a{background:var(--red);color:#fff;border-radius:8px;padding:10px 14px;font:700 .92rem/1 var(--body);text-decoration:none;white-space:nowrap}
+.ws-tag{display:inline-block;font:700 .68rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;background:#111216;color:#fff;border-radius:4px;padding:3px 5px;margin-left:6px;vertical-align:2px}
+.ws-hc{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+.ws-hc th,.ws-hc td{padding:7px 6px;border-bottom:1px solid #e3e5e9;text-align:right}
+.ws-hc th:first-child,.ws-hc td:first-child,.ws-hc th:nth-child(2),.ws-hc td:nth-child(2){text-align:left}
+.ws-hc tr.on td{background:#f6e4e5;font-weight:700}
+.ws-hc button{background:none;border:0;padding:0;font:inherit;color:var(--red-deep);text-decoration:underline;cursor:pointer;text-align:left}
+.ws-hcwrap{overflow-x:auto}
+/* Family dashboard: kiosk code */
+.me-code{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.me-code .me-digits{display:flex;gap:6px}
+.me-code .me-digits span{width:46px;height:58px;border-radius:8px;background:#111216;color:#fff;display:grid;place-items:center;font:800 2.1rem/1 var(--display)}
+.me-code p{margin:0;max-width:46ch}
+.mb-code b{font:800 1.15rem/1 var(--display);letter-spacing:.12em;margin-right:8px}
+
 /* breadcrumb bar sits flush under the site header, lined up with the page title */
 .rk-page>.crumbs{margin:calc(-1*clamp(1rem,2.5vw,1.6rem)) 0 clamp(1rem,2.5vw,1.6rem)}.rk-page>.crumbs .wrap{max-width:1240px}
 .cal-page>.crumbs{margin:calc(-1*clamp(2rem,5vw,3.5rem)) 0 clamp(2rem,5vw,3.5rem)}
@@ -3079,6 +3152,7 @@ body.rw-tv .rw-fol{display:none}
 <div class="page rk-page" data-page="workshop-signin" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="workshop-signin"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="wsBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="volunteers" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="volunteers"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="volBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 <div class="page rk-page" data-page="photographer" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="photographer"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="phBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
+<div class="page kiosk-page" data-page="kiosk" hidden><div id="kioskBox" class="ki-box"><p class="ki-load">Loading the check-in kiosk…</p></div></div>
 <div class="page rk-page" data-page="teacher" hidden><nav class="crumbs" aria-label="Breadcrumb" data-crumbs="teacher"><div class="wrap"><a href="#home">Home</a></div></nav><div class="wrap rk-wrap"><div id="teBox" class="rk-box"><div class="rk-card"><p>Loading…</p></div></div></div></div>
 
 <!-- ======================= ADMIN PORTAL ======================= -->
@@ -3209,7 +3283,7 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
@@ -3935,12 +4009,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
@@ -4130,7 +4204,7 @@ window.FRB=(function(){
     ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["spirit","Spirit Shop","Shirts, hats and product photos","shirt"],["partners","Partners","Sponsor and partner logos","star"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
     ["Fundraising",[["donate","Donations","Connect the Donate page to Stripe checkout","heart"]]],
     ["Race day",[["race","Race day setup","Racers, brackets, sponsors, ads and the race-day team","flag"]]]];
-  var RLINKS=[["#race-control","Race control","live"],["#track-manager","Track operations","star","so"],["#volunteers","Volunteer lists","users","vol"],["#workshop-signin","Workshop sign-in","check"],["#race-watch","Spectator view","ext"]];
+  var RLINKS=[["#race-control","Race control","live"],["#track-manager","Track operations","star","so"],["#volunteers","Volunteer lists","users","vol"],["#workshop-signin","Workshop sign-in","check"],["#kiosk","Check-in kiosk","grid"],["#race-watch","Spectator view","ext"]];
   function sectOf(k){var o=null;SECT.forEach(function(g){g[1].forEach(function(s){if(s[0]===k)o={g:g[0],k:s[0],t:s[1],d:s[2],i:s[3],b:s[4]}})});return o}
   function admCounts(){return Promise.all([db.from("members").select("id",{count:"exact",head:true}).eq("status","pending"),db.from("inquiries").select("id",{count:"exact",head:true}).eq("status","new"),
       db.from("albums").select("id",{count:"exact",head:true}).eq("status","submitted"),db.from("teacher_plans").select("id",{count:"exact",head:true}).eq("status","submitted"),
@@ -4318,7 +4392,7 @@ window.FRB=(function(){
     if(/network|fetch/i.test(t)) return "Couldn’t reach the server. Check your internet connection.";
     if(/same password|different from the old/i.test(t)) return "Choose a password you haven’t used here before.";
     return "Something went wrong: "+t}
-  function authMainPx(){var h=location.hash;return h==="#admin"?"adm":h==="#race-control"?"rks":h==="#track-manager"?"tms":h==="#workshop-signin"?"wss":h==="#volunteers"?"vos":h==="#photographer"?"phs":h==="#teacher"?"tes":"acc"}
+  function authMainPx(){var h=location.hash;return h==="#admin"?"adm":h==="#race-control"?"rks":h==="#track-manager"?"tms":h==="#workshop-signin"?"wss":h==="#kiosk"?"kis":h==="#volunteers"?"vos":h==="#photographer"?"phs":h==="#teacher"?"tes":"acc"}
   function signOut(){setEditing(false);var was=ME;ME=null;PD.data=null;LOGGED={};
     (was?db.rpc("member_signout").then(function(){},function(){}):Promise.resolve()).then(function(){return db.auth.signOut()}).then(function(){toast("Signed out")})}
 
@@ -4887,16 +4961,89 @@ window.FRB=(function(){
     return '<div class="rk-top"><div class="rk-tt"><p class="rk-k">'+esc(kicker)+'</p><h1>'+esc(title)+'</h1></div><div class="rk-who"><span>'+esc(name)+' · '+esc(IS_ADMIN?"Admin":role)+'</span><a class="mini" href="'+(ME?"#my-dashboard":"#admin")+'">'+(ME?"My dashboard":"Admin")+'</a><button class="mini" type="button" data-out="1">Sign out</button></div></div>'}
   function bindTop(box){var o=$("[data-out]",box);if(o)o.onclick=signOut}
 
+
+  /* ---------- Workshop check-in kiosk (#kiosk) ----------
+     Runs on a tablet signed in as workshop staff. Families type their 4-digit family code, tap the kids who are here,
+     and the screen goes back to the keypad. Each event day starts at zero; headcounts live in Workshop sign-in. */
+  var KI={code:"",step:"pad",fam:null,sel:{},adults:1,busy:false,lockUntil:0,idle:null,back:null,lock:null,count:null};
+  function kiEvent(){var d=todayISO(),ev=FR.EVENTS.filter(function(e){return e.d<=d&&(e.e||e.d)>=d});
+    return ev.filter(function(e){return e.k==="workshop"})[0]||ev[0]||null}
+  function kiReset(){clearTimeout(KI.idle);clearTimeout(KI.back);KI.code="";KI.step="pad";KI.fam=null;KI.sel={};KI.adults=1;KI.busy=false;kiDraw()}
+  function kiIdle(){clearTimeout(KI.idle);KI.idle=setTimeout(function(){if(hashBase()==="kiosk"&&KI.step!=="pad")kiReset()},60000)}
+  function kiWake(){try{if(navigator.wakeLock&&document.visibilityState==="visible")navigator.wakeLock.request("screen").then(function(l){KI.lock=l},function(){})}catch(e){}}
+  function kiCount(){db.from("workshop_signins").select("kids,volunteers").eq("session_date",todayISO()).then(function(r){if(r.error)return;
+    var k=0,a=0;(r.data||[]).forEach(function(x){k+=x.kids;a+=x.volunteers});KI.count={f:(r.data||[]).length,k:k,a:a};var el=$("#kiCount");if(el)el.innerHTML=kiCountHTML()})}
+  function kiCountHTML(){var c=KI.count;return c?'Here today: <b>'+c.k+'</b> kid'+(c.k===1?'':'s')+' · <b>'+c.f+'</b> famil'+(c.f===1?'y':'ies'):'Here today: …'}
+  function kiNames(a){return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1]}
+  function renderKiosk(){var box=$("#kioskBox"),on=hashBase()==="kiosk";
+    if(!on){document.documentElement.classList.remove("kiosk-on");clearTimeout(KI.idle);clearTimeout(KI.back);if(KI.lock){try{KI.lock.release()}catch(e){}KI.lock=null}return}
+    if(!box)return;
+    if(!gate(box,"kis","Workshop sign-in",IS_ADMIN||STAFF.workshop)){document.documentElement.classList.remove("kiosk-on");return}
+    document.documentElement.classList.add("kiosk-on");kiWake();kiReset();kiCount()}
+  function kiDraw(){var box=$("#kioskBox");if(!box||hashBase()!=="kiosk")return;var ev=kiEvent(),f=KI.fam,body="";
+    var head='<header class="ki-head"><div><p>Flint Racing &amp; STEM · Check-in</p><h1>'+esc(ev?ev.t:"Workshop day")+'</h1></div><p class="ki-date">'+esc(fmtDate(todayISO(),{weekday:"long",month:"long",day:"numeric"}))+'</p></header>';
+    if(KI.step==="pad"){var locked=Date.now()<KI.lockUntil;
+      body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Enter your family code</h2><p>Your 4-digit code is on your family dashboard. A staff member can look it up for you.</p>'+
+        '<div class="ki-dots" id="kiDots" aria-hidden="true">'+[0,1,2,3].map(function(i){return '<span class="'+(i<KI.code.length?'on':'')+'"></span>'}).join("")+'</div>'+
+        '<p class="ki-msg'+(KI.busy?' ok':'')+'" id="kiMsg" role="status">'+(locked?'Too many tries. Please wait a couple of minutes or ask a staff member.':KI.busy?'Checking…':'')+'</p>'+
+        '<label class="ki-kbd" for="kiKbd">Family code</label><input class="ki-kbd" id="kiKbd" inputmode="numeric" autocomplete="off" maxlength="4" tabindex="-1">'+
+        '<div class="ki-pad" role="group" aria-label="Number pad">'+["1","2","3","4","5","6","7","8","9"].map(function(n){return '<button type="button" data-kd="'+n+'"'+(locked||KI.busy?' disabled':'')+'>'+n+'</button>'}).join("")+
+        '<button type="button" class="ki-fn" data-kd="clear"'+(locked||KI.busy?' disabled':'')+'>Clear</button><button type="button" data-kd="0"'+(locked||KI.busy?' disabled':'')+'>0</button><button type="button" class="ki-fn" data-kd="back" aria-label="Delete last digit"'+(locked||KI.busy?' disabled':'')+'>⌫ Back</button></div></section>'}
+    else if(KI.step==="pick"){var kids=f.kids||[],n=kids.filter(function(k){return KI.sel[k]}).length,again=(f.already||[]).length>0;
+      body='<section class="ki-card" aria-labelledby="kiH"><h2 id="kiH">Hi, '+esc(f.family)+' family!</h2>'+
+        (kids.length?'<p>'+(again?'You already checked in today. Change who’s here and tap Update.':'Who’s here today? Tap each racer.')+'</p>'+
+          '<div class="ki-kids">'+kids.map(function(k,i){return '<button type="button" class="ki-kid" data-kk="'+i+'" aria-pressed="'+(!!KI.sel[k])+'"><i aria-hidden="true"></i>'+esc(k)+'</button>'}).join("")+'</div>'+
+          '<div class="ki-adults"><span id="kiAdL">Grown-ups with you</span><div class="ki-step" role="group" aria-labelledby="kiAdL"><button type="button" data-ka="-1" aria-label="One fewer grown-up">−</button><b id="kiAd" aria-live="polite">'+KI.adults+'</b><button type="button" data-ka="1" aria-label="One more grown-up">+</button></div></div>'+
+          '<button type="button" class="ki-go" id="kiGo"'+(n&&!KI.busy?'':' disabled')+'>'+(KI.busy?'Checking in…':n?(again?'Update: ':'Check in ')+n+' racer'+(n===1?'':'s'):'Tap a racer first')+'</button>'
+        :'<p>We don’t have any racers on your family profile yet. Please see a staff member and they’ll sign you in.</p>')+
+        '<button type="button" class="ki-back" id="kiBack">Not the '+esc(f.family)+' family? Start over</button></section>'}
+    else if(KI.step==="done"){
+      body='<section class="ki-card ki-done" aria-labelledby="kiH" role="status"><div class="ki-flag" aria-hidden="true">✓</div><h2 id="kiH">You’re checked in!</h2><p class="ki-names">'+esc(kiNames(f.done||[]))+'</p>'+
+        '<p>'+(KI.adults?KI.adults+' grown-up'+(KI.adults===1?'':'s')+' with you. ':'')+'Have a great build day.</p><button type="button" class="ki-back" id="kiBack">Done · next family</button></section>'}
+    box.innerHTML=head+body+'<footer class="ki-foot"><span id="kiCount">'+kiCountHTML()+'</span><button type="button" class="ki-exit" id="kiExit" title="Staff: press and hold to leave the kiosk"><span>Staff: hold to exit</span></button></footer>';
+    $$("[data-kd]",box).forEach(function(b){b.onclick=function(){kiKey(b.getAttribute("data-kd"))}});
+    $$("[data-kk]",box).forEach(function(b){b.onclick=function(){var k=f.kids[+b.getAttribute("data-kk")];KI.sel[k]=!KI.sel[k];kiIdle();kiDraw()}});
+    $$("[data-ka]",box).forEach(function(b){b.onclick=function(){KI.adults=Math.max(0,Math.min(10,KI.adults+(+b.getAttribute("data-ka"))));kiIdle();kiDraw()}});
+    var go=$("#kiGo");if(go)go.onclick=kiSubmit;
+    var bk=$("#kiBack");if(bk)bk.onclick=kiReset;
+    var ex=$("#kiExit"),ht=null;
+    ex.onpointerdown=function(e){ex.classList.add("hold");ht=setTimeout(function(){location.hash="#workshop-signin"},1500)};
+    ex.onpointerup=ex.onpointerleave=ex.onpointercancel=function(){ex.classList.remove("hold");clearTimeout(ht)};
+    ex.onclick=function(e){if(e.detail===0)location.hash="#workshop-signin"};
+    ex.oncontextmenu=function(e){e.preventDefault()}}
+  function kiKey(k){if(KI.step!=="pad"||KI.busy||Date.now()<KI.lockUntil)return;
+    if(k==="clear")KI.code="";else if(k==="back")KI.code=KI.code.slice(0,-1);else if(/^[0-9]$/.test(k)&&KI.code.length<4)KI.code+=k;
+    kiDraw();if(KI.code.length===4)kiLookup()}
+  function kiBad(msg){KI.code="";KI.busy=false;kiDraw();var d=$("#kiDots"),m=$("#kiMsg");if(m)m.textContent=msg;if(d){d.classList.remove("bad");void d.offsetWidth;d.classList.add("bad")}}
+  function kiLookup(){KI.busy=true;kiDraw();var code=KI.code;
+    db.rpc("kiosk_lookup",{p_code:code}).then(function(r){
+      if(r.error){kiBad(/staff/i.test(r.error.message)?"This tablet needs a workshop staff sign-in.":"Something went wrong. Try again or ask a staff member.");return}
+      var x=r.data||{};
+      if(!x.ok){if(x.locked){KI.lockUntil=Date.now()+120000;setTimeout(function(){if(KI.step==="pad")kiDraw()},120500);kiBad("Too many tries. Please wait a couple of minutes or ask a staff member.")}
+        else kiBad("That code didn’t match. Try again.");return}
+      KI.busy=false;KI.fam={code:code,family:x.family||"",kids:(x.kids||[]).filter(Boolean),already:x.already||[]};KI.sel={};
+      (x.already||[]).forEach(function(k){KI.sel[k]=true});KI.adults=x.adults==null?1:Math.max(0,Math.min(10,+x.adults));
+      KI.step="pick";kiIdle();kiDraw()},function(){kiBad("No connection. Check the Wi-Fi and try again.")})}
+  function kiSubmit(){var f=KI.fam,names=f.kids.filter(function(k){return KI.sel[k]});if(!names.length||KI.busy)return;KI.busy=true;kiDraw();var ev=kiEvent();
+    db.rpc("kiosk_checkin",{p_code:f.code,p_event:ev&&ev.id&&/^[0-9a-f-]{36}$/.test(ev.id)?ev.id:null,p_kids:names,p_adults:KI.adults}).then(function(r){KI.busy=false;
+      if(r.error){toast("Couldn’t check in: "+r.error.message);kiDraw();return}
+      f.done=names;KI.step="done";clearTimeout(KI.idle);kiDraw();kiCount();KI.back=setTimeout(function(){if(KI.step==="done")kiReset()},6000)},function(){KI.busy=false;toast("No connection. Check the Wi-Fi and try again.");kiDraw()})}
+  document.addEventListener("keydown",function(e){if(hashBase()!=="kiosk"||KI.step!=="pad"||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(/^[0-9]$/.test(e.key)){e.preventDefault();kiKey(e.key)}else if(e.key==="Backspace"){e.preventDefault();kiKey("back")}else if(e.key==="Escape"){kiKey("clear")}});
+  document.addEventListener("visibilitychange",function(){if(hashBase()==="kiosk"&&document.visibilityState==="visible"){kiWake();kiCount()}});
   /* ---------- Workshop sign-in (#workshop-signin) ---------- */
   var WS={date:null,edit:null};
   function renderWS(){var box=$("#wsBox");if(!box||hashBase()!=="workshop-signin")return;
     if(!gate(box,"wss","Workshop sign-in",IS_ADMIN||STAFF.workshop))return;
     var d=WS.date||todayISO();WS.date=d;
-    Promise.all([db.from("workshop_signins").select("*").eq("session_date",d).order("created_at",{ascending:false}),db.rpc("public_stats",{p_year:+d.slice(0,4)})]).then(function(r){
+    Promise.all([db.from("workshop_signins").select("*").eq("session_date",d).order("created_at",{ascending:false}),db.rpc("public_stats",{p_year:+d.slice(0,4)}),db.from("workshop_signins").select("session_date,kids,volunteers").gte("session_date",d.slice(0,4)+"-01-01").lte("session_date",d.slice(0,4)+"-12-31")]).then(function(r){
       if(r[0].error){box.innerHTML='<div class="rk-card"><p>Couldn’t load sign-ins: '+esc(r[0].error.message)+'</p></div>';return}
       var rows=r[0].data||[],st=r[1].data||{},kids=0,vols=0;rows.forEach(function(x){kids+=x.kids;vols+=x.volunteers});
       var wk=FR.EVENTS.filter(function(e){return e.k==="workshop"&&e.d<=d&&(e.e||e.d)>=d})[0];
+      var HC={};((r[2]&&r[2].data)||[]).forEach(function(x){var h=HC[x.session_date]=HC[x.session_date]||{f:0,k:0,a:0};h.f++;h.k+=x.kids;h.a+=x.volunteers});
+      var hcDays=Object.keys(HC).sort().reverse(),evOn=function(day){var e=FR.EVENTS.filter(function(e){return e.d<=day&&(e.e||e.d)>=day});return (e.filter(function(x){return x.k==="workshop"})[0]||e[0]||{}).t||"—"};
       box.innerHTML=portalTop("Workshop sign-in","Building Workshops","Workshop staff")+
+        '<div class="ws-kiosk"><p><b>Check-in kiosk.</b> Set a tablet out by the door: families type their 4-digit code and tap the kids who are here. It counts into this page.</p><a href="#kiosk">Open the kiosk</a></div>'+
         '<div class="ws-grid"><section class="rk-card ws-form"><div class="ws-day"><label class="f" for="ws-date">Workshop day<input type="date" id="ws-date" value="'+d+'"></label><p>'+(wk?esc(wk.t):'No workshop on the calendar this day. Sign-ins still count.')+'</p></div>'+
           '<form id="wsForm" novalidate><div class="rk-form"><label class="f" for="ws-last">Family last name<input type="text" id="ws-last" maxlength="60" autocomplete="off" required></label><label class="f" for="ws-team">Team or car name<input type="text" id="ws-team" maxlength="80" list="wsTeams" autocomplete="off"></label></div>'+
           '<datalist id="wsTeams">'+rows.map(function(x){return x.team}).filter(function(v,i,a){return v&&a.indexOf(v)===i}).map(function(v){return '<option value="'+esc(v)+'">'}).join("")+'</datalist>'+
@@ -4905,19 +5052,23 @@ window.FRB=(function(){
           '<p class="ws-meals" id="wsMeals"></p><label class="f" for="ws-notes">Notes <small>(optional)</small><input type="text" id="ws-notes" maxlength="300" placeholder="Allergies, first visit, left early…"></label>'+
           '<button class="rk-go" type="submit">Sign them in</button></form></section>'+
         '<section class="rk-card"><div class="ws-totals"><div><b>'+rows.length+'</b><span>Families</span></div><div><b>'+kids+'</b><span>Kids</span></div><div><b>'+vols+'</b><span>Adults</span></div><div><b>'+(kids+vols)+'</b><span>Meals</span></div></div>'+
-          '<h3>Signed in on '+fmtDate(d)+'</h3>'+(rows.length?'<ol class="rk-list">'+rows.map(function(x){return '<li><div><b>'+esc(x.last_name)+'</b>'+(x.team?' <small>'+esc(x.team)+'</small>':'')+'<br><small>'+x.kids+' kid'+(x.kids===1?'':'s')+' · '+x.volunteers+' adult'+(x.volunteers===1?'':'s')+(x.notes?' · '+esc(x.notes):'')+'</small></div><button class="mini red" type="button" data-wdel="'+x.id+'">Remove</button></li>'}).join("")+'</ol>':'<p class="rk-fine">No one signed in yet for this day.</p>')+
+          '<h3>Signed in on '+fmtDate(d)+'</h3>'+(rows.length?'<ol class="rk-list">'+rows.map(function(x){return '<li><div><b>'+esc(x.last_name)+'</b>'+(x.team?' <small>'+esc(x.team)+'</small>':'')+(x.source==="kiosk"?'<span class="ws-tag">Kiosk</span>':'')+'<br><small>'+(x.kid_names&&x.kid_names.length?esc(x.kid_names.join(", "))+' · ':x.kids+' kid'+(x.kids===1?'':'s')+' · ')+x.volunteers+' adult'+(x.volunteers===1?'':'s')+(x.notes?' · '+esc(x.notes):'')+'</small></div><button class="mini red" type="button" data-wdel="'+x.id+'">Remove</button></li>'}).join("")+'</ol>':'<p class="rk-fine">No one signed in yet for this day.</p>')+
           '<div class="row"><button class="mini" type="button" id="wsCsv">Download this day</button><button class="mini" type="button" id="wsCsvAll">Download the season</button></div>'+
+          '<h3 style="margin-top:16px">Headcount by event</h3><p class="rk-fine">Each event day starts at zero. Pick a day to see who came, then download it.</p>'+
+          (hcDays.length?'<div class="ws-hcwrap"><table class="ws-hc"><thead><tr><th>Day</th><th>Event</th><th>Families</th><th>Kids</th><th>Adults</th></tr></thead><tbody>'+hcDays.map(function(day){var h=HC[day];
+            return '<tr'+(day===d?' class="on"':'')+'><td><button type="button" data-hcday="'+day+'">'+esc(fmtDate(day,{month:"short",day:"numeric"}))+'</button></td><td>'+esc(evOn(day))+'</td><td>'+h.f+'</td><td>'+h.k+'</td><td>'+h.a+'</td></tr>'}).join("")+'</tbody></table></div>':'<p class="rk-fine">No sign-ins yet this year.</p>')+
           '<h3 style="margin-top:16px">This season so far</h3><p class="rk-fine">'+(st.sessions||0)+' workshop days · '+(st.kids||0)+' kids · '+(st.meals||0)+' meals served · '+(st.teams||0)+' teams. These can feed the homepage “Work you can see” numbers (Admin → Homepage).</p></section></div>';
       bindTop(box);
       function meals(){var k=+$("#ws-kids").value||0,v=+$("#ws-vols").value||0;$("#wsMeals").textContent="Meals for this family: "+(k+v)}
       $$("[data-step]",box).forEach(function(b){b.onclick=function(){var i=$("#"+b.getAttribute("data-step"));i.value=Math.max(0,Math.min(40,(+i.value||0)+(+b.getAttribute("data-d"))));meals()}});
       $("#ws-kids").oninput=meals;$("#ws-vols").oninput=meals;meals();
       $("#ws-date").onchange=function(){WS.date=this.value||todayISO();renderWS()};
+      $$("[data-hcday]",box).forEach(function(b){b.onclick=function(){WS.date=b.getAttribute("data-hcday");renderWS();window.scrollTo(0,0)}});
       $("#wsForm").onsubmit=function(e){e.preventDefault();var rec={session_date:d,last_name:$("#ws-last").value.trim(),team:$("#ws-team").value.trim()||null,kids:Math.max(0,Math.min(40,+$("#ws-kids").value||0)),volunteers:Math.max(0,Math.min(40,+$("#ws-vols").value||0)),notes:$("#ws-notes").value.trim()||null,event_id:wk&&wk.id&&/^[0-9a-f-]{36}$/.test(wk.id)?wk.id:null};
         if(!rec.last_name){toast("Add the family’s last name.");$("#ws-last").focus();return}
         db.from("workshop_signins").insert(rec).then(function(x){if(okToast(x,rec.last_name+" signed in · "+(rec.kids+rec.volunteers)+" meals")){renderWS();setTimeout(function(){var l=$("#ws-last");if(l)l.focus()},150)}})};
       $$("[data-wdel]",box).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm"){b.textContent="Confirm";return}db.from("workshop_signins").delete().eq("id",b.getAttribute("data-wdel")).then(function(x){if(okToast(x,"Removed"))renderWS()})}});
-      var head=["Date","Last name","Team","Kids","Adults","Meals","Notes"],row=function(x){return [x.session_date,x.last_name,x.team,x.kids,x.volunteers,x.kids+x.volunteers,x.notes]};
+      var head=["Date","Event","Last name","Team","Kids","Racers","Adults","Meals","Checked in at","Notes"],row=function(x){return [x.session_date,evOn(x.session_date),x.last_name,x.team,x.kids,(x.kid_names||[]).join(", "),x.volunteers,x.kids+x.volunteers,x.source==="kiosk"?"Kiosk":"Desk",x.notes]};
       $("#wsCsv").onclick=function(){csv([head].concat(rows.map(row)),"workshop-signins-"+d+".csv")};
       $("#wsCsvAll").onclick=function(){db.from("workshop_signins").select("*").order("session_date").then(function(x){if(okToast(x))csv([head].concat((x.data||[]).filter(function(y){return y.session_date.slice(0,4)===d.slice(0,4)}).map(row)),"workshop-signins-"+d.slice(0,4)+".csv")})};
     });
@@ -5061,7 +5212,7 @@ window.FRB=(function(){
   /* ---------- Route the new pages ---------- */
   function renderPortals(){var h=hashBase();
     if(h==="program-signin")renderPD(); if(h==="printables")renderPrintables(); if(h==="my-dashboard")renderMe(); if(h==="new-profile")renderReg(); if(RES_MAP[h])renderRes(); if(h==="crew")renderCrew(); if(h==="news-page")renderNews();
-    renderWS();renderVol();renderPH();renderTE();}
+    renderKiosk();renderWS();renderVol();renderPH();renderTE();}
   window.addEventListener("hashchange",renderPortals);
   /* ---------- Admin → Families: private times and places ---------- */
   function famKind(e){return (e.kind||"")+"|"+String(e.title||"").split("·")[0].replace(/\s+/g," ").trim().toLowerCase()}
@@ -5248,6 +5399,7 @@ window.FRB=(function(){
         hours:62.5,workshops:18,race_days:2,events:4,years:3,open:null,recent:[{kind:"workshop",started_at:d(2,-3),ended_at:d(2,1)},{kind:"event",started_at:d(12,-4),ended_at:d(12,0)},{kind:"workshop",started_at:d(16,-3),ended_at:d(16,1)}]}}
   var MSPACES=[["#program-signin","Program Dashboard","Dates, times, places and the bulletin",function(){return true},1],
     ["#workshop-signin","Workshop sign-in","Sign families in and count meals",function(){return hasRole("workshop")}],
+    ["#kiosk","Check-in kiosk","Set out a tablet so families check themselves in",function(){return hasRole("workshop")}],
     ["#teacher","Teacher planning","Suggest events and list materials",function(){return hasRole("teacher")}],
     ["#photographer","Photographer","Upload photo albums for review",function(){return hasRole("photographer")}],
     ["#race-control","Race control","Brackets, lights and run times",function(){return hasRole("controller")}],
@@ -5378,6 +5530,7 @@ window.FRB=(function(){
     box.innerHTML='<section class="me-hero"><div class="me-av" aria-hidden="true">'+esc((m.display_name||"?").charAt(0).toUpperCase())+'</div><div><p class="me-k">'+(fam?"Family Pass":"Crew Pass")+' · Since '+esc(m.first_year)+'</p><h1>'+esc(m.display_name)+'</h1><p class="me-u">@'+esc(m.username)+'</p>'+
         '<div class="me-chips">'+(roles.length?roles.map(function(r){return '<span>'+esc(MROLES[r]?MROLES[r][0]:r)+'</span>'}).join(""):'<span>No roles yet</span>')+'</div></div><div class="row"><button class="mini" type="button" id="meOut">Sign out</button></div></section>'+
       '<div class="me-stats">'+tiles.map(function(t){return '<div><b>'+esc(t[0])+'</b><span>'+esc(t[1])+'</span></div>'}).join("")+'</div>'+
+      (fam&&ME&&ME.family_code?'<div class="me-card me-code"><div><p class="me-k">Workshop check-in</p><h2>Your kiosk code</h2></div><div class="me-digits" aria-label="Kiosk code '+esc(ME.family_code.split("").join(" "))+'">'+ME.family_code.split("").map(function(n){return '<span aria-hidden="true">'+esc(n)+'</span>'}).join("")+'</div><p>Type this on the check-in tablet by the door on workshop day, then tap your racers who are there. Keep it in the family.</p></div>':'')+
       '<div class="me-grid"><div class="me-col"><div class="me-card"><p class="me-k">Your dashboard</p><h2>Where to next</h2><div class="me-sp">'+sp.map(function(s){return '<a href="'+s[0]+'"'+(s[4]?' class="main"':'')+'><b>'+esc(s[1])+'</b><span>'+esc(s[2])+'</span></a>'}).join("")+'</div>'+
           (roles.length<=1&&!fam?'<p class="me-fine">Need another space, like Race control or Photographer? Ask Kendall or Kevin to add it to your profile.</p>':'')+'</div>'+
         '<div class="me-card"><p class="me-k">Your history</p><h2>Recent check-ins</h2>'+(recent?'<ul class="me-list">'+recent+'</ul>':'<p class="me-empty">Nothing yet. Check in the next time you’re at the shop or the track.</p>')+'</div></div>'+
@@ -5411,7 +5564,7 @@ window.FRB=(function(){
       var sub='<div class="mb-sub" role="tablist">'+[["people","Profiles",pend.length],["log","Who’s been in",0]].map(function(t){return '<button type="button" role="tab" data-msub="'+t[0]+'" aria-selected="'+(MSUB===t[0])+'">'+t[1]+(t[2]?'<em>'+t[2]+'</em>':'')+'</button>'}).join("")+'</div>';
       function chips(m,pre){var on=pre||m.roles||[],req=m.requested||[];return '<div class="mb-roles" aria-label="Roles">'+Object.keys(MROLES).map(function(k){return '<label class="'+(req.indexOf(k)>=0?"req":"")+'" title="'+esc(MROLES[k][1])+'"><input type="checkbox" value="'+k+'"'+(on.indexOf(k)>=0?' checked':'')+'>'+esc(MROLES[k][0])+'</label>'}).join("")+'</div>'}
       function info(m){return '<div class="mb-info"><span><b>Email</b>'+(m.email?'<a href="mailto:'+esc(m.email)+'">'+esc(m.email)+'</a>':'—')+'</span><span><b>Phone</b>'+esc(m.phone||"—")+'</span>'+
-        (m.kind==="family"?'<span><b>Racers</b>'+esc((m.kids||[]).map(function(k){return k.name+(k.age?" ("+k.age+")":"")}).join(", ")||"—")+'</span>':'<span><b>Asked for</b>'+esc((m.requested||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k}).join(", ")||"—")+'</span>')+
+        (m.kind==="family"?'<span><b>Racers</b>'+esc((m.kids||[]).map(function(k){return k.name+(k.age?" ("+k.age+")":"")}).join(", ")||"—")+'</span><span class="mb-code"><b>Kiosk code</b>'+(m.family_code?'<b data-code>'+esc(m.family_code)+'</b><button class="mini" type="button" data-ma="code">New code</button>':'<small>Given automatically when they’re approved as a family.</small>')+'</span>':'<span><b>Asked for</b>'+esc((m.requested||[]).map(function(k){return MROLES[k]?MROLES[k][0]:k}).join(", ")||"—")+'</span>')+
         (m.about?'<span style="grid-column:1/-1"><b>Note from them</b>'+esc(m.about)+'</span>':'')+'</div>'}
       function card(m){var st=m.status,h=HM[m.id]||{hrs:0,list:[]},pending=st==="pending";
         return '<div class="mb'+(pending?' pend':'')+'" data-id="'+m.id+'"><div class="mb-top"><div><b>'+esc(m.display_name)+'</b> <small>@'+esc(m.username)+'</small><span class="mb-st st-'+st+'">'+esc(st)+'</span><br><small>'+(m.kind==="family"?"Family":"Crew")+' · registered '+fmtDate(String(m.created_at).slice(0,10),{month:"short",day:"numeric",year:"numeric"})+(m.last_seen_at?' · last seen '+new Date(m.last_seen_at).toLocaleDateString([],{month:"short",day:"numeric"}):' · never signed in')+'</small></div>'+
@@ -5423,9 +5576,12 @@ window.FRB=(function(){
             '<button class="mini" type="button" data-ma="hours">Hours ('+h.list.length+')</button><button class="mini" type="button" data-ma="reset">Reset passcode</button><button class="mini red" type="button" data-ma="del">Delete</button>')+'</div>'+
           '<div class="mb-more" hidden></div></div>'}
       if(MSUB==="people"){
-        P.innerHTML=sub+'<p style="color:#4a4d55;max-width:78ch">Everyone registers once with a username and passcode. Approve them here and tick their roles: roles decide what their dashboard opens. Families get the Program Dashboard; crew roles open Workshop sign-in, Teacher, Photographer, Race control, Track operations or Volunteer lists.</p>'+
+        P.innerHTML=sub+'<p style="color:#4a4d55;max-width:78ch">Every approved family gets a 4-digit kiosk code for workshop check-in. <button class="mini" type="button" id="mbCodes">Download kiosk codes</button></p><p style="color:#4a4d55;max-width:78ch">Everyone registers once with a username and passcode. Approve them here and tick their roles: roles decide what their dashboard opens. Families get the Program Dashboard; crew roles open Workshop sign-in, Teacher, Photographer, Race control, Track operations or Volunteer lists.</p>'+
           (pend.length?'<h3 class="ov-h">Waiting for approval ('+pend.length+')</h3>'+pend.map(card).join(""):'<p class="rk-fine">No one is waiting for approval.</p>')+
           '<h3 class="ov-h">Everyone</h3><div class="mb-find"><input type="search" id="mbQ" placeholder="Search name, username or email" aria-label="Search profiles" value="'+esc(MFIND.q)+'"><select id="mbF" aria-label="Show">'+[["all","Everyone"],["family","Families"],["crew","Crew"],["approved","Approved"],["paused","Paused"],["declined","Declined"]].map(function(o){return '<option value="'+o[0]+'"'+(MFIND.f===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join("")+'</select><button class="mini" type="button" id="mbCsv">Download (.csv)</button></div><div id="mbList"></div>';
+        $("#mbCodes").onclick=function(){var fam=M.filter(function(m){return m.status==="approved"&&m.family_code}).sort(function(a,b){return a.display_name>b.display_name?1:-1});
+          if(!fam.length){toast("No approved families with codes yet.");return}
+          csv([["Family","Username","Kiosk code","Racers"]].concat(fam.map(function(m){return [m.display_name,m.username,m.family_code,(m.kids||[]).map(function(k){return k.name}).join(", ")]})),"kiosk-codes.csv")};
         var list=$("#mbList");
         function drawList(){var q=MFIND.q.toLowerCase(),rows=M.filter(function(m){if(m.status==="pending")return false;var f=MFIND.f;
             if(f==="family"||f==="crew"){if(m.kind!==f)return false}else if(f!=="all"&&m.status!==f)return false;
@@ -5454,6 +5610,7 @@ window.FRB=(function(){
           if(a==="approve"){if(!roles().length){toast("Tick at least one role first.");return}upd("approved",m.display_name+" is approved. Let them know they can sign in.");return}
           if(a==="decline"){if(b.textContent!=="Confirm decline"){b.textContent="Confirm decline";return}upd("declined","Declined");return}
           if(a==="save"){upd(m.status,"Roles saved");return}
+          if(a==="code"){if(b.textContent!=="Confirm new code"){b.textContent="Confirm new code";return}db.rpc("admin_new_family_code",{p_id:m.id}).then(function(x){if(okToast(x,m.display_name+"’s new kiosk code is "+x.data+". Let them know.")){m.family_code=x.data;$$("[data-code]",c).forEach(function(e){e.textContent=x.data});b.textContent="New code"}});return}
           if(a==="pause"){upd("paused","Paused. They’re signed out everywhere.");return}
           if(a==="activate"){upd("approved","Approved");return}
           if(a==="del"){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}db.from("members").delete().eq("id",id).then(function(x){if(okToast(x,"Profile deleted"))tabMembers()});return}
@@ -5549,7 +5706,7 @@ window.FRB=(function(){
         $$("button",fl).forEach(function(b){b.onclick=function(){var f=b.getAttribute("data-f");$$("button",fl).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});$$("#spGrid .sp-item").forEach(function(it){it.hidden=!!f&&it.getAttribute("data-cat")!==f})}})}})}
   var EDSUB="previews", PVPATH=0, PVSEL=null, PVW=390;
   var PVPAGES=[["Families","users","Register, sign in, and the family dashboards",[["#new-profile","Register","The one-time sign-up form"],["#access","Sign in","The car select page"],["#my-dashboard/family","My dashboard","Profile, stats and check-in (sample family)"],["#program-signin","Program Dashboard","Dates, times, places and the bulletin"],["#printables","Flyers & forms","Printables to download"]]],
-    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
+    ["Crew & staff","check","Volunteers, workshop crew, teachers and photographers",[["#my-dashboard/crew","My dashboard","Profile with hours (sample crew member)"],["#workshop-signin","Workshop sign-in","Sign families in and count meals"],["#kiosk","Check-in kiosk","Families type their 4-digit code"],["#teacher","Teacher planning","Suggest events and list materials"],["#photographer","Photographer","Upload albums for review"],["#crew/sample","Volunteer crew pass","A race-day volunteer’s link (sample)"],["#volunteers","Volunteer lists","Race-day crew and check-in"]]],
     ["Race day","flag","Everything that runs the track on race day",[["#race-control","Race control","Brackets, lights and run times"],["#track-manager","Track operations","Shout-outs, intermissions and ads"],["#race-watch","Live race","What spectators see"]]],
     ["Public site","layout","Pages anyone can visit",[["#home","Homepage","The front door"],["#calendar","Calendar","Dates for the year"],["#donate","Donate","Stripe checkout"],["#printables","Flyers & forms","Printables to download"],["#spirit","Spirit Shop","Shirts and hats"]]]];
   function tabEdits(){var P=$("#admPanel");
