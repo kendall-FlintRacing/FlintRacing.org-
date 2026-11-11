@@ -1448,6 +1448,35 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .cs-fine{font-size:.86rem;color:#a9abb1}
 .cs-fine a{color:#fff}
 @media (prefers-reduced-motion:reduce){.cs-card{animation:none}}
+/* Wide screens: sign-in sits beside the car picker so nobody has to scroll to find it */
+.gx-beside{display:none}
+@media (min-width:1024px){
+  .cs{padding-top:clamp(.8rem,1.6vw,1.2rem)}
+  .cs-wrap{max-width:calc(1360px + 2*max(16px,env(safe-area-inset-left,0px)));display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,380px);gap:clamp(16px,1.8vw,24px);align-items:stretch}
+  .gx-main{height:clamp(280px,min(30vw,100vh - 345px),470px)}
+  .gx-thimg{aspect-ratio:16/7}
+  .gx-arrow{width:46px;height:46px}
+  .gx-legend{padding-block:6px 9px}
+  .cs-card .mem-dark{padding:14px}
+  .cs-card .mem-f input{padding:9px 12px;font-size:1.05rem}
+  .cs-card .mem-sub{font-size:.9rem}
+  .gx-title{font-size:clamp(1.6rem,2.5vw,2.4rem)}
+  .gx-name{font-size:clamp(1.7rem,2.8vw,2.5rem)}
+  .gx-spec{width:min(290px,40%)}
+  .gx-no{display:none}
+  .gx-player{font-size:.74rem;padding:8px 12px}
+  .gx-th b{font-size:.74rem}
+  .gx-strip{padding-block:10px}
+  .gx-below{display:none}.gx-beside{display:inline}
+  .cs-info{margin:0;max-width:none;text-align:left;background:#121317;border:1px solid #2a2b31;border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .cs-card{justify-items:stretch;gap:10px}
+  .cs-card>h2{position:static;width:auto;height:auto;overflow:visible;clip:auto;margin:0;font:italic 800 1.6rem/1 var(--body);color:#fff;text-transform:none;text-shadow:0 0 18px color-mix(in srgb,var(--n) 45%,transparent)}
+  .cs-desc{font-size:.9rem;line-height:1.4;margin:0;color:#c9cbd0}
+  .cs-card .mem-in,.cs-card .cs-form,.cs-card .staff-auth{width:100%}
+  .cs-acts{margin-top:0}.cs-acts .cs-go{width:100%}
+}
+@media (min-width:1024px) and (max-width:1239px){.gx-player{display:none}}
+
 /* ===== The Grandstand (guest passes) ===== */
 .gs-head{text-align:center;max-width:720px;margin:0 auto 22px;display:grid;gap:10px;justify-items:center}
 .gs-head h1{color:#fff;font-size:clamp(2.6rem,7vw,4.4rem)}
@@ -3014,7 +3043,7 @@ body.rw-tv .rw-fol{display:none}
           <div class="gx-thumbs cs-dots" role="group" aria-label="Choose a ride"></div>
           <button class="gx-arrow cs-next" type="button" aria-label="Next ride"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l8 7-8 7z"/></svg></button>
         </div>
-        <div class="gx-legend" aria-hidden="true"><span><i>◀ ▶</i> Pick your pass</span><span>Then sign in below <i>▼</i></span></div>
+        <div class="gx-legend" aria-hidden="true"><span><i>◀ ▶</i> Pick your pass</span><span class="gx-below">Then sign in below <i>▼</i></span><span class="gx-beside">Then sign in on the right <i>▶</i></span></div>
       </div>
       <div class="cs-info">
         <article class="cs-card" data-card="0" aria-label="Family Pass">
