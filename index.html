@@ -1957,6 +1957,8 @@ body.rk-on .fr-pill{display:none!important}
 .rk-lane input:focus{outline:3px solid var(--red);outline-offset:1px;border-color:var(--red)}
 .rk-prev{min-height:1.4em;margin:12px 0 4px;font:700 1.05rem/1.4 var(--body);color:#1d4e33}
 .rk-ovr{margin:8px 0;border:1px dashed #c9ccd1;border-radius:6px;padding:8px 12px}
+.rk-ovr select,.rk-ovr input[type=text]{width:100%;font:inherit;padding:8px 10px;border:1.5px solid #c9ccd1;border-radius:4px;background:#fff;color:#16181d}
+.rw-sheet{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:4px 0 14px}
 .rk-ovr summary{font-weight:700;cursor:pointer}
 .rk-ovr p{color:#4a4d55;font-size:.9rem;margin-top:6px}
 .rk-radio{display:inline-flex;gap:6px;align-items:center;font-weight:600;padding:8px 10px;border:1px solid #d4d6da;border-radius:4px}
@@ -4372,8 +4374,11 @@ body.rw-tv .rw-fol{display:none}
 </script>
 <script>
 /* ===== Bracket engine (shared by the live race page, Admin and test mode) =====
-   Every heat is two runs with a lane swap: racer A starts in Lane 1, racer B in Lane 2, then they swap.
-   Lowest total time wins. Brackets can be single or double elimination, with byes placed by hand. */
+   AASBD format: every heat is two phases. Racer A starts Phase 1 in Lane 1, racer B in Lane 2; they swap lanes
+   (and wheels, per the bracket's wheel swap method) for Phase 2. The heat goes to the lower combined time, which is
+   the same as the net of the two phase differentials, so it works with elapsed-time or differential-only timers.
+   Single or double elimination; double elimination ends with a championship heat plus a runoff heat that is only
+   raced if the challenger (consolation-side) finalist wins the first championship heat (true double elimination). */
 window.FRB=(function(){
   function uid(){try{if(crypto.randomUUID)return crypto.randomUUID()}catch(e){}
     var b=crypto.getRandomValues(new Uint8Array(16));b[6]=b[6]&15|64;b[8]=b[8]&63|128;
@@ -4387,12 +4392,12 @@ window.FRB=(function(){
     var p=cars+byes; if(!pow2(p)||p>64) return "Cars + byes must add up to 4, 8, 16, 32 or 64 (you have "+p+"). Try "+autoByes(cars)+" byes.";
     if(byes>p/2) return "Too many byes: each bye needs a car on the other side.";
     return ""}
-  var FIELDS=["lane1","lane2","winner","status","run","a_time1","b_time1","a_time2","b_time2","lane1_time","lane2_time","a_bye","b_bye","updated_at"];
-  function blank(){return{status:"upcoming",run:1,lane1:null,lane2:null,winner:null,lane1_time:null,lane2_time:null,a_time1:null,b_time1:null,a_time2:null,b_time2:null,
+  var FIELDS=["lane1","lane2","winner","status","run","a_time1","b_time1","a_time2","b_time2","lane1_time","lane2_time","diff1","diff2","note","started_at","finished_at","a_bye","b_bye","updated_at"];
+  function blank(){return{status:"upcoming",run:1,lane1:null,lane2:null,winner:null,lane1_time:null,lane2_time:null,a_time1:null,b_time1:null,a_time2:null,b_time2:null,diff1:null,diff2:null,note:null,started_at:null,finished_at:null,
     win_to:null,win_slot:null,lose_to:null,lose_slot:null,a_bye:false,b_bye:false}}
   /* o = {name, kind:'single'|'double', cars, byes, pairs:[[racerA, racerB or null for a bye], …]} */
   function build(o){
-    var P=+o.cars+(+o.byes),k=Math.round(Math.log2(P)),bid=o.bracketId||uid(),H=[],W=[],L=[],F=null,dbl=o.kind!=="single"&&P>=4;
+    var P=+o.cars+(+o.byes),k=Math.round(Math.log2(P)),bid=o.bracketId||uid(),H=[],W=[],L=[],F=null,F2=null,dbl=o.kind!=="single"&&P>=4;
     function mk(side,round,slot,label){var h=Object.assign(blank(),{id:uid(),bracket_id:bid,division:o.name,label:label,side:side,round:round,slot:slot,sort_order:0});H.push(h);return h}
     function race(n,i){return n>1?" · Race "+(i+1):""}
     for(var r=1;r<=k;r++){W[r]=[];var n=P/Math.pow(2,r);
@@ -4410,17 +4415,20 @@ window.FRB=(function(){
         } else if(m<LR){ L[m].forEach(function(h,i){link(h,L[m+1][Math.floor(i/2)],i%2?"b":"a")}) }
       }
       F=mk("F",1,0,"Championship"); link(W[k][0],F,"a"); link(L[LR][0],F,"b");
+      F2=mk("F",2,0,"Championship runoff (if required)"); link(F,F2,"a"); link(F,F2,"b",true);
     }
     /* first-round cars and byes */
     (o.pairs||[]).forEach(function(p,i){var h=W[1][i];if(!h)return;h.lane1=p[0]||null;h.lane2=p[1]||null;if(!p[0])h.a_bye=true;if(!p[1])h.b_bye=true});
     /* natural running order: stages that respect who-feeds-whom */
-    var st=[W[1]]; if(dbl){st.push(L[1]);for(var j=2;j<=k;j++){st.push(W[j]);st.push(L[2*j-2]);if(2*j-1<=2*k-2)st.push(L[2*j-1])}st.push([F])} else for(j=2;j<=k;j++)st.push(W[j]);
+    var st=[W[1]]; if(dbl){st.push(L[1]);for(var j=2;j<=k;j++){st.push(W[j]);st.push(L[2*j-2]);if(2*j-1<=2*k-2)st.push(L[2*j-1])}st.push([F]);st.push([F2])} else for(j=2;j<=k;j++)st.push(W[j]);
     var ord=0; st.forEach(function(s){s.forEach(function(h){h.sort_order=++ord})});
     resolve(H);
-    return {bracket:{id:bid,name:o.name,kind:dbl?"double":"single",car_count:+o.cars,bye_count:+o.byes},heats:H};
+    var bk={id:bid,name:o.name,kind:dbl?"double":"single",car_count:+o.cars,bye_count:+o.byes};
+    if(o.wheel_swap)bk.wheel_swap=o.wheel_swap; if(o.timing)bk.timing=o.timing; if(o.race_date)bk.race_date=o.race_date;
+    return {bracket:bk,heats:H};
   }
   function stage(h,kind,maxRound){ /* position of a heat's round in the natural order */
-    if(h.side==="F") return 9999; var r=h.round||1;
+    if(h.side==="F") return 9999+((h.round||1)-1); var r=h.round||1;
     if(kind==="single"||h.side==="W"&&kind!=="double") return r-1;
     if(h.side==="W") return r===1?0:2+3*(r-2);
     if(r===1) return 1; return r%2===0?3+3*((r+2)/2-2):4+3*((r+1)/2-2);}
@@ -4434,17 +4442,24 @@ window.FRB=(function(){
       if(h.win_to) send(M,h.win_to,h.win_slot,h.winner,ch); if(h.lose_to) send(M,h.lose_to,h.lose_slot,null,ch);});}
     return Object.keys(ch).map(function(k){return ch[k]});}
   function n3(x){return x==null||x===""||isNaN(+x)?null:Math.round(+x*1000)/1000}
-  /* post a finished heat: t={a1,b1,a2,b2,winner:'a'|'b'|''} */
+  /* post a finished heat. t={a1,b1,a2,b2 (elapsed times) | d1,d2 (phase differentials, + = racer A ahead), winner:'a'|'b'|'', note}
+     Racer A = lane1 (Lane 1 in Phase 1), racer B = lane2. */
   function post(H,id,t){var M=byId(H),h=M[id],ch={};if(!h) return {error:"Heat not found."};
     if(!h.lane1||!h.lane2) return {error:"Both racers have to be set first."};
     h.a_time1=n3(t.a1);h.b_time1=n3(t.b1);h.a_time2=n3(t.a2);h.b_time2=n3(t.b2);
     var A=h.a_time1!=null&&h.a_time2!=null?n3(h.a_time1+h.a_time2):null,B=h.b_time1!=null&&h.b_time2!=null?n3(h.b_time1+h.b_time2):null;
     h.lane1_time=A;h.lane2_time=B;
-    var w=t.winner==="a"?h.lane1:t.winner==="b"?h.lane2:(A!=null&&B!=null&&A!==B?(A<B?h.lane1:h.lane2):null);
-    if(!w) return {error:A!=null&&A===B?"It’s a tie. Pick the winner.":"Enter all four run times, or pick the winner."};
-    h.winner=w;h.status="finished";h.run=2;h.updated_at=new Date().toISOString();ch[h.id]=h;
+    h.diff1=h.a_time1!=null&&h.b_time1!=null?n3(h.b_time1-h.a_time1):n3(t.d1);
+    h.diff2=h.a_time2!=null&&h.b_time2!=null?n3(h.b_time2-h.a_time2):n3(t.d2);
+    var net=h.diff1!=null&&h.diff2!=null?n3(h.diff1+h.diff2):null;
+    var w=t.winner==="a"?h.lane1:t.winner==="b"?h.lane2:(net!=null&&net!==0?(net>0?h.lane1:h.lane2):null);
+    if(!w) return {error:net===0?"It’s a tie. Pick the winner.":"Enter both phases, or pick the winner."};
+    var now=new Date().toISOString();
+    h.winner=w;h.status="finished";h.run=2;h.note=t.note?String(t.note).slice(0,300):null;h.updated_at=now;h.finished_at=now;if(!h.started_at)h.started_at=now;ch[h.id]=h;
     var lo=w===h.lane1?h.lane2:h.lane1;
     if(h.win_to) send(M,h.win_to,h.win_slot,w,ch); if(h.lose_to) send(M,h.lose_to,h.lose_slot,lo,ch);
+    /* true double elimination: the runoff is only needed if the challenger (slot B) wins the first championship heat */
+    if(h.side==="F"&&(h.round||1)===1&&h.win_to&&w===h.lane1){var r2=M[h.win_to];if(r2&&r2.status!=="finished"){r2.status="bye";r2.winner=w;ch[r2.id]=r2}}
     return {changed:resolve(H,ch)};}
   /* undo a result (only if nothing it fed into has been raced) */
   function clear(H,id){var M=byId(H),h=M[id],ch={};if(!h||h.status!=="finished") return {error:"Nothing to clear."};
@@ -4456,7 +4471,7 @@ window.FRB=(function(){
         if(t.win_to)pull(t.win_to,t.win_slot,w,!w); if(t.lose_to)pull(t.lose_to,t.lose_slot,null,true);}}
     var w=h.winner,lo=w===h.lane1?h.lane2:h.lane1;
     if(h.win_to)pull(h.win_to,h.win_slot,w,false); if(h.lose_to)pull(h.lose_to,h.lose_slot,lo,false);
-    Object.assign(h,{status:"upcoming",run:1,winner:null,a_time1:null,b_time1:null,a_time2:null,b_time2:null,lane1_time:null,lane2_time:null,updated_at:new Date().toISOString()});ch[h.id]=h;
+    Object.assign(h,{status:"upcoming",run:1,winner:null,a_time1:null,b_time1:null,a_time2:null,b_time2:null,lane1_time:null,lane2_time:null,diff1:null,diff2:null,note:null,finished_at:null,updated_at:new Date().toISOString()});ch[h.id]=h;
     return {changed:resolve(H,ch)};}
   /* running order: alternate brackets round by round, or one bracket after another */
   function order(H,brackets,mode){var B=brackets.slice().sort(function(a,b){return (a.sort_order||0)-(b.sort_order||0)}),out=[];
@@ -4476,8 +4491,77 @@ window.FRB=(function(){
       if(s.win_to===h.id&&s.win_slot===slot){if(isBye(s)){if(s.a_bye&&s.b_bye)return "Bye";return source(H,s,s.a_bye?"b":"a",N)}return "Winner of Heat "+(N[s.id]||"?")}
       if(s.lose_to===h.id&&s.lose_slot===slot) return "Loser of Heat "+(N[s.id]||"?");}
     return "TBD";}
+  function skipped(h){return h.side==="F"&&(h.round||1)===2&&h.status==="bye"&&!!h.lane1&&!h.a_bye&&!h.b_bye}
+  function net(h){return h.diff1!=null&&h.diff2!=null?n3(+h.diff1+(+h.diff2)):(h.lane1_time!=null&&h.lane2_time!=null?n3(h.lane2_time-h.lane1_time):null)}
+  function other(h,id){return id===h.lane1?h.lane2:h.lane1}
+  function ord(n){var s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])}
+  /* final placings for one bracket: [{place:"1st",ids:[…]}, …]. done=false until the champion is decided. */
+  function places(hs,kind){var out=[],taken={},fin=function(h){return h.status==="finished"&&h.winner},n=1;
+    function add(ids){ids=ids.filter(function(x){return x&&!taken[x]});if(!ids.length)return;ids.forEach(function(x){taken[x]=1});
+      out.push({place:ord(n)+(ids.length>1?"–"+ord(n+ids.length-1)+" (tie)":""),ids:ids});n+=ids.length}
+    var F1=hs.filter(function(h){return h.side==="F"&&(h.round||1)===1})[0],F2=hs.filter(function(h){return h.side==="F"&&h.round===2})[0],champ=null;
+    if(kind==="double"&&F1){if(F2&&fin(F2)&&!skipped(F2))champ=F2;else if(fin(F1)&&(!F2||skipped(F2)))champ=F1}
+    else champ=hs.filter(function(h){return h.side==="W"&&!h.win_to&&fin(h)})[0]||null;
+    if(!champ) return {done:false,list:[]};
+    add([champ.winner]);add([other(champ,champ.winner)]);
+    var side=kind==="double"?"L":"W",rounds=[];hs.forEach(function(h){if(h.side===side&&rounds.indexOf(h.round)<0)rounds.push(h.round)});rounds.sort(function(a,b){return b-a});
+    rounds.forEach(function(r){add(hs.filter(function(h){return h.side===side&&h.round===r&&fin(h)&&!isBye(h)}).map(function(h){return other(h,h.winner)}))});
+    return {done:true,list:out}}
+  /* ---- Downloadable heat sheet (companion record to the official ISBD heat sheet, Rules A-10.03 to A-10.05) ---- */
+  function hEsc(v){return String(v==null?"":v).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function tm(iso){return iso?new Date(iso).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}).replace(/\s?([AP])M$/i,function(m,x){return x.toLowerCase()+"m"}):""}
+  function f3(x){return x==null||x===""?"":(+x).toFixed(3)}
+  function sheet(o){ /* o={brackets,heats,racers,city,title} */
+    var R={};(o.racers||[]).forEach(function(r){R[r.id]=r});
+    var nm=function(id){var r=R[id];return r?(r.car_number?"#"+r.car_number+" ":"")+r.display_name:""};
+    var all=(o.heats||[]).slice().sort(function(a,b){return (a.sort_order||0)-(b.sort_order||0)}),N=numbers(all);
+    var byIdA={};all.forEach(function(x){byIdA[x.id]=x});
+    var dest=function(h,to){var t=byIdA[to],via="";if(!t)return "";
+      while(t&&isBye(t)&&!skipped(t)&&t.win_to){t=byIdA[t.win_to];via=" (after a bye)"}
+      if(!t)return "";if(skipped(t))return "Runoff (not needed)";if(isBye(t))return "Bye";return "Heat "+(N[t.id]||"?")+via};
+    var css='@page{size:letter landscape;margin:.4in}*{box-sizing:border-box}body{font:8.6pt/1.3 Arial,Helvetica,sans-serif;color:#000;margin:0}'+
+      '.pg{page-break-after:always}.pg:last-child{page-break-after:auto}h1{font-size:15pt;margin:0}h2{font-size:10.5pt;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.04em}'+
+      '.hd{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;border-bottom:1.5pt solid #000;padding-bottom:6px}.hd p{margin:2px 0 0}'+
+      '.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:4px 16px;margin:8px 0}.meta div{border-bottom:.5pt solid #999;padding:2px 0}.meta b{display:block;font-size:7pt;text-transform:uppercase;color:#444;letter-spacing:.05em}'+
+      'table{width:100%;border-collapse:collapse}th,td{border:.5pt solid #777;padding:3px 4px;vertical-align:top;text-align:left}th{background:#eee;font-size:7.4pt;text-transform:uppercase}'+
+      'td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}td.c{text-align:center}.w{font-weight:bold}.mut{color:#555}.pl td{border:0;border-bottom:.5pt solid #999;padding:3px 6px}'+
+      '.sg{display:flex;gap:40px;margin-top:22px}.sg span{flex:1;border-top:.75pt solid #000;padding-top:3px;font-size:7.6pt}.ft{margin-top:10px;font-size:7pt;color:#333}';
+    var pages=(o.brackets||[]).map(function(b){
+      var hs=all.filter(function(h){return h.bracket_id===b.id}),run=hs.filter(function(h){return !isBye(h)}),pl=places(hs,b.kind);
+      var starts=hs.map(function(h){return h.started_at}).filter(Boolean).sort(),ends=hs.map(function(h){return h.finished_at}).filter(Boolean).sort();
+      var byes=hs.filter(function(h){return h.side==="W"&&h.round===1&&isBye(h)&&!(h.a_bye&&h.b_bye)}).map(function(h){return nm(h.lane1||h.lane2)}).filter(Boolean);
+      var notes=run.filter(function(h){return h.note}).map(function(h){return "Heat "+N[h.id]+": "+h.note});
+      var diffTxt=function(d,h){if(d==null)return "";var ahead=+d>0?h.lane1:+d<0?h.lane2:null;return ahead?nm(ahead).split(" ")[0]+" +"+Math.abs(d).toFixed(3):"Even"};
+      var rows=run.map(function(h){var fin=h.status==="finished",w=h.winner,lo=fin?other(h,w):null,nt=net(h),last=!h.win_to||(byIdA[h.win_to]&&skipped(byIdA[h.win_to]));
+        return '<tr><td class="c"><b>'+N[h.id]+'</b></td><td>'+hEsc(h.label||"")+'</td>'+
+          '<td'+(fin&&w===h.lane1?' class="w"':'')+'>'+hEsc(nm(h.lane1)||FRB_source(all,h,"a",N))+'</td><td'+(fin&&w===h.lane2?' class="w"':'')+'>'+hEsc(nm(h.lane2)||FRB_source(all,h,"b",N))+'</td>'+
+          '<td class="n">'+f3(h.a_time1)+(h.a_time1!=null?' / ':'')+f3(h.b_time1)+'<br><span class="mut">'+hEsc(diffTxt(h.diff1,h))+'</span></td>'+
+          '<td class="n">'+f3(h.b_time2)+(h.b_time2!=null?' / ':'')+f3(h.a_time2)+'<br><span class="mut">'+hEsc(diffTxt(h.diff2,h))+'</span></td>'+
+          '<td class="n">'+(h.lane1_time!=null?f3(h.lane1_time)+' / '+f3(h.lane2_time)+'<br>':'')+(nt!=null&&fin?'<span class="mut">net '+Math.abs(nt).toFixed(3)+'</span>':'')+'</td>'+
+          '<td class="w">'+hEsc(fin?nm(w):"")+'</td><td>'+hEsc(fin?(last?"Champion":dest(h,h.win_to)):"")+'</td><td>'+hEsc(fin?(last?"Runner-up":h.lose_to?dest(h,h.lose_to):"Out"):"")+'</td>'+
+          '<td class="c">'+hEsc(tm(h.started_at))+(h.finished_at?'–'+hEsc(tm(h.finished_at)):'')+'</td><td>'+hEsc(h.note||"")+'</td></tr>'}).join("");
+      var sk=hs.filter(skipped)[0];
+      return '<section class="pg"><div class="hd"><div><h1>'+hEsc(o.title||"Race Day Heat Record")+' · '+hEsc(b.name)+'</h1><p>'+hEsc(o.city||"")+(b.race_date?' · '+hEsc(new Date(b.race_date+"T12:00").toLocaleDateString([],{weekday:"long",month:"long",day:"numeric",year:"numeric"})):'')+'</p></div>'+
+        '<div style="text-align:right"><b>'+(pl.done?"FINAL":"IN PROGRESS")+'</b><p class="mut">Printed '+hEsc(new Date().toLocaleString())+'</p></div></div>'+
+        '<div class="meta"><div><b>Division</b>'+hEsc(b.name)+'</div><div><b>Format</b>'+(b.kind==="double"?"Double":"Single")+' elimination</div><div><b>Cars</b>'+b.car_count+' cars · '+b.bye_count+' byes</div><div><b>Heats raced</b>'+run.filter(function(h){return h.status==="finished"}).length+' of '+run.length+(sk?' (runoff not needed)':'')+'</div>'+
+        '<div><b>Wheel swap</b>'+hEsc(b.wheel_swap||"2/4/2 Progressive")+'</div><div><b>Timing</b>'+(b.timing==="differential"?"Differential (phase margins)":"Elapsed times")+'</div><div><b>Start time</b>'+hEsc(tm(starts[0]))+'</div><div><b>End time</b>'+hEsc(pl.done?tm(ends[ends.length-1]):"")+'</div></div>'+
+        (pl.list.length?'<h2>Final placings</h2><table class="pl"><tbody>'+pl.list.slice(0,8).map(function(p){return '<tr><td style="width:110px"><b>'+p.place+'</b></td><td>'+p.ids.map(function(i){return hEsc(nm(i))}).join(", ")+'</td></tr>'}).join("")+'</tbody></table>':'')+
+        '<h2>Heats</h2><table><thead><tr><th>Heat</th><th>Round</th><th>Racer A (Lane 1 in Phase 1)</th><th>Racer B (Lane 2 in Phase 1)</th><th>Phase 1<br>A / B · diff</th><th>Phase 2 (lanes &amp; wheels swapped)<br>B / A · diff</th><th>Totals A / B</th><th>Winner</th><th>Winner to</th><th>Loser to</th><th>Time</th><th>Notes</th></tr></thead><tbody>'+(rows||'<tr><td colspan="12">No heats yet.</td></tr>')+'</tbody></table>'+
+        (byes.length?'<p style="margin-top:8px"><b>First-round byes:</b> '+hEsc(byes.join(", "))+' · Offer each at least one bye run (Rule A-10.07).</p>':'')+
+        '<h2>Special situations</h2><p>'+(notes.length?hEsc(notes.join(" · ")):'None recorded (disqualifications, lane/line violations, forfeits, health issues).')+'</p>'+
+        '<div class="sg"><span>Local Race Director signature / date</span><span>Chief timer / scorekeeper signature / date</span></div>'+
+        '<p class="ft">Each heat is two phases. Racers swap lanes and wheels between phases, and the lower combined time (net phase differential) wins (Rules A-10, A-12). Companion record to the official ISBD heat sheet, which must be used for the official record (A-10.04). Keep completed heat sheets for one year and send a copy to ISBD (A-10.03).</p></section>'}).join("");
+    return '<!doctype html><html><head><meta charset="utf-8"><title>'+hEsc((o.title||"Heat Sheet")+((o.brackets||[]).length===1?" – "+o.brackets[0].name:""))+'</title><style>'+css+'</style></head><body>'+(pages||'<p>No brackets yet.</p>')+'</body></html>'}
+  function FRB_source(H,h,s,N){var t=source(H,h,s,N);return t==="TBD"?"":t}
+  function printSheet(o){var fr=document.createElement("iframe");fr.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";fr.setAttribute("aria-hidden","true");document.body.appendChild(fr);
+    var w=fr.contentWindow;w.document.open();w.document.write(sheet(o));w.document.close();setTimeout(function(){try{w.focus();w.print()}catch(e){}setTimeout(function(){fr.remove()},60000)},150)}
+  function sheetCSV(o){var R={};(o.racers||[]).forEach(function(r){R[r.id]=r});var nm=function(id){var r=R[id];return r?r.display_name:""},car=function(id){var r=R[id];return r&&r.car_number||""};
+    var all=(o.heats||[]).slice().sort(function(a,b){return (a.sort_order||0)-(b.sort_order||0)}),N=numbers(all),rows=[["Division","Heat","Round","Car A","Racer A","Car B","Racer B","Phase 1 A","Phase 1 B","Phase 1 diff (A+)","Phase 2 A","Phase 2 B","Phase 2 diff (A+)","Total A","Total B","Net diff (A+)","Winner","Notes","Started","Finished"]];
+    (o.brackets||[]).forEach(function(b){all.filter(function(h){return h.bracket_id===b.id&&!isBye(h)}).forEach(function(h){rows.push([b.name,N[h.id]||"",h.label||"",car(h.lane1),nm(h.lane1),car(h.lane2),nm(h.lane2),f3(h.a_time1),f3(h.b_time1),f3(h.diff1),f3(h.a_time2),f3(h.b_time2),f3(h.diff2),f3(h.lane1_time),f3(h.lane2_time),f3(net(h)),nm(h.winner),h.note||"",h.started_at||"",h.finished_at||""])})});
+    return rows.map(function(r){return r.map(function(c){c=String(c==null?"":c);return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(",")}).join("\r\n")}
+  function downloadCSV(o,name){var b=new Blob(["﻿"+sheetCSV(o)],{type:"text/csv"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name||"heat-sheets.csv";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
   function row(h){var o={};FIELDS.forEach(function(f){if(f in h)o[f]=h[f]});return o}
-  return {uid:uid,check:check,autoByes:autoByes,build:build,post:post,clear:clear,resolve:resolve,order:order,isBye:isBye,numbers:numbers,source:source,row:row,stage:stage};
+  return {uid:uid,check:check,autoByes:autoByes,build:build,post:post,clear:clear,resolve:resolve,order:order,isBye:isBye,numbers:numbers,source:source,row:row,stage:stage,skipped:skipped,net:net,places:places,sheet:sheet,printSheet:printSheet,sheetCSV:sheetCSV,downloadCSV:downloadCSV};
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -5162,56 +5246,92 @@ window.FRB=(function(){
   function rkNext(C,c){var hs=C.heats,i=c?hs.indexOf(c):-1;return hs.slice(i+1).filter(function(h){return rkReady(h)&&h!==c})[0]||hs.filter(function(h){return rkReady(h)&&h!==c})[0]||null}
 
   /* Race tab: the heat on the track */
+  var SWAPS=["2/4/2 Progressive","Wheel Bank","Other (ISBD approved)"];
   function rkRace(C){var FRB=window.FRB,M=$("#rkMain"),n=rkNames(C),cur=C.cur,N=C.N,R=C.R,nx=rkNext(C,cur),h="";
     function meta(id){var x=R[id];return x?[x.car_number?"Car #"+esc(x.car_number):"",x.team?esc(x.team):""].filter(Boolean).join(" · "):""}
+    var BK=cur&&cur.bracket_id?C.brackets.filter(function(b){return b.id===cur.bracket_id})[0]:null,DIFF=!!(BK&&BK.timing==="differential"),SW=BK?(BK.wheel_swap||"2/4/2 Progressive"):"";
+    var swapTip=SW==="Wheel Bank"?"Swap lanes for Phase 2. Wheels per the wheel bank procedure.":SW?"Swap lanes and all four wheels with the opponent for Phase 2 ("+esc(SW)+").":"Swap lanes for Phase 2.";
+    var rn=function(id){return R[id]?R[id].display_name:"TBD"};
+    function phases(x){var p=function(d,lead){return d==null?"":(+d===0?"even":rn(lead)+" by "+Math.abs(d).toFixed(3))};
+      return x.diff1!=null&&x.diff2!=null?"Phase 1: "+esc(p(x.diff1,+x.diff1>0?x.lane1:x.lane2))+" · Phase 2: "+esc(p(x.diff2,+x.diff2>0?x.lane1:x.lane2)):""}
     if(!C.heats.length) h='<section class="rk-card rk-main"><p class="rk-k">Race morning</p><h2>Build the brackets first</h2><p class="rk-big">Open the Brackets tab, enter the cars and byes, and place each car as the bingo roller calls it.</p><button class="rk-go" type="button" data-tab2="brackets">Go to Brackets</button></section>';
     else if(!cur) h='<section class="rk-card rk-main"><p class="rk-k">No heat on the track</p><h2>'+(nx?'Ready to start':'No heats ready')+'</h2>'+(nx?'<p class="rk-big">Heat '+N[nx.id]+' · '+n.title(nx)+'<br><b>'+n.rn(nx.lane1)+'</b> vs <b>'+n.rn(nx.lane2)+'</b></p><button class="rk-go" type="button" data-next="'+nx.id+'">Put Heat '+N[nx.id]+' on the ramp</button>':'<p>Check the running order.</p>')+'</section>';
     else if(!cur.lane1||!cur.lane2) h='<section class="rk-card rk-main"><p class="rk-k">Heat '+(N[cur.id]||"")+' · '+n.title(cur)+'</p><h2>Waiting on results</h2><p class="rk-big">'+n.who(cur,"a")+' vs '+n.who(cur,"b")+'</p>'+(nx?'<button class="rk-go" type="button" data-next="'+nx.id+'">Skip ahead to Heat '+N[nx.id]+'</button>':'')+'</section>';
-    else if(cur.status==="finished"){var A=cur.lane1_time,B=cur.lane2_time;
+    else if(cur.status==="finished"){var A=cur.lane1_time,B=cur.lane2_time,nt=FRB.net(cur);
       h='<section class="rk-card rk-main rk-done"><p class="rk-k">Heat '+N[cur.id]+' · '+n.title(cur)+' · Final</p><h2>'+n.rn(cur.winner)+' wins</h2>'+
-        (A!=null&&B!=null?'<p class="rk-big">'+n.rn(cur.lane1)+' '+(+cur.a_time1).toFixed(3)+' + '+(+cur.a_time2).toFixed(3)+' = <b>'+(+A).toFixed(3)+'</b><br>'+n.rn(cur.lane2)+' '+(+cur.b_time1).toFixed(3)+' + '+(+cur.b_time2).toFixed(3)+' = <b>'+(+B).toFixed(3)+'</b> · margin '+Math.abs(A-B).toFixed(3)+'s</p>':'<p class="rk-big">Decided without times (tie, forfeit or DQ).</p>')+
+        (A!=null&&B!=null?'<p class="rk-big">'+n.rn(cur.lane1)+' '+(+cur.a_time1).toFixed(3)+' + '+(+cur.a_time2).toFixed(3)+' = <b>'+(+A).toFixed(3)+'</b><br>'+n.rn(cur.lane2)+' '+(+cur.b_time1).toFixed(3)+' + '+(+cur.b_time2).toFixed(3)+' = <b>'+(+B).toFixed(3)+'</b> · margin '+Math.abs(A-B).toFixed(3)+'s</p>':
+          nt!=null?'<p class="rk-big">'+phases(cur)+'<br>Net differential <b>'+Math.abs(nt).toFixed(3)+'s</b></p>':'<p class="rk-big">Decided without times.</p>')+
+        (cur.note?'<p class="rk-fine"><b>Note:</b> '+esc(cur.note)+'</p>':'')+
         (nx?'<button class="rk-go" type="button" data-next="'+nx.id+'">Next: Heat '+N[nx.id]+' · '+n.rn(nx.lane1)+' vs '+n.rn(nx.lane2)+' →</button>':'<p class="rk-big">'+(C.heats.some(function(x){return !FRB.isBye(x)&&x.status!=="finished"})?'The next heats are waiting on results.':'That was the last heat. Great racing!')+'</p>')+
         '<div class="row"><button class="mini" type="button" data-clr="'+cur.id+'">Undo this result</button></div></section>';}
     else {var run=cur.run||1,l1=run===1?cur.lane1:cur.lane2,l2=run===1?cur.lane2:cur.lane1,key=cur.id+":"+run,d=RK.draft[key]||{};
-      var prev1=function(id){var t=id===cur.lane1?cur.a_time1:cur.b_time1;return run===2&&t!=null?' · run 1 <b>'+(+t).toFixed(3)+'</b>':''};
-      h='<section class="rk-card rk-main"><div class="rk-hh"><span class="rk-num">Heat '+N[cur.id]+'</span><span>'+n.title(cur)+'</span><span class="rk-run">Run '+run+' of 2'+(run===2?' · lanes swapped':'')+'</span></div>'+
+      var prev1=function(id){if(run!==2)return "";if(DIFF){if(cur.diff1==null)return "";var lead=+cur.diff1>0?cur.lane1:cur.lane2;return id===lead&&+cur.diff1!==0?' · won Phase 1 by <b>'+Math.abs(cur.diff1).toFixed(3)+'</b>':''}
+        var t=id===cur.lane1?cur.a_time1:cur.b_time1;return t!=null?' · Phase 1 <b>'+(+t).toFixed(3)+'</b>':''};
+      var lanes=DIFF?'<div class="rk-lanes">'+[[1,l1],[2,l2]].map(function(p){return '<label class="rk-lane'+(p[0]===1?' l1':'')+'"><span class="rk-ln">Lane '+p[0]+'</span><b>'+n.rn(p[1])+'</b><small>'+meta(p[1])+prev1(p[1])+'</small>'+
+            '<span class="rk-radio" style="margin-top:10px;display:flex;justify-content:flex-start;gap:10px;width:auto"><input type="radio" name="rkpw" style="width:20px;height:20px;flex:none" value="'+p[0]+'"'+(d.pw===String(p[0])?' checked':'')+'> Won Phase '+run+'</span></label>'}).join("")+'</div>'+
+          '<label class="f" for="rk-m" style="max-width:260px;margin-top:10px">Winning margin (seconds)<input id="rk-m" type="text" inputmode="decimal" autocomplete="off" placeholder="0.000" value="'+esc(d.m||"")+'"></label>'
+        :'<div class="rk-lanes">'+[[1,l1],[2,l2]].map(function(p){return '<label class="rk-lane'+(p[0]===1?' l1':'')+'" for="rk-t'+p[0]+'"><span class="rk-ln">Lane '+p[0]+'</span><b>'+n.rn(p[1])+'</b><small>'+meta(p[1])+prev1(p[1])+'</small>'+
+          '<span class="rk-tl">Phase '+run+' time (seconds)</span><input id="rk-t'+p[0]+'" type="text" inputmode="decimal" autocomplete="off" placeholder="00.000" value="'+esc(d["t"+p[0]]||"")+'"></label>'}).join("")+'</div>';
+      var WHY=[["","Pick a reason"],["Lane violation (A-14.01)","Lane violation (crossed the center line)"],["Line violation (A-14.02)","Line violation (hit the timer)"],["Forfeit","Forfeit"],["Disqualification","Disqualification (3 officials agreed)"],["Tie, winner chosen by officials","Tie"],["Other","Other"]];
+      h='<section class="rk-card rk-main"><div class="rk-hh"><span class="rk-num">Heat '+N[cur.id]+'</span><span>'+n.title(cur)+'</span><span class="rk-run">Phase '+run+' of 2'+(run===2?' · lanes swapped':'')+'</span></div>'+
         '<div class="rk-steps" role="group" aria-label="Starting status">'+[["upcoming","Up next"],["staging","On the ramp"],["set","Ready, set"],["racing","They’re off"]].map(function(s){return '<button type="button" class="s-'+s[0]+'" data-st="'+s[0]+'" aria-pressed="'+(cur.status===s[0])+'">'+s[1]+'</button>'}).join("")+'</div>'+
-        '<div class="rk-lanes">'+[[1,l1],[2,l2]].map(function(p){return '<label class="rk-lane'+(p[0]===1?' l1':'')+'" for="rk-t'+p[0]+'"><span class="rk-ln">Lane '+p[0]+'</span><b>'+n.rn(p[1])+'</b><small>'+meta(p[1])+prev1(p[1])+'</small>'+
-          '<span class="rk-tl">Run '+run+' time (seconds)</span><input id="rk-t'+p[0]+'" type="text" inputmode="decimal" autocomplete="off" placeholder="00.000" value="'+esc(d["t"+p[0]]||"")+'"></label>'}).join("")+'</div>'+
+        (run===2?'<p class="rk-fine" style="margin:0 0 8px"><b>Phase 2:</b> '+swapTip+'</p>':'')+lanes+
         '<p class="rk-prev" id="rkPrev" role="status"></p>'+
-        (run===2?'<details class="rk-ovr"'+(RK.ovr[cur.id]?' open':'')+'><summary>Tie, forfeit or disqualification?</summary><p>Pick the winner yourself. Times are optional.</p><div class="row">'+[["","Use the times"],["a",n.rn(cur.lane1)+" wins"],["b",n.rn(cur.lane2)+" wins"]].map(function(o){return '<label class="rk-radio"><input type="radio" name="rkw" value="'+o[0]+'"'+((RK.ovr[cur.id]||"")===o[0]?' checked':'')+'> '+o[1]+'</label>'}).join("")+'</div></details>':'')+
-        '<div class="rk-acts"><button class="rk-go" type="button" id="rkPost">'+(run===1?'Post run 1 and swap lanes':'Post final result')+'</button>'+(run===2?'<button class="mini" type="button" id="rkBack">Back to run 1</button>':'')+'</div></section>';}
+        '<details class="rk-ovr"'+(RK.ovr[cur.id]?' open':'')+'><summary>Violation, forfeit, disqualification or tie?</summary><p>Decide the heat yourself. It goes on the heat sheet with the reason.</p>'+
+          '<div class="row">'+[["","Use the times"],["a",n.rn(cur.lane1)+" wins"],["b",n.rn(cur.lane2)+" wins"]].map(function(o){return '<label class="rk-radio"><input type="radio" name="rkw" value="'+o[0]+'"'+((RK.ovr[cur.id]||"")===o[0]?' checked':'')+'> '+o[1]+'</label>'}).join("")+'</div>'+
+          '<div class="row"><label class="f" for="rk-why" style="flex:1;min-width:200px">Reason<select id="rk-why">'+WHY.map(function(w){return '<option value="'+esc(w[0])+'"'+(RK.why&&RK.why[cur.id]===w[0]?' selected':'')+'>'+esc(w[1])+'</option>'}).join("")+'</select></label>'+
+          '<label class="f" for="rk-note" style="flex:2;min-width:220px">Details <span class="opt">(optional)</span><input id="rk-note" type="text" maxlength="200" placeholder="e.g. Car 12 crossed the center line" value="'+esc(RK.note&&RK.note[cur.id]||"")+'"></label></div></details>'+
+        '<div class="rk-acts"><button class="rk-go" type="button" id="rkPost">'+(run===1?'Post Phase 1 and swap':'Post final result')+'</button>'+(run===2?'<button class="mini" type="button" id="rkBack">Back to Phase 1</button>':'')+'</div></section>';}
     M.innerHTML=h;
     $$("[data-tab2]",M).forEach(function(b){b.onclick=function(){RK.tab=b.getAttribute("data-tab2");renderRK(true)}});
     $$("[data-next]",M).forEach(function(b){b.onclick=function(){rkPutOn(b.getAttribute("data-next"),N)}});
     $$("[data-clr]",M).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm undo"){b.textContent="Confirm undo";return}var res=FRB.clear(C.heats,b.getAttribute("data-clr"));if(res.error){toast(res.error);b.textContent="Undo this result";return}rkSave(res.changed,"Result undone")}});
     if(!cur||cur.status==="finished"||!cur.lane1||!cur.lane2) return;
-    var run2=(cur.run||1)===2,key2=cur.id+":"+(cur.run||1),t1=$("#rk-t1"),t2=$("#rk-t2"),post=$("#rkPost"),prev=$("#rkPrev");
-    $$("[data-st]",M).forEach(function(b){b.onclick=function(){db.from("race_heats").update({status:b.getAttribute("data-st"),updated_at:new Date().toISOString()}).eq("id",cur.id).then(function(x){rkOk(x)})}});
-    function val(inp){var v=(inp.value||"").trim().replace(",",".");if(v==="")return null;var q=+v;return isFinite(q)&&q>0&&q<1000?Math.round(q*1000)/1000:NaN}
+    RK.why=RK.why||{};RK.note=RK.note||{};
+    var run2=(cur.run||1)===2,key2=cur.id+":"+(cur.run||1),t1=$("#rk-t1"),t2=$("#rk-t2"),mg=$("#rk-m"),post=$("#rkPost"),prev=$("#rkPrev"),now=function(){return new Date().toISOString()};
+    $$("[data-st]",M).forEach(function(b){b.onclick=function(){var up={status:b.getAttribute("data-st"),updated_at:now()};if(!cur.started_at&&up.status!=="upcoming")up.started_at=now();db.from("race_heats").update(up).eq("id",cur.id).then(function(x){rkOk(x)})}});
+    function val(inp){if(!inp)return null;var v=(inp.value||"").trim().replace(",",".");if(v==="")return null;var q=+v;return isFinite(q)&&q>=0&&q<1000?Math.round(q*1000)/1000:NaN}
     function winPick(){var r=M.querySelector('input[name="rkw"]:checked');return r?r.value:""}
-    function update(){RK.draft[key2]={t1:t1.value,t2:t2.value};RK.confirm="";post.textContent=run2?"Post final result":"Post run 1 and swap lanes";post.classList.remove("confirm");
-      var a=val(t1),b=val(t2),msg=[],odd=[a,b].some(function(x){return x!=null&&!isNaN(x)&&(x<15||x>90)});
-      if(isNaN(a)||isNaN(b)) msg.push("Times are numbers like 28.412.");
-      else if(run2&&a!=null&&b!=null&&cur.a_time1!=null&&cur.b_time1!=null){var A=Math.round((+cur.a_time1+b)*1000)/1000,B=Math.round((+cur.b_time1+a)*1000)/1000;
-        msg.push("Totals: "+R[cur.lane1].display_name+" "+A.toFixed(3)+" · "+R[cur.lane2].display_name+" "+B.toFixed(3)+(A===B?" · it’s a tie, pick the winner below":" · "+(A<B?R[cur.lane1]:R[cur.lane2]).display_name+" wins by "+Math.abs(A-B).toFixed(3)+"s"));}
-      if(odd) msg.push("Double-check: that time looks unusual.");
+    function pw(){var r=M.querySelector('input[name="rkpw"]:checked');return r?r.value:""}
+    function note(){var w=$("#rk-why").value,x=$("#rk-note").value.trim();return [w,x].filter(Boolean).join(": ")}
+    /* the phase's signed differential for racer A (lane1), from the lane winner + margin (differential timing) */
+    function dPhase(){var m=val(mg),p=pw();if(m==null||isNaN(m)||!p)return null;var laneOneIsA=!run2;var aWon=(p==="1")===laneOneIsA;return m===0?0:(aWon?m:-m)}
+    function update(){RK.draft[key2]=DIFF?{pw:pw(),m:mg.value}:{t1:t1.value,t2:t2.value};RK.confirm="";post.textContent=run2?"Post final result":"Post Phase 1 and swap";post.classList.remove("confirm");
+      var msg=[],w=winPick();
+      if(w){msg.push("Officials’ decision: "+rn(w==="a"?cur.lane1:cur.lane2)+" wins"+(note()?" ("+note()+")":"")+".")}
+      else if(DIFF){var dd=dPhase();if(isNaN(val(mg)))msg.push("The margin is a number like 0.062.");
+        else if(run2&&dd!=null&&cur.diff1!=null){var net=Math.round((+cur.diff1+dd)*1000)/1000;msg.push(net===0?"Net differential is even. It’s a tie, so officials pick the winner below.":"Net: "+rn(net>0?cur.lane1:cur.lane2)+" wins by "+Math.abs(net).toFixed(3)+"s")}}
+      else {var a=val(t1),b=val(t2),odd=[a,b].some(function(x){return x!=null&&!isNaN(x)&&(x<15||x>90)});
+        if(isNaN(a)||isNaN(b)) msg.push("Times are numbers like 28.412.");
+        else if(run2&&a!=null&&b!=null&&cur.a_time1!=null&&cur.b_time1!=null){var A=Math.round((+cur.a_time1+b)*1000)/1000,B=Math.round((+cur.b_time1+a)*1000)/1000;
+          msg.push("Totals: "+rn(cur.lane1)+" "+A.toFixed(3)+" · "+rn(cur.lane2)+" "+B.toFixed(3)+(A===B?" · it’s a tie, pick the winner below":" · "+rn(A<B?cur.lane1:cur.lane2)+" wins by "+Math.abs(A-B).toFixed(3)+"s"));}
+        if(odd) msg.push("Double-check: that time looks unusual.");}
       prev.textContent=msg.join(" ");}
-    t1.oninput=update;t2.oninput=update;update();
-    t1.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();t2.focus()}};
-    t2.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();post.click()}};
-    var det=M.querySelector(".rk-ovr"); if(det){det.ontoggle=function(){if(!det.open)RK.ovr[cur.id]=""};$$('input[name="rkw"]',det).forEach(function(r){r.onchange=function(){RK.ovr[cur.id]=r.value;update()}})}
-    var bk=$("#rkBack"); if(bk) bk.onclick=function(){db.from("race_heats").update({run:1,status:"staging"}).eq("id",cur.id).then(function(x){rkOk(x,"Back to run 1")})};
-    post.onclick=function(){var a=val(t1),b=val(t2),w=run2?winPick():"";
-      if(isNaN(a)||isNaN(b)){toast("Times are numbers like 28.412.");return}
-      if(!run2){if(a==null||b==null){toast("Enter both run 1 times.");return}
-        if(RK.confirm!==key2){RK.confirm=key2;post.classList.add("confirm");post.textContent="Confirm run 1: Lane 1 "+a.toFixed(3)+" · Lane 2 "+b.toFixed(3);return}
-        db.from("race_heats").update({a_time1:a,b_time1:b,run:2,status:"staging",updated_at:new Date().toISOString()}).eq("id",cur.id).then(function(x){if(rkOk(x,"Run 1 posted. Swap lanes for run 2."))delete RK.draft[key2]});return}
-      var trial=JSON.parse(JSON.stringify(C.heats)),res=FRB.post(trial,cur.id,{a1:cur.a_time1,b1:cur.b_time1,a2:b,b2:a,winner:w});
+    if(DIFF){mg.oninput=update;$$('input[name="rkpw"]',M).forEach(function(r){r.onchange=function(){update();mg.focus()}});mg.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();post.click()}}}
+    else{t1.oninput=update;t2.oninput=update;t1.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();t2.focus()}};t2.onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();post.click()}}}
+    update();
+    var det=M.querySelector(".rk-ovr"); if(det){det.ontoggle=function(){if(!det.open)RK.ovr[cur.id]=""};$$('input[name="rkw"]',det).forEach(function(r){r.onchange=function(){RK.ovr[cur.id]=r.value;update()}});
+      $("#rk-why").onchange=function(){RK.why[cur.id]=this.value;update()};$("#rk-note").oninput=function(){RK.note[cur.id]=this.value;update()}}
+    var bk=$("#rkBack"); if(bk) bk.onclick=function(){db.from("race_heats").update({run:1,status:"staging"}).eq("id",cur.id).then(function(x){rkOk(x,"Back to Phase 1")})};
+    function finish(t,label){var trial=JSON.parse(JSON.stringify(C.heats)),res=FRB.post(trial,cur.id,t);
       if(res.error){toast(res.error);return}
-      if(RK.confirm!==key2){var h2=trial.filter(function(x){return x.id===cur.id})[0];RK.confirm=key2;post.classList.add("confirm");
-        post.textContent="Confirm: "+R[h2.winner].display_name+" wins"+(h2.lane1_time!=null&&h2.lane2_time!=null?" by "+Math.abs(h2.lane1_time-h2.lane2_time).toFixed(3)+"s":"");return}
-      rkSave(res.changed,"Result posted. Winner moves on.");delete RK.draft[key2];RK.ovr[cur.id]="";};
+      if(RK.confirm!==key2+"F"){var h2=trial.filter(function(x){return x.id===cur.id})[0],nt=FRB.net(h2);RK.confirm=key2+"F";post.classList.add("confirm");
+        post.textContent="Confirm: "+rn(h2.winner)+" wins"+(t.winner?" ("+(t.note||"officials’ decision")+")":nt!=null?" by "+Math.abs(nt).toFixed(3)+"s":"");return}
+      rkSave(res.changed,label||"Result posted. Winner moves on.");delete RK.draft[key2];RK.ovr[cur.id]="";RK.why[cur.id]="";RK.note[cur.id]=""}
+    post.onclick=function(){var w=winPick();
+      if(w){ /* officials decide the heat now (either phase) */
+        if(!$("#rk-why").value){toast("Pick a reason for the heat sheet.");return}
+        var t=run2?{a1:cur.a_time1,b1:cur.b_time1,d1:cur.diff1}:{};t.winner=w;t.note=note();finish(t,"Heat decided. Winner moves on.");return}
+      if(DIFF){var dd=dPhase();if(isNaN(val(mg))){toast("The margin is a number like 0.062.");return}if(dd==null){toast("Pick which lane won and enter the margin.");return}
+        if(!run2){if(RK.confirm!==key2){RK.confirm=key2;post.classList.add("confirm");post.textContent="Confirm Phase 1: "+rn(dd>=0?cur.lane1:cur.lane2)+(dd===0?" even":" by "+Math.abs(dd).toFixed(3));return}
+          db.from("race_heats").update({diff1:dd,run:2,status:"staging",started_at:cur.started_at||now(),updated_at:now()}).eq("id",cur.id).then(function(x){if(rkOk(x,"Phase 1 posted. "+(SW==="Wheel Bank"?"Swap lanes.":"Swap lanes and wheels.")))delete RK.draft[key2]});return}
+        finish({d1:cur.diff1,d2:dd,note:note()});return}
+      var a=val(t1),b=val(t2);
+      if(isNaN(a)||isNaN(b)){toast("Times are numbers like 28.412.");return}
+      if(!run2){if(a==null||b==null){toast("Enter both Phase 1 times.");return}
+        if(RK.confirm!==key2){RK.confirm=key2;post.classList.add("confirm");post.textContent="Confirm Phase 1: Lane 1 "+a.toFixed(3)+" · Lane 2 "+b.toFixed(3);return}
+        db.from("race_heats").update({a_time1:a,b_time1:b,diff1:Math.round((b-a)*1000)/1000,run:2,status:"staging",started_at:cur.started_at||now(),updated_at:now()}).eq("id",cur.id).then(function(x){if(rkOk(x,"Phase 1 posted. "+(SW==="Wheel Bank"?"Swap lanes.":"Swap lanes and wheels.")))delete RK.draft[key2]});return}
+      finish({a1:cur.a_time1,b1:cur.b_time1,a2:b,b2:a,note:note()});};
   }
   /* Side column: coming up + announcement (under the live preview) */
   function rkSide(C){var S2=$("#rkSide"),n=rkNames(C),FRB=window.FRB,st=C.st,cur=C.cur;
@@ -5232,23 +5352,36 @@ window.FRB=(function(){
     var label=function(id){var x=R[id];return x?(x.car_number?"#"+x.car_number+" ":"")+x.display_name:""};
     if(!D){
       h='<section class="rk-card"><h3>Brackets</h3>'+(C.brackets.length?C.brackets.map(function(b){var hs=C.heats.filter(function(x){return x.bracket_id===b.id}),real=hs.filter(function(x){return !FRB.isBye(x)}),done=real.filter(function(x){return x.status==="finished"}).length;
-          return '<div class="rk-brow"><div><b>'+esc(b.name)+'</b><small>'+(b.kind==="double"?"Double":"Single")+' elimination · '+b.car_count+' cars · '+b.bye_count+' byes · '+done+' of '+real.length+' raced</small></div><div class="row">'+(done?'':'<button class="mini" type="button" data-edit="'+b.id+'">Redo first round</button>')+'<button class="mini red" type="button" data-delb="'+b.id+'">Delete</button></div></div>'}).join(""):'<p class="rk-fine">No brackets yet. Start one below.</p>')+'</section>'+
+          return '<div class="rk-brow"><div><b>'+esc(b.name)+'</b><small>'+(b.kind==="double"?"Double":"Single")+' elimination · '+b.car_count+' cars · '+b.bye_count+' byes · '+done+' of '+real.length+' raced</small>'+
+            '<div class="row" style="margin-top:6px"><select class="mini" data-swap="'+b.id+'" aria-label="Wheel swap method for '+esc(b.name)+'">'+SWAPS.map(function(w){return '<option'+((b.wheel_swap||SWAPS[0])===w?' selected':'')+'>'+w+'</option>'}).join("")+'</select>'+
+            '<select class="mini" data-timing="'+b.id+'" aria-label="Timing for '+esc(b.name)+'"><option value="elapsed"'+(b.timing!=="differential"?' selected':'')+'>Elapsed times</option><option value="differential"'+(b.timing==="differential"?' selected':'')+'>Differential (margins only)</option></select></div></div>'+
+            '<div class="row">'+'<button class="mini solid" type="button" data-sheet="'+b.id+'">Heat sheet</button>'+(done?'':'<button class="mini" type="button" data-edit="'+b.id+'">Redo first round</button>')+'<button class="mini red" type="button" data-delb="'+b.id+'">Delete</button></div></div>'}).join("")+
+            '<div class="row" style="margin-top:10px"><button class="mini solid" type="button" data-sheet="all">All heat sheets (print or save PDF)</button><button class="mini" type="button" id="bkCsv">Download all heats (.csv)</button></div><p class="rk-fine">Heat sheets show both phases, differentials, wheel swap method, start and end times, notes and final placings. Share the PDF, and keep the official ISBD heat sheet as the official record (Rule A-10.04).</p>':'<p class="rk-fine">No brackets yet. Start one below.</p>')+'</section>'+
         '<section class="rk-card"><h3>New bracket</h3><div class="rk-form">'+
           '<label class="f" for="bk-name">Bracket<input type="text" id="bk-name" maxlength="40" list="bkNames" placeholder="Super Stock"></label><datalist id="bkNames">'+[].concat.apply([],racers.map(function(x){return x.division?[x.division]:[]})).filter(function(v,i,a){return a.indexOf(v)===i}).map(function(v){return '<option value="'+esc(v)+'">'}).join("")+'</datalist>'+
           '<label class="f" for="bk-kind">Type<select id="bk-kind"><option value="double">Double elimination (out after 2 losses)</option><option value="single">Single elimination (out after 1 loss)</option></select></label>'+
-          '<label class="f" for="bk-cars">Cars racing<input type="number" id="bk-cars" min="2" max="64" value="8"></label><label class="f" for="bk-byes">Byes<input type="number" id="bk-byes" min="0" max="32" value="0"></label></div>'+
+          '<label class="f" for="bk-cars">Cars racing<input type="number" id="bk-cars" min="2" max="64" value="8"></label><label class="f" for="bk-byes">Byes<input type="number" id="bk-byes" min="0" max="32" value="0"></label>'+
+          '<label class="f" for="bk-swap">Wheel swap (Rule A-12.01)<select id="bk-swap">'+SWAPS.map(function(w){return '<option>'+w+'</option>'}).join("")+'</select></label>'+
+          '<label class="f" for="bk-timing">Timer<select id="bk-timing"><option value="elapsed">Elapsed times for each car</option><option value="differential">Differential (winner and margin only)</option></select></label>'+
+          '<label class="f" for="bk-date">Race date<input type="date" id="bk-date" value="'+new Date().toISOString().slice(0,10)+'"></label></div>'+
           '<p id="bkCheck" class="rk-check"></p><button class="rk-go" type="button" id="bkNext">Next: draw the cars</button></section>';
       M.innerHTML=h;
-      var cars=$("#bk-cars"),byes=$("#bk-byes"),nm=$("#bk-name"),chk=function(){var m=FRB.check(cars.value,byes.value),t=(+cars.value)+(+byes.value);$("#bkCheck").textContent=m||("Bracket of "+t+": "+cars.value+" cars + "+byes.value+" byes · "+t/2+" first-round races");$("#bkCheck").className="rk-check "+(m?"bad":"good")};
+      var cars=$("#bk-cars"),byes=$("#bk-byes"),nm=$("#bk-name"),chk=function(){var m=FRB.check(cars.value,byes.value),t=(+cars.value)+(+byes.value),dn=nm.value.trim().toLowerCase(),need=/master/.test(dn)?6:/stock/.test(dn)?12:0;
+        var heats=$("#bk-kind").value==="double"&&t>=4?" · "+(2*(+cars.value)-2)+" heats + 1 runoff if required":"";
+        $("#bkCheck").textContent=m||("Bracket of "+t+": "+cars.value+" cars + "+byes.value+" byes · "+t/2+" first-round races"+heats+(need&&+cars.value<need?". Note: the champion needs at least "+need+" qualified racers in this division to qualify for Akron (Rule B-2).":""));$("#bkCheck").className="rk-check "+(m?"bad":"good")};
       cars.oninput=function(){byes.value=FRB.autoByes(+cars.value||2);chk()}; byes.oninput=chk;
       nm.oninput=function(){var c=racers.filter(function(x){return (x.division||"").toLowerCase()===nm.value.trim().toLowerCase()}).length;if(c>=2){cars.value=c;byes.value=FRB.autoByes(c);chk()}};
-      byes.value=FRB.autoByes(8); chk();
+      byes.value=FRB.autoByes(8); chk(); $("#bk-kind").onchange=chk;
+      $$("[data-swap]",M).forEach(function(sl){sl.onchange=function(){db.from("race_brackets").update({wheel_swap:sl.value}).eq("id",sl.getAttribute("data-swap")).then(function(x){rkOk(x,"Wheel swap saved")})}});
+      $$("[data-timing]",M).forEach(function(sl){sl.onchange=function(){db.from("race_brackets").update({timing:sl.value}).eq("id",sl.getAttribute("data-timing")).then(function(x){rkOk(x,"Timer setting saved")})}});
+      $$("[data-sheet]",M).forEach(function(bt){bt.onclick=function(){var id=bt.getAttribute("data-sheet");FRB.printSheet({brackets:id==="all"?C.brackets:C.brackets.filter(function(b){return b.id===id}),heats:C.heats,racers:racers,city:"Flint Soap Box Derby · Flint, MI",title:"Race Day Heat Record"})}});
+      var bc=$("#bkCsv"); if(bc) bc.onclick=function(){FRB.downloadCSV({brackets:C.brackets,heats:C.heats,racers:racers},"flint-soap-box-derby-heats.csv")};
       $("#bkNext").onclick=function(){var name=nm.value.trim(),m=FRB.check(cars.value,byes.value);if(!name){toast("Name the bracket.");return}if(m){toast(m);return}
         if(C.brackets.some(function(b){return b.name.toLowerCase()===name.toLowerCase()})){toast("There’s already a bracket with that name.");return}
-        var c=+cars.value,y=+byes.value,half=(c+y)/2;RK.bd={name:name,kind:$("#bk-kind").value,cars:c,byes:y,pairs:[]};for(var i=0;i<half;i++)RK.bd.pairs.push(["",i>=half-y?"BYE":""]);RK.lastPick=[];renderRK(true)};
+        var c=+cars.value,y=+byes.value,half=(c+y)/2;RK.bd={name:name,kind:$("#bk-kind").value,cars:c,byes:y,pairs:[],wheel_swap:$("#bk-swap").value,timing:$("#bk-timing").value,race_date:$("#bk-date").value||null};for(var i=0;i<half;i++)RK.bd.pairs.push(["",i>=half-y?"BYE":""]);RK.lastPick=[];renderRK(true)};
       $$("[data-delb]",M).forEach(function(b){b.onclick=function(){if(b.textContent!=="Confirm delete"){b.textContent="Confirm delete";return}var id=b.getAttribute("data-delb");delBracket(C,id).then(function(x){rkOk(x,"Bracket deleted")})}});
       $$("[data-edit]",M).forEach(function(b){b.onclick=function(){var br=C.brackets.filter(function(x){return x.id===b.getAttribute("data-edit")})[0],r1=C.heats.filter(function(x){return x.bracket_id===br.id&&x.side==="W"&&x.round===1}).sort(function(a,c){return a.slot-c.slot});
-        RK.bd={name:br.name,kind:br.kind,cars:br.car_count,byes:br.bye_count,pairs:r1.map(function(x){return [x.lane1||"",x.b_bye?"BYE":(x.lane2||"")]}),replace:br.id};RK.lastPick=[];renderRK(true)}});
+        RK.bd={name:br.name,kind:br.kind,cars:br.car_count,byes:br.bye_count,wheel_swap:br.wheel_swap,timing:br.timing,race_date:br.race_date,pairs:r1.map(function(x){return [x.lane1||"",x.b_bye?"BYE":(x.lane2||"")]}),replace:br.id};RK.lastPick=[];renderRK(true)}});
       return;}
     /* placing cars */
     var placed=[],nb=0;D.pairs.forEach(function(p){if(p[0])placed.push(p[0]);if(p[1]==="BYE")nb++;else if(p[1])placed.push(p[1])});
@@ -5284,7 +5417,7 @@ window.FRB=(function(){
       if(!err&&nb2!==D.byes) err="Place exactly "+D.byes+" byes (you have "+nb2+").";
       if(!err&&ids.length!==D.cars) err="Place exactly "+D.cars+" cars (you have "+ids.length+").";
       if(err){toast(err);return}
-      var out=FRB.build({name:D.name,kind:D.kind,cars:D.cars,byes:D.byes,pairs:D.pairs.map(function(p){return [p[0],p[1]==="BYE"?null:p[1]]})});
+      var out=FRB.build({name:D.name,kind:D.kind,cars:D.cars,byes:D.byes,wheel_swap:D.wheel_swap,timing:D.timing,race_date:D.race_date,pairs:D.pairs.map(function(p){return [p[0],p[1]==="BYE"?null:p[1]]})});
       var pre=D.replace?delBracket(C,D.replace):Promise.resolve({});
       pre.then(function(x){if(x&&x.error)throw x.error;
         var left=C.heats.filter(function(h){return h.bracket_id!==D.replace}),base=left.length?Math.max.apply(null,left.map(function(h){return h.sort_order||0})):0;
@@ -6326,8 +6459,13 @@ window.FRB=(function(){
   function num(h){return S.N[h.id]?"Heat "+S.N[h.id]:""}
   function heatTitle(h){return esc((h.division||"")+(h.division&&h.label?" · ":"")+(h.label||""))}
   function bye(h){return FRB.isBye(h)}
-  function margin(h){return (h.lane1_time!=null&&h.lane2_time!=null)?Math.abs(h.lane1_time-h.lane2_time).toFixed(3):""}
+  function margin(h){var n=FRB.net(h);return n!=null&&n!==0?Math.abs(n).toFixed(3):""}
+  function phaseTxt(h){var p=function(d){return d==null?"":+d===0?"even":nm(+d>0?h.lane1:h.lane2)+" by "+Math.abs(d).toFixed(3)+"s"};return h.diff1!=null&&h.diff2!=null?"Phase 1: "+p(h.diff1)+" · Phase 2: "+p(h.diff2):""}
   function loser(h){return h.winner===h.lane1?h.lane2:h.lane1}
+  function SHEETBTN(b){return S.brackets.length?'<p class="rw-sheet"><button class="rw-btn red" type="button" data-sheet="'+(b?esc(b.id):"all")+'">⬇ Download heat sheet'+(b?' · '+esc(b.name):'s')+' (PDF)</button><button class="rw-link" type="button" data-sheetcsv="1">Spreadsheet (.csv)</button></p>':''}
+  document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-sheet],[data-sheetcsv]");if(!b||!page.contains(b))return;
+    if(b.hasAttribute("data-sheetcsv")){FRB.downloadCSV({brackets:S.brackets,heats:S.heats,racers:S.list},"flint-soap-box-derby-heats.csv");return}
+    var id=b.getAttribute("data-sheet");FRB.printSheet({brackets:id==="all"?S.brackets:S.brackets.filter(function(x){return x.id===id}),heats:S.heats,racers:S.list,city:"Flint Soap Box Derby · Flint, MI",title:"Race Day Heat Record"})});
   function real(){return S.heats.filter(function(x){return !bye(x)})}
   function current(){var st=S.state||{},h=S.heats.filter(function(x){return x.id===st.current_heat&&!bye(x)})[0];
     return h||real().filter(function(x){return x.status!=="finished"})[0]||null}
@@ -6338,14 +6476,14 @@ window.FRB=(function(){
   function record(id){var w=0,l=0,best=null;S.heats.forEach(function(h){if(h.status!=="finished"||!h.winner||(h.lane1!==id&&h.lane2!==id))return;
       if(h.winner===id)w++;else l++;runTimes(h,id).forEach(function(t){if(t!=null&&(best==null||+t<best))best=+t})});return{w:w,l:l,best:best}}
   /* where a racer stands in their bracket */
-  function standing(id,b){if(!b) return "";var hs=S.heats.filter(function(h){return h.bracket_id===b.id}),fin=hs.filter(function(h){return h.side==="F"})[0]||hs.filter(function(h){return h.side==="W"&&!h.win_to})[0];
-    if(fin&&fin.status==="finished"){if(fin.winner===id)return "Champion";if(fin.lane1===id||fin.lane2===id)return "Runner-up"}
+  function standing(id,b){if(!b) return "";var hs=S.heats.filter(function(h){return h.bracket_id===b.id}),pl=FRB.places(hs,b.kind);
+    if(pl.done){if(pl.list[0]&&pl.list[0].ids[0]===id)return "Champion";if(pl.list[1]&&pl.list[1].ids[0]===id)return "Runner-up"}
     var l=0;hs.forEach(function(h){if(h.status==="finished"&&h.winner&&h.winner!==id&&(h.lane1===id||h.lane2===id))l++});
     if(l>=(b.kind==="double"?2:1)) return "Out";
     return b.kind==="double"?(l?"Consolation side":"Winners side"):"Still racing"}
   function racerBracket(id){var h=S.heats.filter(function(x){return x.bracket_id&&(x.lane1===id||x.lane2===id)})[0];return h?bracketOf(h):S.brackets.filter(function(b){return racer(id)&&b.name===racer(id).division})[0]||null}
   function divisions(){var d=[];S.brackets.forEach(function(b){if(d.indexOf(b.name)<0)d.push(b.name)});S.heats.forEach(function(x){var v=x.division||"Race";if(d.indexOf(v)<0)d.push(v)});return d}
-  function where(id,cur,up){if(cur&&cur.status!=="finished"&&(cur.lane1===id||cur.lane2===id)) return ["hot",cur.status==="upcoming"?"Up next":"On the track now · run "+(cur.run||1)+" of 2"];
+  function where(id,cur,up){if(cur&&cur.status!=="finished"&&(cur.lane1===id||cur.lane2===id)) return ["hot",cur.status==="upcoming"?"Up next":"On the track now · Phase "+(cur.run||1)+" of 2"];
     for(var i=0;i<up.length;i++){if(up[i].lane1===id||up[i].lane2===id) return [i<2?"soon":"",i===0?"Next heat":"In "+(i+1)+" heats"+(S.N[up[i].id]?" (Heat "+S.N[up[i].id]+")":"")]}
     var r=record(id),s=standing(id,racerBracket(id));
     if(s==="Champion") return ["soon","Champion! · "+r.w+" W, "+r.l+" L"];
@@ -6390,7 +6528,7 @@ window.FRB=(function(){
   function lane(h,n){var run=h.run||1,id=run===2?(n===1?h.lane2:h.lane1):(n===1?h.lane1:h.lane2);
     var r=racer(id),tt=runTimes(h,id),fin=h.status==="finished"&&h.winner,tot=id===h.lane1?h.lane1_time:h.lane2_time;
     var cls="rw-lane"+(n===1?" l1":"")+(fin?(h.winner===id?" win":" lose"):"")+(isF(id)?" mine":"");
-    var times=[tt[0]!=null?'<span>Run 1 <b>'+secs(tt[0])+'</b></span>':'',tt[1]!=null?'<span>Run 2 <b>'+secs(tt[1])+'</b></span>':''].join("");
+    var times=[tt[0]!=null?'<span>Phase 1 <b>'+secs(tt[0])+'</b></span>':'',tt[1]!=null?'<span>Phase 2 <b>'+secs(tt[1])+'</b></span>':''].join("");
     return '<div class="'+cls+'"><div class="rw-av" aria-hidden="true">'+esc(initials(r))+'</div><span class="rw-lp">Lane '+n+'</span>'+
       '<p class="rw-name">'+nm(id)+'</p>'+(r&&r.team?'<p class="rw-team">'+esc(r.team)+'</p>':'')+
       (r&&(r.car_number||r.sponsor)?'<p class="rw-meta">'+[r.car_number?"Car #"+esc(r.car_number):"",r.sponsor?esc(r.sponsor):""].filter(Boolean).join(" · ")+'</p>':'')+
@@ -6417,9 +6555,10 @@ window.FRB=(function(){
     else if(!cur.lane1||!cur.lane2){setH(on,'<div class="rw-st-top"><span class="rw-state">Up next</span><span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div><h2 class="rw-head">Waiting on results</h2><p class="rw-status">'+slot(cur,"a")+' vs '+slot(cur,"b")+'</p>');}
     else{var s=cur.status||"upcoming",L={staging:"r",set:"ry",racing:"g"}[s]||"",m=margin(cur),fin=s==="finished"&&cur.winner,run=cur.run||1;
       var light=function(c,lbl,onn){return '<span class="rw-lt"><i class="'+c+(onn?" on":"")+'"></i><small>'+lbl+'</small></span>'};
-      var line=fin?(m?'Won by '+m+' seconds over '+nm(loser(cur))+' (total of both runs)':'Heat complete'):(run===2&&s!=="racing"?'Lanes swapped for run 2.':ST[s][2]);
-      if(!fin&&run===2&&cur.a_time1!=null&&cur.b_time1!=null&&+cur.a_time1!==+cur.b_time1){var ld=+cur.a_time1<+cur.b_time1?cur.lane1:cur.lane2;line+=' <span class="rw-lead">After run 1: '+nm(ld)+' leads by '+Math.abs(cur.a_time1-cur.b_time1).toFixed(3)+'s</span>'}
-      setH(on,'<div class="rw-st-top"><span class="rw-state s-'+s+'">'+ST[s][0]+'</span>'+(fin?'':'<span class="rw-runpill">Run '+run+' of 2</span>')+'<span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div>'+
+      var line=fin?(m?'Won by '+m+' seconds over '+nm(loser(cur))+' (net of both phases)':cur.note?'Officials’ decision: '+esc(cur.note):'Heat complete'):(run===2&&s!=="racing"?'Lanes and wheels swapped for Phase 2.':ST[s][2]);
+      var d1=cur.diff1!=null?+cur.diff1:(cur.a_time1!=null&&cur.b_time1!=null?cur.b_time1-cur.a_time1:null);
+      if(!fin&&run===2&&d1!=null&&d1!==0){var ld=d1>0?cur.lane1:cur.lane2;line+=' <span class="rw-lead">After Phase 1: '+nm(ld)+' leads by '+Math.abs(d1).toFixed(3)+'s</span>'}
+      setH(on,'<div class="rw-st-top"><span class="rw-state s-'+s+'">'+ST[s][0]+'</span>'+(fin?'':'<span class="rw-runpill">Phase '+run+' of 2</span>')+'<span class="rw-heat">'+esc(num(cur))+' · '+heatTitle(cur)+'</span></div>'+
         presents(cur)+'<h2 class="rw-head">'+(fin?nm(cur.winner)+' wins!':ST[s][1])+'</h2>'+
         '<div class="rw-match">'+lane(cur,1)+'<div class="rw-vs" aria-hidden="true">VS</div>'+lane(cur,2)+'</div>'+
         '<div class="rw-lights" role="img" aria-label="Starting lights: '+(L?({r:"red",ry:"red and amber",g:"green"})[L]:"off")+'">'+light("r","Ramp",L.indexOf("r")>=0)+light("y","Set",L.indexOf("y")>=0)+light("g","Go",L==="g")+'</div>'+
@@ -6431,6 +6570,7 @@ window.FRB=(function(){
   }
   function card(h){var fin=h.status==="finished",isB=bye(h),cur=current(),on=cur&&cur.id===h.id&&!fin;
     if(isB&&h.a_bye&&h.b_bye) return '';
+    if(FRB.skipped(h)) return '<div class="bk-c bye"><p class="bk-h">Runoff not needed</p><div class="bk-r w"><span>'+nmF(h.winner,true)+'</span><b>✓</b></div><div class="bk-r dead"><span>Champion won the first championship heat</span><b></b></div></div>';
     var row=function(s){var id=s==="a"?h.lane1:h.lane2,isW=fin&&h.winner&&h.winner===id,dead=s==="a"?h.a_bye:h.b_bye,t=fin?(s==="a"?h.lane1_time:h.lane2_time):null;
       return '<div class="bk-r'+(isW?' w':'')+(dead?' dead':'')+'"><span>'+(dead?'Bye':slot(h,s,isW))+'</span><b>'+(t!=null?Number(t).toFixed(3):isW?'✓':'')+'</b></div>'};
     return '<div class="bk-c'+(on?' on':'')+(isB?' bye':'')+'"><p class="bk-h">'+(isB?'Bye':esc(num(h)))+(on?' · On track':fin?' · Final':'')+'</p>'+row("a")+row("b")+'</div>'}
@@ -6439,7 +6579,7 @@ window.FRB=(function(){
       var inSide=hs.filter(function(h){return h.side===sd[0]}),rounds=[];inSide.forEach(function(h){if(rounds.indexOf(h.round)<0)rounds.push(h.round)});rounds.sort(function(a,b){return a-b});
       if(!inSide.length) return '';
       return '<p class="bk-side">'+sd[1]+'</p><div class="bk-scroll" tabindex="0" role="region" aria-label="'+esc(b.name)+' '+sd[1]+'"><div class="bk-cols">'+rounds.map(function(r){var col=inSide.filter(function(h){return h.round===r}).sort(function(a,b){return a.slot-b.slot}),
-        lab=sd[0]==="F"?"Final":(col[0].label||"").split(" · ")[0];
+        lab=sd[0]==="F"?(r===2?"Runoff (if required)":"Championship"):(col[0].label||"").split(" · ")[0];
         return '<div class="bk-col"><p class="bk-rt">'+esc(lab)+'</p><div class="bk-stack">'+col.map(card).join("")+'</div></div>'}).join("")+'</div></div>'}).join("")+'</div>'}
   function view(cur,up){
     $$('.rw-tabs button',page).forEach(function(b){b.setAttribute("aria-selected",String(b.getAttribute("data-view")===VIEW))});
@@ -6459,14 +6599,14 @@ window.FRB=(function(){
     box.__mode=VIEW; var html="";
     if(VIEW==="sched"){var hs=real().filter(inDiv),ups=S.heats.filter(function(x){return bye(x)&&!(x.a_bye&&x.b_bye)&&x.winner&&x.bracket_id&&inDiv(x)&&x.round===1&&x.side==="W"});
       html=(hs.length?'<ol class="rw-list">'+hs.map(function(x){var isCur=cur&&x.id===cur.id&&x.status!=="finished",fin=x.status==="finished";
-        var pill=fin?'<span class="rw-pill done">Final</span>':isCur?'<span class="rw-pill live">'+(x.status==="upcoming"?"Up next":"On track · run "+(x.run||1))+'</span>':'<span class="rw-pill">Upcoming</span>';
+        var pill=fin?'<span class="rw-pill done">Final</span>':isCur?'<span class="rw-pill live">'+(x.status==="upcoming"?"Up next":"On track · Phase "+(x.run||1))+'</span>':'<span class="rw-pill">Upcoming</span>';
         return '<li class="rw-row'+(isCur?' cur':'')+(fin?' done':'')+'"><span class="rw-n">'+(S.N[x.id]||"")+'</span><div><p class="rw-rt">'+heatTitle(x)+'</p><p class="rw-rv">'+slot(x,"a",fin&&x.winner===x.lane1)+'<span class="vs">vs</span>'+slot(x,"b",fin&&x.winner===x.lane2)+'</p></div><div class="rw-rs">'+pill+(fin&&x.winner?'<small>'+nm(x.winner)+(x.lane1_time!=null?' · '+secs(x.winner===x.lane1?x.lane1_time:x.lane2_time)+' total':'')+'</small>':'')+'</div></li>'}).join("")+'</ol>':none)+
         (ups.length?'<p class="rw-fine">First-round byes: '+ups.map(function(x){return nm(x.winner)+' ('+esc(x.division)+')'}).join(", ")+' move straight to the next round.</p>':'');}
     else if(VIEW==="results"){var rs=real().filter(function(x){return x.status==="finished"&&x.winner&&inDiv(x)}).sort(function(a,b){return (b.updated_at||"")>(a.updated_at||"")?1:-1});
-      html=rs.length?'<ul class="rw-list">'+rs.map(function(x){var m=margin(x),lo=loser(x),tw=runTimes(x,x.winner),tl=runTimes(x,lo);
+      html=(rs.length?SHEETBTN(null):'')+(rs.length?'<ul class="rw-list">'+rs.map(function(x){var m=margin(x),lo=loser(x),tw=runTimes(x,x.winner),tl=runTimes(x,lo);
         var line=function(id,t,tot){return t[0]!=null&&t[1]!=null?nm(id)+' '+Number(t[0]).toFixed(3)+' + '+Number(t[1]).toFixed(3)+' = <b>'+Number(tot).toFixed(3)+'s</b>':''};
         return '<li class="rw-res"><p class="rw-rt">'+esc(num(x))+' · '+heatTitle(x)+'</p><p class="big">'+nmF(x.winner,true)+' beat '+nmF(lo)+(m?' by '+m+'s':'')+'</p>'+
-          (x.lane1_time!=null?'<p class="tm">'+line(x.winner,tw,x.winner===x.lane1?x.lane1_time:x.lane2_time)+'<br>'+line(lo,tl,lo===x.lane1?x.lane1_time:x.lane2_time)+'</p>':'<p class="tm">Decided without times</p>')+'</li>'}).join("")+'</ul>':'<p class="rw-empty">Results show up here as soon as each heat finishes.</p>';}
+          (x.lane1_time!=null?'<p class="tm">'+line(x.winner,tw,x.winner===x.lane1?x.lane1_time:x.lane2_time)+'<br>'+line(lo,tl,lo===x.lane1?x.lane1_time:x.lane2_time)+'</p>':phaseTxt(x)?'<p class="tm">'+phaseTxt(x)+'</p>':'<p class="tm">Decided by race officials</p>')+(x.note?'<p class="tm"><b>Note:</b> '+esc(x.note)+'</p>':'')+'</li>'}).join("")+'</ul>':'<p class="rw-empty">Results show up here as soon as each heat finishes.</p>');}
     else if(VIEW==="stand"){html='<div class="rw-stand">'+(DIV?[DIV]:divisions()).map(function(d){var b=S.brackets.filter(function(x){return x.name===d})[0];
         var ids=[];S.heats.forEach(function(h){if((h.division||"Race")===d)[h.lane1,h.lane2].forEach(function(id){if(id&&ids.indexOf(id)<0)ids.push(id)})});S.list.forEach(function(r){if((r.division||"")===d&&ids.indexOf(r.id)<0&&!b)ids.push(r.id)});
         var rank={"Champion":0,"Runner-up":1,"Winners side":2,"Still racing":2,"Consolation side":3,"Out":4,"":2};
@@ -6474,7 +6614,7 @@ window.FRB=(function(){
         return '<h3>'+esc(d)+(b?' <small>'+(b.kind==="double"?"Double":"Single")+' elimination</small>':'')+'</h3>'+(rows.length?'<table><thead><tr><th>Racer</th><th class="c">W</th><th class="c">L</th><th class="bt">Best run</th></tr></thead><tbody>'+rows.map(function(r){var x=racer(r.id);
           return '<tr><td>'+nmF(r.id)+(r.s?' <span class="rw-tagx t-'+r.s.split(" ")[0].toLowerCase()+'">'+esc(r.s)+'</span>':'')+(x&&x.team?'<small>'+esc(x.team)+'</small>':'')+'</td><td class="c">'+r.w+'</td><td class="c">'+r.l+'</td><td class="bt">'+(r.best!=null?r.best.toFixed(3)+"s":"–")+'</td></tr>'}).join("")+'</tbody></table>':none)}).join("")+
         '<p class="rw-fine">Racers still in the bracket are listed first. Official placings are announced at the track.</p></div>';}
-    else if(VIEW==="bracket"){var bb=S.brackets.filter(function(b){return b.name===DIV})[0]||S.brackets[0];html=bb?bracketHTML(bb)+'<p class="rw-fine">Each heat is two runs with a lane swap. Totals shown in seconds.</p>':none;}
+    else if(VIEW==="bracket"){var bb=S.brackets.filter(function(b){return b.name===DIV})[0]||S.brackets[0];html=bb?bracketHTML(bb)+'<p class="rw-fine">Each heat is two phases: racers swap lanes and wheels, and the lower combined time wins. Times in seconds.'+(bb.kind==="double"?' If the consolation-side finalist wins the championship heat, a runoff decides the champion.':'')+'</p>'+SHEETBTN(bb):none;}
     else {html=(S.shout.length?'<ul class="rw-cheer">'+S.shout.map(function(s){return '<li><b>'+esc(s.name)+'</b>'+esc(s.message)+'</li>'}).join("")+'</ul>':'<p class="rw-empty">No cheers yet. Be the first!</p>')+'<p style="margin-top:12px"><button class="btn deep" type="button" data-so="1">Send a shout-out</button></p>';}
     setH(box,html);
   }

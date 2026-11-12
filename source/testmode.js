@@ -25,14 +25,14 @@
       ["Mia S.","Brick Street Builders","9","Moonwalk Man","Masters"],["Leo D.","Vehicle City Velocity","30","Flint Community Schools","Masters"],
       ["Aria J.","Hilltop Hustle","15","Goyette Mechanical","Masters"],["Caleb B.","Southside Speed","27","Ideal Group","Masters"],["Nora F.","Checkered Dreams","5","United Way","Masters"]];
     T.race_racers=R.map(function(x,i){return{id:"rr"+i,display_name:x[0],team:x[1],car_number:x[2],sponsor:x[3],division:x[4]}});
-    var a=F.build({name:"Super Stock",kind:"double",cars:6,byes:2,pairs:[["rr0","rr1"],["rr2","rr3"],["rr4",null],["rr5",null]]}),
-        b=F.build({name:"Masters",kind:"single",cars:5,byes:3,pairs:[["rr6","rr7"],["rr8",null],["rr9",null],["rr10",null]]});
+    var day=new Date().toISOString().slice(0,10),a=F.build({name:"Super Stock",kind:"double",cars:6,byes:2,wheel_swap:"2/4/2 Progressive",timing:"elapsed",race_date:day,pairs:[["rr0","rr1"],["rr2","rr3"],["rr4",null],["rr5",null]]}),
+        b=F.build({name:"Masters",kind:"single",cars:5,byes:3,wheel_swap:"2/4/2 Progressive",timing:"elapsed",race_date:day,pairs:[["rr6","rr7"],["rr8",null],["rr9",null],["rr10",null]]});
     a.bracket.sort_order=1;b.bracket.sort_order=2;
     var H=a.heats.concat(b.heats); F.order(H,[a.bracket,b.bracket],"alt"); H.sort(function(x,y){return x.sort_order-y.sort_order});
     /* race the first three heats, then put the fourth on the ramp for run 2 */
     var times=[[28.412,28.977,28.501,28.870],[28.851,28.603,28.790,28.655],[29.104,29.380,29.012,29.250]],n=0,cur=null;
     H.forEach(function(h){if(F.isBye(h)||cur)return;if(!h.lane1||!h.lane2)return;
-      if(n<3){var t=times[n++];F.post(H,h.id,{a1:t[0],b1:t[1],a2:t[2],b2:t[3]})} else {cur=h;h.run=2;h.status="staging";h.a_time1=28.66;h.b_time1=28.94}});
+      if(n<3){var t=times[n++];F.post(H,h.id,{a1:t[0],b1:t[1],a2:t[2],b2:t[3]})} else {cur=h;h.run=2;h.status="staging";h.a_time1=28.66;h.b_time1=28.94;h.diff1=0.28;h.started_at=new Date().toISOString()}});
     var now=Date.now();H.forEach(function(h,i){h.updated_at=new Date(now-(60-i)*6e4).toISOString()});
     T.race_brackets=[a.bracket,b.bracket]; T.race_heats=H;
     var P=[];((window.FR&&window.FR.PARTNERS)||[]).forEach(function(pg){pg.forEach(function(p){if(p.img&&!/your logo/i.test(p.name))P.push(p)})});
