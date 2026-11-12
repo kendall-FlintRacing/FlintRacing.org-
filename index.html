@@ -708,6 +708,100 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
 @media (max-width:620px){.rg-pick3{grid-template-columns:1fr 1fr}.rg-pick3 .rf:first-child{grid-column:1/-1}}
 .rg-cta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:10px;font-size:.92rem}
 .rg-cta a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* ===== Track & Racing hero: logo + major events ===== */
+.rh2{position:relative;background:#16171a;color:#fff;overflow:hidden;border-bottom:4px solid var(--red)}
+.rh2::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 3px),rgba(255,255,255,.12) calc(25% - 3px) 25%);-webkit-mask-image:repeating-linear-gradient(180deg,#000 0 46px,transparent 46px 80px);mask-image:repeating-linear-gradient(180deg,#000 0 46px,transparent 46px 80px);pointer-events:none}
+.rh2-grid{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:clamp(1.5rem,4vw,3.2rem);align-items:center;padding-block:clamp(2rem,5vw,3.6rem)}
+.rh2-brand{display:grid;gap:14px;align-content:center}
+.rh2-logo{position:relative;overflow:hidden;isolation:isolate;border-radius:8px;border:3px solid #fff;box-shadow:10px 10px 0 var(--red);max-width:480px;aspect-ratio:5/4;display:grid;place-items:center;padding:clamp(14px,3vw,30px);background:#16171a}
+.rh2-bg{position:absolute;inset:-24px;width:calc(100% + 48px);height:calc(100% + 48px);object-fit:cover;filter:blur(9px) brightness(.72) saturate(1.05);z-index:-1}
+.rh2-mark{width:100%;height:auto;max-height:100%;object-fit:contain;display:block;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
+.rh2-h1{font-size:clamp(2.6rem,6vw,4.4rem);font-style:italic;color:#fff;transform:skewX(-6deg);transform-origin:left;margin-top:10px}
+.rh2-h1 em,.dr-hero h1 em{font-style:inherit;color:var(--red2)}
+.rh2-lede{color:#e3e5e9;font-size:1.05rem;max-width:48ch;margin:0}
+.rh2-events{display:grid;gap:12px}
+.rh2-k{margin:0;font:700 .76rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}
+.rh2-feat{position:relative;border-radius:8px;overflow:hidden;min-height:clamp(300px,34vw,370px);display:grid;align-items:end;border:3px solid #fff;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.rh2-feat>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 85%}
+.rh2-feat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.05) 0%,rgba(10,10,12,.55) 38%,rgba(10,10,12,.94) 100%)}
+.rh2-feat-in{position:relative;z-index:1;padding:clamp(16px,2.6vw,26px);display:grid;gap:8px}
+.rh2-tag{margin:0;justify-self:start;font:800 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;background:var(--red);color:#fff;padding:7px 10px;border-radius:3px}
+.rh2-feat h2{font-size:clamp(2rem,4.4vw,3.1rem);line-height:.95;color:#fff;text-wrap:balance}
+.rh2-date{margin:0;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font:800 clamp(1.15rem,2.2vw,1.45rem)/1.1 var(--display);text-transform:uppercase;color:#fff}
+.rh2-count{font:700 .74rem/1 var(--body);letter-spacing:.1em;background:#fff;color:var(--red-deep);padding:6px 9px;border-radius:999px}
+.rh2-desc{margin:0;color:#e3e5e9;max-width:56ch}
+.rh2-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.rh2-acts .btn{min-height:44px}
+.rh2-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rh2-list a{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;height:100%;padding:12px 14px;border-radius:6px;background:#22242b;border:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;transition:background .15s,border-color .15s}
+.rh2-list a:hover,.rh2-list a:focus-visible{background:#2b2d35;border-color:var(--red)}
+.rh2-list b{display:block;font:800 1.08rem/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.rh2-list small{display:block;color:#b9bcc2;font-size:.84rem;line-height:1.35;margin-top:3px}
+.rh2-list i{font-style:normal;font:700 1.4rem/1 var(--body);color:var(--red2)}
+.rh2-ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--red-deep);color:#fff;font:700 1rem/1 var(--body)}
+@media (max-width:900px){.rh2-grid{grid-template-columns:minmax(0,1fr)}.rh2-logo{max-width:340px}}
+@media (max-width:560px){.rh2-list{grid-template-columns:minmax(0,1fr)}.rh2-acts .btn{flex:1 1 auto;justify-content:center}}
+.dr-teaser{margin-top:clamp(2rem,4vw,3rem);display:grid;grid-template-columns:minmax(0,1.4fr) auto;gap:18px 28px;align-items:center;padding:clamp(18px,3vw,28px);border-radius:6px;background:var(--red-deep);color:#fff}
+.dr-teaser h2{font-size:clamp(1.7rem,3.4vw,2.3rem);color:#fff;margin:6px 0}
+.dr-teaser p{margin:0;max-width:62ch}
+.dr-teaser .hiw-k{color:#ffd9db}
+.dr-teaser-acts{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:760px){.dr-teaser{grid-template-columns:minmax(0,1fr)}}
+/* ===== About Derby Racing page ===== */
+.dr-hero{background:#16171a;border-bottom:4px solid var(--red);color:#fff}
+.dr-hero .wrap{display:grid;gap:18px;padding-block:clamp(2rem,5vw,3.4rem)}
+.dr-hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-style:italic;color:#fff;transform:skewX(-6deg);transform-origin:left;margin-top:6px}
+.dr-jump{display:flex;flex-wrap:wrap;gap:8px}
+.dr-jump a{color:#fff;text-decoration:none;font:700 .86rem/1 var(--body);border:1.5px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 14px}
+.dr-jump a:hover,.dr-jump a:focus-visible{background:#fff;color:var(--ink)}
+.dr-sec{margin-top:clamp(2.5rem,5vw,3.6rem);scroll-margin-top:96px}
+.dr-h{font-size:clamp(2rem,4vw,2.7rem);color:#fff;margin:8px 0 10px}
+.dr-h3{font-size:1.45rem;color:#fff;margin:0 0 10px}
+.dr-lede{color:#d6d8dc;font-size:1.05rem;max-width:72ch;margin:0 0 16px}
+.dr-fine{color:#c9cbd0;font-size:.92rem;max-width:80ch;margin-top:12px}
+.dr-fine a,.dr-sec dd a{color:#fff}
+.dr-flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;counter-reset:fl}
+.dr-flow li{counter-increment:fl;position:relative;background:#fff;color:var(--ink);border-radius:4px;padding:14px 16px 14px 62px;display:grid;gap:4px}
+.dr-flow li::before{content:counter(fl);position:absolute;left:14px;top:14px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font:800 1.1rem/1 var(--display)}
+.dr-flow li.fin::before{background:var(--red-deep)}
+.dr-flow b{font:800 1.1rem/1.1 var(--display);text-transform:uppercase}
+.dr-flow span{color:#3b3e45;font-size:.95rem}
+.dr-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.dr-facts div{background:#22242b;border-radius:4px;padding:14px 16px;display:grid;gap:4px}
+.dr-facts b{font:800 1.9rem/1 var(--display);color:var(--red2)}
+.dr-facts span{color:#d6d8dc;font-size:.92rem}
+.dr-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dr-cards article{background:#fff;color:var(--ink);border-radius:4px;border-top:6px solid var(--red-deep);padding:16px;display:grid;gap:6px;align-content:start}
+.dr-cards h3{font-size:1.3rem}
+.dr-cards p{margin:0;color:#3b3e45;font-size:.94rem}
+.dr-ex{margin-top:12px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;background:#0d0d0f;border:2px solid #2b2c31;border-radius:6px;padding:14px 18px;color:#fff}
+.dr-ex p{margin:0}.dr-ex-k{font:800 .74rem/1 var(--body)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--red2)}
+.dr-ex b{font-variant-numeric:tabular-nums;color:var(--red2)}
+.dr-table{overflow-x:auto;border-radius:6px}
+.dr-table table{width:100%;border-collapse:collapse;background:#fff;color:var(--ink);min-width:620px}
+.dr-table th,.dr-table td{padding:12px 14px;text-align:left;border-bottom:1px solid #e1e3e7;vertical-align:top}
+.dr-table thead th{background:var(--ink);color:#fff;font:700 .76rem/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.dr-table tbody th{font:800 1.15rem/1.1 var(--display);text-transform:uppercase}
+.dr-table a{color:var(--red-deep);font-weight:700}
+.dr-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,3vw,32px)}
+.dr-weeks,.dr-steps{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.dr-weeks li{background:#22242b;border-left:6px solid var(--red-deep);border-radius:4px;padding:10px 14px;color:#d6d8dc}
+.dr-weeks b{display:block;color:#fff;font:800 1.05rem/1.2 var(--display);text-transform:uppercase}
+.dr-steps{counter-reset:st}
+.dr-steps li{counter-increment:st;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:center;color:#e3e5e9}
+.dr-steps li::before{content:counter(st);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:2px solid #fff;font:800 .9rem/1 var(--display)}
+.dr-terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0}
+.dr-terms div{background:#fff;color:var(--ink);border-radius:4px;padding:12px 14px}
+.dr-terms dt{font:800 1.08rem/1.1 var(--display);text-transform:uppercase;color:var(--red-deep);margin-bottom:4px}
+.dr-terms dd{margin:0;color:#3b3e45;font-size:.92rem;line-height:1.45}
+.dr-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dr-links a{display:grid;gap:4px;background:#22242b;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:14px 16px;color:#fff;text-decoration:none}
+.dr-links a:hover,.dr-links a:focus-visible{border-color:var(--red)}
+.dr-links b{font:800 1.05rem/1.15 var(--display);text-transform:uppercase}
+.dr-links span{color:#b9bcc2;font-size:.88rem}
+@media (max-width:1000px){.dr-cards,.dr-links{grid-template-columns:repeat(2,minmax(0,1fr))}.dr-terms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.dr-flow,.dr-two,.dr-facts{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.dr-cards,.dr-links,.dr-terms{grid-template-columns:minmax(0,1fr)}}
 /* ===== Track & Racing: How it works (#how-racing) ===== */
 .hiw{margin-top:clamp(2.5rem,5vw,3.5rem);display:grid;gap:clamp(18px,2.4vw,26px);scroll-margin-top:96px}
 .hiw-head{display:grid;gap:10px;max-width:70ch}
@@ -2621,13 +2715,31 @@ body.rw-tv .rw-fol{display:none}
 <!-- ======================= TRACK & RACING ======================= -->
 <div class="page dark prog-page" data-page="racing" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Track &amp; Racing</span></div></nav>
-  <header class="race-hero"><div class="wrap">
-    <div>
-      <p class="eyebrow" style="color:var(--pink)">Build something bigger.</p>
-      <h1>Track &amp; <em>Racing</em></h1>
-      <p class="lede">Experience the starting line at Cronin Derby Downs. From school teams to community racers, our events bring families together through gravity-powered racing.</p>
+  <header class="rh2"><div class="wrap rh2-grid">
+    <div class="rh2-brand">
+      <div class="rh2-logo"><img class="rh2-bg" src="img/hero.webp" alt="" aria-hidden="true"><img class="rh2-mark" src="img/cronin-derby-downs-logo-sticker.webp" alt="Cronin Derby Downs, established 1969" width="786" height="603"></div>
+      <h1 class="rh2-h1">Track &amp; <em>Racing</em></h1>
+      <p class="rh2-lede">Home of the Annual Flint Soap Box Derby. From school teams to community racers, our events bring families together through gravity-powered racing.</p>
     </div>
-    <div class="pic"><img src="img/web/two-cars-track.webp" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs as spectators watch from the tents" style="object-position:50% 100%"></div>
+    <div class="rh2-events" aria-labelledby="rh2H">
+      <p class="rh2-k" id="rh2H"><span id="rhYear">2027</span> major events</p>
+      <article class="rh2-feat">
+        <img src="img/web/two-cars-track.webp" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs as spectators watch from the tents">
+        <div class="rh2-feat-in">
+          <p class="rh2-tag">The main event</p>
+          <h2>Annual Flint Soap Box Derby</h2>
+          <p class="rh2-date"><span id="rhDate">Saturday, June 5, 2027</span><span class="rh2-count" id="rhCount" hidden></span></p>
+          <p class="rh2-desc">Our building workshop teams and sanctioned racers take on the hill at Cronin Derby Downs. Free to race and free to eat for every participant.</p>
+          <div class="rh2-acts"><a class="btn white" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn white-ghost" href="#sanctioned-racers">Sanctioned racers</a><a class="btn white-ghost" href="#race-watch">Live race page</a></div>
+        </div>
+      </article>
+      <ul class="rh2-list">
+        <li><a href="#fun-runs"><span class="rh2-ic" aria-hidden="true">☀</span><span><b>Seasonal Fun Runs</b><small id="rhFun">Low-pressure runs at the track through summer and fall</small></span><i aria-hidden="true">›</i></a></li>
+        <li><a href="#race-board"><span class="rh2-ic" aria-hidden="true">⏱</span><span><b>Practice Runs at the Track</b><small id="rhPrac">Get a feel for the hill before race day</small></span><i aria-hidden="true">›</i></a></li>
+        <li><a href="#derby-racing"><span class="rh2-ic" aria-hidden="true">?</span><span><b>About Derby Racing</b><small>How it works, race day, building a car and terminology</small></span><i aria-hidden="true">›</i></a></li>
+        <li><a href="#about"><span class="rh2-ic" aria-hidden="true">♥</span><span><b>Cronin Derby Downs</b><small>Our family story and the history of the hill</small></span><i aria-hidden="true">›</i></a></li>
+      </ul>
+    </div>
   </div></header>
   <div class="wrap">
     <div class="panels">
@@ -2636,31 +2748,10 @@ body.rw-tv .rw-fol{display:none}
     </div>
 
 
-    <section class="hiw" id="how-racing" aria-labelledby="hiwH">
-      <div class="hiw-head">
-        <p class="hiw-k">How it works</p>
-        <h2 id="hiwH">From the first bolt to the finish line</h2>
-        <p class="hiw-lede">Here’s how a season comes together. Schools and groups sign up, build their own soap box cars side by side with our crew, take them out for practice runs, then race for real in our sanctioned race. The winner earns a trip to nationals in Akron, Ohio.</p>
-      </div>
-      <ol class="hiw-steps">
-        <li><span class="hiw-n" aria-hidden="true">1</span><h3>Sign up</h3><p>Your school or group registers for our building workshop.</p></li>
-        <li><span class="hiw-n" aria-hidden="true">2</span><h3>Build together</h3><p>Six weeks of hands-on, side-by-side building. Every team rolls out with a car of its own.</p></li>
-        <li><span class="hiw-n" aria-hidden="true">3</span><h3>Practice runs</h3><p>Get a feel for the hill at Cronin Derby Downs before it counts.</p></li>
-        <li class="hiw-fin"><span class="hiw-n" aria-hidden="true">4</span><h3>Race day</h3><p>Compete in our sanctioned race. The winner heads to nationals in Akron, Ohio.</p></li>
-      </ol>
-      <h3 class="hiw-sub">Two ways for schools and groups to join</h3>
-      <div class="hiw-paths">
-        <article class="hiw-path"><p class="hiw-tag"><b>6</b> weeks</p><h4>Local schools</h4><p>Build with us for six weeks in a row, from the first piece to a finished, race-ready car.</p></article>
-        <article class="hiw-path"><p class="hiw-tag"><b>3</b> visits</p><h4>Out-of-town schools &amp; groups</h4><p>Coming from farther away? Our limited program fits the drive. You join us just three times:</p>
-          <ul class="hiw-visits"><li>Information night</li><li>Shell reveal day</li><li>Impound &amp; race day</li></ul></article>
-        <article class="hiw-path hiw-own"><p class="hiw-tag">Your way</p><h4>Racers &amp; families</h4><p>Individual racers are welcome in our race. Local families and builders who want to build a car together can reach out, and we’ll talk through your options.</p>
-          <a class="btn outline-red" href="#participate" data-interest="racing" data-topic="Racing as a family or individual racer" data-note="Interested in: building a car as a family or individual racer">Talk to us about building</a></article>
-      </div>
-      <div class="hiw-free">
-        <div><p class="hiw-free-h">Free to race. Free to eat.</p><p>Every participant takes part at no cost, and every participant and volunteer eats free.</p></div>
-        <div class="hiw-reg"><p><b>Registration is required, in two parts:</b> one for the building workshop and a separate one for race day. Signing up for one doesn’t sign you up for the other.</p>
-          <div class="hiw-acts"><a class="btn white" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a><a class="btn white-ghost" href="#participate" data-interest="racing">Inquire about race day</a></div></div>
-      </div>
+    <section class="dr-teaser" aria-labelledby="drtH">
+      <div><p class="hiw-k">New to derby racing?</p><h2 id="drtH">Start with About Derby Racing</h2>
+        <p>How a season comes together, what race day looks like at Cronin Derby Downs, how heats work, how to build a car and the terms you’ll hear at the track.</p></div>
+      <div class="dr-teaser-acts"><a class="btn white" href="#derby-racing">About Derby Racing →</a><a class="btn white-ghost" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a></div>
     </section>
     <h2 class="sec-title"><small>Pick your lane</small>Explore the racing formats</h2>
     <div class="lanes4">
@@ -2676,7 +2767,7 @@ body.rw-tv .rw-fol{display:none}
     <p style="color:#c9cbd0;font-size:.9rem;margin-top:14px;max-width:80ch">For every format: each published event provides its date, car and age requirements, preparation details and registration pathway. Staff confirm eligibility and next steps by email. Youth participants must know their assigned chaperone, with one chaperone per six to eight students, or have an arrangement confirmed with staff beforehand.</p>
 
     <h2 class="sec-title"><small>2027 season</small>Upcoming races</h2>
-    <div class="board" aria-label="Upcoming racing dates">
+    <div class="board" id="race-board" aria-label="Upcoming racing dates">
       <div class="board-head"><b>Race board</b><span><i aria-hidden="true"></i>2027 season</span></div>
       <div id="raceBoard"></div>
       <div class="board-foot">Times and locations are emailed to registered participants.</div>
@@ -2702,6 +2793,131 @@ body.rw-tv .rw-fol{display:none}
         <p class="sbd-fee">Sanctioned racers are welcome at our local race. Send a quick inquiry and we’ll email you the forms and fees. Race day registration has a fee for racers not affiliated with our program.</p>
       </div>
       <button class="btn red" type="button" id="sbdOpen" aria-haspopup="dialog">Quick register →</button>
+    </section>
+  </div>
+</div>
+
+<!-- ======================= ABOUT DERBY RACING ======================= -->
+<div class="page dark prog-page" data-page="derby-racing" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">About Derby Racing</span></div></nav>
+  <header class="dr-hero"><div class="wrap">
+    <div><p class="eyebrow" style="color:var(--pink)">Derby racing 101</p><h1>About Derby <em>Racing</em></h1>
+      <p class="rh2-lede">Everything you need to know to build, race and cheer at Cronin Derby Downs: how a season works, what race day looks like, how heats are decided, the divisions, building a car and the terms you’ll hear at the track.</p></div>
+    <nav class="dr-jump" aria-label="On this page"><a href="#how-racing">How it works</a><a href="#dr-raceday">Race day</a><a href="#dr-heats">How a heat works</a><a href="#dr-divisions">Divisions</a><a href="#dr-build">Build a car</a><a href="#dr-terms">Terminology</a><a href="#dr-rules">Rules &amp; resources</a></nav>
+  </div></header>
+  <div class="wrap">
+    <section class="hiw dr-sec" id="how-racing" aria-labelledby="hiwH">
+      <div class="hiw-head">
+        <p class="hiw-k">How it works</p>
+        <h2 id="hiwH">From the first bolt to the finish line</h2>
+        <p class="hiw-lede">Here’s how a season comes together. Schools and groups sign up, build their own soap box cars side by side with our crew, take them out for practice runs, then race for real in our sanctioned race. The winner earns a trip to nationals in Akron, Ohio.</p>
+      </div>
+      <ol class="hiw-steps">
+        <li><span class="hiw-n" aria-hidden="true">1</span><h3>Sign up</h3><p>Your school or group registers for our building workshop.</p></li>
+        <li><span class="hiw-n" aria-hidden="true">2</span><h3>Build together</h3><p>Six weeks of hands-on, side-by-side building. Every team rolls out with a car of its own.</p></li>
+        <li><span class="hiw-n" aria-hidden="true">3</span><h3>Practice runs</h3><p>Get a feel for the hill at Cronin Derby Downs before it counts.</p></li>
+        <li class="hiw-fin"><span class="hiw-n" aria-hidden="true">4</span><h3>Race day</h3><p>Compete in our sanctioned race. The winner heads to nationals in Akron, Ohio.</p></li>
+      </ol>
+      <h3 class="hiw-sub">Two ways for schools and groups to join</h3>
+      <div class="hiw-paths">
+        <article class="hiw-path"><p class="hiw-tag"><b>6</b> weeks</p><h4>Local schools</h4><p>Build with us for six weeks in a row, from the first piece to a finished, race-ready car.</p></article>
+        <article class="hiw-path"><p class="hiw-tag"><b>3</b> visits</p><h4>Out-of-town schools &amp; groups</h4><p>Coming from farther away? Our limited program fits the drive. You join us just three times:</p>
+          <ul class="hiw-visits"><li>Information night</li><li>Shell reveal day</li><li>Impound &amp; race day</li></ul></article>
+        <article class="hiw-path hiw-own"><p class="hiw-tag">Your way</p><h4>Racers &amp; families</h4><p>Individual racers are welcome in our race. Local families and builders who want to build a car together can reach out, and we’ll talk through your options.</p>
+          <a class="btn outline-red" href="#participate" data-interest="racing" data-topic="Racing as a family or individual racer" data-note="Interested in: building a car as a family or individual racer">Talk to us about building</a></article>
+      </div>
+      <div class="hiw-free">
+        <div><p class="hiw-free-h">Free to race. Free to eat.</p><p>Every participant takes part at no cost, and every participant and volunteer eats free.</p></div>
+        <div class="hiw-reg"><p><b>Registration is required, in two parts:</b> one for the building workshop and a separate one for race day. Signing up for one doesn’t sign you up for the other.</p>
+          <div class="hiw-acts"><a class="btn white" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a><a class="btn white-ghost" href="#participate" data-interest="racing">Inquire about race day</a></div></div>
+      </div>
+    </section>
+
+    <section class="dr-sec" id="dr-raceday" aria-labelledby="drRdH">
+      <p class="hiw-k">At Cronin Derby Downs</p><h2 id="drRdH" class="dr-h">What race day looks like</h2>
+      <p class="dr-lede">The top half of the hill is the program race: check-in, the start, the VIP tent and the Team Zone. The bottom half is the community event: the Welcome Tent, general admission, concessions, merchandise and the finish line.</p>
+      <ol class="dr-flow">
+        <li><b>Park and enter at the Welcome Tent</b><span>Park in your color-coded parking zone and follow the ribbons to the Welcome Tent for your wristband and the day’s program.</span></li>
+        <li><b>Check in up the hill</b><span>Participants and volunteers head up the hill to the Check-in Tent to sign in and pick up their folder, swag bag and race day shirt.</span></li>
+        <li><b>Weigh-in and team photo</b><span>Coaches gather their team and head to weigh-in for the team photo. Chaperones set up the team’s tent or zone.</span></li>
+        <li><b>Warm-ups in the Team Zone</b><span>While the driver and coach go to the start line for warm-ups, teams wait in the Team Zone making posters and cheers and reading through their folders.</span></li>
+        <li><b>Opening ceremony</b><span>Drivers join Kevin on the track for the opening ceremony, and then the race begins!</span></li>
+        <li><b>Racing</b><span>The coach and one chaperone help load the driver at the start, and the second chaperone stays with the team to cheer. After each run, drivers get a ride back to the top of the hill.</span></li>
+        <li><b>Team lunch</b><span>Once a team is out of the bracket, the team eats lunch together in the VIP tent, then rejoins family for the rest of the race.</span></li>
+        <li class="fin"><b>Final wave and awards</b><span>After the final heat, every participant meets at the top of the hill and rides down the track together for a final wave. Medals and trophies are awarded. Leaving early? Pick up your medal at the Welcome Tent.</span></li>
+      </ol>
+      <div class="dr-facts">
+        <div><b>Free</b><span>to race and to eat for every participant and volunteer</span></div>
+        <div><b>1 : 6–8</b><span>one chaperone for every six to eight students</span></div>
+        <div><b>2</b><span>drivers at the top of the hill at a time during fun runs</span></div>
+      </div>
+    </section>
+
+    <section class="dr-sec" id="dr-heats" aria-labelledby="drHtH">
+      <p class="hiw-k">The rules of the hill</p><h2 id="drHtH" class="dr-h">How a heat works</h2>
+      <div class="dr-cards">
+        <article><h3>Two phases</h3><p>Two racers start side by side from the ramps and race down the hill. That’s Phase 1. They swap lanes and race again in Phase 2.</p></article>
+        <article><h3>Lane and wheel swap</h3><p>Between phases, racers trade lanes and wheels (the 2/4/2 Progressive swap, or the Wheel Bank method), so neither the lane nor the wheels decide the race.</p></article>
+        <article><h3>Lowest combined time wins</h3><p>Each phase is timed to the thousandth of a second. The heat goes to the lower combined time. That’s the same as adding the two phase margins together.</p></article>
+        <article><h3>Double elimination</h3><p>Racers are out after two losses. If the consolation-side finalist wins the first championship heat, a runoff heat decides the champion.</p></article>
+      </div>
+      <div class="dr-ex"><p class="dr-ex-k">Example</p><p>Car 12 wins Phase 1 by <b>0.062</b> seconds. Car 7 wins Phase 2 by <b>0.086</b> seconds. Car 7 wins the heat by <b>0.024</b> seconds.</p></div>
+      <p class="dr-fine">Crossing the center line (lane violation) or hitting the timer (line violation) loses the heat. Interference on the track means the phase is rerun. Follow every heat live on the <a href="#race-watch">live race page</a>.</p>
+    </section>
+
+    <section class="dr-sec" id="dr-divisions" aria-labelledby="drDvH">
+      <p class="hiw-k">Pick your car</p><h2 id="drDvH" class="dr-h">Divisions</h2>
+      <div class="dr-table" role="region" aria-label="Divisions" tabindex="0"><table>
+        <thead><tr><th>Division</th><th>Ages</th><th>Max car + driver</th><th>Good to know</th><th>Official plans</th></tr></thead>
+        <tbody>
+          <tr><th>Stock</th><td>7–13</td><td>200 lb</td><td>The entry-level car for younger racers.</td><td><a href="https://www.soapboxderby.org/wp-content/uploads/sites/2/2023/06/stock-car-build-plans-august-2021.pdf" target="_blank" rel="noopener">Build plans ↗</a></td></tr>
+          <tr><th>Super Stock</th><td>9–18</td><td>240 lb</td><td>A longer car with room for bigger drivers.</td><td><a href="https://www.soapboxderby.org/wp-content/uploads/sites/2/2023/06/super-stock-car-plans-august-2021.pdf" target="_blank" rel="noopener">Build plans ↗</a></td></tr>
+          <tr><th>Masters</th><td>10–20</td><td>255 lb</td><td>A lay-down car with more design freedom. Talk to staff before you start a build.</td><td><a href="https://www.soapboxderby.org/wp-content/uploads/2026/06/Masters-Car-Plans-JULY-2026.pdf" target="_blank" rel="noopener">Build plans ↗</a></td></tr>
+        </tbody></table></div>
+      <p class="dr-fine">For a local champion to qualify for Akron, a division needs at least 12 qualified racers in Stock or Super Stock, or 6 in Masters. Divisions and kits are set by the All-American Soap Box Derby. See <a href="https://www.soapboxderby.org/racers/race-divisions-build-plans/" target="_blank" rel="noopener">race divisions and build plans ↗</a>.</p>
+    </section>
+
+    <section class="dr-sec" id="dr-build" aria-labelledby="drBdH">
+      <p class="hiw-k">From kit to car</p><h2 id="drBdH" class="dr-h">How to build a car</h2>
+      <div class="dr-two">
+        <div><h3 class="dr-h3">Our six-week build</h3>
+          <ol class="dr-weeks">
+            <li><b>Week 1 · Community</b>Meet the team, learn workshop safety and get to know your schedule.</li>
+            <li><b>Week 2 · Build</b>Begin assembly: steering, brakes, axles and alignment.</li>
+            <li><b>Week 3 · Sight</b>See your designs on the returning shells and receive team shirts as they arrive.</li>
+            <li><b>Week 4 · Persevere</b>Keep going, work together and bring the build closer to the finish.</li>
+            <li><b>Week 5 · Prepare</b>Check the build and get ready for final inspections.</li>
+            <li><b>Week 6 · Race</b>Celebrate your work at the Soap Box Derby.</li>
+          </ol>
+          <p class="dr-fine">Out-of-town schools and groups join us three times instead: information night, shell reveal day, and impound and race day.</p></div>
+        <div><h3 class="dr-h3">What goes into every car</h3>
+          <ol class="dr-steps">
+            <li>Steering stop and foot brace</li><li>Kingpins, axles and washer stacks</li><li>Steering hardware, pulleys and cables (double-clamped)</li><li>Stabilizer assembly</li><li>A new brake pad, brake pedal and cable</li><li>Fixed and adjustable weights</li><li>Axle airfoils</li><li>Foam, shell and team design</li><li>Required decals: car number, sponsors, race city and AASBD logo</li><li>Floorboard finish: tung oil and/or wax</li>
+          </ol>
+          <p class="dr-fine">Build exactly to the official plans for your division. Inspectors check every item on the official inspection sheet, so the plans are your checklist. Watch the official build videos for <a href="https://www.youtube.com/watch?v=plaeXYyfteM" target="_blank" rel="noopener">Stock ↗</a> and <a href="https://www.youtube.com/watch?v=UBGGKyN8Umk" target="_blank" rel="noopener">Super Stock ↗</a>.</p></div>
+      </div>
+      <div class="row" style="margin-top:14px"><a class="btn deep" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a><a class="btn outline-red" href="#building-workshops">Building workshops →</a></div>
+    </section>
+
+    <section class="dr-sec" id="dr-terms" aria-labelledby="drTmH">
+      <p class="hiw-k">Talk like a racer</p><h2 id="drTmH" class="dr-h">Terminology</h2>
+      <dl class="dr-terms"><div><dt>Akron</dt><dd>Home of the FirstEnergy All-American Soap Box Derby World Championship at Derby Downs in Akron, Ohio. Local champions can earn a trip there.</dd></div><div><dt>AASBD / ISBD</dt><dd>The All-American Soap Box Derby, run by International Soap Box Derby, Inc. They set the official rules, car plans and forms.</dd></div><div><dt>Local race</dt><dd>An official, sanctioned race like the Flint Soap Box Derby. Its division champions can qualify for Akron.</dd></div><div><dt>Division</dt><dd>The racing class, set by car type, age and weight: Stock, Super Stock and Masters.</dd></div><div><dt>Car kit</dt><dd>The official parts for a division’s car: axles, steering, brakes, hardware and shell.</dd></div><div><dt>Floorboard</dt><dd>The wooden base everything mounts to. It’s finished with tung oil and/or wax.</dd></div><div><dt>Shell</dt><dd>The body that covers the car. Teams decorate it with their design and the required decals.</dd></div><div><dt>Kingpin</dt><dd>The bolt each axle pivots on. The front kingpin lets the car steer.</dd></div><div><dt>Wheelbase</dt><dd>The distance from the front kingpin to the rear kingpin. Each division’s plans set it.</dd></div><div><dt>Weights</dt><dd>Adjustable weights bolted to the car so the car and driver together come close to the division’s maximum.</dd></div><div><dt>Weigh-in</dt><dd>Car and driver are weighed together before racing.</dd></div><div><dt>Inspection</dt><dd>Officials check each car against the plans using the official inspection sheet. Errors must be fixed within a set time.</dd></div><div><dt>Impound</dt><dd>After inspection, cars are held by officials until racing. No work on the car without permission.</dd></div><div><dt>Starting ramp</dt><dd>Where cars start from a standstill at the top of the hill. Gravity does the rest.</dd></div><div><dt>Lane</dt><dd>Each side of the track. Racers swap lanes between phases.</dd></div><div><dt>Phase</dt><dd>One run down the hill.</dd></div><div><dt>Heat</dt><dd>Two racers, two phases. The lower combined time wins.</dd></div><div><dt>Wheel swap</dt><dd>Racers exchange wheels between phases so equipment differences cancel out. Approved methods are 2/4/2 Progressive and Wheel Bank.</dd></div><div><dt>Time differential</dt><dd>How far ahead the winner of a phase finished, measured in thousandths of a second.</dd></div><div><dt>Bracket</dt><dd>The chart that shows who races whom and where winners and losers go next.</dd></div><div><dt>Double elimination</dt><dd>Racers are out after two losses. One loss moves a racer from the winners side to the consolation side.</dd></div><div><dt>Championship runoff</dt><dd>An extra heat that’s raced only if the consolation-side finalist wins the first championship heat, so the champion is never decided by a single loss.</dd></div><div><dt>Bye</dt><dd>A free pass to the next round when the bracket isn’t full. Racers with a first-round bye are offered a practice bye run.</dd></div><div><dt>Lane or line violation</dt><dd>Crossing the center line (lane) or hitting the timer (line). Either one loses the heat.</dd></div><div><dt>Team Zone</dt><dd>At our race, the area along the track where teams wait together and cheer for their driver.</dd></div><div><dt>Chaperone</dt><dd>The adult responsible for a group of youth at our events, one for every six to eight students.</dd></div><div><dt>Fun run</dt><dd>Relaxed runs down the hill for practice and fun, outside the race bracket.</dd></div></dl>
+    </section>
+
+    <section class="dr-sec" id="dr-rules" aria-labelledby="drRlH">
+      <p class="hiw-k">Read up</p><h2 id="drRlH" class="dr-h">Rules &amp; resources</h2>
+      <div class="dr-links">
+        <a href="#rules"><b>Rules &amp; Guidelines</b><span>Our race rules, car specs and race day guidelines</span></a>
+        <a href="https://www.soapboxderby.org/wp-content/uploads/2023/07/rulebook-updated-june-2023.pdf" target="_blank" rel="noopener"><b>Official AASBD rulebook ↗</b><span>Local race rules, heats, wheel swaps and inspections</span></a>
+        <a href="https://www.soapboxderby.org/rcr/" target="_blank" rel="noopener"><b>Inspection sheets ↗</b><span>Official Stock, Super Stock and Masters inspection sheets</span></a>
+        <a href="#parent-resources"><b>Parent Resources</b><span>Guides and helpful links for parents and guardians</span></a>
+      </div>
+    </section>
+
+    <section class="panel wide" style="margin-top:clamp(2rem,4vw,3rem)">
+      <h2>Ready to take the next step?</h2>
+      <p>Questions about race day or how we operate? Send an inquiry and staff will follow up by email. Once your place is confirmed, we’ll email you the official All-American Soap Box Derby registration form to complete and sign online.</p>
+      <div class="row"><a class="btn deep" href="#participate" data-interest="racing" data-scope="racing">Inquire about race day</a><a class="btn outline-red" href="#racing">← Track &amp; Racing</a></div>
     </section>
   </div>
 </div>
@@ -3574,11 +3790,11 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
-  var PAGE_ANCHORS={"how-racing":"racing","workshop-registration":"race-registration"};
+  var PAGE_ANCHORS={"how-racing":"derby-racing","dr-raceday":"derby-racing","dr-heats":"derby-racing","dr-divisions":"derby-racing","dr-build":"derby-racing","dr-terms":"derby-racing","dr-rules":"derby-racing","race-board":"racing","sanctioned-racers":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
@@ -3598,7 +3814,7 @@ body.rw-tv .rw-fol{display:none}
     closeMenus();
     if(home){ if(h!=="home"&&HOME_ANCHORS[h]){var t=document.getElementById(h);if(t){var y=t.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-8;scrollTo(0,y)}} else scrollTo(0,0); document.title="Flint Racing and STEM | Build Something Bigger"; }
     else { if(show==="stub"){$("#stubTitle").textContent=NAMES[h];$("#stubCrumb").textContent=NAMES[h];} NAMES.about="Our Story"; NAMES.participate="Register / Inquire"; scrollTo(0,0); document.title=NAMES[h]+" | Flint Racing and STEM";
-      if(anchor){var at=document.getElementById(anchor);if(at)requestAnimationFrame(function(){scrollTo(0,at.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-12)})} }
+      if(anchor){var at=document.getElementById(anchor);if(at){var go=function(){var y=at.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-12;if(Math.abs(scrollY-y)>40)scrollTo({top:y,behavior:"instant"})};requestAnimationFrame(go);setTimeout(go,400)}} }
   }
   addEventListener("hashchange",route);
 
@@ -3768,8 +3984,17 @@ body.rw-tv .rw-fol{display:none}
     var t=todayKey(), rows=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t});
     $("#raceBoard").innerHTML=rows.map(function(e){var f=fmtShort(e.d);var main=/Race Day/.test(e.t);
       return '<div class="board-row"><span class="d">'+f.w+' · '+f.m+' '+String(f.d).padStart(2,"0")+'</span><span class="n">'+e.t+'</span><span class="s'+(main?' main':'')+(e.tbc?' tbc':'')+'">'+(main?"Race day":e.tbc?"To be confirmed":"Racing")+'</span></div>'}).join("")||'<div class="board-row"><span class="n">No upcoming dates are published yet.</span></div>';
-    renderSbdDate();
+    renderSbdDate(); renderRaceHero();
   }
+  function renderRaceHero(){if(!document.getElementById("rhDate"))return;
+    var t=todayKey(),up=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t}),rd=nextRaceDay();
+    var lst=function(arr){return arr.slice(0,2).map(function(e){var f=fmtShort(e.d);return f.m+" "+f.d+" · "+e.t.replace(/\s*·\s*Memorial Day Weekend/,"")+(e.tbc?" (TBC)":"")}).join(" · ")+(arr.length>2?" · +"+(arr.length-2)+" more":"")};
+    if(rd){var d=pd(rd.d),f=fmtShort(rd.d);document.getElementById("rhDate").textContent=d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+(rd.tbc?" (to be confirmed)":"");
+      document.getElementById("rhYear").textContent=d.getFullYear();
+      var days=Math.round((d-pd(t))/864e5),c=document.getElementById("rhCount");c.hidden=days<0;c.textContent=days===0?"Today!":days===1?"Tomorrow":days+" days to go"}
+    var prac=up.filter(function(e){return /practice/i.test(e.t)}),fun=up.filter(function(e){return !/practice/i.test(e.t)&&!/Race Day/i.test(e.t)});
+    if(prac.length)document.getElementById("rhPrac").textContent=lst(prac);
+    if(fun.length)document.getElementById("rhFun").textContent=lst(fun)}
 
 
   /* ---- Official AASBD Local Race Registration Form (2027 Flint). The wording below is the official form,
@@ -4204,7 +4429,7 @@ body.rw-tv .rw-fol{display:none}
     setTimeout(function(){pendingInterest=null;pendingNote=null},0);
     if(document.querySelector(".q-done")){qCard.innerHTML=qFormHTML;bindForm()}
     var pg=(document.querySelector("main > .page:not([hidden])")||{getAttribute:function(){return ""}}).getAttribute("data-page");
-    var scope=a.getAttribute("data-scope")||(pg==="racing"&&interest==="racing"?"racing":pg==="building-workshops"&&interest==="building"?"building":pg==="stem-camps"?"camps":pg==="seasonal-workshops"?"seasonal":null);
+    var scope=a.getAttribute("data-scope")||((pg==="racing"||pg==="derby-racing")&&interest==="racing"?"racing":pg==="building-workshops"&&interest==="building"?"building":pg==="stem-camps"?"camps":pg==="seasonal-workshops"?"seasonal":null);
     $("#qDlgSlot").appendChild(qCard); openForm(interest,note,scope,a.getAttribute("data-topic")); qDlg.showModal(); qDlg.scrollTop=0;
     var f=document.getElementById("q-first"); if(f) f.focus();
   },true);
