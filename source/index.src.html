@@ -692,6 +692,14 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
 .rg-done h2{font:800 clamp(1.8rem,4vw,2.4rem)/1.05 var(--display);text-transform:uppercase;margin:6px 0 10px}
 .rg-done p{max-width:52ch;margin:0 auto 18px;color:#3a3d44}
 .rg-done .row{justify-content:center}
+.rg-ws{margin-top:22px;padding:clamp(16px,3vw,24px);border:2px solid var(--red);border-radius:6px;background:#fffafa}
+.rg-ws h3{color:var(--red-deep)}
+.rg-ws .rg-sub{font:800 .78rem/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;color:#2b2e35;margin:18px 0 8px}
+.rg-ws textarea{width:100%;font:400 1rem/1.4 var(--body);border:1.5px solid #c9ccd1;border-radius:4px;padding:9px 11px;min-height:80px}
+.rg-ws .rg-help{color:#4a4d55;font-size:.88rem;margin:0 0 10px}
+.rg-ws .rg-div label{font-weight:600}
+.rg-pick3{display:grid;grid-template-columns:2fr 1.3fr 1.4fr;gap:10px 12px;margin-bottom:10px}
+@media (max-width:620px){.rg-pick3{grid-template-columns:1fr 1fr}.rg-pick3 .rf:first-child{grid-column:1/-1}}
 .rg-cta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:10px;font-size:.92rem}
 .rg-cta a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 /* ===== Track & Racing: How it works (#how-racing) ===== */
@@ -2585,8 +2593,8 @@ body.rw-tv .rw-fol{display:none}
 
     <section class="panel wide" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
       <h2>Ready to take the next step?</h2>
-      <p>Your request goes to Flint Racing admin for review. Staff will follow up by email about availability, requirements and next steps, and organize the relevant email list. Sending a request does not confirm a place.</p>
-      <div class="row"><a class="btn deep" href="#participate" data-interest="building">Ask about joining a building workshop</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
+      <p><b>Register</b> with the official All-American Soap Box Derby registration form, plus your T-shirt size and safe check-in and checkout details. Have questions first? <b>Inquire</b> and staff will follow up by email. Registering or inquiring does not confirm a place.</p>
+      <div class="row"><a class="btn deep" href="#workshop-registration">Register for a building workshop</a><a class="btn outline-red" href="#participate" data-interest="building">Inquire about building workshops</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
   </div>
 </div>
@@ -2627,24 +2635,24 @@ body.rw-tv .rw-fol{display:none}
         <article class="hiw-path"><p class="hiw-tag"><b>3</b> visits</p><h4>Out-of-town schools &amp; groups</h4><p>Coming from farther away? Our limited program fits the drive. You join us just three times:</p>
           <ul class="hiw-visits"><li>Information night</li><li>Shell reveal day</li><li>Impound &amp; race day</li></ul></article>
         <article class="hiw-path hiw-own"><p class="hiw-tag">Your way</p><h4>Racers &amp; families</h4><p>Individual racers are welcome in our race. Local families and builders who want to build a car together can reach out, and we’ll talk through your options.</p>
-          <a class="btn outline-red" href="#participate" data-interest="racing" data-note="Interested in: building a car as a family or individual racer">Talk to us about building</a></article>
+          <a class="btn outline-red" href="#participate" data-interest="racing" data-topic="Racing as a family or individual racer" data-note="Interested in: building a car as a family or individual racer">Talk to us about building</a></article>
       </div>
       <div class="hiw-free">
         <div><p class="hiw-free-h">Free to race. Free to eat.</p><p>Every participant takes part at no cost, and every participant and volunteer eats free.</p></div>
         <div class="hiw-reg"><p><b>Registration is required, in two parts:</b> one for the building workshop and a separate one for race day. Signing up for one doesn’t sign you up for the other.</p>
-          <div class="hiw-acts"><a class="btn white" href="#participate" data-interest="building" data-note="Registering for: building workshop">Register for a building workshop</a><a class="btn white-ghost" href="#participate" data-interest="racing" data-note="Registering for: race day">Register to race</a></div></div>
+          <div class="hiw-acts"><a class="btn white" href="#workshop-registration">Register for a building workshop</a><a class="btn white-ghost" href="#race-registration">Register to race</a></div></div>
       </div>
     </section>
     <h2 class="sec-title"><small>Pick your lane</small>Explore the racing formats</h2>
     <div class="lanes4">
       <details class="lane4"><summary><span class="ln">Lane 1</span><span><h3>Community &amp; School Racing</h3><p>Celebrate the cars, teamwork and skills developed by our school and community building groups.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>School teams attend with their teacher or school chaperone. Families and outside groups provide their own chaperone.</p><div><a class="btn deep" href="#participate" data-interest="racing" data-note="Interested in: Community & School Racing">Ask about Community &amp; School Racing</a></div></div></details>
+        <div class="more"><p>School teams attend with their teacher or school chaperone. Families and outside groups provide their own chaperone.</p><div class="row"><a class="btn deep" href="#race-registration">Register to race</a><a class="btn outline-red" href="#participate" data-interest="racing" data-topic="Community & school racing" data-note="Interested in: Community & School Racing">Inquire about Community &amp; School Racing</a></div></div></details>
       <details class="lane4"><summary><span class="ln">Lane 2</span><span><h3>Sanctioned Soap Box Derby Racing</h3><p>Explore official race participation, division requirements and the local pathway toward Akron. Eligibility and qualification requirements are confirmed for each event.</p></span><span class="go" aria-hidden="true">›</span></summary>
         <div class="more"><p>Ask staff about official division rules, local qualification and Akron coordination before making travel plans.</p><div class="row"><button class="btn deep" type="button" data-sbd-open aria-haspopup="dialog">Quick register for sanctioned racing →</button><a class="btn outline-red" href="#race-registration">Official registration form</a></div></div></details>
       <details class="lane4"><summary><span class="ln">Lane 3</span><span><h3>Masters Racing</h3><p>Learn about our Masters racing opportunities and the preparation required for that event.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>Contact staff to discuss the available Masters format and eligibility before beginning a build.</p><div><a class="btn deep" href="#participate" data-interest="racing" data-note="Interested in: Masters Racing">Ask about Masters Racing</a></div></div></details>
+        <div class="more"><p>Contact staff to discuss the available Masters format and eligibility before beginning a build.</p><div class="row"><a class="btn deep" href="#race-registration">Register to race</a><a class="btn outline-red" href="#participate" data-interest="racing" data-topic="Divisions: Stock, Super Stock & Masters" data-note="Interested in: Masters Racing">Inquire about Masters Racing</a></div></div></details>
       <details class="lane4"><summary><span class="ln">Lane 4</span><span><h3>Rally &amp; Track Experiences</h3><p>Explore additional opportunities for track time and racing practice when scheduled. Availability and participation requirements vary by session.</p></span><span class="go" aria-hidden="true">›</span></summary>
-        <div class="more"><p>Ask about available practice or rally dates and the equipment needed before arriving at the track.</p><div><a class="btn deep" href="#participate" data-interest="racing" data-note="Interested in: Rally & Track Experiences">Ask about Rally &amp; Track Experiences</a></div></div></details>
+        <div class="more"><p>Ask about available practice or rally dates and the equipment needed before arriving at the track.</p><div class="row"><a class="btn deep" href="#race-registration">Register to race</a><a class="btn outline-red" href="#participate" data-interest="racing" data-topic="Rally & track experiences" data-note="Interested in: Rally & Track Experiences">Inquire about Rally &amp; Track Experiences</a></div></div></details>
     </div>
     <p style="color:#c9cbd0;font-size:.9rem;margin-top:14px;max-width:80ch">For every format: each published event provides its date, car and age requirements, preparation details and registration pathway. Staff confirm eligibility and next steps by email. Youth participants must know their assigned chaperone, with one chaperone per six to eight students, or have an arrangement confirmed with staff beforehand.</p>
 
@@ -2662,8 +2670,8 @@ body.rw-tv .rw-fol{display:none}
 
     <section class="panel wide" style="margin-top:26px">
       <h2>Ready to take the next step?</h2>
-      <p>Your request goes to Flint Racing admin for review. Staff will follow up by email about availability, requirements and next steps, and organize the relevant email list. Sending a request does not confirm a place.</p>
-      <div class="row"><a class="btn deep" href="#participate" data-interest="racing">Ask about racing</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
+      <p><b>Register</b> with the official All-American Soap Box Derby registration form. Have questions about race day or how we operate? <b>Inquire</b> and staff will follow up by email. Registering or inquiring does not confirm a place.</p>
+      <div class="row"><a class="btn deep" href="#race-registration">Register to race</a><a class="btn outline-red" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
 
     <section class="sbd" id="sanctioned-racers" aria-labelledby="sbdH">
@@ -2684,9 +2692,9 @@ body.rw-tv .rw-fol{display:none}
 <div class="page dark prog-page" data-page="race-registration" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">Race Registration</span></div></nav>
   <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
-    <section class="cal-head"><p class="eyebrow">2027 Flint Soap Box Derby</p><h1>Race Registration</h1><p>This is the official All-American Soap Box Derby Local Race Registration Form for the 2027 Flint Soap Box Derby. The racer fills in and signs the top half. A parent or guardian completes and signs the rest. Race day registration has a fee for racers not affiliated with our program. We’ll email you about fees after you submit.</p></section>
+    <section class="cal-head"><p class="eyebrow" id="rgEyebrow">2027 Flint Soap Box Derby</p><h1 id="rgH1">Race Registration</h1><p id="rgIntro">This is the official All-American Soap Box Derby Local Race Registration Form for the 2027 Flint Soap Box Derby. The racer fills in and signs the top half. A parent or guardian completes and signs the rest. Race day registration has a fee for racers not affiliated with our program. We’ll email you about fees after you submit.</p></section>
     <div class="rg-wrap" id="rgWrap">
-      <ol class="rg-steps"><li><b>1</b>Racer details and signature</li><li><b>2</b>Parent or guardian details and signature</li><li><b>3</b>Submit. We’ll email next steps.</li></ol>
+      <ol class="rg-steps" id="rgSteps"><li><b>1</b>Racer details and signature</li><li><b>2</b>Parent or guardian details and signature</li><li><b>3</b>Submit. We’ll email next steps.</li></ol>
       <form class="rg-paper" id="rgForm" novalidate></form>
     </div>
   </div></div>
@@ -2714,7 +2722,7 @@ body.rw-tv .rw-fol{display:none}
 
 <!-- Program Register / Inquire questionnaire, shown as a pop-up (the form moves in here while open) -->
 <dialog class="sbd-dlg q-dlg" id="qDlg" aria-labelledby="qDlgH">
-  <div class="sbd-top"><img src="{{LOGO_DARK}}" alt=""><div><h2 id="qDlgH">Register / Inquire</h2><p>About two minutes. We’ll follow up with the right forms and next steps.</p></div><button class="sbd-x" type="button" id="qDlgClose" aria-label="Close">×</button></div>
+  <div class="sbd-top"><img src="{{LOGO_DARK}}" alt=""><div><h2 id="qDlgH">Register / Inquire</h2><p id="qDlgSub">About two minutes. We’ll follow up with the right forms and next steps.</p></div><button class="sbd-x" type="button" id="qDlgClose" aria-label="Close">×</button></div>
   <div id="qDlgSlot"></div>
 </dialog>
 
@@ -2926,8 +2934,9 @@ body.rw-tv .rw-fol{display:none}
         </fieldset>
 
         <fieldset class="q-step">
-          <legend><span>2</span>What are you interested in?</legend>
+          <legend><span>2</span><b id="qL2" style="font:inherit">What are you interested in?</b></legend>
           <p class="q-help" style="margin-top:-8px">Choose all that apply.</p>
+          <div class="picks" id="q-topics" hidden></div>
           <div class="picks" id="q-picks">
             <label class="pick"><input type="checkbox" name="interest" value="building" id="qi-building"><span>Building Workshops<small>Spring build season and race day</small></span></label>
             <label class="pick"><input type="checkbox" name="interest" value="steam" id="qi-steam"><span>Monthly STEAM Workshops</span></label>
@@ -3547,11 +3556,11 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","race-registration":"Race Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
-  var PAGE_ANCHORS={"how-racing":"racing"};
+  var PAGE_ANCHORS={"how-racing":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
@@ -3776,8 +3785,39 @@ body.rw-tv .rw-fol{display:none}
     return '<label class="rf '+f[3]+'" for="'+id+'"><span>'+rgEsc(f[1])+(o.opt?' <span class="opt">(optional)</span>':'')+'</span><input id="'+id+'" name="'+f[0]+'" type="'+f[2]+'"'+(o.ro?' value="'+rgEsc(o.ro)+'" readonly':'')+(o.val?' value="'+o.val+'"':'')+(o.ac?' autocomplete="'+o.ac+'"':'')+(o.max&&f[2]!=="number"?' maxlength="'+o.max+'"':'')+(f[2]==="number"?' min="'+o.min+'" max="'+o.max+'" inputmode="numeric"':'')+(o.im?' inputmode="'+o.im+'"':'')+(o.opt||o.ro?'':' required')+'></label>'}
   function rgPad(key,label){return '<div class="rg-pad" data-pad="'+key+'"><span>'+label+'</span><div class="pad"><canvas aria-label="'+label+' area. Draw your signature with a finger, stylus or mouse." role="img"></canvas><span class="hint">Sign here</span><button class="clr" type="button">Clear</button></div></div>'}
   function rgDateBox(id){return '<label class="rf" for="'+id+'"><span>Date</span><input id="'+id+'" type="text" readonly value="'+rgUS(rgToday())+'"></label>'}
+  var RGMODE="race"; /* "race" = Akron form only (#race-registration); "building_workshop" = Akron form + workshop details (#workshop-registration) */
+  var RG_SHIRTS=["Youth XS","Youth S","Youth M","Youth L","Youth XL","Adult S","Adult M","Adult L","Adult XL","Adult 2XL","Adult 3XL","Special order (describe below)"];
+  function rgWorkshopHTML(){
+    var tf=function(name,label,type,cls,extra){return '<label class="rf '+(cls||"")+'" for="rgw-'+name+'"><span>'+label+'</span><input id="rgw-'+name+'" name="w_'+name+'" type="'+(type||"text")+'"'+(extra||"")+'></label>'};
+    return '<section class="rg-ws" aria-labelledby="rgWsH"><h3 id="rgWsH">Building workshop details</h3><p class="rg-help">For Flint Racing building workshops. This part is ours, not the official AASBD form.</p>'+
+      '<div class="rg-grid">'+tf("school","School or group","text","c4",' maxlength="120" required')+
+        '<label class="rf c2" for="rgw-shirt"><span>T-shirt size</span><select id="rgw-shirt" name="w_shirt" required><option value="">Choose a size</option>'+RG_SHIRTS.map(function(x){return '<option>'+x+'</option>'}).join("")+'</select></label>'+
+        '<label class="rf c6" for="rgw-special" id="rgwSpecialWrap" hidden><span>Special order details</span><input id="rgw-special" name="w_special" type="text" maxlength="200" placeholder="Size, fit or anything else we should order"></label></div>'+
+      '<p class="rg-sub">Safe check-in and checkout</p>'+
+      '<div class="rg-div" role="radiogroup" aria-label="How does the participant arrive and leave?"><span>How does the participant arrive and leave?</span>'+
+        [["Parent/guardian drop-off and pickup","Parent/guardian drop-off and pickup"],["School or group transportation","School or group transportation"],["Other","Other"]].map(function(o){return '<label><input type="radio" name="w_arrival" value="'+o[0]+'"> '+o[1]+'</label>'}).join("")+'</div>'+
+      '<div class="rg-grid">'+'<label class="rf c6" for="rgw-arrother" id="rgwArrOtherWrap" hidden><span>Describe how they arrive and leave</span><input id="rgw-arrother" name="w_arrother" type="text" maxlength="200"></label>'+
+        tf("dropphone","Cell phone of the adult who usually drops off","tel","c3",' autocomplete="tel" maxlength="30" required')+'</div>'+
+      '<p class="rg-sub">Adults allowed to pick up</p><p class="rg-help">Besides the parent/guardian above, only these adults may check the participant out. We may ask for photo ID.</p>'+
+      [1,2,3].map(function(i){return '<div class="rg-pick3">'+tf("p"+i+"name","Name"+(i>1?' <span class="opt">(optional)</span>':''),"text","",' maxlength="80" autocomplete="off"')+tf("p"+i+"rel","Relationship","text","",' maxlength="40"')+tf("p"+i+"phone","Phone","tel","",' maxlength="30"')+'</div>'}).join("")+
+      '<p class="rg-sub">Emergency contact</p><p class="rg-help">Someone other than the parent/guardian above, in case we can’t reach you.</p>'+
+      '<div class="rg-pick3">'+tf("ename","Name","text","",' maxlength="80" required')+tf("erel","Relationship","text","",' maxlength="40" required')+tf("ephone","Phone","tel","",' maxlength="30" required')+'</div>'+
+      '<label class="rf" for="rgw-medical"><span>Allergies, medical needs or anything staff should know <span class="opt">(optional)</span></span><textarea id="rgw-medical" name="w_medical" maxlength="800"></textarea></label></section>'}
+  function rgSetMode(){
+    var ws=location.hash==="#workshop-registration"?"building_workshop":"race",f=document.getElementById("rgForm");
+    if(f&&f.__built&&f.__mode!==ws){var w0=document.getElementById("rgWrap");if(w0&&w0.__orig)w0.innerHTML=w0.__orig}
+    RGMODE=ws;var W=ws==="building_workshop";
+    var t=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v};
+    t("rgEyebrow",W?"2027 Building Workshops":"2027 Flint Soap Box Derby");t("rgH1",W?"Building Workshop Registration":"Race Registration");
+    t("rgIntro",W?"Every building workshop participant completes the official All-American Soap Box Derby Local Race Registration Form, plus a few workshop details: school, T-shirt size and safe check-in and checkout. The participant fills in and signs the top half, and a parent or guardian completes the rest.":
+      "This is the official All-American Soap Box Derby Local Race Registration Form for the 2027 Flint Soap Box Derby. The racer fills in and signs the top half. A parent or guardian completes and signs the rest. Race day registration has a fee for racers not affiliated with our program. We’ll email you about fees after you submit.");
+    var st=document.getElementById("rgSteps");if(st)st.innerHTML=W?'<li><b>1</b>Participant details and signature</li><li><b>2</b>Parent or guardian details and signature</li><li><b>3</b>Shirt size and safe check-in</li><li><b>4</b>Submit. We’ll email next steps.</li>':'<li><b>1</b>Racer details and signature</li><li><b>2</b>Parent or guardian details and signature</li><li><b>3</b>Submit. We’ll email next steps.</li>';
+    document.title=(W?"Building Workshop Registration":"Race Registration")+" | Flint Racing and STEM";
+    var cr=document.querySelector('[data-page="race-registration"] .crumbs [aria-current]');if(cr)cr.textContent=W?"Building Workshop Registration":"Race Registration";
+    var back=document.querySelector('[data-page="race-registration"] .crumbs a[href="#racing"],[data-page="race-registration"] .crumbs a[href="#building-workshops"]');if(back){back.setAttribute("href",W?"#building-workshops":"#racing");back.textContent=W?"Building & Workshops":"Track & Racing"}}
   function rgBuild(){
-    var f=document.getElementById("rgForm"); if(!f||f.__built) return; f.__built=true;
+    var w0=document.getElementById("rgWrap"); if(w0&&!document.getElementById("rgForm")&&w0.__orig) w0.innerHTML=w0.__orig;
+    var f=document.getElementById("rgForm"); if(!f||f.__built) return; if(w0&&!w0.__orig) w0.__orig=w0.innerHTML; f.__built=true; f.__mode=RGMODE;
     var fill=function(k){return k==="p"?'<b class="rg-fill" data-mirror="participant_name"></b>':k==="g"?'<b class="rg-fill" data-mirror="parent_name"></b>':k==="city"?'<b class="rg-fill">'+RG.city+'</b>':k==="rc"?'<b class="rg-fill">'+RG.raceCity+'</b>':'<b class="rg-fill"></b>'};
     f.innerHTML='<div class="rg-top"><img src="'+RG.logo+'" alt="Flint, MI Soap Box Derby logo"><div><h2>Local Race Registration Form</h2><p>'+RG.year+' '+RG.org+' · '+RG.city+'<span id="rgRaceDate"></span></p></div><div class="rg-car"><b>CAR NUMBER</b><span></span><small>Local Director\'s Use Only</small></div></div>'+
       '<section class="rg-sec" aria-labelledby="rgS1"><h3 id="rgS1">Participant</h3><div class="rg-div" role="radiogroup" aria-label="Division"><span>'+RGT.division+'</span>'+["Stock","Super Stock","Masters"].map(function(d){return '<label><input type="radio" name="division" value="'+d+'" required> '+d+'</label>'}).join("")+'</div>'+
@@ -3788,6 +3828,7 @@ body.rw-tv .rw-fol{display:none}
         '<p class="rg-txt">'+rgPara(RGT.pg1,fill)+'</p><p class="rg-txt">'+rgEsc(RGT.pg2)+'</p><p class="rg-txt">'+rgEsc(RGT.photo)+'</p><p class="rg-txt">'+rgEsc(RGT.covid)+'</p><p class="rg-txt">'+rgEsc(RGT.guide)+'</p><p class="rg-txt">'+rgEsc(RGT.waiver)+'</p>'+
         '<div class="rg-sign">'+rgPad("parent","Parent/Guardian Signature")+rgDateBox("rg-gdate")+'</div></section>'+
       '<section class="rg-sec" aria-labelledby="rgS3"><h3 id="rgS3">Local Race Director</h3><div class="rg-dir"><span class="rg-off">Completed by the Local Race Director at inspection</span><p class="rg-txt">'+rgPara(RGT.dir,fill)+'</p><p style="margin:0">Local Race Director Signature ________________________ Date _________________</p></div></section>'+
+      (RGMODE==="building_workshop"?rgWorkshopHTML():'')+
       '<label class="rg-esign" id="rgEsignBox"><input type="checkbox" id="rgEsign" required><span>'+rgEsc(RGT.esign)+'</span></label>'+
       '<p class="rg-err" id="rgErr" role="alert" hidden></p><div class="rg-acts"><button class="btn deep" type="submit" id="rgGo">Submit registration</button><small style="color:#4a4d55">Submitting does not confirm a place. We’ll email you about fees and next steps.</small></div>';
     var e=nextRaceDay&&nextRaceDay(); if(e){var x=fmtShort(e.d);document.getElementById("rgRaceDate").textContent=" · Race day "+x.w+", "+x.m+" "+x.d+", "+e.d.slice(0,4)}
@@ -3795,7 +3836,10 @@ body.rw-tv .rw-fol{display:none}
       if(n==="participant_name"||n==="parent_name") f.querySelectorAll('[data-mirror="'+n+'"]').forEach(function(b){b.textContent=ev.target.value.trim()});
       var l=ev.target.closest(".rf"); if(l) l.classList.remove("bad");
       if(n&&n.indexOf("parent_")!==0&&document.getElementById("rgSame").checked) rgCopyAddr(f);});
-    f.addEventListener("change",function(ev){if(ev.target.id==="rgSame"&&ev.target.checked) rgCopyAddr(f); if(ev.target.id==="rgEsign") document.getElementById("rgEsignBox").classList.remove("bad")});
+    f.addEventListener("change",function(ev){if(ev.target.id==="rgSame"&&ev.target.checked) rgCopyAddr(f); if(ev.target.id==="rgEsign") document.getElementById("rgEsignBox").classList.remove("bad");
+      if(ev.target.id==="rgw-shirt"){document.getElementById("rgwSpecialWrap").hidden=!/^Special/.test(ev.target.value)}
+      if(ev.target.name==="w_arrival"){document.getElementById("rgwArrOtherWrap").hidden=ev.target.value!=="Other";var g=ev.target.closest(".rg-div");if(g)g.classList.remove("bad")}
+      var l=ev.target.closest&&ev.target.closest(".rf");if(l)l.classList.remove("bad")});
     f.querySelectorAll("[data-pad]").forEach(rgPadInit);
     f.addEventListener("submit",function(ev){ev.preventDefault();rgSubmit(f)});
   }
@@ -3839,16 +3883,29 @@ body.rw-tv .rw-fol{display:none}
     need("parent_city","the parent/guardian’s city",v("parent_city")); need("parent_state","the parent/guardian’s state",v("parent_state"));
     need("parent_zip","the parent/guardian’s zip code",/^\d{5}(-\d{4})?$/.test(v("parent_zip")));
     if(gp.__empty){miss.push("the parent/guardian’s signature");gp.classList.add("bad")}
+    var wk=null;
+    if(RGMODE==="building_workshop"){var wv=function(n){var el=E["w_"+n];return el?(el.value||"").trim():""},wbad=function(n){var el=E["w_"+n];var l=el&&el.closest(".rf");if(l)l.classList.add("bad")};
+      var ph=function(x){return x.replace(/\D/g,"").length>=10};
+      if(!wv("school")){miss.push("the school or group");wbad("school")}
+      if(!wv("shirt")){miss.push("a T-shirt size");wbad("shirt")} else if(/^Special/.test(wv("shirt"))&&!wv("special")){miss.push("the special order details");wbad("special")}
+      var arr=f.querySelector('input[name="w_arrival"]:checked');if(!arr){miss.push("how the participant arrives and leaves");f.querySelector('.rg-ws .rg-div').classList.add("bad")} else if(arr.value==="Other"&&!wv("arrother")){miss.push("how they arrive and leave");wbad("arrother")}
+      if(!ph(wv("dropphone"))){miss.push("the drop-off adult’s cell phone");wbad("dropphone")}
+      var pk=[1,2,3].map(function(i){return {name:wv("p"+i+"name"),relationship:wv("p"+i+"rel"),phone:wv("p"+i+"phone"),i:i}}).filter(function(x){return x.name||x.relationship||x.phone});
+      if(!pk.length){miss.push("at least one adult allowed to pick up");wbad("p1name")}
+      pk.forEach(function(x){if(!x.name||!x.relationship||!ph(x.phone)){miss.push("a name, relationship and phone for pickup adult "+x.i);if(!x.name)wbad("p"+x.i+"name");if(!x.relationship)wbad("p"+x.i+"rel");if(!ph(x.phone))wbad("p"+x.i+"phone")}});
+      if(!wv("ename")||!wv("erel")||!ph(wv("ephone"))){miss.push("an emergency contact’s name, relationship and phone");if(!wv("ename"))wbad("ename");if(!wv("erel"))wbad("erel");if(!ph(wv("ephone")))wbad("ephone")}
+      wk={school:wv("school"),shirt_size:/^Special/.test(wv("shirt"))?"Special order":wv("shirt"),shirt_special:/^Special/.test(wv("shirt"))?wv("special"):null,arrival:arr?arr.value:"",arrival_other:arr&&arr.value==="Other"?wv("arrother"):null,
+        dropoff_phone:wv("dropphone"),pickups:pk.map(function(x){return {name:x.name,relationship:x.relationship,phone:x.phone}}),emergency:{name:wv("ename"),relationship:wv("erel"),phone:wv("ephone")},medical:wv("medical")||null}}
     if(!document.getElementById("rgEsign").checked){miss.push("your agreement to sign electronically");document.getElementById("rgEsignBox").classList.add("bad")}
     if(miss.length){err.textContent="Please add "+miss.join(", ")+".";err.hidden=false;var b=f.querySelector(".bad");if(b)b.scrollIntoView({block:"center",behavior:"smooth"});return}
     err.hidden=true;
     var t=rgToday(),row={race_year:RG.year,form_version:RG.version,division:div.value,participant_name:v("participant_name"),local_race_org:RG.org,mailing_address:v("mailing_address"),city:v("city"),state:v("state"),zip:v("zip"),
       phone:v("phone"),school_grade:v("school_grade"),age:age,date_of_birth:v("date_of_birth"),parent_email:v("parent_email"),year_began:v("year_began")||null,how_learned:v("how_learned")||null,
       participant_signature:rgSig(pp),participant_signed_on:t,parent_name:v("parent_name"),relationship:v("relationship"),parent_address:v("parent_address"),parent_city:v("parent_city"),parent_state:v("parent_state"),parent_zip:v("parent_zip"),
-      parent_signature:rgSig(gp),parent_signed_on:t,esign_consent:true,user_agent:navigator.userAgent.slice(0,400)};
+      parent_signature:rgSig(gp),parent_signed_on:t,esign_consent:true,user_agent:navigator.userAgent.slice(0,400),program:RGMODE,workshop:wk};
     var btn=document.getElementById("rgGo"),db=window.FR_DB;
     function done(sent){var w=document.getElementById("rgWrap"),keep=Object.assign({created_at:new Date().toISOString()},row);
-      w.innerHTML='<div class="rg-done" role="status"><p class="eyebrow">'+(sent?"Registration received":"Preview: not sent")+'</p><h2>'+rgEsc(row.participant_name)+' is registered!</h2><p>'+(sent?"Thanks, "+rgEsc(row.parent_name)+". We’ll email "+rgEsc(row.parent_email)+" with fees and next steps. Save a copy of the signed form for your records.":"This preview isn’t connected to the database, so nothing was sent.")+'</p><div class="row"><button class="btn deep" type="button" id="rgCopy">Save or print your copy</button><a class="btn outline-red" href="#racing">Back to Track &amp; Racing</a></div></div>';
+      w.innerHTML='<div class="rg-done" role="status"><p class="eyebrow">'+(sent?"Registration received":"Preview: not sent")+'</p><h2>'+rgEsc(row.participant_name)+(row.program==="building_workshop"?' is signed up!':' is registered!')+'</h2><p>'+(sent?"Thanks, "+rgEsc(row.parent_name)+". We’ll email "+rgEsc(row.parent_email)+" with fees and next steps. Save a copy of the signed form for your records.":"This preview isn’t connected to the database, so nothing was sent.")+'</p><div class="row"><button class="btn deep" type="button" id="rgCopy">Save or print your copy</button><a class="btn outline-red" href="'+(row.program==="building_workshop"?"#building-workshops":"#racing")+'">Back to '+(row.program==="building_workshop"?"Building Workshops":"Track &amp; Racing")+'</a></div></div>';
       document.getElementById("rgCopy").onclick=function(){rgPrint(keep)}; scrollTo(0,0)}
     if(!db){done(false);return}
     btn.disabled=true;btn.textContent="Submitting…";
@@ -3882,15 +3939,23 @@ body.rw-tv .rw-fol{display:none}
       '<p>'+rgPara(RGT.pg1,fill)+'</p><p>'+rgEsc(RGT.pg2)+'</p><p>'+rgEsc(RGT.photo)+'</p><p>'+rgEsc(RGT.covid)+'</p><p>'+rgEsc(RGT.guide)+'</p><p>'+rgEsc(RGT.waiver)+'</p>'+
       sig("Parent/Guardian Signature",d.parent_signature,d.parent_signed_on)+'<hr>'+
       '<p>'+rgPara(RGT.dir,fill)+'</p>'+sig("Local Race Director Signature",null,d.director_signed_on)+
-      '<div class="ft">Signed electronically'+(d.created_at?' on '+rgEsc(new Date(d.created_at).toLocaleString())+'':'')+' at flintracing.org. Both signers agreed to sign electronically.'+(d.id?' Registration ID '+rgEsc(String(d.id).slice(0,8))+'.':'')+' '+rgEsc(d.form_version||RG.version)+'</div></body></html>'}
+      '<div class="ft">Signed electronically'+(d.created_at?' on '+rgEsc(new Date(d.created_at).toLocaleString())+'':'')+' at flintracing.org. Both signers agreed to sign electronically.'+(d.id?' Registration ID '+rgEsc(String(d.id).slice(0,8))+'.':'')+' '+rgEsc(d.form_version||RG.version)+'</div>'+rgWsDoc(d)+'</body></html>'}
+  function rgWsDoc(d){var w=d.workshop;if(d.program!=="building_workshop"||!w)return "";var e=rgEsc,row=function(k,v){return '<tr><th>'+e(k)+'</th><td>'+e(v||"")+'</td></tr>'};
+    return '<div style="page-break-before:always"></div><div class="hd"><img src="'+new URL(RG.logo,location.href).href+'" alt=""><div><h1>Building Workshop Details</h1><p>'+RG.year+' Flint Racing Building Workshops · '+e(d.participant_name)+'</p></div></div>'+
+      '<style>.wt{width:100%;border-collapse:collapse;margin:8px 0 14px}.wt th,.wt td{border:.75pt solid #000;padding:6px 8px;text-align:left;vertical-align:top}.wt th{width:34%;background:#f1f1f1}h2{font-size:11pt;margin:14px 0 4px}</style>'+
+      '<h2>Participant</h2><table class="wt">'+row("Participant",d.participant_name)+row("School or group",w.school)+row("Age / grade",d.age+" / "+d.school_grade)+row("T-shirt size",w.shirt_size+(w.shirt_special?" — "+w.shirt_special:""))+'</table>'+
+      '<h2>Safe check-in and checkout</h2><table class="wt">'+row("Parent/guardian",d.parent_name+" ("+d.relationship+") · "+d.phone+" · "+d.parent_email)+row("Arrives and leaves by",w.arrival+(w.arrival_other?": "+w.arrival_other:""))+row("Drop-off adult’s cell",w.dropoff_phone)+
+        (w.pickups||[]).map(function(p,i){return row("Allowed to pick up "+(i+1),p.name+" ("+p.relationship+") · "+p.phone)}).join("")+row("Emergency contact",w.emergency?w.emergency.name+" ("+w.emergency.relationship+") · "+w.emergency.phone:"")+'</table>'+
+      '<h2>Allergies, medical needs, notes</h2><table class="wt"><tr><td style="height:60px">'+e(w.medical||"None listed")+'</td></tr></table>'+
+      '<p class="ft">Only the parent/guardian and the adults listed above may check this participant out. Staff may request photo ID.</p>'}
   function rgPrint(d){var fr=document.createElement("iframe");fr.style.cssText="position:fixed;right:0;bottom:0;width:0;height:0;border:0";fr.setAttribute("aria-hidden","true");document.body.appendChild(fr);
     var w=fr.contentWindow;w.document.open();w.document.write(rgDoc(d));w.document.close();
     var go=function(){try{w.focus();w.print()}catch(e){} setTimeout(function(){fr.remove()},60000)};
     var imgs=[].slice.call(w.document.images),left=imgs.length; if(!left)return go(); imgs.forEach(function(i){if(i.complete){if(!--left)go()}else i.onload=i.onerror=function(){if(!--left)go()}})}
   window.FR_REG={doc:rgDoc,print:rgPrint};
-  function rgShow(){rgBuild();var f=document.getElementById("rgForm");if(f)f.querySelectorAll("[data-pad]").forEach(function(b){if(b.__size)b.__size()})}
-  addEventListener("hashchange",function(){if(location.hash==="#race-registration")setTimeout(rgShow,0)});
-  if(location.hash==="#race-registration") setTimeout(rgShow,0);
+  function rgShow(){rgSetMode();rgBuild();var f=document.getElementById("rgForm");if(f)f.querySelectorAll("[data-pad]").forEach(function(b){if(b.__size)b.__size()})}
+  addEventListener("hashchange",function(){if(location.hash==="#race-registration"||location.hash==="#workshop-registration")setTimeout(rgShow,0)});
+  if(location.hash==="#race-registration"||location.hash==="#workshop-registration") setTimeout(rgShow,0);
   /* ---- Track & Racing: sanctioned racer quick inquiry (pop-up over the page; saves to Inquiries) ---- */
   function nextRaceDay(){var t=todayKey();return EVENTS.filter(function(e){return e.k==="racing"&&/Race Day/i.test(e.t)&&(e.e||e.d)>=t}).sort(function(a,b){return a.d<b.d?-1:1})[0]}
   function renderSbdDate(){var e=nextRaceDay(),txt="Date to be announced";
@@ -4018,6 +4083,26 @@ body.rw-tv .rw-fol{display:none}
   var FORM_ENDPOINT="";
   var LABELS={building:"Building Workshops",steam:"Monthly STEAM Workshops",weekday:"Weekday STEM programs",camps:"Summer Camps",racing:"Racing events & race day",volunteer:"Volunteering",team:"Joining our team",sponsor:"Sponsoring or partnering",event:"Planning an event at the park",park:"Park ideas & improvements",updates:"Email updates only",other:"Something else"};
   var YOUTH={building:1,steam:1,weekday:1,camps:1,racing:1};
+  /* Page-specific inquiries. Racing and building pages ask topic questions about that program only.
+     Camp and seasonal workshop pages hide the racing and building workshop options (those use the Akron registration form). */
+  var SCOPES={
+    racing:{interest:"racing",label:"Race day inquiry",title:"Race day inquiry",sub:"Questions about race day and how we operate. To register, use the official race registration form.",
+      topics:["Race day schedule & what to expect","How heats, phases & brackets work","Divisions: Stock, Super Stock & Masters","Sanctioned racing & the path to Akron","Community & school racing","Rally & track experiences","Racing as a family or individual racer","Fees & race day registration","Volunteering on race day"]},
+    building:{interest:"building",label:"Building workshop inquiry",title:"Building workshop inquiry",sub:"Questions about building workshops. To sign up, use the building workshop registration form.",
+      topics:["Workshop dates, times & location","What participants build and learn","School teams & chaperones","Out-of-town schools & groups (3-visit program)","Building a car as a family","Car kits & costs","Registration, forms & shirts"]},
+    camps:{hide:["building","racing"],title:"Summer camp sign-up",sub:"About two minutes. We’ll follow up with camp details and next steps."},
+    seasonal:{hide:["building","racing"],title:"Workshop inquiry",sub:"About two minutes. We’ll follow up with workshop details and next steps."}};
+  var SCOPE=null;
+  function applyScope(sc,topic){SCOPE=sc&&SCOPES[sc]?SCOPES[sc]:null;
+    var picks=document.getElementById("q-picks"),tp=document.getElementById("q-topics"),l2=document.getElementById("qL2");if(!picks)return;
+    picks.querySelectorAll("label.pick").forEach(function(l){l.hidden=false});picks.hidden=false;tp.hidden=true;tp.innerHTML="";l2.textContent="What are you interested in?";
+    var H=document.getElementById("qDlgH"),S2=document.getElementById("qDlgSub");
+    if(H){H.textContent=SCOPE?SCOPE.title:"Register / Inquire";S2.textContent=SCOPE?SCOPE.sub:"About two minutes. We’ll follow up with the right forms and next steps."}
+    if(!SCOPE)return;
+    if(SCOPE.topics){picks.hidden=true;tp.hidden=false;l2.textContent="What would you like to know?";
+      picks.querySelectorAll("input").forEach(function(i){i.checked=i.value===SCOPE.interest});
+      tp.innerHTML=SCOPE.topics.map(function(t,i){return '<label class="pick"><input type="checkbox" name="topic" value="'+esc(t)+'" id="qt-'+i+'"'+(t===topic?' checked':'')+'><span>'+esc(t)+'</span></label>'}).join("")}
+    else (SCOPE.hide||[]).forEach(function(v){var i=document.getElementById("qi-"+v);if(i){i.checked=false;i.closest("label").hidden=true}})}
   var qForm=$("#qForm"), qCard=$("#qCard"), qFormHTML=null, qDirty=false;
   function syncForm(){
     var role=$("#q-role").value;
@@ -4027,13 +4112,14 @@ body.rw-tv .rw-fol{display:none}
     var by=(document.querySelector('input[name="contact_by"]:checked')||{}).value;
     $("#q-phone-opt").textContent=by&&by!=="Email"?"(needed to call or text)":"(optional)";
   }
-  function openForm(interest,note){
+  function openForm(interest,note,scope,topic){
     if(!document.getElementById("qForm")){qCard.innerHTML=qFormHTML;bindForm()}
     $("#qNote").hidden=!!(FORM_ENDPOINT||window.FR_DB);
     if(interest){
       if(!qDirty) qForm.querySelectorAll('#q-picks input').forEach(function(i){i.checked=false});
       var box=document.getElementById("qi-"+interest);if(box)box.checked=true}
     if(note){var m=document.getElementById("q-msg");if(m&&(!m.value||!qDirty))m.value=note}
+    applyScope(scope,topic);
     syncForm();
   }
   function bindForm(){
@@ -4048,13 +4134,14 @@ body.rw-tv .rw-fol{display:none}
       var by=qForm.querySelector('input[name="contact_by"]:checked').value;
       if(!first||!last) errs.push("your first and last name");
       if(!f.role.value) errs.push("who you are (I am a…)");
-      if(!picked.length) errs.push("at least one interest");
+      var topics=[].slice.call(qForm.querySelectorAll('#q-topics input:checked')).map(function(i){return i.value});
+      if(SCOPE&&SCOPE.topics){if(!topics.length) errs.push("at least one topic")} else if(!picked.length) errs.push("at least one interest");
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.push("a complete email address");
       if(by!=="Email"&&phone.replace(/\D/g,"").length<10) errs.push("a phone number so we can "+(by==="Text"?"text":"call")+" you");
       var err=$("#qErr");
       if(errs.length){err.textContent="Please add "+errs.join(", ")+".";err.hidden=false;err.scrollIntoView({block:"center"});return}
       err.hidden=true;
-      var data={first_name:first,last_name:last,role:f.role.value,organization:f.organization.value.trim(),interests:picked.map(function(v){return LABELS[v]}).join(", "),
+      var data={first_name:first,last_name:last,role:f.role.value,organization:f.organization.value.trim(),interests:SCOPE&&SCOPE.topics?SCOPE.label+": "+topics.join("; "):picked.map(function(v){return LABELS[v]}).join(", "),
         youth_count:f.youth_count.value,youth_ages:f.youth_ages.value.trim(),message:f.message.value.trim(),email:email,phone:phone,contact_by:by,best_time:f.best_time.value||"Any time",email_updates:f.email_updates.checked?"Yes":"No"};
       var btn=$("#qSubmit"); btn.disabled=true; btn.textContent="Sending…";
       function done(sent){showDone(data,sent)}
@@ -4080,7 +4167,8 @@ body.rw-tv .rw-fol{display:none}
     if(d.message) rows.push(["Note",d.message]);
     qCard.innerHTML='<div class="q-done" role="status"><p class="eyebrow">'+(sent?"Request sent":"Preview: not sent")+'</p><h2>Thanks, '+esc(d.first_name)+'.</h2><p>'+(sent?"We received your answers. Our team will follow up by "+esc(d.contact_by.toLowerCase())+" with next steps and the right forms for what you’re interested in.":"This form isn’t connected to an inbox yet, so nothing was sent. Here’s what a visitor would submit:")+'</p><dl>'+rows.map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>'}).join("")+'</dl><div class="q-actions">'+(qDlg.open?'<button class="btn deep" type="button" id="qDone">Done</button>':'<a class="btn deep" href="#home">Back to home</a>')+'<button class="btn outline-red" type="button" id="qAgain">Send another</button></div></div>';
     var qd=document.getElementById("qDone"); if(qd){qd.onclick=function(){qDlg.close()};qd.focus()}
-    $("#qAgain").onclick=function(){qCard.innerHTML=qFormHTML;bindForm();openForm(null)};
+    var keep=SCOPE?Object.keys(SCOPES).filter(function(k){return SCOPES[k]===SCOPE})[0]:null;
+    $("#qAgain").onclick=function(){qCard.innerHTML=qFormHTML;bindForm();openForm(keep&&SCOPES[keep].interest||null,null,keep)};
     if(qDlg.open) qDlg.scrollTop=0; else qCard.scrollIntoView({block:"start"});
   }
   qFormHTML=qCard.innerHTML; bindForm();
@@ -4097,7 +4185,9 @@ body.rw-tv .rw-fol{display:none}
     var h=a.getAttribute("href").slice(1), interest=a.getAttribute("data-interest")||ALIAS[h]||null, note=a.getAttribute("data-note");
     setTimeout(function(){pendingInterest=null;pendingNote=null},0);
     if(document.querySelector(".q-done")){qCard.innerHTML=qFormHTML;bindForm()}
-    $("#qDlgSlot").appendChild(qCard); openForm(interest,note); qDlg.showModal(); qDlg.scrollTop=0;
+    var pg=(document.querySelector("main > .page:not([hidden])")||{getAttribute:function(){return ""}}).getAttribute("data-page");
+    var scope=a.getAttribute("data-scope")||(pg==="racing"&&interest==="racing"?"racing":pg==="building-workshops"&&interest==="building"?"building":pg==="stem-camps"?"camps":pg==="seasonal-workshops"?"seasonal":null);
+    $("#qDlgSlot").appendChild(qCard); openForm(interest,note,scope,a.getAttribute("data-topic")); qDlg.showModal(); qDlg.scrollTop=0;
     var f=document.getElementById("q-first"); if(f) f.focus();
   },true);
   $("#qDlgClose").onclick=function(){qDlg.close()};
@@ -4765,7 +4855,7 @@ window.FRB=(function(){
     menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',live:'<circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/>'};
   function ico(k){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICO[k]||"")+'</svg>'}
   var SECT=[["Home",[["overview","Overview","Everything that needs you, at a glance","home"]]],
-    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Race registrations","Official Local Race Registration Forms signed online","flag","regs"],["team","Admins","Kendall and Kevin’s email accounts","shield"]]],
+    ["People",[["members","Members","Approve profiles, set roles, fix hours and see who’s been in","users","mem"],["inq","Inquiries","Questionnaire replies from families, schools and sponsors","inbox","inq"],["regs","Registrations","Race and building workshop registrations (official AASBD form) signed online","flag","regs"],["team","Admins","Kendall and Kevin’s email accounts","shield"]]],
     ["Programs",[["events","Events","Dates on the public calendar","cal"],["families","Times & places","Private times and locations for signed-in members","pin"],["notes","Bulletin","Monthly notes on the Program Dashboard","note"],["resources","Resources","Forms, links and program pages","folder"],["printables","Flyers & forms","Upload printable flyers, registration, order and field trip forms","note"],["reviews","Reviews","Photo albums and teacher plans waiting for approval","check","rev"]]],
     ["Website",[["home","Homepage","Slideshow and the numbers on the homepage","layout"],["news","News & Stories","Post and edit stories","news"],["spirit","Spirit Shop","Shirts, hats and product photos","shirt"],["partners","Partners","Sponsor and partner logos","star"],["edits","Site edits","Every text and photo change, with undo","undo"]]],
     ["Fundraising",[["donate","Donations","Connect the Donate page to Stripe checkout","heart"]]],
@@ -5025,15 +5115,29 @@ window.FRB=(function(){
     });
   }
   var INQ_FILTER="new";
-  var REG_FILTER="";
+  var REG_FILTER="",REG_PROG="";
+  function siteLink(h){return location.origin+location.pathname.replace(/flint-racing-site\.html$/,"")+h}
+  function regLinks(){return '<div class="inq" style="background:#f6f7f9"><header><b>Registration links to send families</b><small>Send after you confirm a place</small></header><div class="row" style="margin-top:6px">'+
+    '<button class="mini solid" type="button" data-copy="#race-registration">Copy race registration link</button><button class="mini solid" type="button" data-copy="#workshop-registration">Copy building workshop registration link</button></div>'+
+    '<p style="color:#4a4d55;margin-top:6px;font-size:.88rem">Race: the official AASBD form. Building workshop: the AASBD form plus school, T-shirt size and safe check-in and checkout.</p></div>'}
+  function bindCopy(P){$$("[data-copy]",P).forEach(function(b){b.onclick=function(){var u=siteLink(b.getAttribute("data-copy")),ok=function(){toast("Link copied: "+u)};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok,function(){prompt("Copy this link:",u)});else prompt("Copy this link:",u)}})}
+  function regMail(i,kind){var W=kind==="workshop",u=siteLink(W?"#workshop-registration":"#race-registration");
+    var sub=W?"Flint Racing building workshop registration":"2027 Flint Soap Box Derby race registration";
+    var body="Hi "+(i.first_name||"")+",\n\nThanks for reaching out to Flint Racing and STEM. "+(W?"To complete building workshop registration, please fill out and sign the official All-American Soap Box Derby registration form, along with the T-shirt size and safe check-in details, here:":"To complete race registration, please fill out and sign the official All-American Soap Box Derby Local Race Registration Form here:")+"\n\n"+u+"\n\nA parent or guardian needs to complete and sign their section. Reply to this email with any questions.\n\nFlint Racing and STEM";
+    return "mailto:"+encodeURIComponent(i.email)+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body)}
   function tabRegs(){var P=$("#admPanel");
-    var q=db.from("race_registrations").select("*").order("created_at",{ascending:false}).limit(300); if(REG_FILTER) q=q.eq("status",REG_FILTER);
+    var q=db.from("race_registrations").select("*").order("created_at",{ascending:false}).limit(300); if(REG_FILTER) q=q.eq("status",REG_FILTER); if(REG_PROG) q=q.eq("program",REG_PROG);
     q.then(function(r){if(r.error){P.textContent="Couldn’t load race registrations.";return}
       var ST=["new","reviewed","fees paid","complete","withdrawn"];
-      P.innerHTML='<p style="margin:0 0 12px;color:#4a4d55;max-width:72ch">Families fill out the official Local Race Registration Form at <a href="#race-registration">flintracing.org/#race-registration</a>. Assign a car number here, then print the signed form for your files and the Local Race Director’s section.</p>'+
+      P.innerHTML='<p style="margin:0 0 12px;color:#4a4d55;max-width:72ch">Racers and building workshop participants fill out the official Local Race Registration Form online. Assign a car number here, then print the signed form for your files and the Local Race Director’s section. Workshop registrations print with a second page for shirts and safe check-in.</p>'+regLinks()+
+        '<div class="row" style="margin-top:12px">'+[["","All programs"],["race","Race"],["building_workshop","Building workshop"]].map(function(f){return '<button class="mini'+(REG_PROG===f[0]?' solid':'')+'" type="button" data-p="'+f[0]+'">'+f[1]+'</button>'}).join("")+'</div>'+
         '<div class="row" style="margin-top:0">'+[["new","New"],["reviewed","Reviewed"],["fees paid","Fees paid"],["complete","Complete"],["","All"]].map(function(f){return '<button class="mini'+(REG_FILTER===f[0]?' solid':'')+'" type="button" data-f="'+f[0]+'">'+f[1]+'</button>'}).join("")+'<button class="mini" type="button" id="regCsv">Download these</button></div>'+
         (r.data.length?r.data.map(function(x){var d=new Date(x.created_at);return '<div class="inq'+(x.status==="complete"||x.status==="withdrawn"?' done':'')+'"><header><b>'+esc(x.participant_name)+'</b><small>'+esc(x.division)+' · age '+esc(x.age)+' · received '+d.toLocaleDateString()+'</small><select data-st="'+x.id+'" aria-label="Status">'+ST.map(function(s){return '<option'+(x.status===s?' selected':'')+'>'+s+'</option>'}).join("")+'</select></header>'+
-          '<p>Parent/guardian: <b>'+esc(x.parent_name)+'</b> ('+esc(x.relationship)+') · '+esc(x.parent_email)+' · '+esc(x.phone)+'</p>'+
+          '<p><span class="mb-st" style="margin:0 6px 0 0">'+(x.program==="building_workshop"?"Building workshop":"Race")+'</span>Parent/guardian: <b>'+esc(x.parent_name)+'</b> ('+esc(x.relationship)+') · '+esc(x.parent_email)+' · '+esc(x.phone)+'</p>'+
+          (x.program==="building_workshop"&&x.workshop?(function(w){return '<p><b>'+esc(w.school||"")+'</b> · Shirt <b>'+esc(w.shirt_size||"")+'</b>'+(w.shirt_special?' ('+esc(w.shirt_special)+')':'')+' · Arrives/leaves: '+esc(w.arrival||"")+(w.arrival_other?' ('+esc(w.arrival_other)+')':'')+' · Drop-off cell '+esc(w.dropoff_phone||"")+'</p>'+
+            '<p>Allowed to pick up: '+esc((w.pickups||[]).map(function(k){return k.name+" ("+k.relationship+") "+k.phone}).join(" · ")||"none listed")+'</p><p>Emergency: '+esc(w.emergency?w.emergency.name+" ("+w.emergency.relationship+") "+w.emergency.phone:"")+'</p>'+
+            (w.medical?'<p style="color:#8a1116"><b>Medical/allergies:</b> '+esc(w.medical)+'</p>':'')})(x.workshop):'')+
           '<p>'+esc(x.mailing_address)+', '+esc(x.city)+', '+esc(x.state)+' '+esc(x.zip)+' · Born '+esc(fmtDate(x.date_of_birth,{month:"short",day:"numeric",year:"numeric"}))+' · Grade '+esc(x.school_grade)+(x.year_began?' · Racing since '+esc(x.year_began):'')+'</p>'+
           (x.how_learned?'<p>Heard about us: “'+esc(x.how_learned)+'”</p>':'')+
           '<div class="row" style="margin-top:8px;align-items:center"><label style="display:flex;gap:6px;align-items:center;font-weight:600">Car #<input data-car="'+x.id+'" value="'+esc(x.car_number||"")+'" maxlength="10" style="width:90px;padding:6px 8px;border:1.5px solid #c9ccd1;border-radius:4px;font:inherit"></label>'+
@@ -5041,7 +5145,8 @@ window.FRB=(function(){
           '<button class="mini solid" type="button" data-print="'+x.id+'">View &amp; print form</button></div></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No race registrations here yet.</p>');
       var byId={};r.data.forEach(function(x){byId[x.id]=x});
       $$("button[data-f]",P).forEach(function(b){b.onclick=function(){REG_FILTER=b.getAttribute("data-f");tabRegs()}});
-      $("#regCsv").onclick=function(){csv([["Received","Status","Car #","Division","Participant","Age","Date of birth","School grade","Phone","Parent/guardian","Relationship","Email","Address","City","State","Zip","Parent address","Parent city","Parent state","Parent zip","Year began","How learned","Note"]].concat(r.data.map(function(x){return [x.created_at,x.status,x.car_number,x.division,x.participant_name,x.age,x.date_of_birth,x.school_grade,x.phone,x.parent_name,x.relationship,x.parent_email,x.mailing_address,x.city,x.state,x.zip,x.parent_address,x.parent_city,x.parent_state,x.parent_zip,x.year_began,x.how_learned,x.admin_note]})),"race-registrations.csv")};
+      $$("button[data-p]",P).forEach(function(b){b.onclick=function(){REG_PROG=b.getAttribute("data-p");tabRegs()}}); bindCopy(P);
+      $("#regCsv").onclick=function(){csv([["Received","Status","Car #","Division","Participant","Age","Date of birth","School grade","Phone","Parent/guardian","Relationship","Email","Address","City","State","Zip","Parent address","Parent city","Parent state","Parent zip","Year began","How learned","Note","Program","School/group","Shirt","Shirt special order","Arrives/leaves","Drop-off cell","Allowed to pick up","Emergency contact","Medical/allergies"]].concat(r.data.map(function(x){return [x.created_at,x.status,x.car_number,x.division,x.participant_name,x.age,x.date_of_birth,x.school_grade,x.phone,x.parent_name,x.relationship,x.parent_email,x.mailing_address,x.city,x.state,x.zip,x.parent_address,x.parent_city,x.parent_state,x.parent_zip,x.year_began,x.how_learned,x.admin_note,x.program==="building_workshop"?"Building workshop":"Race"].concat((function(w){w=w||{};return [w.school,w.shirt_size,w.shirt_special,(w.arrival||"")+(w.arrival_other?": "+w.arrival_other:""),w.dropoff_phone,(w.pickups||[]).map(function(k){return k.name+" ("+k.relationship+") "+k.phone}).join("; "),w.emergency?w.emergency.name+" ("+w.emergency.relationship+") "+w.emergency.phone:"",w.medical]})(x.workshop))})),"race-registrations.csv")};
       var save=function(id,patch,msg){db.from("race_registrations").update(patch).eq("id",id).then(function(z){toast(z.error?"Couldn’t save":msg);if(!z.error)Object.assign(byId[id],patch);admCounts()})};
       $$("select[data-st]",P).forEach(function(s){s.onchange=function(){save(s.getAttribute("data-st"),{status:s.value},"Updated")}});
       $$("input[data-car]",P).forEach(function(i){i.onchange=function(){save(i.getAttribute("data-car"),{car_number:i.value.trim()||null},"Car number saved")}});
@@ -5052,10 +5157,12 @@ window.FRB=(function(){
   function tabInq(){var P=$("#admPanel");
     var q=db.from("inquiries").select("*").order("created_at",{ascending:false}).limit(200); if(INQ_FILTER) q=q.eq("status",INQ_FILTER);
     q.then(function(r){if(r.error){P.textContent="Couldn’t load inquiries.";return}
-      P.innerHTML='<div class="row" style="margin-top:0">'+[["new","New"],["in progress","In progress"],["done","Done"],["","All"]].map(function(f){return '<button class="mini'+(INQ_FILTER===f[0]?' solid':'')+'" type="button" data-f="'+f[0]+'">'+f[1]+'</button>'}).join("")+'<button class="mini" type="button" id="inqCsv">Download these</button></div>'+
+      P.innerHTML=regLinks()+'<div class="row" style="margin-top:12px">'+[["new","New"],["in progress","In progress"],["done","Done"],["","All"]].map(function(f){return '<button class="mini'+(INQ_FILTER===f[0]?' solid':'')+'" type="button" data-f="'+f[0]+'">'+f[1]+'</button>'}).join("")+'<button class="mini" type="button" id="inqCsv">Download these</button></div>'+
         (r.data.length?r.data.map(function(i){var d=new Date(i.created_at);return '<div class="inq'+(i.status==="done"?' done':'')+'"><header><b>'+esc(i.first_name+" "+i.last_name)+'</b><small>'+d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})+'</small><select data-id="'+i.id+'" aria-label="Status">'+["new","in progress","done"].map(function(s){return '<option'+(i.status===s?' selected':'')+'>'+s+'</option>'}).join("")+'</select></header>'+
           '<p><b>'+esc(i.role)+'</b>'+(i.organization?' · '+esc(i.organization):'')+'</p><p>Interested in: '+esc(i.interests)+'</p>'+((i.youth_count||i.youth_ages)?'<p>Young people: '+esc([i.youth_count,i.youth_ages&&("ages "+i.youth_ages)].filter(Boolean).join(", "))+'</p>':'')+
-          (i.message?'<p>“'+esc(i.message)+'”</p>':'')+'<p>Reach by '+esc(i.contact_by)+' · '+esc(i.email)+(i.phone?' · '+esc(i.phone):'')+' · '+esc(i.best_time||"Any time")+(i.email_updates?' · wants email updates':'')+'</p></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No inquiries here.</p>');
+          (i.message?'<p>“'+esc(i.message)+'”</p>':'')+'<p>Reach by '+esc(i.contact_by)+' · '+esc(i.email)+(i.phone?' · '+esc(i.phone):'')+' · '+esc(i.best_time||"Any time")+(i.email_updates?' · wants email updates':'')+'</p>'+
+          '<div class="row" style="margin-top:6px"><a class="mini" href="'+esc(regMail(i,"race"))+'">Email race registration form</a><a class="mini" href="'+esc(regMail(i,"workshop"))+'">Email workshop registration form</a></div></div>'}).join(""):'<p style="margin-top:14px;color:#4a4d55">No inquiries here.</p>');
+      bindCopy(P);
       $$("button[data-f]",P).forEach(function(b){b.onclick=function(){INQ_FILTER=b.getAttribute("data-f");tabInq()}});
       $("#inqCsv").onclick=function(){csv([["Received","First","Last","Role","Organization","Interests","Youth","Ages","Message","Email","Phone","Contact by","Best time","Email updates","Status"]].concat(r.data.map(function(i){return [i.created_at,i.first_name,i.last_name,i.role,i.organization,i.interests,i.youth_count,i.youth_ages,i.message,i.email,i.phone,i.contact_by,i.best_time,i.email_updates?"yes":"no",i.status]})),"inquiries.csv")};
       $$("select[data-id]",P).forEach(function(s){s.onchange=function(){db.from("inquiries").update({status:s.value}).eq("id",s.getAttribute("data-id")).then(function(x){toast(x.error?"Couldn’t update":"Updated");tabInq()})}});
@@ -6285,7 +6392,7 @@ window.FRB=(function(){
     if(kind==="racers") return db.from("race_racers").select("*").order("display_name").then(function(r){if(okToast(r))csv([["Racer","Team","Car #","Sponsor","Division"]].concat((r.data||[]).map(function(x){return [x.display_name,x.team,x.car_number,x.sponsor,x.division]})),"racers.csv")});
     if(kind==="volunteers") return db.from("race_volunteers").select("*").order("last_name").then(function(r){if(okToast(r))csv([["First","Last","Email","Phone","Wants","Shift","18+","Status","List","Role","Checked in","Notes"]].concat((r.data||[]).map(function(v){return [v.first_name,v.last_name,v.email,v.phone,v.area,v.shift,v.over18?"yes":"no",v.status,v.assigned_area,v.role,v.checked_in_at,v.notes]})),"race-day-volunteers.csv")});
     if(kind==="workshop") return db.from("workshop_signins").select("*").order("session_date").then(function(r){if(okToast(r))csv([["Date","Last name","Team","Kids","Adults","Meals","Notes"]].concat((r.data||[]).map(function(x){return [x.session_date,x.last_name,x.team,x.kids,x.volunteers,x.kids+x.volunteers,x.notes]})),"workshop-signins.csv")});
-    if(kind==="registrations") return db.from("race_registrations").select("*").order("created_at").then(function(r){if(okToast(r))csv([["Received","Status","Car #","Division","Participant","Age","Date of birth","School grade","Phone","Parent/guardian","Relationship","Email","Address","City","State","Zip","Parent address","Parent city","Parent state","Parent zip","Year began","How learned","Note"]].concat((r.data||[]).map(function(x){return [x.created_at,x.status,x.car_number,x.division,x.participant_name,x.age,x.date_of_birth,x.school_grade,x.phone,x.parent_name,x.relationship,x.parent_email,x.mailing_address,x.city,x.state,x.zip,x.parent_address,x.parent_city,x.parent_state,x.parent_zip,x.year_began,x.how_learned,x.admin_note]})),"race-registrations.csv")});
+    if(kind==="registrations") return db.from("race_registrations").select("*").order("created_at").then(function(r){if(okToast(r))csv([["Received","Status","Car #","Division","Participant","Age","Date of birth","School grade","Phone","Parent/guardian","Relationship","Email","Address","City","State","Zip","Parent address","Parent city","Parent state","Parent zip","Year began","How learned","Note","Program","School/group","Shirt","Shirt special order","Arrives/leaves","Drop-off cell","Allowed to pick up","Emergency contact","Medical/allergies"]].concat((r.data||[]).map(function(x){return [x.created_at,x.status,x.car_number,x.division,x.participant_name,x.age,x.date_of_birth,x.school_grade,x.phone,x.parent_name,x.relationship,x.parent_email,x.mailing_address,x.city,x.state,x.zip,x.parent_address,x.parent_city,x.parent_state,x.parent_zip,x.year_began,x.how_learned,x.admin_note,x.program==="building_workshop"?"Building workshop":"Race"].concat((function(w){w=w||{};return [w.school,w.shirt_size,w.shirt_special,(w.arrival||"")+(w.arrival_other?": "+w.arrival_other:""),w.dropoff_phone,(w.pickups||[]).map(function(k){return k.name+" ("+k.relationship+") "+k.phone}).join("; "),w.emergency?w.emergency.name+" ("+w.emergency.relationship+") "+w.emergency.phone:"",w.medical]})(x.workshop))})),"race-registrations.csv")});
     if(kind==="inquiries") return db.from("inquiries").select("*").order("created_at").then(function(r){if(okToast(r))csv([["Received","First","Last","Role","Organization","Interests","Youth","Ages","Message","Email","Phone","Contact by","Status"]].concat((r.data||[]).map(function(i){return [i.created_at,i.first_name,i.last_name,i.role,i.organization,i.interests,i.youth_count,i.youth_ages,i.message,i.email,i.phone,i.contact_by,i.status]})),"inquiries.csv")});
     if(kind==="members") return Promise.all([db.from("members").select("*").order("display_name"),db.from("member_hours").select("*")]).then(function(r){if(!okToast(r[0]))return;var H={};(r[1].data||[]).forEach(function(h){if(h.ended_at)H[h.member_id]=(H[h.member_id]||0)+(new Date(h.ended_at)-new Date(h.started_at))/36e5});
       csv([["Name","Username","Type","Status","Roles","Email","Phone","Racers","Hours","Registered","Last seen"]].concat((r[0].data||[]).map(function(m){return [m.display_name,m.username,m.kind,m.status,(m.roles||[]).join(" "),m.email,m.phone,(m.kids||[]).map(function(k){return k.name}).join("; "),Math.round((H[m.id]||0)*10)/10,m.created_at,m.last_seen_at]})),"flint-racing-members.csv")});
