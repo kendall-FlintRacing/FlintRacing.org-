@@ -708,6 +708,45 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
 @media (max-width:620px){.rg-pick3{grid-template-columns:1fr 1fr}.rg-pick3 .rf:first-child{grid-column:1/-1}}
 .rg-cta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:10px;font-size:.92rem}
 .rg-cta a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* ===== Track & Racing hero v3: compact, fits the first screen ===== */
+.rh3{position:relative;overflow:hidden;isolation:isolate;background:#16171a;color:#fff;border-bottom:4px solid var(--red)}
+.rh3-bg{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(10px) brightness(.62) saturate(1.05);z-index:-2}
+.rh3::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,15,18,.35) 0%,rgba(14,15,18,.6) 45%,rgba(14,15,18,.82) 100%)}
+.rh3-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.55fr);gap:clamp(20px,3.5vw,44px);align-items:center;padding-block:clamp(20px,3.2vw,36px)}
+.rh3-brand{display:grid;gap:8px;justify-items:start;align-content:center}
+.rh3-logo{display:block;width:100%;max-width:360px;height:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,.55))}
+.rh3-h1{font-size:clamp(2.1rem,3.6vw,3rem);font-style:italic;color:#fff;transform:skewX(-6deg);transform-origin:left;line-height:.95}
+.rh3-h1 em{font-style:inherit;color:var(--red2)}
+.rh3-lede{margin:6px 0 0;color:#e3e5e9;font-size:.98rem;line-height:1.5;max-width:38ch}
+.rh3-main{display:grid;gap:10px;min-width:0}
+.rh3-k{margin:0;font:700 .74rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#ffb3b6}
+.rh3-feat{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.9);box-shadow:8px 8px 0 var(--red)}
+.rh3-feat>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
+.rh3-feat::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,12,.94) 0%,rgba(10,10,12,.82) 48%,rgba(10,10,12,.5) 100%)}
+.rh3-tix{position:relative;z-index:1;display:grid;place-content:center;justify-items:center;gap:4px;background:var(--red);padding:14px 16px;min-width:94px;text-transform:uppercase}
+.rh3-tix span{font:800 .78rem/1 var(--body);letter-spacing:.14em}
+.rh3-tix b{font:900 3.1rem/.9 var(--display)}
+.rh3-body{position:relative;z-index:1;padding:clamp(14px,2vw,20px);display:grid;gap:6px;align-content:center}
+.rh3-tag{margin:0;justify-self:start;font:800 .66rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffb3b6}
+.rh3-feat h2{font-size:clamp(1.6rem,2.7vw,2.3rem);line-height:.98;color:#fff}
+.rh3-date{margin:0;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font:800 1.02rem/1.1 var(--display);text-transform:uppercase;color:#fff}
+.rh3-count{font:800 .7rem/1 var(--body);letter-spacing:.1em;background:#fff;color:var(--red-deep);padding:5px 9px;border-radius:999px}
+.rh3-desc{margin:0;color:#dfe1e5;font-size:.93rem;line-height:1.45;max-width:58ch}
+.rh3-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.rh3-acts .btn{min-height:42px;padding-inline:16px;font-size:.92rem}
+.rh3-links{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rh3-links a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;height:100%;padding:10px 12px;border-radius:6px;background:rgba(20,21,25,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);border-top:3px solid var(--red);color:#fff;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}
+.rh3-links a:hover,.rh3-links a:focus-visible{background:rgba(34,36,43,.92);border-color:var(--red);transform:translateY(-2px)}
+.rh3-links b{display:block;font:800 .96rem/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.rh3-links small{display:block;color:#c9cbd0;font-size:.78rem;line-height:1.3;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rh3-ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--red-deep);color:#fff;font:700 .9rem/1 var(--body)}
+@media (max-width:900px){.rh3-grid{grid-template-columns:minmax(0,1fr)}.rh3-brand{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:16px}.rh3-logo{width:180px}}
+@media (max-width:560px){
+  .rh3-grid{gap:16px;padding-block:16px 20px}.rh3-brand{grid-template-columns:118px minmax(0,1fr);gap:12px}.rh3-logo{width:118px}.rh3-h1{font-size:1.9rem}.rh3-lede{font-size:.88rem;line-height:1.4}
+  .rh3-feat h2{font-size:1.55rem}.rh3-desc{font-size:.88rem}.rh3-links{gap:6px}.rh3-links a{padding:9px 10px;gap:8px}.rh3-links b{font-size:.86rem}.rh3-ic{width:26px;height:26px;font-size:.8rem}
+  .rh3-feat{grid-template-columns:minmax(0,1fr)}.rh3-tix{grid-auto-flow:column;justify-content:start;align-items:baseline;gap:8px;padding:8px 14px;min-width:0}.rh3-tix b{font-size:1.5rem}
+  .rh3-acts .btn{flex:1 1 40%;justify-content:center;min-height:40px;padding-inline:10px;font-size:.88rem}.rh3-acts .btn.white{flex-basis:100%}
+  .rh3-links small{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}}
 /* ===== Track & Racing hero: logo + major events ===== */
 .rh2{position:relative;background:#16171a;color:#fff;overflow:hidden;border-bottom:4px solid var(--red)}
 .rh2::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 3px),rgba(255,255,255,.12) calc(25% - 3px) 25%);-webkit-mask-image:repeating-linear-gradient(180deg,#000 0 46px,transparent 46px 80px);mask-image:repeating-linear-gradient(180deg,#000 0 46px,transparent 46px 80px);pointer-events:none}
@@ -2715,32 +2754,35 @@ body.rw-tv .rw-fol{display:none}
 <!-- ======================= TRACK & RACING ======================= -->
 <div class="page dark prog-page" data-page="racing" hidden>
   <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><span aria-current="page">Track &amp; Racing</span></div></nav>
-  <header class="rh2"><div class="wrap rh2-grid">
-    <div class="rh2-brand">
-      <div class="rh2-logo"><img class="rh2-bg" src="img/hero.webp" alt="" aria-hidden="true"><img class="rh2-mark" src="img/cronin-derby-downs-logo-sticker.webp" alt="Cronin Derby Downs, established 1969" width="786" height="603"></div>
-      <h1 class="rh2-h1">Track &amp; <em>Racing</em></h1>
-      <p class="rh2-lede">Home of the Annual Flint Soap Box Derby. From school teams to community racers, our events bring families together through gravity-powered racing.</p>
+  <header class="rh3">
+    <img class="rh3-bg" src="img/hero.webp" alt="" aria-hidden="true">
+    <div class="wrap rh3-grid">
+      <div class="rh3-brand">
+        <img class="rh3-logo" src="img/cronin-derby-downs-logo-sticker.webp" alt="Cronin Derby Downs, established 1969" width="786" height="603">
+        <div><h1 class="rh3-h1">Track &amp; <em>Racing</em></h1><p class="rh3-lede">Home of the Annual Flint Soap Box Derby. Gravity-powered racing for school teams, community racers and families.</p></div>
+      </div>
+      <div class="rh3-main">
+        <p class="rh3-k"><span id="rhYear">2027</span> major events</p>
+        <article class="rh3-feat">
+          <img src="img/web/two-cars-track.webp" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs as spectators watch from the tents">
+          <div class="rh3-tix" aria-hidden="true"><span id="rhDow">Sat</span><b id="rhDay">05</b><span id="rhMon">Jun</span></div>
+          <div class="rh3-body">
+            <p class="rh3-tag">The main event</p>
+            <h2>Annual Flint Soap Box Derby</h2>
+            <p class="rh3-date"><span id="rhDate">Saturday, June 5, 2027</span><span class="rh3-count" id="rhCount" hidden></span></p>
+            <p class="rh3-desc">Our building workshop teams and sanctioned racers take on the hill at Cronin Derby Downs. Free to race and free to eat.</p>
+            <div class="rh3-acts"><a class="btn white" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn white-ghost" href="#sanctioned-racers">Sanctioned racers</a><a class="btn white-ghost" href="#race-watch">Live race page</a></div>
+          </div>
+        </article>
+        <ul class="rh3-links">
+          <li><a href="#fun-runs"><span class="rh3-ic" aria-hidden="true">☀</span><span><b>Seasonal Fun Runs</b><small id="rhFun">Summer and fall runs at the track</small></span></a></li>
+          <li><a href="#race-board"><span class="rh3-ic" aria-hidden="true">⏱</span><span><b>Practice Runs</b><small id="rhPrac">Get a feel for the hill</small></span></a></li>
+          <li><a href="#derby-racing"><span class="rh3-ic" aria-hidden="true">?</span><span><b>About Derby Racing</b><small>How-tos, race day &amp; terms</small></span></a></li>
+          <li><a href="#about"><span class="rh3-ic" aria-hidden="true">♥</span><span><b>Cronin Derby Downs</b><small>Our family story</small></span></a></li>
+        </ul>
+      </div>
     </div>
-    <div class="rh2-events" aria-labelledby="rh2H">
-      <p class="rh2-k" id="rh2H"><span id="rhYear">2027</span> major events</p>
-      <article class="rh2-feat">
-        <img src="img/web/two-cars-track.webp" alt="Two soap box cars race side by side down the hill at Cronin Derby Downs as spectators watch from the tents">
-        <div class="rh2-feat-in">
-          <p class="rh2-tag">The main event</p>
-          <h2>Annual Flint Soap Box Derby</h2>
-          <p class="rh2-date"><span id="rhDate">Saturday, June 5, 2027</span><span class="rh2-count" id="rhCount" hidden></span></p>
-          <p class="rh2-desc">Our building workshop teams and sanctioned racers take on the hill at Cronin Derby Downs. Free to race and free to eat for every participant.</p>
-          <div class="rh2-acts"><a class="btn white" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn white-ghost" href="#sanctioned-racers">Sanctioned racers</a><a class="btn white-ghost" href="#race-watch">Live race page</a></div>
-        </div>
-      </article>
-      <ul class="rh2-list">
-        <li><a href="#fun-runs"><span class="rh2-ic" aria-hidden="true">☀</span><span><b>Seasonal Fun Runs</b><small id="rhFun">Low-pressure runs at the track through summer and fall</small></span><i aria-hidden="true">›</i></a></li>
-        <li><a href="#race-board"><span class="rh2-ic" aria-hidden="true">⏱</span><span><b>Practice Runs at the Track</b><small id="rhPrac">Get a feel for the hill before race day</small></span><i aria-hidden="true">›</i></a></li>
-        <li><a href="#derby-racing"><span class="rh2-ic" aria-hidden="true">?</span><span><b>About Derby Racing</b><small>How it works, race day, building a car and terminology</small></span><i aria-hidden="true">›</i></a></li>
-        <li><a href="#about"><span class="rh2-ic" aria-hidden="true">♥</span><span><b>Cronin Derby Downs</b><small>Our family story and the history of the hill</small></span><i aria-hidden="true">›</i></a></li>
-      </ul>
-    </div>
-  </div></header>
+  </header>
   <div class="wrap">
     <div class="panels">
       <section class="panel"><h2>A place to race, learn and cheer</h2><p>Racers prepare their cars, learn safe track routines and put teamwork into action. Families and spectators are part of the experience, too. Each event outlines its own age, car, safety and registration requirements.</p></section>
@@ -3988,9 +4030,10 @@ body.rw-tv .rw-fol{display:none}
   }
   function renderRaceHero(){if(!document.getElementById("rhDate"))return;
     var t=todayKey(),up=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t}),rd=nextRaceDay();
-    var lst=function(arr){return arr.slice(0,2).map(function(e){var f=fmtShort(e.d);return f.m+" "+f.d+" · "+e.t.replace(/\s*·\s*Memorial Day Weekend/,"")+(e.tbc?" (TBC)":"")}).join(" · ")+(arr.length>2?" · +"+(arr.length-2)+" more":"")};
+    var lst=function(arr){var e=arr[0],f=fmtShort(e.d);return "Next: "+f.m+" "+f.d+" · "+e.t.replace(/\s*·\s*Memorial Day Weekend/,"").replace(/^First Annual /,"")+(e.tbc?" (TBC)":"")+(arr.length>1?" · "+arr.length+" dates":"")};
     if(rd){var d=pd(rd.d),f=fmtShort(rd.d);document.getElementById("rhDate").textContent=d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+(rd.tbc?" (to be confirmed)":"");
       document.getElementById("rhYear").textContent=d.getFullYear();
+      document.getElementById("rhDow").textContent=f.w;document.getElementById("rhDay").textContent=String(f.d).padStart(2,"0");document.getElementById("rhMon").textContent=f.m;
       var days=Math.round((d-pd(t))/864e5),c=document.getElementById("rhCount");c.hidden=days<0;c.textContent=days===0?"Today!":days===1?"Tomorrow":days+" days to go"}
     var prac=up.filter(function(e){return /practice/i.test(e.t)}),fun=up.filter(function(e){return !/practice/i.test(e.t)&&!/Race Day/i.test(e.t)});
     if(prac.length)document.getElementById("rhPrac").textContent=lst(prac);
