@@ -714,13 +714,14 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
 .rh3::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,15,18,.35) 0%,rgba(14,15,18,.6) 45%,rgba(14,15,18,.82) 100%)}
 .rh3-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.55fr);gap:clamp(20px,3.5vw,44px);align-items:center;padding-block:clamp(20px,3.2vw,36px)}
 .rh3-brand{display:grid;gap:8px;justify-items:start;align-content:center}
-.rh3-logo{display:block;width:100%;max-width:360px;height:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,.55))}
+.rh3-logo{display:block;width:100%;max-width:360px;height:auto;margin-left:clamp(-28px,-2vw,-12px);filter:drop-shadow(0 10px 22px rgba(0,0,0,.55))}
+@media (max-width:900px){.rh3-logo{margin-left:0}}
 .rh3-h1{font-size:clamp(2.1rem,3.6vw,3rem);font-style:italic;color:#fff;transform:skewX(-6deg);transform-origin:left;line-height:.95}
 .rh3-h1 em{font-style:inherit;color:var(--red2)}
 .rh3-lede{margin:6px 0 0;color:#e3e5e9;font-size:.98rem;line-height:1.5;max-width:38ch}
-.rh3-main{display:grid;gap:10px;min-width:0}
-.rh3-k{margin:0;font:700 .74rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#ffb3b6}
-.rh3-feat{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.9);box-shadow:8px 8px 0 var(--red)}
+.rh3-main{display:grid;gap:16px;min-width:0}
+.rh3-k{margin:0 0 -4px;font:700 .74rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#ffb3b6}
+.rh3-feat{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.22);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .rh3-feat>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%}
 .rh3-feat::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,12,.94) 0%,rgba(10,10,12,.82) 48%,rgba(10,10,12,.5) 100%)}
 .rh3-tix{position:relative;z-index:1;display:grid;place-content:center;justify-items:center;gap:4px;background:var(--red);padding:14px 16px;min-width:94px;text-transform:uppercase}
@@ -734,8 +735,8 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
 .rh3-desc{margin:0;color:#dfe1e5;font-size:.93rem;line-height:1.45;max-width:58ch}
 .rh3-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .rh3-acts .btn{min-height:42px;padding-inline:16px;font-size:.92rem}
-.rh3-links{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.rh3-links a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;height:100%;padding:10px 12px;border-radius:6px;background:rgba(20,21,25,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);border-top:3px solid var(--red);color:#fff;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}
+.rh3-links{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rh3-links a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;height:100%;padding:10px 12px;border-radius:6px;background:rgba(20,21,25,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}
 .rh3-links a:hover,.rh3-links a:focus-visible{background:rgba(34,36,43,.92);border-color:var(--red);transform:translateY(-2px)}
 .rh3-links b{display:block;font:800 .96rem/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em}
 .rh3-links small{display:block;color:#c9cbd0;font-size:.78rem;line-height:1.3;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -747,6 +748,37 @@ dialog.q-dlg{width:min(780px,calc(100vw - 32px))}
   .rh3-feat{grid-template-columns:minmax(0,1fr)}.rh3-tix{grid-auto-flow:column;justify-content:start;align-items:baseline;gap:8px;padding:8px 14px;min-width:0}.rh3-tix b{font-size:1.5rem}
   .rh3-acts .btn{flex:1 1 40%;justify-content:center;min-height:40px;padding-inline:10px;font-size:.88rem}.rh3-acts .btn.white{flex-basis:100%}
   .rh3-links small{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}}
+/* ===== Track & Racing: Akron card + track calendar card ===== */
+.rx-duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,22px);margin-top:clamp(1.8rem,3.5vw,2.6rem);align-items:stretch}
+.sbd.sbd-card{margin-top:0;grid-template-columns:auto minmax(0,1fr);align-content:start;height:100%}
+.sbd.sbd-card .btn{grid-column:2;justify-self:start;min-height:46px}
+.sbd.sbd-card h2,.rx-cal h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+.sbd.sbd-card .sbd-date{font-size:clamp(1.2rem,2.2vw,1.55rem)}
+.rx-cal{display:grid;gap:10px;align-content:start;padding:clamp(18px,3vw,28px);border-radius:6px;background:linear-gradient(135deg,#22242b 0%,#1a1c22 100%);border:1px solid rgba(255,255,255,.1);border-left:6px solid #6d7077;color:#fff}
+.rx-next{list-style:none;margin:2px 0 4px;padding:0;display:grid;gap:6px}
+.rx-next li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.14)}
+.rx-next span{font:800 .95rem/1 var(--display);text-transform:uppercase;color:var(--red2);letter-spacing:.03em}
+.rx-next b{font:700 1.02rem/1.25 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.rx-next em{font:700 .66rem/1 var(--body);letter-spacing:.1em;border:1px dashed #9ea2aa;padding:3px 5px;border-radius:3px;margin-left:6px;vertical-align:2px;color:#c9cbd0}
+.rx-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.rx-acts .btn{min-height:46px}
+@media (max-width:900px){.rx-duo{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.sbd.sbd-card .btn{grid-column:1/-1;width:100%;justify-self:stretch}.rx-next li{grid-template-columns:96px minmax(0,1fr)}.rx-acts .btn{flex:1 1 auto;justify-content:center}}
+.rx-practice{margin-top:clamp(2rem,4vw,3rem);display:grid;gap:16px;padding:clamp(18px,3vw,28px);border-radius:6px;background:var(--red-deep);color:#fff;scroll-margin-top:96px}
+.rx-practice h2{font-size:clamp(1.7rem,3.4vw,2.3rem);color:#fff;margin:6px 0}
+.rx-practice p{margin:0;max-width:70ch}.rx-practice .hiw-k{color:#ffd9db}
+.rx-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;counter-reset:rs}
+.rx-steps li{counter-increment:rs;background:rgba(0,0,0,.18);border-radius:4px;padding:12px 14px 12px 52px;position:relative;font-size:.93rem}
+.rx-steps li::before{content:counter(rs);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:#fff;color:var(--red-deep);display:grid;place-items:center;font:800 1rem/1 var(--display)}
+.rx-steps b{display:block;font:800 1.02rem/1.15 var(--display);text-transform:uppercase}
+@media (max-width:700px){.rx-steps{grid-template-columns:minmax(0,1fr)}}
+.gi-ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gi-ways article{background:#fff;color:var(--ink);border-radius:4px;border-top:6px solid var(--red-deep);padding:18px;display:grid;gap:8px;align-content:start}
+.gi-ways h3{font-size:1.35rem}
+.gi-ways p{margin:0;color:#3b3e45;font-size:.94rem}
+.gi-ways .btn{justify-self:start;margin-top:6px}
+@media (max-width:980px){.gi-ways{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.gi-ways{grid-template-columns:minmax(0,1fr)}}
 /* ===== Track & Racing hero: logo + major events ===== */
 .rh2{position:relative;background:#16171a;color:#fff;overflow:hidden;border-bottom:4px solid var(--red)}
 .rh2::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 3px),rgba(255,255,255,.12) calc(25% - 3px) 25%);-webkit-mask-image:repeating-linear-gradient(180deg,#000 0 46px,transparent 46px 80px);mask-image:repeating-linear-gradient(180deg,#000 0 46px,transparent 46px 80px);pointer-events:none}
@@ -2775,20 +2807,33 @@ body.rw-tv .rw-fol{display:none}
           </div>
         </article>
         <ul class="rh3-links">
-          <li><a href="#fun-runs"><span class="rh3-ic" aria-hidden="true">☀</span><span><b>Seasonal Fun Runs</b><small id="rhFun">Summer and fall runs at the track</small></span></a></li>
-          <li><a href="#race-board"><span class="rh3-ic" aria-hidden="true">⏱</span><span><b>Practice Runs</b><small id="rhPrac">Get a feel for the hill</small></span></a></li>
+          <li><a href="#track-schedule"><span class="rh3-ic" aria-hidden="true">☀</span><span><b>Seasonal Fun Runs</b><small id="rhFun">Summer and fall runs at the track</small></span></a></li>
+          <li><a href="#about"><span class="rh3-ic" aria-hidden="true">♥</span><span><b>About Cronin Derby Downs</b><small>Our family story</small></span></a></li>
           <li><a href="#derby-racing"><span class="rh3-ic" aria-hidden="true">?</span><span><b>About Derby Racing</b><small>How-tos, race day &amp; terms</small></span></a></li>
-          <li><a href="#about"><span class="rh3-ic" aria-hidden="true">♥</span><span><b>Cronin Derby Downs</b><small>Our family story</small></span></a></li>
+          <li><a href="#racing-get-involved"><span class="rh3-ic" aria-hidden="true">→</span><span><b>How to Get Involved</b><small>Steps to join and ways to take part</small></span></a></li>
         </ul>
       </div>
     </div>
   </header>
   <div class="wrap">
-    <div class="panels">
-      <section class="panel"><h2>A place to race, learn and cheer</h2><p>Racers prepare their cars, learn safe track routines and put teamwork into action. Families and spectators are part of the experience, too. Each event outlines its own age, car, safety and registration requirements.</p></section>
-      <section class="panel"><h2>Racing throughout the year</h2><p>Explore our racing formats below. Dates and formats are confirmed through each published event; an overview is not a promise that registration is open.</p></section>
+    <div class="rx-duo">
+      <section class="sbd sbd-card" id="sanctioned-racers" aria-labelledby="sbdH">
+          <div class="sbd-logo"><img src="img/flint-soap-box-derby.webp" alt="Flint, MI Soap Box Derby logo"></div>
+          <div>
+              <p class="sbd-k">Akron sanctioned racing</p>
+              <h2 id="sbdH">Looking for a local Derby?</h2>
+              <p class="sbd-date"><span id="sbdDate">Sat · Jun 05, 2027</span><small>Flint Soap Box Derby</small></p>
+              <p class="sbd-fee">Sanctioned racers are welcome at our local race. Send a quick inquiry and we’ll email you the forms and fees. Race day registration has a fee for racers not affiliated with our program.</p>
+          </div>
+          <button class="btn red" type="button" id="sbdOpen" aria-haspopup="dialog">Quick register →</button>
+        </section>
+      <section class="rx-cal" aria-labelledby="rxCalH">
+        <p class="sbd-k">Track calendar</p>
+        <h2 id="rxCalH">Fun runs &amp; practice at the track</h2>
+        <ul class="rx-next" id="rxNext"><li><span>Dates</span><b>Posted on the track schedule</b></li></ul>
+        <div class="rx-acts"><a class="btn red" href="#track-schedule">Track schedule →</a><a class="btn white-ghost" href="#school-practice">Schedule a school practice</a></div>
+      </section>
     </div>
-
 
     <section class="dr-teaser" aria-labelledby="drtH">
       <div><p class="hiw-k">New to derby racing?</p><h2 id="drtH">Start with About Derby Racing</h2>
@@ -2808,35 +2853,71 @@ body.rw-tv .rw-fol{display:none}
     </div>
     <p style="color:#c9cbd0;font-size:.9rem;margin-top:14px;max-width:80ch">For every format: each published event provides its date, car and age requirements, preparation details and registration pathway. Staff confirm eligibility and next steps by email. Youth participants must know their assigned chaperone, with one chaperone per six to eight students, or have an arrangement confirmed with staff beforehand.</p>
 
-    <h2 class="sec-title"><small>At Cronin Derby Downs</small>2027 Fun Run Schedule</h2>
+    <div class="race-plan" style="margin-top:clamp(2rem,4vw,2.6rem)">
+      <div><h2>Plan a Racing Experience</h2><p>Bring your group to the track for a party, fundraiser or custom event. Tell us what you have in mind, and we’ll discuss activities, dates, supervision and what is possible at Cronin Derby Downs.</p></div>
+      <a class="btn white" href="#participate" data-interest="event">Start planning your track event →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= TRACK SCHEDULE ======================= -->
+<div class="page dark prog-page" data-page="track-schedule" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">Track Schedule</span></div></nav>
+  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
+    <section class="cal-head"><p class="eyebrow">At Cronin Derby Downs</p><h1>Track Schedule</h1><p>Seasonal fun runs, practice runs and school practice days at the track. The Annual Flint Soap Box Derby is on <a href="#racing" id="tsRace" style="color:#fff">Saturday, June 5, 2027</a>.</p></section>
+    <h2 class="sec-title"><small>Summer &amp; fall</small>2027 Fun Run Schedule</h2>
     <div class="board" id="race-board" aria-label="2027 fun run and practice run dates">
       <div class="board-head"><b>Fun runs</b><span><i aria-hidden="true"></i>2027 season</span></div>
       <div id="raceBoard"></div>
       <div class="board-foot">Times and locations are emailed to registered participants.</div>
     </div>
+    <p class="dr-fine">Fun run sign-ups happen beside the track on the day, and two drivers are at the top of the hill at a time.</p>
 
-    <div class="race-plan" style="margin-top:26px">
-      <div><h2>Plan a Racing Experience</h2><p>Bring your group to the track for a party, fundraiser or custom event. Tell us what you have in mind, and we’ll discuss activities, dates, supervision and what is possible at Cronin Derby Downs.</p></div>
-      <a class="btn white" href="#participate" data-interest="event">Start planning your track event →</a>
-    </div>
+    <section class="rx-practice" id="school-practice" aria-labelledby="spH">
+      <div><p class="hiw-k">For schools and groups</p><h2 id="spH">Schedule a practice for your school</h2>
+        <p>School teams and groups can request a practice day at Cronin Derby Downs to get a feel for the hill before race day. Tell us your school or group, how many racers, your car division and the dates that work for you. Staff will follow up by email to confirm a time, supervision and what to bring.</p></div>
+      <ol class="rx-steps"><li><b>Send a practice request</b>Pick “Scheduling a practice for your school” in the race day inquiry.</li><li><b>We confirm by email</b>Date, time, supervision and what to bring.</li><li><b>Practice on the hill</b>Run the track before race day.</li></ol>
+      <div class="row"><a class="btn white" href="#participate" data-interest="racing" data-scope="racing" data-topic="Scheduling a practice for your school" data-note="Practice request: school or group, number of racers, car division and preferred dates">Request a school practice</a><a class="btn white-ghost" href="#calendar">Full calendar</a></div>
+    </section>
+    <p class="res-back" style="margin-top:clamp(1.6rem,3vw,2.2rem)"><a class="btn outline-red" href="#racing">← Track &amp; Racing</a></p>
+  </div></div>
+</div>
 
-    <section class="panel wide" style="margin-top:26px">
+<!-- ======================= HOW TO GET INVOLVED (racing) ======================= -->
+<div class="page dark prog-page" data-page="racing-get-involved" hidden>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="#home">Home</a><span aria-hidden="true">/</span><a href="#programs">Programs</a><span aria-hidden="true">/</span><a href="#racing">Track &amp; Racing</a><span aria-hidden="true">/</span><span aria-current="page">How to Get Involved</span></div></nav>
+  <div class="wrap"><div style="padding-top:clamp(1.5rem,3vw,2rem)">
+    <section class="cal-head"><p class="eyebrow">Track &amp; Racing</p><h1>How to Get Involved</h1><p>There’s a place for everyone at Cronin Derby Downs: racers, families, schools, volunteers and fans. Every participant races and eats for free.</p></section>
+
+    <section class="dr-sec" style="margin-top:clamp(1.4rem,3vw,2rem)" aria-labelledby="giStepsH">
+      <p class="hiw-k">From first question to race day</p><h2 id="giStepsH" class="dr-h">How joining works</h2>
+      <ol class="dr-flow">
+        <li><b>Send an inquiry</b><span>Choose a race day inquiry or a building workshop inquiry, and tell us a little about your racer, school or group.</span></li>
+        <li><b>We follow up by email</b><span>Staff reply with availability, requirements and next steps.</span></li>
+        <li><b>Complete the official registration</b><span>Once your place is confirmed, we email you the official All-American Soap Box Derby registration form to fill out and sign online.</span></li>
+        <li class="fin"><b>Build and race</b><span>Join the building workshops, practice on the hill and race at the Annual Flint Soap Box Derby.</span></li>
+      </ol>
+    </section>
+
+    <section class="dr-sec" aria-labelledby="giWaysH">
+      <p class="hiw-k">Pick your path</p><h2 id="giWaysH" class="dr-h">Ways to take part</h2>
+      <div class="gi-ways">
+        <article><h3>Join a building workshop</h3><p>Build a soap box car side by side with our crew over six weeks, or three visits for out-of-town groups.</p><a class="btn deep" href="#participate" data-interest="building" data-scope="building">Inquire about building workshops</a></article>
+        <article><h3>Race in the Flint Soap Box Derby</h3><p>Questions about race day, divisions or how we operate? Start with a race day inquiry.</p><a class="btn deep" href="#participate" data-interest="racing" data-scope="racing">Inquire about race day</a></article>
+        <article><h3>Sanctioned racer from another program</h3><p>Looking for a local Derby? Send a quick inquiry and we’ll email you the forms and fees.</p><button class="btn deep" type="button" data-sbd-open aria-haspopup="dialog">Quick register</button></article>
+        <article><h3>Volunteer on race day</h3><p>Help run the start, the finish, the tents and more. Students and adults are welcome.</p><a class="btn deep" href="#race-volunteer">Volunteer on race day</a></article>
+        <article><h3>Plan a track event</h3><p>Bring your group to the track for a party, fundraiser or custom event.</p><a class="btn deep" href="#participate" data-interest="event">Start planning your track event</a></article>
+        <article><h3>Stay in the loop</h3><p>Get fun run dates, race day news and workshop announcements by email.</p><a class="btn deep" href="#participate" data-interest="updates">Join email updates</a></article>
+      </div>
+    </section>
+
+    <section class="panel wide" style="margin-top:clamp(2rem,4vw,3rem)">
       <h2>Ready to take the next step?</h2>
       <p>Questions about race day or how we operate? Send an inquiry and staff will follow up by email. Once your place is confirmed, we’ll email you the official All-American Soap Box Derby registration form to complete and sign online. Inquiring does not confirm a place.</p>
       <div class="row"><a class="btn deep" href="#participate" data-interest="racing">Inquire about race day</a><a class="btn outline-red" href="#participate" data-interest="updates">Join email updates</a></div>
     </section>
-
-    <section class="sbd" id="sanctioned-racers" aria-labelledby="sbdH">
-      <div class="sbd-logo"><img src="img/flint-soap-box-derby.webp" alt="Flint, MI Soap Box Derby logo"></div>
-      <div>
-        <p class="sbd-k">For sanctioned racers</p>
-        <h2 id="sbdH">Looking for a local Derby?</h2>
-        <p class="sbd-date"><span id="sbdDate">Sat · Jun 05, 2027</span><small>Flint Soap Box Derby</small></p>
-        <p class="sbd-fee">Sanctioned racers are welcome at our local race. Send a quick inquiry and we’ll email you the forms and fees. Race day registration has a fee for racers not affiliated with our program.</p>
-      </div>
-      <button class="btn red" type="button" id="sbdOpen" aria-haspopup="dialog">Quick register →</button>
-    </section>
-  </div>
+    <p class="res-back" style="margin-top:clamp(1.4rem,3vw,2rem)"><a class="btn outline-red" href="#racing">← Track &amp; Racing</a></p>
+  </div></div>
 </div>
 
 <!-- ======================= ABOUT DERBY RACING ======================= -->
@@ -3832,11 +3913,11 @@ body.rw-tv .rw-fol{display:none}
 (function(){
   var $=function(s){return document.querySelector(s)};
   /* ---- Pages not yet rebuilt: name shown on the placeholder ---- */
-  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
+  var NAMES={"kiosk":"Workshop kiosk","calendar":"Calendar","cronin-derby-downs":"Cronin Derby Downs","plan-event":"Plan an Event","race-watch":"Live Race","race-control":"Race control","race-volunteer":"Volunteer on race day","volunteers":"Race-day volunteers","workshop-signin":"Workshop sign-in","photographer":"Photographer","teacher":"Teacher planning","team":"Staff Garage","printables":"Flyers & Forms","my-dashboard":"My dashboard","new-profile":"Register","resources":"Programs & Resources","rules":"Rules & Guidelines","parent-resources":"Parent Resources","forms":"Registration & Forms","stem-camps":"STEM Camps","fun-runs":"Summer Fun Runs","leadership-council":"Student Leadership Council","crew":"Crew pass","track-manager":"Track operations","access":"Sign in","donate":"Donate","program-signin":"Program Dashboard","building-workshops":"Building & Workshops","racing":"Track & Racing","derby-racing":"About Derby Racing","track-schedule":"Track Schedule","racing-get-involved":"How to Get Involved","race-registration":"Race Registration","workshop-registration":"Building Workshop Registration","steam-and-beyond":"STEM Programs","seasonal-workshops":"Seasonal Workshops","leadership":"Student Volunteers","serve":"Community Volunteers","support":"Sponsors & Partners","join-our-team":"Join Our Team","spirit":"Spirit Shop","about":"About","participate":"Get Involved","background-check":"Background Checks","news-page":"News & Stories","privacy":"Privacy","contact":"Contact","admin":"Admin"};
   var HOME_ANCHORS={"home":1,"story":1,"programs":1,"news":1,"about-mission":1,"get-involved":1};
 
   function closeMenus(){$("#moreMenu").hidden=true;$("#moreBtn").setAttribute("aria-expanded","false");$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}
-  var PAGE_ANCHORS={"how-racing":"derby-racing","dr-raceday":"derby-racing","dr-heats":"derby-racing","dr-divisions":"derby-racing","dr-build":"derby-racing","dr-terms":"derby-racing","dr-rules":"derby-racing","race-board":"racing","sanctioned-racers":"racing","workshop-registration":"race-registration"};
+  var PAGE_ANCHORS={"school-practice":"track-schedule","how-racing":"derby-racing","dr-raceday":"derby-racing","dr-heats":"derby-racing","dr-divisions":"derby-racing","dr-build":"derby-racing","dr-terms":"derby-racing","dr-rules":"derby-racing","race-board":"track-schedule","sanctioned-racers":"racing","workshop-registration":"race-registration"};
   var ALIAS={"plan-event":"event","park-support":"park","park-inquiry":"park","register":"building"};
   var pendingInterest=null;
   var pendingNote=null;
@@ -3851,7 +3932,7 @@ body.rw-tv .rw-fol{display:none}
     document.querySelectorAll("main > .page").forEach(function(p){p.hidden=p.getAttribute("data-page")!==show});
     if(show==="calendar") renderCal();
     if(show==="participate") openForm(pendingInterest,pendingNote); pendingInterest=null; pendingNote=null;
-    if(show==="racing") renderBoard();
+    if(show==="racing"||show==="track-schedule") renderBoard();
     if(show==="seasonal-workshops") renderSeasons();
     closeMenus();
     if(home){ if(h!=="home"&&HOME_ANCHORS[h]){var t=document.getElementById(h);if(t){var y=t.getBoundingClientRect().top+scrollY-document.querySelector('.site-nav').offsetHeight-8;scrollTo(0,y)}} else scrollTo(0,0); document.title="Flint Racing and STEM | Build Something Bigger"; }
@@ -4022,7 +4103,7 @@ body.rw-tv .rw-fol{display:none}
   $("#mToday").onclick=function(){cs.m="";var n=new Date();cur=new Date(n.getFullYear(),n.getMonth(),1);renderCal()};
 
   function fmtShort(s){var d=pd(s);return {m:MON[d.getMonth()].slice(0,3),d:d.getDate(),w:DOW[d.getDay()]}}
-  function renderBoard(){
+  function renderBoard(){ if(!document.getElementById("raceBoard")){renderSbdDate();renderRaceHero();return}
     /* Fun run schedule: every racing date except the Annual Soap Box Derby race day (featured in the hero) */
     var t=todayKey(), rows=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t&&!/Race Day/i.test(e.t)});
     $("#raceBoard").innerHTML=rows.map(function(e){var f=fmtShort(e.d),pr=/practice/i.test(e.t);
@@ -4032,12 +4113,14 @@ body.rw-tv .rw-fol{display:none}
   function renderRaceHero(){if(!document.getElementById("rhDate"))return;
     var t=todayKey(),up=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t}),rd=nextRaceDay();
     var lst=function(arr){var e=arr[0],f=fmtShort(e.d);return "Next: "+f.m+" "+f.d+" · "+e.t.replace(/\s*·\s*Memorial Day Weekend/,"").replace(/^First Annual /,"")+(e.tbc?" (TBC)":"")+(arr.length>1?" · "+arr.length+" dates":"")};
-    if(rd){var d=pd(rd.d),f=fmtShort(rd.d);document.getElementById("rhDate").textContent=d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+(rd.tbc?" (to be confirmed)":"");
+    if(rd){var d=pd(rd.d),f=fmtShort(rd.d),tsr=document.getElementById("tsRace");if(tsr)tsr.textContent=d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});document.getElementById("rhDate").textContent=d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+(rd.tbc?" (to be confirmed)":"");
       document.getElementById("rhYear").textContent=d.getFullYear();
       document.getElementById("rhDow").textContent=f.w;document.getElementById("rhDay").textContent=String(f.d).padStart(2,"0");document.getElementById("rhMon").textContent=f.m;
       var days=Math.round((d-pd(t))/864e5),c=document.getElementById("rhCount");c.hidden=days<0;c.textContent=days===0?"Today!":days===1?"Tomorrow":days+" days to go"}
     var prac=up.filter(function(e){return /practice/i.test(e.t)}),fun=up.filter(function(e){return !/practice/i.test(e.t)&&!/Race Day/i.test(e.t)});
-    if(prac.length)document.getElementById("rhPrac").textContent=lst(prac);
+    var rp=document.getElementById("rhPrac");if(rp&&prac.length)rp.textContent=lst(prac);
+    var nx=document.getElementById("rxNext"),tr=up.filter(function(e){return !/Race Day/i.test(e.t)}).slice(0,3);
+    if(nx&&tr.length)nx.innerHTML=tr.map(function(e){var f=fmtShort(e.d);return '<li><span>'+f.w+' · '+f.m+' '+f.d+'</span><b>'+e.t.replace(/^First Annual /,"")+(e.tbc?' <em>TBC</em>':'')+'</b></li>'}).join("");
     if(fun.length)document.getElementById("rhFun").textContent=lst(fun)}
 
 
@@ -4374,7 +4457,7 @@ body.rw-tv .rw-fol{display:none}
      Camp and seasonal workshop pages hide the racing and building workshop options (those use the Akron registration form). */
   var SCOPES={
     racing:{interest:"racing",label:"Race day inquiry",title:"Race day inquiry",sub:"Questions about race day and how we operate. To register, use the official race registration form.",
-      topics:["Race day schedule & what to expect","How heats, phases & brackets work","Divisions: Stock, Super Stock & Masters","Sanctioned racing & the path to Akron","Community & school racing","Rally & track experiences","Racing as a family or individual racer","Fees & race day registration","Volunteering on race day"]},
+      topics:["Race day schedule & what to expect","How heats, phases & brackets work","Divisions: Stock, Super Stock & Masters","Sanctioned racing & the path to Akron","Community & school racing","Rally & track experiences","Racing as a family or individual racer","Scheduling a practice for your school","Fees & race day registration","Volunteering on race day"]},
     building:{interest:"building",label:"Building workshop inquiry",title:"Building workshop inquiry",sub:"Questions about building workshops. To sign up, use the building workshop registration form.",
       topics:["Workshop dates, times & location","What participants build and learn","School teams & chaperones","Out-of-town schools & groups (3-visit program)","Building a car as a family","Car kits & costs","Registration, forms & shirts"]},
     camps:{hide:["building","racing"],title:"Summer camp sign-up",sub:"About two minutes. We’ll follow up with camp details and next steps."},
@@ -4473,7 +4556,7 @@ body.rw-tv .rw-fol{display:none}
     setTimeout(function(){pendingInterest=null;pendingNote=null},0);
     if(document.querySelector(".q-done")){qCard.innerHTML=qFormHTML;bindForm()}
     var pg=(document.querySelector("main > .page:not([hidden])")||{getAttribute:function(){return ""}}).getAttribute("data-page");
-    var scope=a.getAttribute("data-scope")||((pg==="racing"||pg==="derby-racing")&&interest==="racing"?"racing":pg==="building-workshops"&&interest==="building"?"building":pg==="stem-camps"?"camps":pg==="seasonal-workshops"?"seasonal":null);
+    var scope=a.getAttribute("data-scope")||((pg==="racing"||pg==="derby-racing"||pg==="track-schedule"||pg==="racing-get-involved")&&interest==="racing"?"racing":pg==="building-workshops"&&interest==="building"?"building":pg==="stem-camps"?"camps":pg==="seasonal-workshops"?"seasonal":null);
     $("#qDlgSlot").appendChild(qCard); openForm(interest,note,scope,a.getAttribute("data-topic")); qDlg.showModal(); qDlg.scrollTop=0;
     var f=document.getElementById("q-first"); if(f) f.focus();
   },true);
@@ -4736,7 +4819,7 @@ body.rw-tv .rw-fol{display:none}
     setPartners:function(list){PARTNERS.length=0;list.forEach(function(pg){PARTNERS.push(pg)});sp=0;drawS();drawWall()},
     recaptureForm:function(){if(document.getElementById("qForm"))qFormHTML=qCard.innerHTML.replace(/ contenteditable="true"/g,"")},
     refresh:function(){nowStrip();monthOptions();var h=(location.hash||"#home").slice(1);
-      if(h==="calendar")renderCal();if(h==="racing")renderBoard();if(h==="seasonal-workshops")renderSeasons();},
+      if(h==="calendar")renderCal();if(h==="racing"||h==="track-schedule")renderBoard();if(h==="seasonal-workshops")renderSeasons();},
     esc:esc,getSlides:function(){return JSON.parse(JSON.stringify(SLIDES))},setSlides:function(l){SLIDES=l;drawSlides()},SLIDES_DEFAULT:SLIDES_DEFAULT};
   route();
 })();
