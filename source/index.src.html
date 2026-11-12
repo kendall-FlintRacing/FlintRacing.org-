@@ -2799,9 +2799,9 @@ body.rw-tv .rw-fol{display:none}
     </div>
     <p style="color:#c9cbd0;font-size:.9rem;margin-top:14px;max-width:80ch">For every format: each published event provides its date, car and age requirements, preparation details and registration pathway. Staff confirm eligibility and next steps by email. Youth participants must know their assigned chaperone, with one chaperone per six to eight students, or have an arrangement confirmed with staff beforehand.</p>
 
-    <h2 class="sec-title"><small>2027 season</small>Upcoming races</h2>
-    <div class="board" id="race-board" aria-label="Upcoming racing dates">
-      <div class="board-head"><b>Race board</b><span><i aria-hidden="true"></i>2027 season</span></div>
+    <h2 class="sec-title"><small>At Cronin Derby Downs</small>2027 Fun Run Schedule</h2>
+    <div class="board" id="race-board" aria-label="2027 fun run and practice run dates">
+      <div class="board-head"><b>Fun runs</b><span><i aria-hidden="true"></i>2027 season</span></div>
       <div id="raceBoard"></div>
       <div class="board-foot">Times and locations are emailed to registered participants.</div>
     </div>
@@ -4014,9 +4014,10 @@ body.rw-tv .rw-fol{display:none}
 
   function fmtShort(s){var d=pd(s);return {m:MON[d.getMonth()].slice(0,3),d:d.getDate(),w:DOW[d.getDay()]}}
   function renderBoard(){
-    var t=todayKey(), rows=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t});
-    $("#raceBoard").innerHTML=rows.map(function(e){var f=fmtShort(e.d);var main=/Race Day/.test(e.t);
-      return '<div class="board-row"><span class="d">'+f.w+' · '+f.m+' '+String(f.d).padStart(2,"0")+'</span><span class="n">'+e.t+'</span><span class="s'+(main?' main':'')+(e.tbc?' tbc':'')+'">'+(main?"Race day":e.tbc?"To be confirmed":"Racing")+'</span></div>'}).join("")||'<div class="board-row"><span class="n">No upcoming dates are published yet.</span></div>';
+    /* Fun run schedule: every racing date except the Annual Soap Box Derby race day (featured in the hero) */
+    var t=todayKey(), rows=EVENTS.filter(function(e){return e.k==="racing"&&(e.e||e.d)>=t&&!/Race Day/i.test(e.t)});
+    $("#raceBoard").innerHTML=rows.map(function(e){var f=fmtShort(e.d),pr=/practice/i.test(e.t);
+      return '<div class="board-row"><span class="d">'+f.w+' · '+f.m+' '+String(f.d).padStart(2,"0")+'</span><span class="n">'+e.t+'</span><span class="s'+(e.tbc?' tbc':'')+'">'+(e.tbc?"To be confirmed":pr?"Practice run":"Fun run")+'</span></div>'}).join("")||'<div class="board-row"><span class="n">Fun run dates are posted here once they’re set.</span></div>';
     renderSbdDate(); renderRaceHero();
   }
   function renderRaceHero(){if(!document.getElementById("rhDate"))return;
