@@ -1916,7 +1916,35 @@ body.fr-editing .fr-test{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 .pd-tabs button{flex:1;border:0;background:transparent;font:800 .95rem/1 var(--body);padding:12px 8px;border-radius:6px;cursor:pointer;color:#4a4d55}
 .pd-tabs button[aria-selected="true"]{background:#fff;color:var(--red-deep);box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .pd-events{display:grid;gap:10px}
-.pd-ev{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;border:1px solid #e1e3e6;border-radius:8px;padding:12px}
+.pd-ev{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;border:1px solid #e1e3e6;border-radius:8px;padding:12px}
+.pd-qs{display:grid;justify-items:end;gap:2px;align-self:stretch;align-content:center;min-width:118px;padding:8px 12px;border:0;border-left:1px solid #e1e3e6;background:none;color:var(--red-deep);cursor:pointer;text-align:right;font:inherit;border-radius:0 6px 6px 0;transition:background .15s}
+.pd-qs b{font:800 .9rem/1.1 var(--body);text-transform:uppercase;letter-spacing:.04em}
+.pd-qs span{font:700 1.3rem/1 var(--body)}
+.pd-qs.on span,.pd-qs.adm span{font:600 .8rem/1.2 var(--body);color:#4a4d54}
+.pd-qs.on b{color:#1d6b35}
+.pd-qs:hover,.pd-qs:focus-visible{background:rgba(200,16,46,.07)}
+.pd-qs:hover span:last-child{transform:translateX(2px)}
+@media (max-width:560px){.pd-ev{grid-template-columns:52px minmax(0,1fr)}.pd-qs{grid-column:1/-1;grid-auto-flow:column;justify-content:space-between;align-items:center;border-left:0;border-top:1px solid #e1e3e6;border-radius:0;margin:0 -12px -12px;padding:10px 12px}}
+.qs-date{display:grid;place-items:center;width:54px;height:54px;flex:none;border-radius:6px;background:var(--red);color:#fff;text-transform:uppercase}
+.qs-date b{font:900 1.5rem/1 var(--display)}.qs-date span{font:800 .7rem/1 var(--body);letter-spacing:.12em}
+.qs-dlg .sbd-top h2{font-size:1.4rem;line-height:1.05}
+.qs-k{margin:0 0 10px;font:800 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#6d7077}
+.qs-kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.qs-kid{display:flex;align-items:center;gap:10px;padding:12px;border:1.5px solid #d7d9dd;border-radius:6px;cursor:pointer;font-weight:700}
+.qs-kid input{width:20px;height:20px;accent-color:var(--red);margin:0}
+.qs-kid:has(input:checked){border-color:var(--red);background:#fdf0f1}
+.qs-none{margin:0;font-size:.9rem;color:#4a4d54}
+.qs-ad{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid #e6e7ea}
+.qs-ad small{display:block;color:#6d7077;font-size:.82rem}
+.qs-step{display:flex;align-items:center;border:1.5px solid #d7d9dd;border-radius:999px;overflow:hidden}
+.qs-step button{width:42px;height:40px;border:0;background:#f3f4f6;font:700 1.2rem/1 var(--body);cursor:pointer;color:var(--ink)}
+.qs-step button:hover{background:#e6e7ea}
+.qs-step output{min-width:40px;text-align:center;font:800 1.1rem/1 var(--body)}
+.qs-dlg .q-err{margin-top:14px}
+.qs-big{margin:0 0 6px;font:800 1.4rem/1.1 var(--display);text-transform:uppercase;color:#1d6b35}
+.qs-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.qs-list li{display:grid;gap:2px;padding:10px 12px;border:1px solid #e1e3e6;border-radius:6px}
+.qs-list span{font-size:.92rem}.qs-list small{color:#6d7077}
 .pd-ev.first{border-color:var(--red);background:#fdf0f1}
 .pd-ev h3{font:800 1.1rem/1.2 var(--body);text-transform:none;color:var(--ink)}
 .pd-ev p{color:#2a2d33;margin-top:3px}
@@ -5107,12 +5135,12 @@ window.FRB=(function(){
     ".chips2 span",".feature-list li",".pace b",".pace small",".sp-art b",".sp-body .k",".topic b",".topic span",".brand strong",".brand small",
     ".site-foot h4",".site-foot a",".links>a",".more-menu a",".loc",".bulletin h3",".board-head b",".datelist time",".datelist span",".tag2",
     ".now-label",".now-col small",".now-col>a",".year-head h2",".bul-top h2",".contact-card dt",".hub b",".hub span",".hub em"].join(",");
-  var DYN=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DYN=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#qCard","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle",
     "form","svg","script","style",".fr-bar",".crumbs"].join(",");
   function hash(t){var h=5381;for(var i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return (h>>>0).toString(36)}
   var TAGGED=[], DEF={};
-  var DATA=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
+  var DATA=["dialog.dr-dlg","#rgForm","#qDlg","#sbdDate","#sbdDlgDate","#sbdDlg","#qsDlg","#accAuth","#prtBox",".mem-in","#meBox","#regBox",".cs-dots",".gx-spec",".gx-fallback","#pdBox","#resLanes",".res-list","#crewBox","#wsBox","#kioskBox","#volBox","#phBox","#teBox","#newsList","#famMsg","#volMsg","#volDone","#rkBox","#tmBox","#rwSpot","#rwExtras","#rwAds","#rwHype","#rwOn","#rwCount","#rwWhen","#rwRun","#rwDivs","#rwView","#rwUp","#rwMine","#rwBanner","#rwProg","#rwLive","#rwTv","#soMsg","#nowDates","#sTrack","#dots","#listOut","#calOut","#fcount","#raceBoard","#bulList","#bulNotes","#bulMonth","#bulListTitle",
     "#yearGrid","#yearRange","#partnerWall","#flowCount","#cCount","#sCount","#stubTitle","#admBox","#mGrid","#mTitle","#yr",
     "script","style","svg",".fr-bar",".fr-test",".q-done","#qErr","option","select","textarea"].join(",");
   function scopes(){var out=[];var n=$("header.site-nav");if(n)out.push(["nav",n]);
@@ -6116,13 +6144,55 @@ window.FRB=(function(){
       '<div class="pd-contact"><b>Questions?</b> <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a></div></aside>';
     var tabs='<div class="pd-tabs" role="tablist">'+[["overview","Overview"],["programs","Programs & Resources"]].map(function(x){return '<button type="button" role="tab" data-pdt="'+x[0]+'" aria-selected="'+(PD.tab===x[0])+'">'+x[1]+'</button>'}).join("")+'</div>';
     var body=PD.tab==="programs"?'<div class="rlanes pd-lanes">'+lanesHTML()+'</div>':
-      '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3>'+(when(e)?'<p>'+when(e)+'</p>':'')+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div></article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
+      '<p class="pd-k">Next on the starting line</p>'+(up.length?'<div class="pd-events">'+up.map(function(e,i){return '<article class="pd-ev'+(i===0?' first':'')+'"><div class="pd-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h3>'+esc(e.title)+'</h3>'+(when(e)?'<p>'+when(e)+'</p>':'')+(e.notes?'<p class="pd-notes">'+esc(e.notes)+'</p>':'')+(e.end_date&&e.end_date!==e.start_date?'<small>Through '+fmtDate(e.end_date)+'</small>':'')+'</div>'+qsSide(e)+'</article>'}).join("")+'</div>':'<p class="pd-empty">No upcoming dates yet. Check back soon.</p>')+
       '<div class="pd-short"><a href="#programs"><b>Programs</b><span>Ways to build</span></a><a href="#race-watch"><b>Live Race</b><span>Race day feed</span></a><a href="#calendar"><b>Calendar</b><span>The whole year</span></a><a href="#printables"><b>Flyers &amp; Forms</b><span>Print and bring</span></a></div>'+
       '<div class="pd-new"><p class="pd-k">New this year</p><p>Summer fun runs at Cronin Derby Downs. Dates are posted on <a href="#fun-runs">Summer Fun Runs</a> once they’re set.</p></div>';
     box.innerHTML='<div class="pd-bar"><span>'+(ME?esc(ME.display_name)+' · @'+esc(ME.username):'Admin preview')+'</span><span class="row" style="margin:0">'+(ME?'<a class="mini" href="#my-dashboard">My dashboard</a>':'')+'<button class="mini" type="button" id="pdOut">Sign out</button></span></div><div class="pd-grid">'+bulletin+'<section class="pd-main">'+tabs+body+'</section></div>';
     $$("[data-pdt]",box).forEach(function(b){b.onclick=function(){PD.tab=b.getAttribute("data-pdt");renderPD()}});
     $("#pdOut").onclick=signOut;
+    $$("[data-qs]",box).forEach(function(b){b.onclick=function(){qsOpen(b.getAttribute("data-qs"))}});
+    $$("[data-qsa]",box).forEach(function(b){b.onclick=function(){qsAdmin(b.getAttribute("data-qsa"))}});
   }
+
+  /* ---------- Quick sign up: signed-in families mark who's coming ---------- */
+  function qsCount(r){return r?(r.kids||[]).length+(r.adults||0):0}
+  function qsSide(e){
+    if(ME){var r=e.rsvp,n=qsCount(r);
+      return '<button type="button" class="pd-qs'+(n?' on':'')+'" data-qs="'+esc(e.id)+'">'+(n?'<b>✓ Signed up</b><span>'+n+' going · Edit ›</span>':'<b>Quick sign up</b><span aria-hidden="true">›</span>')+'</button>'}
+    if(IS_ADMIN){var g=e.going||{families:0,kids:0,adults:0};
+      return '<button type="button" class="pd-qs adm" data-qsa="'+esc(e.id)+'"><b>'+g.families+' '+(g.families===1?"family":"families")+'</b><span>'+g.kids+' kid'+(g.kids===1?'':'s')+' · '+g.adults+' adult'+(g.adults===1?'':'s')+' ›</span></button>'}
+    return ''}
+  function qsDlg(){var d=$("#qsDlg");if(d)return d;d=document.createElement("dialog");d.className="sbd-dlg qs-dlg";d.id="qsDlg";d.setAttribute("aria-labelledby","qsH");document.body.appendChild(d);
+    d.addEventListener("click",function(e){if(e.target===d||e.target.closest("[data-qsx]"))d.close()});return d}
+  function qsTop(e,sub){return '<div class="sbd-top"><div class="qs-date"><b>'+fmtDate(e.start_date,{day:"numeric"})+'</b><span>'+fmtDate(e.start_date,{month:"short"})+'</span></div><div><h2 id="qsH">'+esc(e.title)+'</h2><p>'+sub+'</p></div><button class="sbd-x" type="button" data-qsx aria-label="Close">×</button></div>'}
+  function qsOpen(id){var e=(PD.data.events||[]).filter(function(x){return x.id===id})[0];if(!e)return;
+    var kids=PD.data.kids||[],r=e.rsvp||{kids:[],adults:0},had=qsCount(e.rsvp)>0,d=qsDlg(),
+      wh=[fmtDate(e.start_date,{weekday:"long",month:"long",day:"numeric"}),e.start_time?esc(e.start_time)+(e.end_time?"–"+esc(e.end_time):""):"",e.location?esc(e.location):""].filter(Boolean).join(" · ");
+    d.innerHTML=qsTop(e,wh)+'<form class="q-card" id="qsForm" novalidate><p class="qs-k">Who’s coming?</p>'+
+      (kids.length?'<div class="qs-kids">'+kids.map(function(k,i){return '<label class="qs-kid"><input type="checkbox" name="kid" value="'+esc(k)+'"'+((r.kids||[]).indexOf(k)>=0?' checked':'')+'><span>'+esc(k)+'</span></label>'}).join("")+'</div>':
+        '<p class="qs-none">There are no kids on your family profile yet. Email <a href="mailto:info@flintsoapbox.org">info@flintsoapbox.org</a> and we’ll add them.</p>')+
+      '<div class="qs-ad"><span><b>Adults coming</b><small>Parents, guardians and other grown-ups</small></span><div class="qs-step"><button type="button" data-ad="-1" aria-label="One fewer adult">−</button><output id="qsAd">'+(r.adults||0)+'</output><button type="button" data-ad="1" aria-label="One more adult">+</button></div></div>'+
+      '<p class="q-err" id="qsErr" role="alert" hidden></p>'+
+      '<div class="q-actions"><button class="btn red" type="submit" id="qsSave">'+(had?"Update sign up":"Sign us up")+'</button>'+(had?'<button class="btn outline-red" type="button" id="qsCancel">We can’t make it</button>':'<button class="btn outline-red" type="button" data-qsx>Cancel</button>')+'</div></form>';
+    var ad=r.adults||0,out=$("#qsAd",d),err=$("#qsErr",d);
+    $$("[data-ad]",d).forEach(function(b){b.onclick=function(){ad=Math.max(0,Math.min(20,ad+ +b.getAttribute("data-ad")));out.textContent=ad}});
+    function send(k,a){var btn=$("#qsSave",d);btn.disabled=true;err.hidden=true;
+      db.rpc("rsvp_event",{p_event:e.id,p_kids:k,p_adults:a}).then(function(res){btn.disabled=false;
+        if(res.error){err.textContent=res.error.message||"Couldn’t save. Please try again.";err.hidden=false;return}
+        var v=res.data||{};e.rsvp=v.cancelled?null:{kids:v.kids||[],adults:v.adults||0};var n=qsCount(e.rsvp);
+        d.innerHTML=qsTop(e,wh)+'<div class="q-card qs-done"><p class="qs-big">'+(n?'✓ You’re signed up':'Sign up removed')+'</p><p>'+(n?(e.rsvp.kids.length?esc(e.rsvp.kids.join(", ")):"")+(e.rsvp.kids.length&&e.rsvp.adults?" and ":"")+(e.rsvp.adults?e.rsvp.adults+" adult"+(e.rsvp.adults===1?"":"s"):"")+'. See you there!':'Thanks for letting us know.')+'</p><div class="q-actions"><button class="btn red" type="button" data-qsx>Done</button></div></div>';
+        renderPD()})}
+    $("#qsForm",d).onsubmit=function(ev){ev.preventDefault();var k=$$('input[name="kid"]:checked',d).map(function(x){return x.value});
+      if(!k.length&&!ad){err.textContent="Tick at least one kid or add an adult.";err.hidden=false;return}send(k,ad)};
+    var c=$("#qsCancel",d);if(c)c.onclick=function(){send([],0)};
+    if(!d.open)d.showModal()}
+  function qsAdmin(id){var e=(PD.data.events||[]).filter(function(x){return x.id===id})[0];if(!e)return;var d=qsDlg();
+    d.innerHTML=qsTop(e,"Family quick sign ups")+'<div class="q-card"><p class="pd-loading">Loading…</p></div>';if(!d.open)d.showModal();
+    db.rpc("admin_event_rsvps",{p_event:id}).then(function(r){var L=r.data||[],box=$(".q-card",d);
+      if(r.error){box.innerHTML='<p class="q-err">'+esc(r.error.message)+'</p>';return}
+      var k=0,a=0;L.forEach(function(x){k+=(x.kids||[]).length;a+=x.adults||0});
+      box.innerHTML='<p class="qs-k">'+L.length+' '+(L.length===1?"family":"families")+' · '+k+' kid'+(k===1?'':'s')+' · '+a+' adult'+(a===1?'':'s')+'</p>'+(L.length?'<ul class="qs-list">'+L.map(function(x){return '<li><b>'+esc(x.family)+'</b><span>'+((x.kids||[]).length?esc(x.kids.join(", ")):"No kids")+' · '+x.adults+' adult'+(x.adults===1?"":"s")+'</span>'+(x.email||x.phone?'<small>'+[x.email?'<a href="mailto:'+esc(x.email)+'">'+esc(x.email)+'</a>':"",x.phone?esc(x.phone):""].filter(Boolean).join(" · ")+'</small>':'')+'</li>'}).join("")+'</ul>':'<p class="pd-empty">No families have signed up yet.</p>')+
+        '<div class="q-actions"><button class="btn red" type="button" data-qsx>Close</button></div>'})}
 
   /* ---------- Resource pages ---------- */
   var RES_MAP={rules:"rules","parent-resources":"parents",forms:"forms","stem-camps":"camps","fun-runs":"funruns","leadership-council":"council"};
